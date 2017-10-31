@@ -185,7 +185,6 @@
 				AA371DA91FA8056500705CE1 /* Company */,
 				AA371DAA1FA8056500705CE1 /* ExamineAndApprove */,
 				AA371DAB1FA8056500705CE1 /* Me */,
-				AA371DAE1FA8056500705CE1 /* youth_info */,
 			);
 			path = sections;
 			sourceTree = "<group>";
@@ -268,6 +267,7 @@
 		AA371DCC1FA8057100705CE1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				AA371DAE1FA8056500705CE1 /* youth_info */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
