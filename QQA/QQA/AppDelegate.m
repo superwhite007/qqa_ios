@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AppViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,26 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    //set  AppViewController  as  root controller  and  register  to  widow
+    AppViewController *appRootVC = [[AppViewController alloc] init];
+    self.window.rootViewController = appRootVC;
+    
+    
+    
+    
+    
     // Override point for customization after application launch.
+    
+    
+    
+    
+    
+    
     return YES;
 }
 

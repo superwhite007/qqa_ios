@@ -9,13 +9,11 @@
 /* Begin PBXBuildFile section */
 		20162A6ED0197AFB5FCEF46B /* libPods-QQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE800B96B9CCC3915A82C983 /* libPods-QQA.a */; };
 		AA19EC3A1FA669BA00BC5297 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19EC391FA669BA00BC5297 /* AppDelegate.m */; };
-		AA19EC3D1FA669BA00BC5297 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19EC3C1FA669BA00BC5297 /* ViewController.m */; };
-		AA19EC401FA669BA00BC5297 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA19EC3E1FA669BA00BC5297 /* Main.storyboard */; };
 		AA19EC421FA669BA00BC5297 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA19EC411FA669BA00BC5297 /* Assets.xcassets */; };
-		AA19EC451FA669BA00BC5297 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA19EC431FA669BA00BC5297 /* LaunchScreen.storyboard */; };
 		AA19EC481FA669BA00BC5297 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19EC471FA669BA00BC5297 /* main.m */; };
 		AA19EC521FA669BA00BC5297 /* QQATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19EC511FA669BA00BC5297 /* QQATests.m */; };
 		AA19EC5D1FA669BA00BC5297 /* QQAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19EC5C1FA669BA00BC5297 /* QQAUITests.m */; };
+		AA371DA31FA8037100705CE1 /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA371DA11FA8037000705CE1 /* AppViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,11 +38,7 @@
 		AA19EC351FA669BA00BC5297 /* QQA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA19EC381FA669BA00BC5297 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AA19EC391FA669BA00BC5297 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AA19EC3B1FA669BA00BC5297 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AA19EC3C1FA669BA00BC5297 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		AA19EC3F1FA669BA00BC5297 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA19EC411FA669BA00BC5297 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AA19EC441FA669BA00BC5297 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA19EC461FA669BA00BC5297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA19EC471FA669BA00BC5297 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AA19EC4D1FA669BA00BC5297 /* QQATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QQATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +47,8 @@
 		AA19EC581FA669BA00BC5297 /* QQAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QQAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA19EC5C1FA669BA00BC5297 /* QQAUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QQAUITests.m; sourceTree = "<group>"; };
 		AA19EC5E1FA669BA00BC5297 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA371DA11FA8037000705CE1 /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewController.m; sourceTree = "<group>"; };
+		AA371DA21FA8037100705CE1 /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
 		AE800B96B9CCC3915A82C983 /* libPods-QQA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QQA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC2E68B88152283475D53F9 /* Pods-QQA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QQA.release.xcconfig"; path = "Pods/Target Support Files/Pods-QQA/Pods-QQA.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,11 +115,9 @@
 			children = (
 				AA19EC381FA669BA00BC5297 /* AppDelegate.h */,
 				AA19EC391FA669BA00BC5297 /* AppDelegate.m */,
-				AA19EC3B1FA669BA00BC5297 /* ViewController.h */,
-				AA19EC3C1FA669BA00BC5297 /* ViewController.m */,
-				AA19EC3E1FA669BA00BC5297 /* Main.storyboard */,
+				AA371DA21FA8037100705CE1 /* AppViewController.h */,
+				AA371DA11FA8037000705CE1 /* AppViewController.m */,
 				AA19EC411FA669BA00BC5297 /* Assets.xcassets */,
-				AA19EC431FA669BA00BC5297 /* LaunchScreen.storyboard */,
 				AA19EC461FA669BA00BC5297 /* Info.plist */,
 				AA19EC471FA669BA00BC5297 /* main.m */,
 			);
@@ -265,9 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA19EC451FA669BA00BC5297 /* LaunchScreen.storyboard in Resources */,
 				AA19EC421FA669BA00BC5297 /* Assets.xcassets in Resources */,
-				AA19EC401FA669BA00BC5297 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,8 +335,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA19EC3D1FA669BA00BC5297 /* ViewController.m in Sources */,
 				AA19EC481FA669BA00BC5297 /* main.m in Sources */,
+				AA371DA31FA8037100705CE1 /* AppViewController.m in Sources */,
 				AA19EC3A1FA669BA00BC5297 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,25 +371,6 @@
 			targetProxy = AA19EC591FA669BA00BC5297 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		AA19EC3E1FA669BA00BC5297 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA19EC3F1FA669BA00BC5297 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AA19EC431FA669BA00BC5297 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA19EC441FA669BA00BC5297 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AA19EC5F1FA669BA00BC5297 /* Debug */ = {
