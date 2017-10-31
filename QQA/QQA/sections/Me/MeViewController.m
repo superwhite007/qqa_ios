@@ -8,9 +8,6 @@
 
 #import "MeViewController.h"
 
-//# define iphoneWidth    [[UIScreen mainScreen] bounds].size.width
-//# define iphoneHeight    [[UIScreen mainScreen] bounds].size.height
-
 
 @interface MeViewController ()
 
