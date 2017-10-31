@@ -9,8 +9,9 @@
 #import "AppViewController.h"
 #import "AppTabBarViewController.h"
 
-# define iphoneWidth    [[UIScreen mainScreen] bounds].size.width
-# define iphoneHeight    [[UIScreen mainScreen] bounds].size.height
+////物理屏幕尺寸
+//# define iphoneWidth    [[UIScreen mainScreen] bounds].size.width
+//# define iphoneHeight    [[UIScreen mainScreen] bounds].size.height
 
 @interface AppViewController ()
 
