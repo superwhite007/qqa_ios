@@ -1,47 +1,45 @@
 //
-//  ViewController.m
+//  AppTabBarViewController.m
 //  QQA
 //
-//  Created by wang huiming on 2017/10/30.
+//  Created by wang huiming on 2017/10/31.
 //  Copyright © 2017年 youth_huiming. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "AppTabBarViewController.h"
 #import "MeViewController.h"
 
-
-@interface ViewController ()<UITableViewDelegate>
+@interface AppTabBarViewController ()
 
 @end
 
-@implementation ViewController
+@implementation AppTabBarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupAllChildViewCOntrollers];
-    
     // Do any additional setup after loading the view.
+    
+    [self setupAllChildViewControllers];
+    
 }
 
-
--(void)setupAllChildViewCOntrollers{
+-(void)setupAllChildViewControllers{
     
     //me
     MeViewController * meVC1 = [[MeViewController alloc] init];
-    [self setupChildViewController:meVC1 title:@"me1" imageName:@"account" selectedImageName:@"me_normal"];
-    
+    [self setupChildViewController:meVC1 title:@"公司" imageName:@"oversea_n" selectedImageName:@"oversea"];
     
     //me
     MeViewController * meVC2 = [[MeViewController alloc] init];
-    [self setupChildViewController:meVC2 title:@"me2" imageName:@"account" selectedImageName:@"me_normal"];
+    [self setupChildViewController:meVC2 title:@"审批" imageName:@"oversea_n" selectedImageName:@"oversea"];
     //me
     MeViewController * meVC3 = [[MeViewController alloc] init];
-    [self setupChildViewController:meVC3 title:@"me3" imageName:@"account" selectedImageName:@"me_normal"];
+    [self setupChildViewController:meVC3 title:@"打卡" imageName:@"oversea_n" selectedImageName:@"oversea"];
     //me
     MeViewController * meVC = [[MeViewController alloc] init];
-    [self setupChildViewController:meVC title:@"me" imageName:@"account" selectedImageName:@"me_normal"];
+    [self setupChildViewController:meVC title:@"me" imageName:@"account" selectedImageName:@"me_normal2.png"];
     
-
+    
 }
 
 - (void)setupChildViewController:(UIViewController *)childVC title:(NSString *)title imageName:(NSString *)imageName selectedImageName:(NSString *)selectedImageName{
@@ -52,7 +50,7 @@
     childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)];
     
     //2.包装一个导航控制器
-    //childVC.tabBarItem.imageInsets = UIEdgeInsetsMake(-1, 0, 1, 0);
+    childVC.tabBarItem.imageInsets = UIEdgeInsetsMake(-1, 0, 1, 0);
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:childVC];
     [self addChildViewController:nav];
     
@@ -64,14 +62,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
 
 
 

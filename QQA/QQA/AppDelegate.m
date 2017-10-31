@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "AppViewController.h"
 
+#import "AppTabBarViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -23,11 +25,14 @@
     [self.window makeKeyAndVisible];
     
     //set  AppViewController  as  root controller  and  register  to  widow
-    AppViewController *appRootVC = [[AppViewController alloc] init];
-    self.window.rootViewController = appRootVC;
+//    AppViewController *appRootVC = [[AppViewController alloc] init];
+//    self.window.rootViewController = appRootVC;
     
     
     
+    AppTabBarViewController * appTabBarVC = [[AppTabBarViewController alloc] init];
+    self.window.rootViewController = appTabBarVC;
+    appTabBarVC.delegate = self;
     
     
     // Override point for customization after application launch.

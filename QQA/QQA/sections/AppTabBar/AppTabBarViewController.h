@@ -1,5 +1,5 @@
 //
-//  MeViewController.h
+//  AppTabBarViewController.h
 //  QQA
 //
 //  Created by wang huiming on 2017/10/31.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MeViewController : UIViewController
+@interface AppTabBarViewController : UITabBarController
 
 @end
