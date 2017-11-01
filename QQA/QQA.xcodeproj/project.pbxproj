@@ -169,8 +169,10 @@
 		AA1CECAE1FA9606500050EFC /* sections */ = {
 			isa = PBXGroup;
 			children = (
-				AA1CECAF1FA9607900050EFC /* MeViewController.h */,
-				AA1CECB01FA9607900050EFC /* MeViewController.m */,
+				AAA169F61FA98C9200F35475 /* Company */,
+				AAA169F41FA98C8B00F35475 /* ExaminationApproval */,
+				AAA169F51FA98C8F00F35475 /* PunchClock */,
+				AAA169F71FA98C9600F35475 /* Me */,
 			);
 			path = sections;
 			sourceTree = "<group>";
@@ -199,6 +201,37 @@
 				AA1CECB51FA960EF00050EFC /* me_normal.png */,
 			);
 			path = youth_info;
+			sourceTree = "<group>";
+		};
+		AAA169F41FA98C8B00F35475 /* ExaminationApproval */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ExaminationApproval;
+			sourceTree = "<group>";
+		};
+		AAA169F51FA98C8F00F35475 /* PunchClock */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PunchClock;
+			sourceTree = "<group>";
+		};
+		AAA169F61FA98C9200F35475 /* Company */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Company;
+			sourceTree = "<group>";
+		};
+		AAA169F71FA98C9600F35475 /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				AA1CECAF1FA9607900050EFC /* MeViewController.h */,
+				AA1CECB01FA9607900050EFC /* MeViewController.m */,
+			);
+			name = Me;
+			path = "New Group5";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
