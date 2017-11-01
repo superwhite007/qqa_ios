@@ -2,14 +2,13 @@
 //  AppDelegate.m
 //  QQA
 //
-//  Created by wang huiming on 2017/10/30.
+//  Created by wang huiming on 2017/11/1.
 //  Copyright © 2017年 youth_huiming. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "AppViewController.h"
+#import "MeViewController.h"
 
-#import "AppTabBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,26 +18,43 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    //set  AppViewController  as  root controller  and  register  to  widow
-//    AppViewController *appRootVC = [[AppViewController alloc] init];
-//    self.window.rootViewController = appRootVC;
+    MeViewController * meVC = [MeViewController new];
+    meVC.tabBarItem.title = @"我";
+//    meVC.tabBarItem.image = [[UIImage imageNamed:@"account.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] ;
+    
+    MeViewController * meVCFirst = [MeViewController new];
+    meVCFirst.tabBarItem.title = @"公司";
+//    meVCFirst.tabBarItem.image = [UIImage imageNamed:@"account.png"];
+//    [meVCFirst.tabBarItem setImage:[UIImage imageNamed:@"account.png"]];
     
     
+    MeViewController * meVCSecond = [MeViewController new];
+    meVCSecond.tabBarItem.title = @"审批";
+//    meVCSecond.tabBarItem.image = [UIImage imageNamed:@"styles.png"];
     
-    AppTabBarViewController * appTabBarVC = [[AppTabBarViewController alloc] init];
-    self.window.rootViewController = appTabBarVC;
-    appTabBarVC.delegate = self;
+    MeViewController * meVCThird = [MeViewController new];
+    meVCThird.tabBarItem.title = @"打卡";
+//    meVCThird.tabBarItem.image = [UIImage imageNamed:@"me_normal.png"];
     
     
-    // Override point for customization after application launch.
+    UITabBarController * tBarcontroller = [UITabBarController new];
+    tBarcontroller.viewControllers = [NSArray arrayWithObjects:meVCFirst, meVCSecond, meVCThird, meVC, nil];
+    tBarcontroller.tabBar.tintColor = [UIColor purpleColor];
+    
+   
+    
+    self.window.rootViewController = tBarcontroller;
     
     
-    
+    meVC.tabBarItem.image = [[UIImage imageNamed:@"account.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] ;
+    [meVCFirst.tabBarItem setImage:[UIImage imageNamed:@"account.png"]];
+    meVCSecond.tabBarItem.image = [UIImage imageNamed:@"styles.png"];
+    meVCThird.tabBarItem.image = [UIImage imageNamed:@"me_normal.png"];
     
     
     

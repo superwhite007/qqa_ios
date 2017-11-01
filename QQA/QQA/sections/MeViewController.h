@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  MeViewController.h
 //  QQA
 //
 //  Created by wang huiming on 2017/11/1.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface MeViewController : UIViewController
 
 @end
-
