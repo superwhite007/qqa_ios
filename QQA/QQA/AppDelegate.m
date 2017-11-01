@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MeViewController.h"
-
+#import "AppTBViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,41 +22,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    MeViewController * meVC = [MeViewController new];
-    meVC.tabBarItem.title = @"我";
-//    meVC.tabBarItem.image = [[UIImage imageNamed:@"account.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] ;
     
-    MeViewController * meVCFirst = [MeViewController new];
-    meVCFirst.tabBarItem.title = @"公司";
-//    meVCFirst.tabBarItem.image = [UIImage imageNamed:@"account.png"];
-//    [meVCFirst.tabBarItem setImage:[UIImage imageNamed:@"account.png"]];
+    AppTBViewController * appTBVC = [AppTBViewController new];
     
+    self.window.rootViewController = appTBVC;
     
-    MeViewController * meVCSecond = [MeViewController new];
-    meVCSecond.tabBarItem.title = @"审批";
-//    meVCSecond.tabBarItem.image = [UIImage imageNamed:@"styles.png"];
-    
-    MeViewController * meVCThird = [MeViewController new];
-    meVCThird.tabBarItem.title = @"打卡";
-//    meVCThird.tabBarItem.image = [UIImage imageNamed:@"me_normal.png"];
-    
-    
-    UITabBarController * tBarcontroller = [UITabBarController new];
-    tBarcontroller.viewControllers = [NSArray arrayWithObjects:meVCFirst, meVCSecond, meVCThird, meVC, nil];
-    tBarcontroller.tabBar.tintColor = [UIColor purpleColor];
-    
-   
-    
-    self.window.rootViewController = tBarcontroller;
-    
-    
-    meVC.tabBarItem.image = [[UIImage imageNamed:@"account.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] ;
-    [meVCFirst.tabBarItem setImage:[UIImage imageNamed:@"account.png"]];
-    meVCSecond.tabBarItem.image = [UIImage imageNamed:@"styles.png"];
-    meVCThird.tabBarItem.image = [UIImage imageNamed:@"me_normal.png"];
-    
-    
-    
+
     return YES;
 }
 
