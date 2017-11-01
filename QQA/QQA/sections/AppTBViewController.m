@@ -7,6 +7,8 @@
 //
 
 #import "AppTBViewController.h"
+
+#import "PunchClockViewController.h"
 #import "MeViewController.h"
 
 
@@ -40,18 +42,18 @@
     
     
     //3.打卡
-    MeViewController *overseasVC = [MeViewController new];
-    [self setupChildViewController:overseasVC title:@"打卡" imageName:@"oversea_n" selectedImageName:@"oversea"];
+    PunchClockViewController *punchClockVC = [PunchClockViewController new];
+    [self setupChildViewController:punchClockVC title:@"打卡" imageName:@"oversea_n" selectedImageName:@"oversea"];
     
     
     //4.我
     MeViewController *meVC = [[MeViewController alloc] init];
     [self setupChildViewController:meVC title:@"我" imageName:@"account" selectedImageName:@"me_normal"];
     
-    self.viewControllers = [NSArray arrayWithObjects:homePageVC, allStyleViewController, overseasVC, meVC, nil];
+    self.viewControllers = [NSArray arrayWithObjects:homePageVC, allStyleViewController, punchClockVC, meVC, nil];
    
-    
-    
+
+    self.selectedViewController = [self.viewControllers objectAtIndex:2];
     
 }
 

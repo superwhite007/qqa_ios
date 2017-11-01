@@ -24,7 +24,6 @@
     
     
     AppTBViewController * appTBVC = [AppTBViewController new];
-    
     self.window.rootViewController = appTBVC;
     
 
