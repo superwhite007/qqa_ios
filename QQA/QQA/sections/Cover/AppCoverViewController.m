@@ -185,16 +185,59 @@
 
 -(void)scanCrama{
     
-    int result = 1;
+    int result = 0;
     
     if (result == 1) {
         [self scanSuccess:@"https://"];
     } else if (result == 0) {
-        [self  plantIDKey];
         
+//        [self alert];
+        NSString *title = @"扫码失败";
+        NSString *message = @"重新返回扫码指导界面";
+        NSString *okButtonTitle = @"OK";
+        // 初始化
+        UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        // 创建操作
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+//            [self  plantIDKey];
+             [self scanSuccess:@"https://"];
+        }];
+        
+        // 添加操作
+        [alertDialog addAction:okAction];
+        // 呈现警告视图
+        [self presentViewController:alertDialog animated:YES completion:nil];
     }
     
 }
+
+-(void)alert{
+    
+    NSString *title = @"Alert Button Selected";
+    NSString *message = @"I need your attention NOW!";
+    NSString *okButtonTitle = @"OK";
+    // 初始化
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    // 创建操作
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        // 操作具体内容
+        // Nothing to do.
+    }];
+    
+    // 添加操作
+    [alertDialog addAction:okAction];
+    
+    // 呈现警告视图
+    [self presentViewController:alertDialog animated:YES completion:nil];
+    
+    
+}
+
+
+
+
 
 -(void)scanSuccess:(NSString *)urlString{
     
