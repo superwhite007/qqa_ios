@@ -24,7 +24,7 @@
     [self.window makeKeyAndVisible];
     
     
-    int  switchs = 1;
+    int  switchs = 0;
     if (switchs == 0) {
         
         AppCoverViewController * appCoverVC = [AppCoverViewController new];

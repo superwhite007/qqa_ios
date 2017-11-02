@@ -207,8 +207,7 @@
 			children = (
 				AAA169F81FA98E0F00F35475 /* AppTBViewController.h */,
 				AAA169F91FA98E0F00F35475 /* AppTBViewController.m */,
-				AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */,
-				AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */,
+				AAC4D1F91FAAAC8700183930 /* Cover */,
 				AAA169F61FA98C9200F35475 /* Company */,
 				AAA169F41FA98C8B00F35475 /* ExaminationApproval */,
 				AAA169F51FA98C8F00F35475 /* PunchClock */,
@@ -232,7 +231,6 @@
 				AAB0F7201FA992E200A9F684 /* account.png */,
 				AAB0F7331FA992E400A9F684 /* app_face_logo.png */,
 				AAB0F7271FA992E300A9F684 /* app_face_title.png */,
-				AAB0F7351FA992E400A9F684 /* app_face.png */,
 				AAB0F7211FA992E200A9F684 /* checkmark_green.png */,
 				AAB0F7221FA992E200A9F684 /* checkmark.png */,
 				AAB0F72D1FA992E300A9F684 /* clockin_normal.png */,
@@ -253,6 +251,7 @@
 				AAB0F7261FA992E300A9F684 /* red_button.png */,
 				AAB0F7301FA992E400A9F684 /* rules.png */,
 				AAB0F71F1FA992E200A9F684 /* scan_qrcode.png */,
+				AAB0F7351FA992E400A9F684 /* app_face.png */,
 				AAB0F72B1FA992E300A9F684 /* search.png */,
 				AAB0F7241FA992E300A9F684 /* text_input_box.png */,
 				AAB0F7281FA992E300A9F684 /* unlocker.png */,
@@ -303,6 +302,15 @@
 			);
 			name = Me;
 			path = "New Group5";
+			sourceTree = "<group>";
+		};
+		AAC4D1F91FAAAC8700183930 /* Cover */ = {
+			isa = PBXGroup;
+			children = (
+				AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */,
+				AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */,
+			);
+			path = Cover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
