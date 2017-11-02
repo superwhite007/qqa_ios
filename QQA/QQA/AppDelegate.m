@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "AppTBViewController.h"
 #import "AppCoverViewController.h"
+#import "AppCoverViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -24,7 +26,7 @@
     [self.window makeKeyAndVisible];
     
     
-    int  switchs = 0;
+    int  switchs = 3;
     if (switchs == 0) {
         
         AppCoverViewController * appCoverVC = [AppCoverViewController new];
@@ -34,6 +36,15 @@
         
         AppTBViewController * appTBVC = [AppTBViewController new];
         self.window.rootViewController = appTBVC;
+        
+    } else if (switchs == 3){
+        
+        AppCoverViewController * scanVC = [AppCoverViewController new];
+        UINavigationController * scanNC = [[UINavigationController alloc] initWithRootViewController:scanVC];
+        self.window.rootViewController = scanNC;
+        
+        
+        
         
     }
     

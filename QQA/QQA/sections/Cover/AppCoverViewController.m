@@ -7,12 +7,13 @@
 //
 
 #import "AppCoverViewController.h"
+#import "ScanImageViewController.h"
 
 #define  iphoneWidth    [[UIScreen mainScreen] bounds].size.width
 #define  iphoneHeight   [[UIScreen mainScreen] bounds].size.height
 
 
-@interface AppCoverViewController ()
+@interface AppCoverViewController ()<ScanImageView>
 
 @end
 
@@ -21,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBarHidden = YES;
+    
+
     
     [self setAppCoverImageName:@"app_face.png"  title:@"V00.00.01"];
     
@@ -176,14 +180,34 @@
     scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [scanButton addTarget:self action:@selector(scanCrama) forControlEvents:UIControlEventTouchUpInside];
+    [scanButton addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
     
     [plantIDEeyView addSubview:scanButton];
     
     
 }
 
--(void)scanCrama{
+
+-(void)startScanssss{
+    
+    //    ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
+    
+    ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
+    scanImage.delegate = self;
+    [self presentViewController:scanImage animated:YES completion:nil];
+    
+}
+
+
+- (void)reportScanResult:(NSString *)result{
+    NSLog(@"%@",result);
+    [self scanCrama:result];
+}
+
+
+
+
+-(void)scanCrama:(NSString *)reseutString {
     
     int result = 0;
     
@@ -192,7 +216,7 @@
     } else if (result == 0) {
         
 //        [self alert];
-        NSString *title = @"扫码失败";
+        NSString *title = reseutString;
         NSString *message = @"重新返回扫码指导界面";
         NSString *okButtonTitle = @"OK";
         // 初始化
@@ -324,10 +348,6 @@
     self.view.backgroundColor = [UIColor  purpleColor];
     
 }
-
-
-
-
 
 
 

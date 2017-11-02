@@ -15,6 +15,7 @@
 		AA1CEC961FA9602E00050EFC /* QQATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC951FA9602E00050EFC /* QQATests.m */; };
 		AA1CECA11FA9602E00050EFC /* QQAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECA01FA9602E00050EFC /* QQAUITests.m */; };
 		AA1CECB11FA9607900050EFC /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECB01FA9607900050EFC /* MeViewController.m */; };
+		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAB0F73C1FA9945E00A9F684 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB0F73B1FA9945E00A9F684 /* PunchClockViewController.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
@@ -66,6 +67,8 @@
 		AA1CECBC1FA96C1600050EFC /* first_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_h.png; sourceTree = "<group>"; };
 		AA1CECBD1FA96C1600050EFC /* oversea_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oversea_n.png; sourceTree = "<group>"; };
 		AA1CECBE1FA96C1600050EFC /* first_ll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_ll.png; sourceTree = "<group>"; };
+		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
+		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AAA169F81FA98E0F00F35475 /* AppTBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppTBViewController.h; sourceTree = "<group>"; };
 		AAA169F91FA98E0F00F35475 /* AppTBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppTBViewController.m; sourceTree = "<group>"; };
 		AAB0F71D1FA992E200A9F684 /* locker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locker.png; sourceTree = "<group>"; };
@@ -174,6 +177,8 @@
 			children = (
 				AA1CEC821FA9602E00050EFC /* AppDelegate.h */,
 				AA1CEC831FA9602E00050EFC /* AppDelegate.m */,
+				AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */,
+				AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */,
 				AA1CECAE1FA9606500050EFC /* sections */,
 				AA1CECB21FA960D800050EFC /* resource */,
 				AA1CEC851FA9602E00050EFC /* Assets.xcassets */,
@@ -501,6 +506,7 @@
 			files = (
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AA1CECB11FA9607900050EFC /* MeViewController.m in Sources */,
+				AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */,
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
 				AAB0F73C1FA9945E00A9F684 /* PunchClockViewController.m in Sources */,
@@ -664,7 +670,7 @@
 				DEVELOPMENT_TEAM = YH3256X757;
 				INFOPLIST_FILE = QQA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CHAOS.QQA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shown.howdyland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -679,7 +685,7 @@
 				DEVELOPMENT_TEAM = YH3256X757;
 				INFOPLIST_FILE = QQA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CHAOS.QQA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shown.howdyland;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
