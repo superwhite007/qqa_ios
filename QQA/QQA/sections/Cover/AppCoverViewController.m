@@ -146,12 +146,12 @@
 -(void)plantIDKey{
     
     UIView * plantIDEeyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight)];
-    plantIDEeyView.backgroundColor = [UIColor blueColor];
+    plantIDEeyView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:plantIDEeyView];
     
     UILabel * plantIDKeyLable = [[UILabel alloc] initWithFrame:CGRectMake((iphoneWidth - 200) / 2, 64, 200, 30)];
     plantIDKeyLable.text = @"种植IDKey";
-        plantIDKeyLable.backgroundColor = [UIColor redColor];
+//        plantIDKeyLable.backgroundColor = [UIColor redColor];
     plantIDKeyLable.textAlignment =  NSTextAlignmentCenter;
     plantIDKeyLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
     
@@ -159,10 +159,8 @@
     
     UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 130, iphoneWidth - 40, 150)];
     plantIDKeyExplianLable.text = @"1.如果是新入职的同事，请让技术研发中心的技术人员先帮您创建一个OA账号。                                                 2.种植IDKey，技术人员会在OA的后台里为您的账号创建一个新的IDKey二维码。通过用手机OA扫描该二维码，IDKey会植入手机内。                                                                                 3.扫描时，请确保您的手机连上互联网，种植会很快完成。";
-        plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
+//        plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
     plantIDKeyExplianLable.textAlignment =  NSTextAlignmentLeft;
-    
-    
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
     CGSize labelSize = [plantIDKeyExplianLable.text boundingRectWithSize:CGSizeMake(200, 8000) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
     plantIDKeyExplianLable.frame = CGRectMake(plantIDKeyExplianLable.frame.origin.x, plantIDKeyExplianLable.frame.origin.y, plantIDKeyExplianLable.frame.size.width, labelSize.height);
@@ -187,7 +185,14 @@
 
 -(void)scanCrama{
     
-    [self scanSuccess:@"https://"];
+    int result = 1;
+    
+    if (result == 1) {
+        [self scanSuccess:@"https://"];
+    } else if (result == 0) {
+        [self  plantIDKey];
+        
+    }
     
 }
 
@@ -195,33 +200,87 @@
     
     
     UIView * scanSuccessView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight)];
-    scanSuccessView.backgroundColor = [UIColor blueColor];
+    scanSuccessView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:scanSuccessView];
     
     UILabel * plantIDKeySuccessLable = [[UILabel alloc] initWithFrame:CGRectMake((iphoneWidth - 200) / 2, 64, 200, 30)];
     plantIDKeySuccessLable.text = @"种植IDKey完成";
-    plantIDKeySuccessLable.backgroundColor = [UIColor redColor];
+//    plantIDKeySuccessLable.backgroundColor = [UIColor redColor];
     plantIDKeySuccessLable.textAlignment =  NSTextAlignmentCenter;
     plantIDKeySuccessLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
     
     [scanSuccessView addSubview:plantIDKeySuccessLable];
     
+    UIImageView *imgView = [[UIImageView alloc] init];
+    imgView.frame = CGRectMake((iphoneWidth - 150) / 2, 114, 150, 150);
+    //    imgView.backgroundColor = [UIColor yellowColor];
+    UIImage *image = [UIImage imageNamed:@"checkmark_green"];
+    [imgView setImage:image];
+    
+    [scanSuccessView addSubview:imgView];
+    
+    
+    UILabel * mattersNeedAttentionLable = [[UILabel alloc] initWithFrame:CGRectMake((iphoneWidth - 200) / 2, 284, 200, 30)];
+    mattersNeedAttentionLable.text = @"注意事项";
+//    mattersNeedAttentionLable.backgroundColor = [UIColor redColor];
+    mattersNeedAttentionLable.textAlignment =  NSTextAlignmentCenter;
+    mattersNeedAttentionLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    
+    [scanSuccessView addSubview:mattersNeedAttentionLable];
+    
+    
+    UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(30 , 340, iphoneWidth - 60 , 120)];
+    mattersNeedAttentionExplianLable.text = @"请不要删除青青OA，也不要清理青青OA中的数据。否则IOKey丢失，导致无法登录。";
+    //    plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
+    mattersNeedAttentionExplianLable.textAlignment =  NSTextAlignmentLeft;
+    //    plantIDKeyExplianLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+    CGSize labelSize = [mattersNeedAttentionExplianLable.text boundingRectWithSize:CGSizeMake(200, 1500) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+    mattersNeedAttentionExplianLable.frame = CGRectMake(mattersNeedAttentionExplianLable.frame.origin.x, mattersNeedAttentionExplianLable.frame.origin.y, mattersNeedAttentionExplianLable.frame.size.width, labelSize.height);
+    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+    mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
+  
+    [scanSuccessView addSubview:mattersNeedAttentionExplianLable];
+    
+    
+    UILabel * nameLable = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight * 3 / 4 - 60, iphoneWidth - 40, 50)];
+    nameLable.text = @"用户 ：小明";
+//    nameLable.backgroundColor = [UIColor redColor];
+    nameLable.textAlignment =  NSTextAlignmentCenter;
+    nameLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    
+    [scanSuccessView addSubview:nameLable];
     
     
     
+    UIButton  * scanButton =  [UIButton buttonWithType:UIButtonTypeSystem];
+    [scanButton setFrame:CGRectMake( 60,  iphoneHeight * 3 / 4 , iphoneWidth -120, 50)];
+    [scanButton setTitle:@"下一步" forState:UIControlStateNormal];
+    scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
+    scanButton.backgroundColor = [UIColor redColor];
+    [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [scanButton addTarget:self action:@selector(goBbackToAPP:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [scanSuccessView addSubview:scanButton];
     
     
+    UILabel * statementLable = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight - 60, iphoneWidth - 40, 30)];
+    statementLable.text = @"2017 版权所有 ：中国青年网";
+//    statementLable.backgroundColor = [UIColor redColor];
+    statementLable.textAlignment =  NSTextAlignmentCenter;
+    statementLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
     
-    
-    
-    
-    
-    
+    [scanSuccessView addSubview:statementLable];
     
     
 }
 
-
+-(void)goBbackToAPP:(NSString *)userInfomation{
+    
+    self.view.backgroundColor = [UIColor  purpleColor];
+    
+}
 
 
 
