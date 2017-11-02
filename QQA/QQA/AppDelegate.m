@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "AppTBViewController.h"
+#import "AppCoverViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,9 +24,20 @@
     [self.window makeKeyAndVisible];
     
     
-    AppTBViewController * appTBVC = [AppTBViewController new];
-    self.window.rootViewController = appTBVC;
+    int  switchs = 1;
+    if (switchs == 0) {
+        
+        AppCoverViewController * appCoverVC = [AppCoverViewController new];
+        self.window.rootViewController = appCoverVC;
+        
+    } else if (switchs == 1){
+        
+        AppTBViewController * appTBVC = [AppTBViewController new];
+        self.window.rootViewController = appTBVC;
+        
+    }
     
+   
 
     return YES;
 }
