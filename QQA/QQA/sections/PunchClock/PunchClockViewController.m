@@ -21,16 +21,16 @@
     UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
     punchCLockImageTileButton.frame = CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
     punchCLockImageTileButton.backgroundColor = [UIColor redColor];
-    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"account"] forState:UIControlStateNormal];
+    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"app_face_logo"] forState:UIControlStateNormal];
     [self.view addSubview:punchCLockImageTileButton];
     
     
     UIButton * punchRecordButtom = [UIButton buttonWithType:UIButtonTypeSystem];
     punchRecordButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 100, 30);
     [punchRecordButtom setTitle:@"打卡记录" forState:UIControlStateNormal];
-    [punchRecordButtom setBackgroundImage:[UIImage imageNamed:@"red_button"] forState:UIControlStateNormal];
+//    [punchRecordButtom setBackgroundImage:[UIImage imageNamed:@"red_button"] forState:UIControlStateNormal];
     [punchRecordButtom setTintColor:[UIColor blackColor]];
-//    punchRecordButtom.backgroundColor = [UIColor blueColor]; scan_qrcode
+    punchRecordButtom.backgroundColor = [UIColor greenColor];
     [self.view addSubview:punchRecordButtom];
     
     UIButton * scanButtom = [UIButton buttonWithType:UIButtonTypeSystem];
