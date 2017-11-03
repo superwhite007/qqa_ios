@@ -25,27 +25,44 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+   
     
-    int  switchs = 3;
-    if (switchs == 0) {
-        
-        AppCoverViewController * appCoverVC = [AppCoverViewController new];
-        self.window.rootViewController = appCoverVC;
-        
-    } else if (switchs == 1){
-        
-        AppTBViewController * appTBVC = [AppTBViewController new];
-        self.window.rootViewController = appTBVC;
-        
-    } else if (switchs == 3){
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@，%@", resultDic, resultDic[@"name"] );
+    
+    if (resultDic[@"name"] == nil || resultDic[@"name"] == NULL ) {
         
         AppCoverViewController * scanVC = [AppCoverViewController new];
         UINavigationController * scanNC = [[UINavigationController alloc] initWithRootViewController:scanVC];
         self.window.rootViewController = scanNC;
         
-    
+    } else{
+        AppTBViewController * appTBVC = [AppTBViewController new];
+        self.window.rootViewController = appTBVC;
+        NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic[@"name"] );
         
     }
+
+    
+//    int  switchs = 3;
+//    if (switchs == 0) {
+//
+//        AppCoverViewController * appCoverVC = [AppCoverViewController new];
+//        self.window.rootViewController = appCoverVC;
+//
+//    } else if (switchs == 1){
+//
+//        AppTBViewController * appTBVC = [AppTBViewController new];
+//        self.window.rootViewController = appTBVC;
+//
+//    } else if (switchs == 3){
+//
+//        AppCoverViewController * scanVC = [AppCoverViewController new];
+//        UINavigationController * scanNC = [[UINavigationController alloc] initWithRootViewController:scanVC];
+//        self.window.rootViewController = scanNC;
+//
+//    }
     
    
 

@@ -69,6 +69,7 @@
 		AA1CECBE1FA96C1600050EFC /* first_ll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_ll.png; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
+		AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQA_PrefixHeader.pch; sourceTree = "<group>"; };
 		AAA169F81FA98E0F00F35475 /* AppTBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppTBViewController.h; sourceTree = "<group>"; };
 		AAA169F91FA98E0F00F35475 /* AppTBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppTBViewController.m; sourceTree = "<group>"; };
 		AAB0F71D1FA992E200A9F684 /* locker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locker.png; sourceTree = "<group>"; };
@@ -184,6 +185,7 @@
 				AA1CEC851FA9602E00050EFC /* Assets.xcassets */,
 				AA1CEC871FA9602E00050EFC /* LaunchScreen.storyboard */,
 				AA1CEC8A1FA9602E00050EFC /* Info.plist */,
+				AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */,
 				AA1CEC8B1FA9602E00050EFC /* main.m */,
 			);
 			path = QQA;
@@ -668,6 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YH3256X757;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QQA/QQA_PrefixHeader.pch";
 				INFOPLIST_FILE = QQA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shown.howdyland;
@@ -683,6 +686,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YH3256X757;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/QQA/QQA_PrefixHeader.pch";
 				INFOPLIST_FILE = QQA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shown.howdyland;
