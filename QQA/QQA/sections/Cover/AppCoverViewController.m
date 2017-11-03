@@ -166,7 +166,7 @@
     [plantIDEeyView addSubview:plantIDKeyLable];
     
     UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 130, iphoneWidth - 40, 150)];
-    plantIDKeyExplianLable.text = @"1.如果是新入职的同事，请让技术研发中心的技术人员先帮您创建一个OA账号。                                                 2.种植IDKey，技术人员会在OA的后台里为您的账号创建一个新的IDKey二维码。通过用手机OA扫描该二维码，IDKey会植入手机内。                                                                                 3.扫描时，请确保您的手机连上互联网，种植会很快完成。";
+    plantIDKeyExplianLable.text = @"1.如果是新入职的同事，请让技术研发中心的技术人员先帮您创建一个OA账号。                                               \n\n\n 2.种植IDKey，技术人员会在OA的后台里为您的账号创建一个新的IDKey二维码。通过用手机OA扫描该二维码，IDKey会植入手机内。 \n\n\n 3.扫描时，请确保您的手机连上互联网，种植会很快完成。";
 //        plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
     plantIDKeyExplianLable.textAlignment =  NSTextAlignmentLeft;
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
