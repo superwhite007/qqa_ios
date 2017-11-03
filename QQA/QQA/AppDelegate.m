@@ -43,8 +43,7 @@
         UINavigationController * scanNC = [[UINavigationController alloc] initWithRootViewController:scanVC];
         self.window.rootViewController = scanNC;
         
-        
-        
+    
         
     }
     

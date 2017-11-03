@@ -9,8 +9,12 @@
 #import "AppCoverViewController.h"
 #import "ScanImageViewController.h"
 
+
 #define  iphoneWidth    [[UIScreen mainScreen] bounds].size.width
 #define  iphoneHeight   [[UIScreen mainScreen] bounds].size.height
+
+#import "AppTBViewController.h"
+#import "AppDelegate.h"
 
 
 @interface AppCoverViewController ()<ScanImageView>
@@ -345,7 +349,13 @@
 
 -(void)goBbackToAPP:(NSString *)userInfomation{
     
-    self.view.backgroundColor = [UIColor  purpleColor];
+    
+
+    AppTBViewController *appTBVController = [AppTBViewController new]; ;
+     ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = appTBVController;
+    
+    
+    
     
 }
 
