@@ -206,6 +206,11 @@
 - (void)reportScanResult:(NSString *)result{
     NSLog(@"%@",result);
     [self scanCrama:result];
+    
+    NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
+
+    
 }
 
 
@@ -322,6 +327,21 @@
     nameLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
     
     [scanSuccessView addSubview:nameLable];
+
+    
+#pragma tset
+    //数据持久化
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentfilePath = paths.firstObject;
+    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
+    
+    NSDictionary *dic5 = @{@"name": @"Duke", @"age": @33, @"gender": @"male"};
+    [dic5 writeToFile:txtPath atomically:YES];
+    
+    NSLog(@"txtPath:%@", txtPath);
+    
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:txtPath];
+    NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic);
     
     
     
@@ -349,13 +369,8 @@
 
 -(void)goBbackToAPP:(NSString *)userInfomation{
     
-    
-
     AppTBViewController *appTBVController = [AppTBViewController new]; ;
      ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = appTBVController;
-    
-    
-    
     
 }
 
