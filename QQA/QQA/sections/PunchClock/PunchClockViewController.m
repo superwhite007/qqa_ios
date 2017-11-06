@@ -7,6 +7,7 @@
 //
 
 #import "PunchClockViewController.h"
+#import "PunchRecordViewController.h"
 
 @interface PunchClockViewController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
     punchCLockImageTileButton.frame = CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
@@ -31,6 +33,7 @@
 //    [punchRecordButtom setBackgroundImage:[UIImage imageNamed:@"red_button"] forState:UIControlStateNormal];
     [punchRecordButtom setTintColor:[UIColor blackColor]];
     punchRecordButtom.backgroundColor = [UIColor greenColor];
+    [punchRecordButtom addTarget:self action:@selector(puchtoPunchRecordcontroller) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:punchRecordButtom];
     
     UIButton * scanButtom = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -68,6 +71,19 @@
     
     
 }
+
+-(void)puchtoPunchRecordcontroller{
+    
+    PunchRecordViewController * prVC = [[PunchRecordViewController alloc] init];
+
+//    [self.navigationController pushViewController:prVC animated:YES];
+    [self presentViewController:prVC animated:YES completion:nil];
+
+    
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
