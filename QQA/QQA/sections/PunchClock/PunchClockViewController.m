@@ -76,8 +76,8 @@
     
     PunchRecordViewController * prVC = [[PunchRecordViewController alloc] init];
 
-//    [self.navigationController pushViewController:prVC animated:YES];
-    [self presentViewController:prVC animated:YES completion:nil];
+    [self.navigationController pushViewController:prVC animated:YES];
+//    [self presentViewController:prVC animated:YES completion:nil];
 
     
 }

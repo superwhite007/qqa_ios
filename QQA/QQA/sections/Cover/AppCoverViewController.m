@@ -199,7 +199,10 @@
     
     ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
     scanImage.delegate = self;
-    [self presentViewController:scanImage animated:YES completion:nil];
+//    [self presentViewController:scanImage animated:YES completion:nil];
+    [self.navigationController  presentViewController:scanImage animated:YES completion:nil];
+    
+    
     
 }
 
@@ -241,7 +244,8 @@
         // 添加操作
         [alertDialog addAction:okAction];
         // 呈现警告视图
-        [self presentViewController:alertDialog animated:YES completion:nil];
+//        [self presentViewController:alertDialog animated:YES completion:nil];
+        [self.navigationController  presentViewController:alertDialog animated:YES completion:nil];
     }
     
 }
@@ -264,7 +268,9 @@
     [alertDialog addAction:okAction];
     
     // 呈现警告视图
-    [self presentViewController:alertDialog animated:YES completion:nil];
+//    [self presentViewController:alertDialog animated:YES completion:nil];
+    
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
     
     
 }
@@ -370,8 +376,9 @@
 
 -(void)goBbackToAPP:(NSString *)userInfomation{
     
-    AppTBViewController *appTBVController = [AppTBViewController new]; ;
-     ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = appTBVController;
+    AppTBViewController *appTBVController = [AppTBViewController new];
+    UINavigationController * tbNC = [[UINavigationController alloc] initWithRootViewController:appTBVController];
+     ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = tbNC;
     
 }
 

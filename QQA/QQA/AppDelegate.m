@@ -39,8 +39,13 @@
         
     } else{
         AppTBViewController * appTBVC = [AppTBViewController new];
-        self.window.rootViewController = appTBVC;
+//        self.window.rootViewController = appTBVC;
         NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic[@"name"] );
+        
+        
+        UINavigationController * tbNC = [[UINavigationController alloc] initWithRootViewController:appTBVC];
+        self.window.rootViewController = tbNC;
+        
         
     }
 
