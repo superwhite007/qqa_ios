@@ -8,8 +8,11 @@
 
 #import "PunchClockViewController.h"
 #import "PunchRecordViewController.h"
+#import "ScanImageViewController.h"
 
-@interface PunchClockViewController ()
+
+
+@interface PunchClockViewController ()<ScanImageView>
 
 @end
 
@@ -42,6 +45,8 @@
     [scanButtom setBackgroundImage:[UIImage imageNamed:@"scan_qrcode"] forState:UIControlStateNormal];
     [scanButtom setTintColor:[UIColor blackColor]];
     //    punchRecordButtom.backgroundColor = [UIColor blueColor]; scan_qrcode
+    [scanButtom addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:scanButtom];
     
    
@@ -71,6 +76,45 @@
     
     
 }
+
+-(void)startScanssss{
+    
+    //    ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
+    
+    ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
+    scanImage.delegate = self;
+    //    [self presentViewController:scanImage animated:YES completion:nil];
+    [self.navigationController  presentViewController:scanImage animated:YES completion:nil];
+    
+    
+}
+
+
+
+
+- (void)reportScanResult:(NSString *)result{
+    NSLog(@"%@",result);
+//    [self scanCrama:result];
+//
+    [self scanResultPunchClock];
+    NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
+    
+    
+}
+
+-(void)scanResultPunchClock{
+    
+    
+    NSLog(@"打卡成功");
+    
+}
+
+
+
+
+
+
 
 -(void)puchtoPunchRecordcontroller{
     
