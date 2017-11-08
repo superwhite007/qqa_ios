@@ -207,15 +207,81 @@
 }
 
 
+//- (void)reportScanResult:(NSString *)result{
+//    NSLog(@"%@",result);
+//    [self scanCrama:result];
+//
+//    NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
+//    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
+//
+//
+//}
 - (void)reportScanResult:(NSString *)result{
     NSLog(@"%@",result);
     [self scanCrama:result];
     
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
-
+    NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
+    [dict removeObjectForKey:@"server_type"];
+    [self clientSendInformationsToServer:dict resultString:result];
     
 }
+
+-(void)clientSendInformationsToServer:(NSMutableDictionary *)clinetDictionaryDIct  resultString:(NSString *)str{
+    
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/receive"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    NSDictionary * dataDic = clinetDictionaryDIct;
+    [clinetDictionaryDIct setValue:@"IOS_APP" forKey:@"client_type"];
+    
+    
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    
+    //    NSString  * string =[self convertToJsonData:clinetDictionaryDIct];
+    //    request.HTTPBody = [string dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 由于要先对request先行处理,我们通过request初始化task
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            NSLog(@"response, error :%@, %@", response, error);
+                                            NSLog(@"data:%@", data);
+                                            if (data != nil) {
+                                                NSLog(@"success");
+                                                NSDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
+                                                ;
+                                                NSLog(@"%@", dictss);
+                                                [self scanCrama:str];
+                                                
+                                            } else{
+                                                NSLog(@"获取数据失败，问李鹏");
+                                            }
+                                            
+                                        }];
+    [task resume];
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
