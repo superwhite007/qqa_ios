@@ -181,8 +181,6 @@
 			children = (
 				AA1CEC821FA9602E00050EFC /* AppDelegate.h */,
 				AA1CEC831FA9602E00050EFC /* AppDelegate.m */,
-				AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */,
-				AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */,
 				AA1CECAE1FA9606500050EFC /* sections */,
 				AA1CECB21FA960D800050EFC /* resource */,
 				AA1CEC851FA9602E00050EFC /* Assets.xcassets */,
@@ -217,6 +215,7 @@
 			children = (
 				AAA169F81FA98E0F00F35475 /* AppTBViewController.h */,
 				AAA169F91FA98E0F00F35475 /* AppTBViewController.m */,
+				AAF14DEC1FB2CE7300B210E1 /* General */,
 				AAC4D1F91FAAAC8700183930 /* Cover */,
 				AAA169F61FA98C9200F35475 /* Company */,
 				AAA169F41FA98C8B00F35475 /* ExaminationApproval */,
@@ -332,6 +331,16 @@
 				AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */,
 			);
 			path = Cover;
+			sourceTree = "<group>";
+		};
+		AAF14DEC1FB2CE7300B210E1 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */,
+				AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */,
+			);
+			name = General;
+			path = "New Group2";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
