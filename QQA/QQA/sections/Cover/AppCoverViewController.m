@@ -261,7 +261,9 @@
                                                 NSDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
                                                 ;
                                                 NSLog(@"%@", dictss);
-                                                [self scanCrama:str];
+                                                
+//                                                [self scanCrama:str];
+                                                [self gitAccess_token];
                                                 
                                             } else{
                                                 NSLog(@"获取数据失败，问李鹏");
@@ -273,6 +275,52 @@
     
 }
 
+
+-(void)gitAccess_token{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/login"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    NSDictionary * dataDic = @{@"grant_type": @"client_credentials", @"client_id": @"1", @"client_secret": @"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3", @"scope": @"1"};
+    
+    
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    
+    //    NSString  * string =[self convertToJsonData:clinetDictionaryDIct];
+    //    request.HTTPBody = [string dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 由于要先对request先行处理,我们通过request初始化task
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            NSLog(@"tokenresponse, error :%@, %@", response, error);
+                                            NSLog(@"tokendata:%@", data);
+                                            if (data != nil) {
+                                                NSLog(@"tokensuccess");
+                                                NSDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
+                                                ;
+                                                
+                                                NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
+                                                
+                                                NSString * newStr = [NSString new];
+                                                [self scanCrama:newStr];
+                                                
+                                            } else{
+                                                NSLog(@"token:获取数据失败，问李鹏");
+                                            }
+                                            
+                                        }];
+    [task resume];
+    
+}
 
 
 
