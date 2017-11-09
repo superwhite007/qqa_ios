@@ -49,7 +49,7 @@
     //数据持久化存储
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
-    self.documentTxtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
+    _documentTxtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
     
 
     
@@ -234,6 +234,8 @@
     [dict removeObjectForKey:@"server_type"];
     [self clientSendInformationsToServer:dict resultString:result];
     
+    [dict writeToFile:self.documentTxtPath atomically:YES];
+    
 }
 
 -(void)clientSendInformationsToServer:(NSMutableDictionary *)clinetDictionaryDIct  resultString:(NSString *)str{
@@ -267,12 +269,11 @@
 //                                            NSLog(@"data:%@", data);
                                             if (data != nil) {
                                                 NSLog(@"PlantKeysuccess");
-//                                                NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                            NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 
-                                                 NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                
-//                                                NSLog(@"PlantKey.dictss:%@; ddict:%@", dict, ddict);
-                                              [self gitAccess_token:ddict];
+//                                            NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                               
+                                              [self gitAccess_token:dict];
                                              
                                             } else{
                                                 NSLog(@"获取数据失败，问李鹏");
@@ -284,17 +285,27 @@
 }
 
 
--(void)gitAccess_token:(NSMutableDictionary *)dict{
+-(void)gitAccess_token:(NSDictionary *)dict{
     
     NSLog(@"gitAccess_token:dictss:%@", dict);
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict removeObjectForKey:@"server_type"];
+    [mdict removeObjectForKey:@"status"];
+    [mdict removeObjectForKey:@"code"];
+    [mdict setObject:@"client_credentials" forKey:@"grant_type"];
+    [mdict setObject:@"1" forKey:@"client_id"];
+    [mdict setObject:@"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3" forKey:@"client_secret"];
+    [mdict setObject:@"1" forKey:@"scope"];
     
-    self.documentTxtPathDictionary = dict;
-//    [_documentTxtPathDictionary setObject:@"IOS_APP" forKey:@"client_type"];  //  "client_type": "ANDROID_APP",//IOS_APP
-    [self.documentTxtPathDictionary writeToFile:self.documentTxtPath atomically:YES];
     
-    NSMutableDictionary * newDict = self.documentTxtPathDictionary;
+//    self.documentTxtPathDictionary = dict;
+//    [self.documentTxtPathDictionary writeToFile:self.documentTxtPath atomically:YES];
+    
+//    NSMutableDictionary * newDict = self.documentTxtPathDictionary;
 //    [newDict removeObjectForKey:@"server_type"];
-
+    
+//    [dict removeObjectForKey:@"server_type"];
     
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/login"]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -303,7 +314,7 @@
     request.HTTPMethod = @"POST";
     
     NSError * error = nil;
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:newDict options:NSJSONWritingPrettyPrinted error:&error];
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     
 //
@@ -325,7 +336,8 @@
                                                 NSDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
                                                 ;
                                                 
-                                                NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
+                                                NSLog(@"tokensuccess:%@",dictss);
+//                                                NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
                                                 
 //                                                NSString * newStr = [NSString new];
 //                                                [self scanCrama:newStr];
