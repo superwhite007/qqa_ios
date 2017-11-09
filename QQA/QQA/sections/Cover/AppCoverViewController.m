@@ -298,6 +298,8 @@
     [mdict setObject:@"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3" forKey:@"client_secret"];
     [mdict setObject:@"1" forKey:@"scope"];
     
+    [mdict writeToFile:_documentTxtPath atomically:YES];
+    
     
 //    self.documentTxtPathDictionary = dict;
 //    [self.documentTxtPathDictionary writeToFile:self.documentTxtPath atomically:YES];
@@ -333,14 +335,16 @@
                                             NSLog(@"tokendata:%@", data);
                                             if (data != nil) {
                                                 NSLog(@"tokensuccess");
-                                                NSDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
+                                                NSMutableDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
                                                 ;
                                                 
-                                                NSLog(@"tokensuccess:%@",dictss);
-//                                                NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
                                                 
-//                                                NSString * newStr = [NSString new];
-//                                                [self scanCrama:newStr];
+                                               
+                                                
+                                                NSLog(@"tokensuccess:%@",dictss);
+//                                              NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
+//                                              NSString * newStr = [NSString new];
+                                                [self scanCrama:dictss];
                                                 
                                             } else{
                                                 NSLog(@"token:获取数据失败，问李鹏");
@@ -353,17 +357,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
--(void)scanCrama:(NSString *)reseutString {
+-(void)scanCrama:(NSMutableDictionary *)mDict {
+    
+    [mDict writeToFile:_documentTxtPath atomically:YES];
+    
     
     int result = 0;
     
@@ -372,7 +369,7 @@
     } else if (result == 0) {
         
 //        [self alert];
-        NSString *title = reseutString;
+        NSString *title = [mDict objectForKey:@"access_token"];
         NSString *message = @"重新返回扫码指导界面";
         NSString *okButtonTitle = @"OK";
         // 初始化
@@ -381,7 +378,7 @@
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
 //            [self  plantIDKey];
-//             [self scanSuccess:@"https://"];
+             [self scanSuccess:@"https://"];
         }];
         
         // 添加操作
@@ -476,23 +473,23 @@
     nameLable.textAlignment =  NSTextAlignmentCenter;
     nameLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
     
-    [scanSuccessView addSubview:nameLable];
+//    [scanSuccessView addSubview:nameLable];
 
     
 #pragma tset
     //数据持久化
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documentfilePath = paths.firstObject;
-    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
-    
-    NSDictionary *dic5 = @{@"name": @"Duke", @"age": @33, @"gender": @"male"};
-    [dic5 writeToFile:txtPath atomically:YES];
-    
-    NSLog(@"txtPath:%@", txtPath);
-    
-    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:txtPath];
-    NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic);
-    
+//    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString * documentfilePath = paths.firstObject;
+//    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
+//
+//    NSDictionary *dic5 = @{@"name": @"Duke", @"age": @33, @"gender": @"male"};
+//    [dic5 writeToFile:txtPath atomically:YES];
+//
+//    NSLog(@"txtPath:%@", txtPath);
+//
+//    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:txtPath];
+//    NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic);
+//
     
     
     UIButton  * scanButton =  [UIButton buttonWithType:UIButtonTypeSystem];
