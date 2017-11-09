@@ -29,9 +29,13 @@
     
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
-    NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@，%@", resultDic, resultDic[@"name"] );
     
-    if (resultDic[@"name"] == nil || resultDic[@"name"] == NULL ) {
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    NSLog(@"AppDic:\nid_key:%@,\n access_token:%@\n",  [resultDic objectForKey:@"id_key"] , [resultDicAccess objectForKey:@"access_token"]);
+    
+    if (resultDic[@"id_key"] == nil || resultDicAccess[@"access_token"] == NULL ) {
         
         AppCoverViewController * scanVC = [AppCoverViewController new];
         UINavigationController * scanNC = [[UINavigationController alloc] initWithRootViewController:scanVC];

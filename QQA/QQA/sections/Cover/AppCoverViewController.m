@@ -20,26 +20,26 @@
 @interface AppCoverViewController ()<ScanImageView>
 
 //数据持久化存储
-@property (nonatomic, strong) NSMutableDictionary * documentTxtPathDictionary;
+//@property (nonatomic, strong) NSMutableDictionary * documentTxtPathDictionary;
 @property (nonatomic, strong) NSString * documentTxtPath;
 
 @end
 
 @implementation AppCoverViewController
 
--(NSMutableDictionary *)documentTxtPathDictionary{
-    if (!_documentTxtPathDictionary) {
-        self.documentTxtPathDictionary = [[NSMutableDictionary alloc] init];
-    }
-    return _documentTxtPathDictionary;
-}
+//-(NSMutableDictionary *)documentTxtPathDictionary{
+//    if (!_documentTxtPathDictionary) {
+//        self.documentTxtPathDictionary = [[NSMutableDictionary alloc] init];
+//    }
+//    return _documentTxtPathDictionary;
+//}
 
--(NSString *)documentTxtPath{
-    if (!_documentTxtPath) {
-        self.documentTxtPath = [[NSString alloc] init];
-    }
-    return _documentTxtPath;
-}
+//-(NSString *)documentTxtPath{
+//    if (!_documentTxtPath) {
+//        self.documentTxtPath = [[NSString alloc] init];
+//    }
+//    return _documentTxtPath;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,8 +50,6 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
     _documentTxtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
-    
-
     
     [self setAppCoverImageName:@"app_face.png"  title:@"V00.00.01"];
     
@@ -232,9 +230,16 @@
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
     [dict removeObjectForKey:@"server_type"];
-    [self clientSendInformationsToServer:dict resultString:result];
     
-    [dict writeToFile:self.documentTxtPath atomically:YES];
+    NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentfilePath = paths.firstObject;
+    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
+    [ddict writeToFile:txtPath atomically:YES];
+    
+    
+    [self clientSendInformationsToServer:dict resultString:result];
+ 
     
 }
 
@@ -247,19 +252,14 @@
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
     
-    NSDictionary * dataDic = clinetDictionaryDIct;
     [clinetDictionaryDIct setValue:@"IOS_APP" forKey:@"client_type"];
-    
-    
+    NSDictionary * dataDic = clinetDictionaryDIct;
+   
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     
-    
-    //    NSString  * string =[self convertToJsonData:clinetDictionaryDIct];
-    //    request.HTTPBody = [string dataUsingEncoding:NSUTF8StringEncoding];
-    
-    
+
     NSURLSession *session = [NSURLSession sharedSession];
     // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
@@ -267,6 +267,7 @@
                                             
 //                                            NSLog(@"response, error :%@, %@", response, error);
 //                                            NSLog(@"data:%@", data);
+                                            
                                             if (data != nil) {
                                                 NSLog(@"PlantKeysuccess");
                                             NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
@@ -298,16 +299,8 @@
     [mdict setObject:@"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3" forKey:@"client_secret"];
     [mdict setObject:@"1" forKey:@"scope"];
     
-    [mdict writeToFile:_documentTxtPath atomically:YES];
+//    [mdict writeToFile:_documentTxtPath atomically:YES];
     
-    
-//    self.documentTxtPathDictionary = dict;
-//    [self.documentTxtPathDictionary writeToFile:self.documentTxtPath atomically:YES];
-    
-//    NSMutableDictionary * newDict = self.documentTxtPathDictionary;
-//    [newDict removeObjectForKey:@"server_type"];
-    
-//    [dict removeObjectForKey:@"server_type"];
     
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/login"]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -319,8 +312,6 @@
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     
-//
-//    NSDictionary * dataDic = @{@"grant_type": @"client_credentials", @"client_id": @"1", @"client_secret": @"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3", @"scope": @"1"};
 
 //    NSError * error = nil;
 //    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDcitFromNewDict options:NSJSONWritingPrettyPrinted error:&error];
@@ -337,10 +328,7 @@
                                                 NSLog(@"tokensuccess");
                                                 NSMutableDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
                                                 ;
-                                                
-                                                
                                                
-                                                
                                                 NSLog(@"tokensuccess:%@",dictss);
 //                                              NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
 //                                              NSString * newStr = [NSString new];
@@ -359,8 +347,14 @@
 
 -(void)scanCrama:(NSMutableDictionary *)mDict {
     
-    [mDict writeToFile:_documentTxtPath atomically:YES];
     
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentfilePath = paths.firstObject;
+    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"badaAccessToktn.txt"];
+    [mDict  writeToFile:txtPath atomically:YES];
+    
+    
+
     
     int result = 0;
     
@@ -370,7 +364,7 @@
         
 //        [self alert];
         NSString *title = [mDict objectForKey:@"access_token"];
-        NSString *message = @"重新返回扫码指导界面";
+        NSString *message = @"扫码成功";
         NSString *okButtonTitle = @"OK";
         // 初始化
         UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
