@@ -19,14 +19,37 @@
 
 @interface AppCoverViewController ()<ScanImageView>
 
+//数据持久化存储
+@property (nonatomic, strong) NSMutableDictionary * documentTxtPathDictionary;
+@property (nonatomic, strong) NSString * documentTxtPath;
+
 @end
 
 @implementation AppCoverViewController
+
+-(NSMutableDictionary *)documentTxtPathDictionary{
+    if (!_documentTxtPathDictionary) {
+        self.documentTxtPathDictionary = [[NSMutableDictionary alloc] init];
+    }
+    return _documentTxtPathDictionary;
+}
+
+-(NSString *)documentTxtPath{
+    if (!_documentTxtPath) {
+        self.documentTxtPath = [[NSString alloc] init];
+    }
+    return _documentTxtPath;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
+    
+    //数据持久化存储
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentfilePath = paths.firstObject;
+    self.documentTxtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
     
 
     
@@ -195,30 +218,16 @@
 
 -(void)startScanssss{
     
-    //    ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
-    
     ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
     scanImage.delegate = self;
-//    [self presentViewController:scanImage animated:YES completion:nil];
+
     [self.navigationController  presentViewController:scanImage animated:YES completion:nil];
-    
-    
     
 }
 
-
-//- (void)reportScanResult:(NSString *)result{
-//    NSLog(@"%@",result);
-//    [self scanCrama:result];
-//
-//    NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
-//    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
-//
-//
-//}
 - (void)reportScanResult:(NSString *)result{
     NSLog(@"%@",result);
-    [self scanCrama:result];
+//    [self scanCrama:result];
     
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
@@ -229,7 +238,7 @@
 
 -(void)clientSendInformationsToServer:(NSMutableDictionary *)clinetDictionaryDIct  resultString:(NSString *)str{
     
-    
+
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/receive"]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -254,17 +263,17 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-                                            NSLog(@"response, error :%@, %@", response, error);
-                                            NSLog(@"data:%@", data);
+//                                            NSLog(@"response, error :%@, %@", response, error);
+//                                            NSLog(@"data:%@", data);
                                             if (data != nil) {
-                                                NSLog(@"success");
-                                                NSDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
-                                                ;
-                                                NSLog(@"%@", dictss);
+                                                NSLog(@"PlantKeysuccess");
+//                                                NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 
-//                                                [self scanCrama:str];
-                                                [self gitAccess_token];
+                                                 NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 
+//                                                NSLog(@"PlantKey.dictss:%@; ddict:%@", dict, ddict);
+                                              [self gitAccess_token:ddict];
+                                             
                                             } else{
                                                 NSLog(@"获取数据失败，问李鹏");
                                             }
@@ -272,11 +281,20 @@
                                         }];
     [task resume];
     
-    
 }
 
 
--(void)gitAccess_token{
+-(void)gitAccess_token:(NSMutableDictionary *)dict{
+    
+    NSLog(@"gitAccess_token:dictss:%@", dict);
+    
+    self.documentTxtPathDictionary = dict;
+//    [_documentTxtPathDictionary setObject:@"IOS_APP" forKey:@"client_type"];  //  "client_type": "ANDROID_APP",//IOS_APP
+    [self.documentTxtPathDictionary writeToFile:self.documentTxtPath atomically:YES];
+    
+    NSMutableDictionary * newDict = self.documentTxtPathDictionary;
+//    [newDict removeObjectForKey:@"server_type"];
+
     
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/login"]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -284,17 +302,16 @@
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
     
-    NSDictionary * dataDic = @{@"grant_type": @"client_credentials", @"client_id": @"1", @"client_secret": @"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3", @"scope": @"1"};
-    
-    
     NSError * error = nil;
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:&error];
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:newDict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     
-    
-    //    NSString  * string =[self convertToJsonData:clinetDictionaryDIct];
-    //    request.HTTPBody = [string dataUsingEncoding:NSUTF8StringEncoding];
-    
+//
+//    NSDictionary * dataDic = @{@"grant_type": @"client_credentials", @"client_id": @"1", @"client_secret": @"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3", @"scope": @"1"};
+
+//    NSError * error = nil;
+//    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDcitFromNewDict options:NSJSONWritingPrettyPrinted error:&error];
+//    request.HTTPBody = jsonData;
     
     NSURLSession *session = [NSURLSession sharedSession];
     // 由于要先对request先行处理,我们通过request初始化task
@@ -310,8 +327,8 @@
                                                 
                                                 NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
                                                 
-                                                NSString * newStr = [NSString new];
-                                                [self scanCrama:newStr];
+//                                                NSString * newStr = [NSString new];
+//                                                [self scanCrama:newStr];
                                                 
                                             } else{
                                                 NSLog(@"token:获取数据失败，问李鹏");
@@ -352,7 +369,7 @@
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             
 //            [self  plantIDKey];
-             [self scanSuccess:@"https://"];
+//             [self scanSuccess:@"https://"];
         }];
         
         // 添加操作
