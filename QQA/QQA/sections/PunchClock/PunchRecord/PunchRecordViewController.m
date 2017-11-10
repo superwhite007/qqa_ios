@@ -108,7 +108,6 @@ static NSString *identifier = @"Cell";
                                             
                                             if (data != nil) {
                                                 
-    
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
                                                                                             
@@ -117,37 +116,19 @@ static NSString *identifier = @"Cell";
                                                 if ([str isEqualToString:@"3004" ]) {
                                                     
                                                     [array removeObjectAtIndex:0];
+                                                    
 //                                                    NSLog(@"PunchRecord1:%@", array);
-//
+
                                                     self.datasource = array;
-                                                    
-//                                                    [self.aTableView reloadData];
-                                                    
+
                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                     self.datasource = array;
                                                    [self.aTableView reloadData];
                                                         
                                                     });
 
-                                                    
-                                                    NSLog(@"_datasource%@", _datasource);
-//
-                                                    
                                                 }
-//                                                [self.aTableView reloadData];
-                                                
-                                                
-//                                                 [self.aTableView reloadData];
-                                                
-                                                    
-                                                    
-                                                
-                                                
-                                                
-                                                //                                            NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                
-                                                //                                                [self gitAccess_token:dict];
-                                                
+                       
                                             } else{
                                                 NSLog(@"获取数据失败，问李鹏");
                                             }
@@ -155,8 +136,6 @@ static NSString *identifier = @"Cell";
                                         }];
     
     [task resume];
-    
-   
     
     
 }
@@ -201,6 +180,7 @@ static NSString *identifier = @"Cell";
     
     NSLog(@"cell:%@",[self.datasource[indexPath.row]  objectForKey:@"clock_time"]);
     cell.textLabel.text = [self.datasource[indexPath.row]  objectForKey:@"clock_time"];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
     //添加动画效果
 //    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
