@@ -237,10 +237,8 @@
     NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
     [ddict writeToFile:txtPath atomically:YES];
     
-    
     [self clientSendInformationsToServer:dict resultString:result];
  
-    
 }
 
 -(void)clientSendInformationsToServer:(NSMutableDictionary *)clinetDictionaryDIct  resultString:(NSString *)str{
@@ -271,13 +269,14 @@
                                             if (data != nil) {
                                                 NSLog(@"PlantKeysuccess");
                                             NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                
-//                                            NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                               
+
                                               [self gitAccess_token:dict];
+                                                
+//                                                [self plantIDKeyFalse];
                                              
                                             } else{
                                                 NSLog(@"获取数据失败，问李鹏");
+                                                
                                             }
                                             
                                         }];
@@ -515,6 +514,56 @@
      ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = tbNC;
     
 }
+
+
+
+-(void)plantIDKeyFalse{
+    
+    UIView * plantIDKeyFalseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight)];
+    plantIDKeyFalseView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:plantIDKeyFalseView];
+    
+    UIImageView *imgView = [[UIImageView alloc] init];
+    imgView.frame = CGRectMake((iphoneWidth - 200) / 2, 64, 220, 400);
+    imgView.backgroundColor = [UIColor yellowColor];
+    UIImage *image = [UIImage imageNamed:@"plantIDKeyFalse"];
+    [imgView setImage:image];
+    
+    [plantIDKeyFalseView addSubview:imgView];
+    
+    UILabel * statementLable = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight * 3 / 4  - 100, iphoneWidth - 40, 30)];
+    statementLable.text = @"种植IDKey失败";
+    //    statementLable.backgroundColor = [UIColor redColor];
+    statementLable.textAlignment =  NSTextAlignmentCenter;
+    statementLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
+    
+    [plantIDKeyFalseView addSubview:statementLable];
+    
+    
+    UIButton  * scanButton =  [UIButton buttonWithType:UIButtonTypeSystem];
+    
+    //    statementLable.frame.origin.y + statementLable.frame.size.height
+    
+    [scanButton setFrame:CGRectMake( 60,  iphoneHeight * 3 / 4 , iphoneWidth -120, 50)];
+    [scanButton setTitle:@"重新扫描" forState:UIControlStateNormal];
+    scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
+    scanButton.backgroundColor = [UIColor redColor];
+    [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [scanButton addTarget:self action:@selector(removeViewFroSuperVIew) forControlEvents:UIControlEventTouchUpInside];
+    
+    [plantIDKeyFalseView addSubview:scanButton];
+    
+    
+    
+}
+
+
+-(void)removeViewFroSuperVIew{
+    
+//    [view removeFromSuperview];
+}
+
+
 
 
 
