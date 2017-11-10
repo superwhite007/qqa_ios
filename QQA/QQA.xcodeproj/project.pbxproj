@@ -18,7 +18,7 @@
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
-		AAAC3D611FB0562000D54265 /* PunchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5F1FB0562000D54265 /* PunchRecordViewController.m */; };
+		AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -75,8 +75,6 @@
 		AAA169F91FA98E0F00F35475 /* AppTBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppTBViewController.m; sourceTree = "<group>"; };
 		AAAC3D5B1FB0561F00D54265 /* PunchClockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchClockViewController.h; sourceTree = "<group>"; };
 		AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchClockViewController.m; sourceTree = "<group>"; };
-		AAAC3D5E1FB0562000D54265 /* PunchRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchRecordViewController.h; sourceTree = "<group>"; };
-		AAAC3D5F1FB0562000D54265 /* PunchRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchRecordViewController.m; sourceTree = "<group>"; };
 		AAB0F71D1FA992E200A9F684 /* locker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locker.png; sourceTree = "<group>"; };
 		AAB0F71E1FA992E200A9F684 /* notify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notify.png; sourceTree = "<group>"; };
 		AAB0F71F1FA992E200A9F684 /* scan_qrcode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scan_qrcode.png; sourceTree = "<group>"; };
@@ -106,6 +104,8 @@
 		AAB0F7371FA992E500A9F684 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		AAB0F7381FA992E500A9F684 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		AAB0F7391FA992E500A9F684 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		AABFE6681FB56F7E000ED5C7 /* PunchRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchRecordViewController.h; sourceTree = "<group>"; };
+		AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchRecordViewController.m; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
 		CE70EE0C5B008995EA81DF25 /* Pods-QQA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QQA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QQA/Pods-QQA.debug.xcconfig"; sourceTree = "<group>"; };
@@ -290,9 +290,9 @@
 		AAA169F51FA98C8F00F35475 /* PunchClock */ = {
 			isa = PBXGroup;
 			children = (
+				AABFE6671FB56F7E000ED5C7 /* PunchRecord */,
 				AAAC3D5B1FB0561F00D54265 /* PunchClockViewController.h */,
 				AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */,
-				AAAC3D5D1FB0562000D54265 /* PunchRecord */,
 			);
 			path = PunchClock;
 			sourceTree = "<group>";
@@ -314,14 +314,13 @@
 			path = "New Group5";
 			sourceTree = "<group>";
 		};
-		AAAC3D5D1FB0562000D54265 /* PunchRecord */ = {
+		AABFE6671FB56F7E000ED5C7 /* PunchRecord */ = {
 			isa = PBXGroup;
 			children = (
-				AAAC3D5E1FB0562000D54265 /* PunchRecordViewController.h */,
-				AAAC3D5F1FB0562000D54265 /* PunchRecordViewController.m */,
+				AABFE6681FB56F7E000ED5C7 /* PunchRecordViewController.h */,
+				AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */,
 			);
-			name = PunchRecord;
-			path = ../../../../../PunchClock/PunchRecord;
+			path = PunchRecord;
 			sourceTree = "<group>";
 		};
 		AAC4D1F91FAAAC8700183930 /* Cover */ = {
@@ -531,7 +530,7 @@
 			files = (
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AA1CECB11FA9607900050EFC /* MeViewController.m in Sources */,
-				AAAC3D611FB0562000D54265 /* PunchRecordViewController.m in Sources */,
+				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */,
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
