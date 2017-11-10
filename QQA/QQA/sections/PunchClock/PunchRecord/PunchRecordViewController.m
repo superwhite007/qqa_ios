@@ -11,6 +11,7 @@
 @interface PunchRecordViewController ()
 
 @property (nonatomic, strong)NSMutableArray *datasource;
+//@property (nonnull, strong) UITableView *aTableView;
 
 @end
 
@@ -26,39 +27,150 @@ static NSString *identifier = @"Cell";
     return _datasource;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadNewData];
+//     [self punchRecoret];
+    
+}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.datasource addObject:@"test1"];
-    [self.datasource addObject:@"test2"];
+//    [self.datasource addObject:@"test1"];
+//    [self.datasource addObject:@"test2"];
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<主页" style:UIBarButtonItemStyleDone target:self action:@selector(returnBack)] ;
     
     
-    UITableView *aTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
-    aTableView.separatorColor = [UIColor orangeColor];
+    self.aTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+    self.aTableView.separatorColor = [UIColor orangeColor];
     
     //04设置分割线的内边距(上、左，下，右)
     //aTableView.separatorInset = UIEdgeInsetsMake(0, 40, 0, 0 );
     
     //05设置行高
-    aTableView.rowHeight = 60;
+    self.aTableView.rowHeight = 60;
     
     
     //07为tableView 指定数据源代理
-    aTableView.dataSource =self;
+    self.aTableView.dataSource =self;
     
     //14为tableView指定代理对象，做外管控制
-    aTableView.delegate = self;
+    self.aTableView.delegate = self;
     
     //02添加对象
-    [self.view addSubview:aTableView];
-    [aTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
+    [self.view addSubview:self.aTableView];
+    [self.aTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
     
     
 }
+
+
+-(void)loadNewData{
+    
+    [self punchRecoret];
+    
+}
+
+-(void)punchRecoret{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/attendance/index"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    
+    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    
+    [mdict setObject:@"1" forKey:@"pageNum"];
+    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 由于要先对request先行处理,我们通过request初始化task
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+//                                            NSLog(@"response, error :%@, %@", response, error);
+//                                            NSLog(@"data:%@", data);
+                                            
+                                            if (data != nil) {
+                                                
+    
+                                                NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
+                                                                                            
+                                                NSDictionary * firDict = array[0];
+                                                NSString * str  = [NSString stringWithFormat:@"%@", [firDict objectForKey:@"message"]];
+                                                if ([str isEqualToString:@"3004" ]) {
+                                                    
+                                                    [array removeObjectAtIndex:0];
+//                                                    NSLog(@"PunchRecord1:%@", array);
+//
+                                                    self.datasource = array;
+                                                    
+//                                                    [self.aTableView reloadData];
+                                                    
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                    self.datasource = array;
+                                                   [self.aTableView reloadData];
+                                                        
+                                                    });
+
+                                                    
+                                                    NSLog(@"_datasource%@", _datasource);
+//
+                                                    
+                                                }
+//                                                [self.aTableView reloadData];
+                                                
+                                                
+//                                                 [self.aTableView reloadData];
+                                                
+                                                    
+                                                    
+                                                
+                                                
+                                                
+                                                //                                            NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                
+                                                //                                                [self gitAccess_token:dict];
+                                                
+                                            } else{
+                                                NSLog(@"获取数据失败，问李鹏");
+                                            }
+                                            
+                                        }];
+    
+    [task resume];
+    
+   
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - Table view data source
 
@@ -69,8 +181,12 @@ static NSString *identifier = @"Cell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
+    
     return self.datasource.count;
 }
+
+
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,7 +199,14 @@ static NSString *identifier = @"Cell";
     }
     
     
-    cell.textLabel.text = self.datasource[indexPath.row];
+    NSLog(@"cell:%@",[self.datasource[indexPath.row]  objectForKey:@"clock_time"]);
+    cell.textLabel.text = [self.datasource[indexPath.row]  objectForKey:@"clock_time"];
+    
+    //添加动画效果
+//    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+//    [UIView animateWithDuration:0.5 animations:^{
+//        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+//    }];
     
     // Configure the cell...
     

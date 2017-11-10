@@ -10,4 +10,8 @@
 
 @interface PunchRecordViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
+@property (nonnull, strong) UITableView *aTableView;
+
+
+
 @end
