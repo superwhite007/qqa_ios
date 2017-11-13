@@ -51,14 +51,14 @@
     
    
     UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125, 100, 30)];
-    timeLable.backgroundColor = [UIColor greenColor];
+//    timeLable.backgroundColor = [UIColor greenColor];
     timeLable.text = @"00:00:01";
     timeLable.font = [UIFont fontWithName:@"Arial" size:18];
     timeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:timeLable];
     
     UILabel * workingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10, 200, 30)];
-    workingTimeLable.backgroundColor = [UIColor greenColor];
+//    workingTimeLable.backgroundColor = [UIColor greenColor];
     workingTimeLable.text = @"上班时间：08:30--17:30";
     workingTimeLable.font = [UIFont fontWithName:@"Arial" size:18];
     workingTimeLable.textAlignment = NSTextAlignmentCenter;
@@ -66,7 +66,7 @@
     
     
     UILabel * explainWorkingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 300 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10 + 40 , 300, 30)];
-    explainWorkingTimeLable.backgroundColor = [UIColor greenColor];
+//    explainWorkingTimeLable.backgroundColor = [UIColor greenColor];
     explainWorkingTimeLable.text = @"扫描公司打卡机上的二维码完成打卡";
     explainWorkingTimeLable.font = [UIFont fontWithName:@"Arial" size:18];
     explainWorkingTimeLable.textAlignment = NSTextAlignmentCenter;
