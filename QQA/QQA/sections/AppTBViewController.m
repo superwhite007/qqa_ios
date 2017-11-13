@@ -11,6 +11,7 @@
 #import "PunchClockViewController.h"
 #import "MeViewController.h"
 #import "ExaminationApprovalViewController.h"
+#import "CompanyViewController.h"
 
 
 @interface AppTBViewController ()
@@ -33,8 +34,9 @@
 - (void)setupAllChildViewControllers{
     
     //1.公司
-    MeViewController *homePageVC = [[MeViewController alloc] init];
-    [self setupChildViewController:homePageVC title:@"公司" imageName:@"first_ll" selectedImageName:@"first_h"];
+    CompanyViewController * companyVC = [[CompanyViewController alloc] init];
+//    MeViewController *homePageVC = [[MeViewController alloc] init];
+    [self setupChildViewController:companyVC title:@"公司" imageName:@"first_ll" selectedImageName:@"first_h"];
     
     
     //2.审核
@@ -53,7 +55,7 @@
     MeViewController *meVC = [[MeViewController alloc] init];
     [self setupChildViewController:meVC title:@"我" imageName:@"account" selectedImageName:@"me_normal"];
     
-    self.viewControllers = [NSArray arrayWithObjects:homePageVC, examinationApprovalVC, punchClockVC, meVC, nil];
+    self.viewControllers = [NSArray arrayWithObjects:companyVC, examinationApprovalVC, punchClockVC, meVC, nil];
    
 
     self.selectedViewController = [self.viewControllers objectAtIndex:2];

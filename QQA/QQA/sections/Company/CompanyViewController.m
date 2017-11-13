@@ -1,21 +1,22 @@
 //
-//  ExaminationApprovalViewController.m
+//  CompanyViewController.m
 //  QQA
 //
 //  Created by wang huiming on 2017/11/13.
 //  Copyright © 2017年 youth_huiming. All rights reserved.
 //
 
-#import "ExaminationApprovalViewController.h"
+#import "CompanyViewController.h"
 #import "LanchViewController.h"
 
-@interface ExaminationApprovalViewController ()<UITableViewDataSource, UITableViewDelegate>
+
+@interface CompanyViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray * datasource;
 
 @end
 
-@implementation ExaminationApprovalViewController
+@implementation CompanyViewController
 
 static NSString *identifier = @"CELL";
 
@@ -27,28 +28,18 @@ static NSString *identifier = @"CELL";
 }
 
 
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UILabel *aLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    aLable.text = @"青春";
-    aLable.textColor = [UIColor yellowColor];
-    aLable.textAlignment = NSTextAlignmentCenter;
-    aLable.font = [UIFont italicSystemFontOfSize:17];
-    aLable.backgroundColor = [UIColor redColor];
-    //允许我们自定义当前视图控制器的标题视图，可以是任意UIView子类创建的视图
-    self.navigationItem.titleView = aLable;
-    
-    
-    
-    
-    
-    
-    [self.datasource addObject:@"发起的审批"];
-    [self.datasource addObject:@"待我审批的"];
-    [self.datasource addObject:@"已审批的"];
-    [self.datasource addObject:@"抄送我的"];
+    [self.datasource addObject:@"公司通知"];
+    [self.datasource addObject:@"规章制度"];
+    [self.datasource addObject:@"公司信息"];
+    [self.datasource addObject:@"组织架构与通讯录"];
+    [self.datasource addObject:@"公司云盘"];
     
     
     UITableView * examinationAndApprovel = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -56,7 +47,7 @@ static NSString *identifier = @"CELL";
     examinationAndApprovel.delegate = self;
     examinationAndApprovel.rowHeight = 60;
     //03设置分割线
-//    examinationAndApprovel.separatorColor = [UIColor orangeColor];
+    //    examinationAndApprovel.separatorColor = [UIColor orangeColor];
     examinationAndApprovel.sectionHeaderHeight =  [UIScreen mainScreen].bounds.size.width * 2 /3;
     
     [examinationAndApprovel registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
@@ -68,10 +59,6 @@ static NSString *identifier = @"CELL";
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
@@ -98,7 +85,7 @@ static NSString *identifier = @"CELL";
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         //if语句中可以为单元格中一些通用的属性赋值，例如可以在其辅助视图类型赋值,标示所有单元格都一直
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
     }
     
@@ -130,12 +117,23 @@ static NSString *identifier = @"CELL";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    if (indexPath.row == 0) {
-        LanchViewController * lanchVC = [LanchViewController new];
-        [self.navigationController pushViewController:lanchVC animated:YES];
-//    }
+    //    if (indexPath.row == 0) {
+    LanchViewController * lanchVC = [LanchViewController new];
+    [self.navigationController pushViewController:lanchVC animated:YES];
+    //    }
     
     
+}
+
+
+
+
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*
