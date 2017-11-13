@@ -23,6 +23,7 @@
 		AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */; };
 		AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D711FB933FF00A7CC2A /* LanchViewController.m */; };
 		AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */; };
+		AAEF4CC11FB93AD200474C07 /* Me.png in Resources */ = {isa = PBXBuildFile; fileRef = AAEF4CC01FB93AD200474C07 /* Me.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		AAD93D711FB933FF00A7CC2A /* LanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanchViewController.m; sourceTree = "<group>"; };
 		AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyViewController.h; sourceTree = "<group>"; };
 		AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
+		AAEF4CC01FB93AD200474C07 /* Me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Me.png; sourceTree = "<group>"; };
 		CE70EE0C5B008995EA81DF25 /* Pods-QQA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QQA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QQA/Pods-QQA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				AAB0F7341FA992E400A9F684 /* about.png */,
+				AAEF4CC01FB93AD200474C07 /* Me.png */,
 				AAB0F7201FA992E200A9F684 /* account.png */,
 				AAB0F7271FA992E300A9F684 /* app_face_title.png */,
 				AAB0F7221FA992E200A9F684 /* checkmark.png */,
@@ -467,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA1CEC861FA9602E00050EFC /* Assets.xcassets in Resources */,
+				AAEF4CC11FB93AD200474C07 /* Me.png in Resources */,
 				AA1CEC891FA9602E00050EFC /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

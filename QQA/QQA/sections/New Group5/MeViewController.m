@@ -105,7 +105,7 @@ static NSString *identifier = @"CELL";
     UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
     punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
     punchCLockImageTileButton.backgroundColor = [UIColor redColor];
-    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"app_face_logo"] forState:UIControlStateNormal];
+    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"Me"] forState:UIControlStateNormal];
     [view addSubview:punchCLockImageTileButton];
     
     
