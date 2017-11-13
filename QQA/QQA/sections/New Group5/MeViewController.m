@@ -8,6 +8,8 @@
 
 #import "MeViewController.h"
 #import "LanchViewController.h"
+#import "MeInformationViewController.h"
+#import "AboutYouthViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -119,10 +121,19 @@ static NSString *identifier = @"CELL";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //    if (indexPath.row == 0) {
-    LanchViewController * lanchVC = [LanchViewController new];
-    [self.navigationController pushViewController:lanchVC animated:YES];
-    //    }
+    if (indexPath.row == 0) {
+        
+    MeInformationViewController * meInformationVC = [MeInformationViewController new];
+    [self.navigationController pushViewController:meInformationVC animated:YES];
+        
+    } else if (indexPath.row == 2){
+        
+        AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
+        [self.navigationController pushViewController:aboutYouthVC animated:YES];
+        
+    }
+    
+    
     
     
 }
