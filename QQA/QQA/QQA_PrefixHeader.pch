@@ -16,6 +16,9 @@
 #define  iphoneWidth    [[UIScreen mainScreen] bounds].size.width
 #define  iphoneHeight   [[UIScreen mainScreen] bounds].size.height
 
+#define kSPACE 20 //button间隙
+#define kBUTTONWITH  50 //button宽
+#define kBUTTONHEIGHT   30 //button高
 
 
 

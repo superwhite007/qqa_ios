@@ -101,6 +101,7 @@ static NSString *identifier = @"CELL";
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
     UIView *view = [[UIView alloc ] init];
     view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     
@@ -108,11 +109,36 @@ static NSString *identifier = @"CELL";
     punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
     punchCLockImageTileButton.backgroundColor = [UIColor redColor];
     [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"Me"] forState:UIControlStateNormal];
-    [view addSubview:punchCLockImageTileButton];
+//    [view addSubview:punchCLockImageTileButton];
     
     
+    NSArray * labelNameArray = @[ @"imageString", @"姓名", @"名称", @"部门", @"职位", @"NO.", @"昵称", @"轻轻ID:"];
+    UIImageView * imgVIew = [[UIImageView alloc] initWithFrame:CGRectMake(20, iphoneWidth  / 9 , iphoneWidth * 4 / 9 , iphoneWidth * 4 / 9)];
+    imgVIew.backgroundColor = [UIColor redColor];
+    imgVIew.layer.cornerRadius = imgVIew.frame.size.width/2;
+    
+    imgVIew.clipsToBounds = YES;
+//    UIImage *image = [UIImage imageNamed:labelNameArray[0]]; hongjinbao
+    UIImage *image = [UIImage imageNamed:@"hongjinbao"];
+    [imgVIew setImage:image];
+    [view addSubview:imgVIew];
+    
+    for (int i = 1; i < 7; i++) {
+        UILabel * label = [[UILabel alloc] init];
+        if ( i > 0 && i < 7) {
+             label.frame = CGRectMake(iphoneWidth * 5 / 9, iphoneWidth * 4 / 9  / 7 + ( iphoneWidth * 2 / 3 / 7  * (i - 1)), iphoneWidth  / 3, iphoneWidth * 4 / 9 / 7);
+            
+        }
+        label.backgroundColor = [UIColor blueColor];
+        [label setText:labelNameArray[i]];
+        [view addSubview:label];
+    }
+    
+    
+
     return  view ;
 }
+
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 //    return 300;
@@ -130,6 +156,9 @@ static NSString *identifier = @"CELL";
         
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
         [self.navigationController pushViewController:aboutYouthVC animated:YES];
+        
+    } else if (indexPath.row == 1){
+        
         
     }
     
