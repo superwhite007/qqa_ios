@@ -10,6 +10,7 @@
 
 #import "PunchClockViewController.h"
 #import "MeViewController.h"
+#import "ExaminationApprovalViewController.h"
 
 
 @interface AppTBViewController ()
@@ -37,8 +38,10 @@
     
     
     //2.审核
-    MeViewController *allStyleViewController = [MeViewController new] ;
-    [self setupChildViewController:allStyleViewController title:@"审核" imageName:@"styles" selectedImageName:@"styles_h"];
+    
+    ExaminationApprovalViewController * examinationApprovalVC = [[ExaminationApprovalViewController alloc] init];
+//    MeViewController *allStyleViewController = [MeViewController new] ;
+    [self setupChildViewController:examinationApprovalVC title:@"审核" imageName:@"styles" selectedImageName:@"styles_h"];
     
     
     //3.打卡
@@ -50,7 +53,7 @@
     MeViewController *meVC = [[MeViewController alloc] init];
     [self setupChildViewController:meVC title:@"我" imageName:@"account" selectedImageName:@"me_normal"];
     
-    self.viewControllers = [NSArray arrayWithObjects:homePageVC, allStyleViewController, punchClockVC, meVC, nil];
+    self.viewControllers = [NSArray arrayWithObjects:homePageVC, examinationApprovalVC, punchClockVC, meVC, nil];
    
 
     self.selectedViewController = [self.viewControllers objectAtIndex:2];

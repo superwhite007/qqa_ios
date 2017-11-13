@@ -20,6 +20,7 @@
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
 		AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
+		AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchRecordViewController.m; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
+		AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExaminationApprovalViewController.h; sourceTree = "<group>"; };
+		AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExaminationApprovalViewController.m; sourceTree = "<group>"; };
 		CE70EE0C5B008995EA81DF25 /* Pods-QQA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QQA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QQA/Pods-QQA.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,6 +286,8 @@
 		AAA169F41FA98C8B00F35475 /* ExaminationApproval */ = {
 			isa = PBXGroup;
 			children = (
+				AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */,
+				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
 			);
 			path = ExaminationApproval;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				AA1CECB11FA9607900050EFC /* MeViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
+				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */,
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
