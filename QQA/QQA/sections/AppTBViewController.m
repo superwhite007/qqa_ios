@@ -9,7 +9,7 @@
 #import "AppTBViewController.h"
 
 #import "PunchClockViewController.h"
-#import "MeViewController.h"
+#import "MeInformationViewController.h"
 #import "ExaminationApprovalViewController.h"
 #import "CompanyViewController.h"
 
@@ -35,14 +35,12 @@
     
     //1.公司
     CompanyViewController * companyVC = [[CompanyViewController alloc] init];
-//    MeViewController *homePageVC = [[MeViewController alloc] init];
     [self setupChildViewController:companyVC title:@"公司" imageName:@"first_ll" selectedImageName:@"first_h"];
     
     
     //2.审核
     
     ExaminationApprovalViewController * examinationApprovalVC = [[ExaminationApprovalViewController alloc] init];
-//    MeViewController *allStyleViewController = [MeViewController new] ;
     [self setupChildViewController:examinationApprovalVC title:@"审核" imageName:@"styles" selectedImageName:@"styles_h"];
     
     
@@ -52,13 +50,14 @@
     
     
     //4.我
-    MeViewController *meVC = [[MeViewController alloc] init];
+    
+    MeInformationViewController *meVC = [[MeInformationViewController alloc] init];
     [self setupChildViewController:meVC title:@"我" imageName:@"account" selectedImageName:@"me_normal"];
     
     self.viewControllers = [NSArray arrayWithObjects:companyVC, examinationApprovalVC, punchClockVC, meVC, nil];
    
 
-    self.selectedViewController = [self.viewControllers objectAtIndex:2];
+    self.selectedViewController = [self.viewControllers objectAtIndex:3];
     
 }
 

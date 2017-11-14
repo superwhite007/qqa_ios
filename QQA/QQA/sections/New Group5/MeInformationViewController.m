@@ -7,12 +7,28 @@
 //
 
 #import "MeInformationViewController.h"
+#import "AboutYouthViewController.h"
 
 @interface MeInformationViewController ()
+
+@property (nonatomic, strong) NSString *imgUrl;
+@property (nonatomic, strong) NSString *nameStr;
+@property (nonatomic, strong) NSString *gender;
+@property (nonatomic, strong) NSString * departmentStr;
+@property (nonatomic, strong) NSString * positionStr;
+@property (nonatomic, strong) NSString * telephoneNumber;
+@property (nonatomic, strong) NSString * email;
+@property (nonatomic, strong) NSString * qq;
+@property (nonatomic, strong) NSString * wechat;
 
 @end
 
 @implementation MeInformationViewController
+
+
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -20,9 +36,77 @@
     
     self.view.backgroundColor = [UIColor greenColor];
     
+    
+    UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
+    view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+    [self.view addSubview: view];
+    
+    
+    UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
+    punchCLockImageTileButton.backgroundColor = [UIColor redColor];
+    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"Me"] forState:UIControlStateNormal];
+    //    [view addSubview:punchCLockImageTileButton];
+    
+    
+    NSArray * labelNameArray = @[ @"imageString", @"姓名", @"名称", @"部门", @"职位", @"NO.", @"昵称", @"轻轻ID:"];
+    UIImageView * imgVIew = [[UIImageView alloc] initWithFrame:CGRectMake(20, iphoneWidth  / 9 , iphoneWidth * 4 / 9 , iphoneWidth * 4 / 9)];
+    imgVIew.backgroundColor = [UIColor redColor];
+    imgVIew.layer.cornerRadius = imgVIew.frame.size.width/2;
+    
+    imgVIew.clipsToBounds = YES;
+    //    UIImage *image = [UIImage imageNamed:labelNameArray[0]]; hongjinbao
+    UIImage *image = [UIImage imageNamed:@"hongjinbao"];
+    [imgVIew setImage:image];
+    [view addSubview:imgVIew];
+    
+    for (int i = 1; i < 7; i++) {
+        UILabel * label = [[UILabel alloc] init];
+        if ( i > 0 && i < 7) {
+            label.frame = CGRectMake(iphoneWidth * 5 / 9, iphoneWidth * 4 / 9  / 7 + ( iphoneWidth * 2 / 3 / 7  * (i - 1)), iphoneWidth  / 3, iphoneWidth * 4 / 9 / 7);
+            
+        }
+        label.backgroundColor = [UIColor blueColor];
+        [label setText:labelNameArray[i]];
+        [view addSubview:label];
+    }
+    
+    
+    
+    UIButton * button1 = [UIButton buttonWithType:UIButtonTypeSystem];
+    button1.frame = CGRectMake(0, CGRectGetMaxY(view.frame) + 10, iphoneWidth, 60);
+    button1.backgroundColor = [UIColor darkGrayColor];
+    [button1 setTitle:@"发起通知" forState:(UIControlStateNormal)];
+    [self.view addSubview:button1];
+    
+    UIButton * button2 = [UIButton buttonWithType:UIButtonTypeSystem];
+    button2.frame = CGRectMake(0, CGRectGetMaxY(button1.frame) + 5, iphoneWidth, 60);
+    button2.backgroundColor = [UIColor darkGrayColor];
+    [button2 setTitle:@"修改登录密码" forState:(UIControlStateNormal)];
+    [self.view addSubview:button2];
+    
+    UIButton * button3 = [UIButton buttonWithType:UIButtonTypeSystem];
+    button3.frame = CGRectMake(0, CGRectGetMaxY(button2.frame) + 5, iphoneWidth, 60);
+    button3.backgroundColor = [UIColor darkGrayColor];
+    [button3 setTitle:@"关于青春" forState:(UIControlStateNormal)];
+    [button3 addTarget:self action:@selector(gotoAboutQingqing) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:button3];
+    
+    
+    
+    
+    
+    
+    
 //    [self punchRecoret];
     
 }
+
+-(void)gotoAboutQingqing{
+    AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
+    [self.navigationController pushViewController:aboutYouthVC animated:YES];
+}
+
 
 
 -(void)punchRecoret{
@@ -62,7 +146,7 @@
                                                 
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
-                                                
+                                                NSLog(@"array2%@", array);
                                                 NSDictionary * firDict = array[0];
                                                 NSString * str  = [NSString stringWithFormat:@"%@", [firDict objectForKey:@"message"]];
                                                 if ([str isEqualToString:@"3004" ]) {

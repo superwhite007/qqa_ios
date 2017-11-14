@@ -84,7 +84,6 @@
 		AAB0F71D1FA992E200A9F684 /* locker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locker.png; sourceTree = "<group>"; };
 		AAB0F71E1FA992E200A9F684 /* notify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notify.png; sourceTree = "<group>"; };
 		AAB0F71F1FA992E200A9F684 /* scan_qrcode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scan_qrcode.png; sourceTree = "<group>"; };
-		AAB0F7201FA992E200A9F684 /* account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = account.png; path = ../../../../../sections/youth_infos/account.png; sourceTree = "<group>"; };
 		AAB0F7211FA992E200A9F684 /* checkmark_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark_green.png; sourceTree = "<group>"; };
 		AAB0F7221FA992E200A9F684 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		AAB0F7231FA992E200A9F684 /* hongjinbao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hongjinbao.jpg; sourceTree = "<group>"; };
@@ -94,7 +93,6 @@
 		AAB0F7271FA992E300A9F684 /* app_face_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_face_title.png; sourceTree = "<group>"; };
 		AAB0F7281FA992E300A9F684 /* unlocker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unlocker.png; sourceTree = "<group>"; };
 		AAB0F7291FA992E300A9F684 /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key.png; sourceTree = "<group>"; };
-		AAB0F72A1FA992E300A9F684 /* me_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = me_normal.png; path = ../../../../../sections/youth_infos/me_normal.png; sourceTree = "<group>"; };
 		AAB0F72B1FA992E300A9F684 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		AAB0F72C1FA992E300A9F684 /* youth_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = youth_info.png; sourceTree = "<group>"; };
 		AAB0F72D1FA992E300A9F684 /* clockin_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clockin_normal.png; sourceTree = "<group>"; };
@@ -255,7 +253,6 @@
 			children = (
 				AAB0F7341FA992E400A9F684 /* about.png */,
 				AAEF4CC01FB93AD200474C07 /* Me.png */,
-				AAB0F7201FA992E200A9F684 /* account.png */,
 				AAB0F7271FA992E300A9F684 /* app_face_title.png */,
 				AAB0F7221FA992E200A9F684 /* checkmark.png */,
 				AAB0F72D1FA992E300A9F684 /* clockin_normal.png */,
@@ -270,7 +267,6 @@
 				AAB0F7391FA992E500A9F684 /* info.png */,
 				AAB0F7291FA992E300A9F684 /* key.png */,
 				AAB0F71D1FA992E200A9F684 /* locker.png */,
-				AAB0F72A1FA992E300A9F684 /* me_normal.png */,
 				AAB0F71E1FA992E200A9F684 /* notify.png */,
 				AAB0F72E1FA992E400A9F684 /* qrcode.png */,
 				AAB0F7261FA992E300A9F684 /* red_button.png */,
