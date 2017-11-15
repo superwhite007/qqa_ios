@@ -14,7 +14,6 @@
 		AA1CEC8C1FA9602E00050EFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC8B1FA9602E00050EFC /* main.m */; };
 		AA1CEC961FA9602E00050EFC /* QQATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC951FA9602E00050EFC /* QQATests.m */; };
 		AA1CECA11FA9602E00050EFC /* QQAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECA01FA9602E00050EFC /* QQAUITests.m */; };
-		AA1CECB11FA9607900050EFC /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECB01FA9607900050EFC /* MeViewController.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
@@ -61,8 +60,6 @@
 		AA1CEC9C1FA9602E00050EFC /* QQAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QQAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1CECA01FA9602E00050EFC /* QQAUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QQAUITests.m; sourceTree = "<group>"; };
 		AA1CECA21FA9602E00050EFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AA1CECAF1FA9607900050EFC /* MeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
-		AA1CECB01FA9607900050EFC /* MeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		AA1CECB41FA960EF00050EFC /* account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account.png; sourceTree = "<group>"; };
 		AA1CECB51FA960EF00050EFC /* me_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_normal.png; sourceTree = "<group>"; };
 		AA1CECB61FA96C1600050EFC /* colection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colection.png; sourceTree = "<group>"; };
@@ -327,8 +324,6 @@
 		AAA169F71FA98C9600F35475 /* Me */ = {
 			isa = PBXGroup;
 			children = (
-				AA1CECAF1FA9607900050EFC /* MeViewController.h */,
-				AA1CECB01FA9607900050EFC /* MeViewController.m */,
 				AAEF4CC21FB9615F00474C07 /* MeInformationViewController.h */,
 				AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */,
 				AAEF4CC51FB9646500474C07 /* AboutYouthViewController.h */,
@@ -555,7 +550,6 @@
 			files = (
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
-				AA1CECB11FA9607900050EFC /* MeViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
