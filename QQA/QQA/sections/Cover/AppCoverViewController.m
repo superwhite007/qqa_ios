@@ -469,15 +469,22 @@
     
     UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(30 , 340, iphoneWidth - 60 , 120)];
     mattersNeedAttentionExplianLable.text = @"请不要删除青青OA，也不要清理青青OA中的数据。否则IOKey丢失，导致无法登录。";
-    //    plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
-    mattersNeedAttentionExplianLable.textAlignment =  NSTextAlignmentLeft;
-    //    plantIDKeyExplianLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
     
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
-    CGSize labelSize = [mattersNeedAttentionExplianLable.text boundingRectWithSize:CGSizeMake(200, 1500) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-    mattersNeedAttentionExplianLable.frame = CGRectMake(mattersNeedAttentionExplianLable.frame.origin.x, mattersNeedAttentionExplianLable.frame.origin.y, mattersNeedAttentionExplianLable.frame.size.width, labelSize.height);
-    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+//    mattersNeedAttentionExplianLable.textAlignment =  NSTextAlignmentLeft;
+//    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+//    CGSize labelSize = [mattersNeedAttentionExplianLable.text boundingRectWithSize:CGSizeMake(200, 1500) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+//    mattersNeedAttentionExplianLable.frame = CGRectMake(mattersNeedAttentionExplianLable.frame.origin.x, mattersNeedAttentionExplianLable.frame.origin.y, mattersNeedAttentionExplianLable.frame.size.width, labelSize.height);
+//    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+//    mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
+    
+    
     mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
+    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+    mattersNeedAttentionExplianLable.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
+    CGRect targetRect = [mattersNeedAttentionExplianLable.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : mattersNeedAttentionExplianLable.font} context:nil];
+    mattersNeedAttentionExplianLable.frame = CGRectMake(30, 340, iphoneWidth - 40, CGRectGetHeight(targetRect));
+    
   
     [scanSuccessView addSubview:mattersNeedAttentionExplianLable];
     
