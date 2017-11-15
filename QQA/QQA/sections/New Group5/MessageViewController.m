@@ -23,19 +23,29 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送范围" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
     
     
-    UITextView * messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 74, iphoneWidth - 20, iphoneWidth * 2 / 3)];
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 74, iphoneWidth - 20, iphoneWidth * 2 / 3)];
 //    messageTextView.backgroundColor = [UIColor blueColor];
-    messageTextView.font = [UIFont systemFontOfSize:24];
-    [self.view addSubview:messageTextView];
+    _messageTextView.font = [UIFont systemFontOfSize:24];
+    [self.view addSubview:_messageTextView];
     
-    messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
-    messageTextView.layer.borderWidth = 1;
-    messageTextView.layer.cornerRadius = 10;
+    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    _messageTextView.layer.borderWidth = 1;
+    _messageTextView.layer.cornerRadius = 10;
+    _messageTextView.returnKeyType = UIReturnKeySend;
+    
+    _messageTextView.delegate = self;
+    
+    
+    
+    
+    
+    
+    
     
     
     
     UIButton  * sendButton =  [UIButton buttonWithType:UIButtonTypeSystem];
-    [sendButton setFrame:CGRectMake(  iphoneWidth - 110,  messageTextView.frame.size.height + 84, 100, 40)];
+    [sendButton setFrame:CGRectMake(  iphoneWidth - 110,  _messageTextView.frame.size.height + 84, 100, 30)];
     [sendButton setTitle:@"发送" forState:UIControlStateNormal];
 //    sendButton.titleLabel.font = [UIFont systemFontOfSize:24];
 //    sendButton.backgroundColor = [UIColor blueColor];
@@ -45,7 +55,7 @@
     sendButton.layer.cornerRadius = 10;
     
     [sendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [welcomeButton addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
+    [sendButton addTarget:self action:@selector(sends) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:sendButton];
     
@@ -54,6 +64,61 @@
     
     
 }
+
+-(void)sends{
+     [_messageTextView resignFirstResponder];
+}
+
+
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+        
+    }
+    return YES;
+    
+}
+
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    
+    NSLog(@"%@", textView.text);
+    
+    
+}
+
+/*
+ 
+ - (BOOL)textViewShouldBeginEditing:(UITextView *)textView;
+ - (BOOL)textViewShouldEndEditing:(UITextView *)textView;
+ 
+ - (void)textViewDidBeginEditing:(UITextView *)textView;
+ - (void)textViewDidEndEditing:(UITextView *)textView;
+ 
+ - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
+ - (void)textViewDidChange:(UITextView *)textView;
+ 
+ - (void)textViewDidChangeSelection:(UITextView *)textView;
+ 
+ - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction NS_AVAILABLE_IOS(10_0);
+ - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction NS_AVAILABLE_IOS(10_0);
+ 
+ - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange NS_DEPRECATED_IOS(7_0, 10_0, "Use textView:shouldInteractWithURL:inRange:forInteractionType: instead");
+ - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange NS_DEPRECATED_IOS(7_0, 10_0, "Use textView:shouldInteractWithTextAttachment:inRange:forInteractionType: instead");
+
+ */
+
+
+
+
+
+
+
 
 
 -(void)chageColor{
