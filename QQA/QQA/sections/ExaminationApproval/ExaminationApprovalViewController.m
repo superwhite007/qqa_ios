@@ -31,16 +31,16 @@ static NSString *identifier = @"CELL";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UILabel *aLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    aLable.text = @"青春";
-    aLable.textColor = [UIColor yellowColor];
-    aLable.textAlignment = NSTextAlignmentCenter;
-    aLable.font = [UIFont italicSystemFontOfSize:17];
-    aLable.backgroundColor = [UIColor redColor];
-    //允许我们自定义当前视图控制器的标题视图，可以是任意UIView子类创建的视图
-    self.navigationItem.titleView = aLable;
+//    UILabel *aLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+//    aLable.text = @"青春";
+//    aLable.textColor = [UIColor yellowColor];
+//    aLable.textAlignment = NSTextAlignmentCenter;
+//    aLable.font = [UIFont italicSystemFontOfSize:17];
+//    aLable.backgroundColor = [UIColor redColor];
+//    //允许我们自定义当前视图控制器的标题视图，可以是任意UIView子类创建的视图
+//    self.navigationItem.titleView = aLable;
     
-    
+    [self.navigationItem setTitle:@"青春"];
     
     
     

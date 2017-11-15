@@ -22,6 +22,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+//    UILabel *aLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+//    aLable.text = @"我";
+//    //    aLable.textColor = [UIColor blueColor];
+//    aLable.textAlignment = NSTextAlignmentCenter;
+//    aLable.font = [UIFont italicSystemFontOfSize:17];
+//
+//    self.navigationItem.titleView = aLable;
+
+//    self.navigationController.navigationBar.topItem.title=@"ME";
+    [self.navigationItem setTitle:@"m"];
+    
+    
     UIButton * button1 = [UIButton buttonWithType:UIButtonTypeSystem];
     button1.frame = CGRectMake(0, iphoneWidth * 2 / 3 + 64 + 10, iphoneWidth, 60);
 //    button1.backgroundColor = [UIColor darkGrayColor];
