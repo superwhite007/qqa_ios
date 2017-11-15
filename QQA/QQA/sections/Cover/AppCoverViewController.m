@@ -119,11 +119,12 @@
     
     [firstAPPLoginView addSubview:plantIDKeyLable];
     
-    UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 270, iphoneWidth - 40, 90)];
+    UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 265, iphoneWidth - 40, 90)];
     plantIDKeyExplianLable.text = @"首次登陆或者丢失IDKey的同事，需要在手机内种植IDKey，该IDKey会授权只有此手机可以登陆青青OA系统。                                                请不要择换其它手机登录，因为只有种植IDKey的手机才可以登录。";
 //    plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
     plantIDKeyExplianLable.textAlignment =  NSTextAlignmentLeft;
 //    plantIDKeyExplianLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    
     
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
     CGSize labelSize = [plantIDKeyExplianLable.text boundingRectWithSize:CGSizeMake(200, 150) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
@@ -144,19 +145,30 @@
     
     [firstAPPLoginView addSubview:mattersNeedAttentionLable];
     
-    UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 440, iphoneWidth - 40, 90)];
+    UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectZero];
     mattersNeedAttentionExplianLable.text = @"请不要删除青青OA，也不要清理青青OA中的数据。否则IOKey丢失，导致无法登录。";
-//    mattersNeedAttentionExplianLable.backgroundColor = [UIColor redColor];
-    mattersNeedAttentionExplianLable.textAlignment =  NSTextAlignmentLeft;
-    //    plantIDKeyExplianLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+
     
-//    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
-    CGSize labelSizemattersNeedAttentionExplian = [mattersNeedAttentionExplianLable.text boundingRectWithSize:CGSizeMake(200, 150) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-    mattersNeedAttentionExplianLable.frame = CGRectMake(mattersNeedAttentionExplianLable.frame.origin.x, mattersNeedAttentionExplianLable.frame.origin.y, mattersNeedAttentionExplianLable.frame.size.width, labelSizemattersNeedAttentionExplian.height);
-    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+//    mattersNeedAttentionExplianLable.textAlignment =  NSTextAlignmentLeft;
+//    //    plantIDKeyExplianLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+//    CGSize labelSizemattersNeedAttentionExplian = [mattersNeedAttentionExplianLable.text boundingRectWithSize:CGSizeMake(200, 150) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+//    mattersNeedAttentionExplianLable.frame = CGRectMake(mattersNeedAttentionExplianLable.frame.origin.x, mattersNeedAttentionExplianLable.frame.origin.y, mattersNeedAttentionExplianLable.frame.size.width, labelSizemattersNeedAttentionExplian.height);
+//    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+//    mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
+    
     mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
+    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+    mattersNeedAttentionExplianLable.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
+    CGRect targetRect = [mattersNeedAttentionExplianLable.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : mattersNeedAttentionExplianLable.font} context:nil];
+    mattersNeedAttentionExplianLable.frame = CGRectMake(20, 435, iphoneWidth - 40, CGRectGetHeight(targetRect));
+    
     
     [firstAPPLoginView addSubview:mattersNeedAttentionExplianLable];
+    
+    
+    
+    
     
     
     UIButton  * nestStepButton =  [UIButton buttonWithType:UIButtonTypeSystem];
@@ -187,15 +199,25 @@
     
     [plantIDEeyView addSubview:plantIDKeyLable];
     
-    UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 130, iphoneWidth - 40, 250)];
-    plantIDKeyExplianLable.text = @"1.如果是新入职的同事，请让技术研发中心的技术人员先帮您创建一个OA账号。                                               \n\n 2.种植IDKey，技术人员会在OA的后台里为您的账号创建一个新的IDKey二维码。通过用手机OA扫描该二维码，IDKey会植入手机内。 \n\n 3.扫描时，请确保您的手机连上互联网，种植会很快完成。";
+    UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectZero];
+    plantIDKeyExplianLable.text = @"1.如果是新入职的同事，请让技术研发中心的技术人员先帮您创建一个OA账号。\n\n 2.种植IDKey，技术人员会在OA的后台里为您的账号创建一个新的IDKey二维码。通过用手机OA扫描该二维码，IDKey会植入手机内。\n\n 3.扫描时，请确保您的手机连上互联网，种植会很快完成。";
+    
 //        plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
-    plantIDKeyExplianLable.textAlignment =  NSTextAlignmentLeft;
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
-    CGSize labelSize = [plantIDKeyExplianLable.text boundingRectWithSize:CGSizeMake(300, 10000) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-    plantIDKeyExplianLable.frame = CGRectMake(plantIDKeyExplianLable.frame.origin.x, plantIDKeyExplianLable.frame.origin.y, plantIDKeyExplianLable.frame.size.width, labelSize.height);
-    plantIDKeyExplianLable.numberOfLines = 0;//表示label可以多行显示
+//    plantIDKeyExplianLable.textAlignment =  NSTextAlignmentLeft;
+//    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+//    CGSize labelSize = [plantIDKeyExplianLable.text boundingRectWithSize:CGSizeMake(300, 10000) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+//    plantIDKeyExplianLable.frame = CGRectMake(plantIDKeyExplianLable.frame.origin.x, plantIDKeyExplianLable.frame.origin.y, plantIDKeyExplianLable.frame.size.width, labelSize.height);
+//    plantIDKeyExplianLable.numberOfLines = 0;//表示label可以多行显示
+//    plantIDKeyExplianLable.font = [UIFont systemFontOfSize:18];
+    
+    
     plantIDKeyExplianLable.font = [UIFont systemFontOfSize:18];
+    plantIDKeyExplianLable.numberOfLines = 0;//表示label可以多行显示
+    plantIDKeyExplianLable.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
+    CGRect targetRect = [plantIDKeyExplianLable.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : plantIDKeyExplianLable.font} context:nil];
+    plantIDKeyExplianLable.frame = CGRectMake(20, 130, iphoneWidth - 40, CGRectGetHeight(targetRect));
+    
     
     [plantIDEeyView addSubview:plantIDKeyExplianLable];
     
