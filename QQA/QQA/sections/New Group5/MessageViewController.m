@@ -24,17 +24,25 @@
     
     
     UITextView * messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 74, iphoneWidth - 20, iphoneWidth * 2 / 3)];
-    messageTextView.backgroundColor = [UIColor blueColor];
+//    messageTextView.backgroundColor = [UIColor blueColor];
     messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:messageTextView];
+    
+    messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    messageTextView.layer.borderWidth = 1;
+    messageTextView.layer.cornerRadius = 10;
     
     
     
     UIButton  * sendButton =  [UIButton buttonWithType:UIButtonTypeSystem];
-    [sendButton setFrame:CGRectMake(  iphoneWidth - 110,  messageTextView.frame.size.height + 84, 100, 30)];
+    [sendButton setFrame:CGRectMake(  iphoneWidth - 110,  messageTextView.frame.size.height + 84, 100, 40)];
     [sendButton setTitle:@"发送" forState:UIControlStateNormal];
 //    sendButton.titleLabel.font = [UIFont systemFontOfSize:24];
-    sendButton.backgroundColor = [UIColor blueColor];
+//    sendButton.backgroundColor = [UIColor blueColor];
+    
+    sendButton.layer.borderColor = [UIColor blackColor].CGColor;
+    sendButton.layer.borderWidth = 1;
+    sendButton.layer.cornerRadius = 10;
     
     [sendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 //    [welcomeButton addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
