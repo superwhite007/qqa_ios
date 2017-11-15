@@ -35,6 +35,8 @@ static NSString *identifier = @"CELL";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+//    self.tabBarController.navigationItem.title = @"gongsi";
+    
     [self.datasource addObject:@"公司通知"];
     [self.datasource addObject:@"规章制度"];
     [self.datasource addObject:@"公司信息"];

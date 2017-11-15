@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MessageViewController : UIViewController
+@interface MessageViewController : UIViewController<UITextViewDelegate>
+
+@property(nonatomic,strong)UITextView *textView;
+@property(nonatomic,strong)UILabel * placeHolderLabel;
+@property(nonatomic,strong)UILabel * residuLabel;// 输入文本时剩余字数
+
 
 @end
