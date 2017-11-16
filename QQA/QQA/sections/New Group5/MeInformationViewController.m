@@ -9,7 +9,6 @@
 #import "MeInformationViewController.h"
 #import "AboutYouthViewController.h"
 #import "MessageViewController.h"
-#import "TestmanyChoicesViewController.h"
 
 
 @interface MeInformationViewController ()
@@ -79,8 +78,7 @@
 }
 
 -(void)gotoTest{
-    TestmanyChoicesViewController * aboutYouthVC = [TestmanyChoicesViewController new];
-    [self.navigationController pushViewController:aboutYouthVC animated:YES];
+    
 }
 
 -(void)gotoAboutQingqing{

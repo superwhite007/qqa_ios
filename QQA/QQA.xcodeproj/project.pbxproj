@@ -20,7 +20,6 @@
 		AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB675C21FBBE58E00BF696B /* MessageViewController.m */; };
 		AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
-		AAD6339E1FBD225600B835E4 /* TestmanyChoicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD6339D1FBD225600B835E4 /* TestmanyChoicesViewController.m */; };
 		AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */; };
 		AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D711FB933FF00A7CC2A /* LanchViewController.m */; };
 		AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */; };
@@ -113,8 +112,6 @@
 		AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchRecordViewController.m; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
-		AAD6339C1FBD225600B835E4 /* TestmanyChoicesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestmanyChoicesViewController.h; sourceTree = "<group>"; };
-		AAD6339D1FBD225600B835E4 /* TestmanyChoicesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestmanyChoicesViewController.m; sourceTree = "<group>"; };
 		AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExaminationApprovalViewController.h; sourceTree = "<group>"; };
 		AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExaminationApprovalViewController.m; sourceTree = "<group>"; };
 		AAD93D701FB933FF00A7CC2A /* LanchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanchViewController.h; sourceTree = "<group>"; };
@@ -334,8 +331,6 @@
 				AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */,
 				AAB675C11FBBE58E00BF696B /* MessageViewController.h */,
 				AAB675C21FBBE58E00BF696B /* MessageViewController.m */,
-				AAD6339C1FBD225600B835E4 /* TestmanyChoicesViewController.h */,
-				AAD6339D1FBD225600B835E4 /* TestmanyChoicesViewController.m */,
 				AAEF4CC51FB9646500474C07 /* AboutYouthViewController.h */,
 				AAEF4CC61FB9646500474C07 /* AboutYouthViewController.m */,
 			);
@@ -570,7 +565,6 @@
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,
-				AAD6339E1FBD225600B835E4 /* TestmanyChoicesViewController.m in Sources */,
 				AA1CEC841FA9602E00050EFC /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
