@@ -22,39 +22,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+  
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"修改登录密码", @"关于青春",  nil];
+    for (int i = 0; i < [titleArray count]; i++) {
+        
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.frame = CGRectMake(60, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 120, 60);
+        //    button1.backgroundColor = [UIColor darkGrayColor];
+        [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
+        
+        button.titleLabel.textColor=[UIColor blackColor];
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        [button addTarget:self action:@selector(gotoSomeForwed:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTintColor:[UIColor blackColor]];
+        [self.view addSubview:button];
+        
+        
+    }
     
+    for (int i = 0; i < 3; i++) {
+      
+        UIImageView *firstimgView = [[UIImageView alloc] init];
+        firstimgView.frame = CGRectMake( 15, iphoneWidth * 2 / 3 + 64 + 10 + 15 + i * 60, 30, 30);
+        //    imgView.backgroundColor = [UIColor yellowColor];
+        UIImage *firstimage = [UIImage imageNamed:@"forward"];
+        [firstimgView setImage:firstimage];
+        [self.view addSubview:firstimgView];
+        
+        UIImageView *imgView = [[UIImageView alloc] init];
+        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + i * 60, 30, 30);
+        UIImage *image = [UIImage imageNamed:@"forward"];
+        [imgView setImage:image];
+        [self.view addSubview:imgView];
     
-    UIButton * button1 = [UIButton buttonWithType:UIButtonTypeSystem];
-    button1.frame = CGRectMake(0, iphoneWidth * 2 / 3 + 64 + 10, iphoneWidth - 60, 60);
-//    button1.backgroundColor = [UIColor darkGrayColor];
-    [button1 setTitle:@"发起通知" forState:(UIControlStateNormal)];
-
-    button1.titleLabel.textColor=[UIColor blackColor];
-    button1.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    button1.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-    [button1 addTarget:self action:@selector(gotoMessage) forControlEvents:UIControlEventTouchUpInside];
-    [button1 setTintColor:[UIColor blackColor]];
-    [self.view addSubview:button1];
-    
-    UIButton * button2 = [UIButton buttonWithType:UIButtonTypeSystem];
-    button2.frame = CGRectMake(0, CGRectGetMaxY(button1.frame), iphoneWidth - 60, 60);
-//    button2.backgroundColor = [UIColor darkGrayColor];
-    button2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    button2.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-    [button2 setTitle:@"修改登录密码" forState:(UIControlStateNormal)];
-    [button2 addTarget:self action:@selector(gotoTest) forControlEvents:(UIControlEventTouchUpInside)];
-    [button2 setTintColor:[UIColor blackColor]];
-    [self.view addSubview:button2];
-    
-    UIButton * button3 = [UIButton buttonWithType:UIButtonTypeSystem];
-    button3.frame = CGRectMake(0, CGRectGetMaxY(button2.frame), iphoneWidth - 60, 60);
-//    button3.backgroundColor = [UIColor darkGrayColor];
-    [button3 setTitle:@"关于青春" forState:(UIControlStateNormal)];
-    button3.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    button3.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-    [button3 setTintColor:[UIColor blackColor]];
-    [button3 addTarget:self action:@selector(gotoAboutQingqing) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:button3];
+    }
     
     for (int i = 0; i < 4; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 72 + i * 60 , iphoneWidth, .5)];
@@ -63,20 +65,32 @@
         [self.view addSubview:view];
     }
     
-    for (int i = 0; i < 3; i++) {
-    UIImageView *imgView = [[UIImageView alloc] init];
-    imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + i * 60, 30, 30);
-//    imgView.backgroundColor = [UIColor yellowColor];
-    UIImage *image = [UIImage imageNamed:@"forward"];
-    [imgView setImage:image];
-    [self.view addSubview:imgView];
-    
-    }
-    
     
     [self punchRecoret];
    
 }
+
+-(void)gotoSomeForwed:(UIButton *)sender{
+    
+    
+    if (sender.tag == 0) {
+        MessageViewController * messageVC = [MessageViewController new];
+        [self.navigationController pushViewController:messageVC animated:YES];
+        
+    }else if (sender.tag == 1){
+        
+        
+    }else if (sender.tag == 2){
+        AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
+        [self.navigationController pushViewController:aboutYouthVC animated:YES];
+        
+    }
+    
+    
+}
+
+
+
 
 -(void)gotoTest{
     
