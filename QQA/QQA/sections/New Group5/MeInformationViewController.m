@@ -21,22 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-//    UILabel *aLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-//    aLable.text = @"我";
-//    //    aLable.textColor = [UIColor blueColor];
-//    aLable.textAlignment = NSTextAlignmentCenter;
-//    aLable.font = [UIFont italicSystemFontOfSize:17];
-//
-//    self.navigationItem.titleView = aLable;
-
-//    self.navigationController.navigationBar.topItem.title=@"ME";
-    [self.navigationItem setTitle:@"m"];
     
     
     UIButton * button1 = [UIButton buttonWithType:UIButtonTypeSystem];
-    button1.frame = CGRectMake(0, iphoneWidth * 2 / 3 + 64 + 10, iphoneWidth, 60);
+    button1.frame = CGRectMake(0, iphoneWidth * 2 / 3 + 64 + 10, iphoneWidth - 60, 60);
 //    button1.backgroundColor = [UIColor darkGrayColor];
     [button1 setTitle:@"发起通知" forState:(UIControlStateNormal)];
 
@@ -44,25 +33,26 @@
     button1.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     button1.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [button1 addTarget:self action:@selector(gotoMessage) forControlEvents:UIControlEventTouchUpInside];
-    
+    [button1 setTintColor:[UIColor blackColor]];
     [self.view addSubview:button1];
     
     UIButton * button2 = [UIButton buttonWithType:UIButtonTypeSystem];
-    button2.frame = CGRectMake(0, CGRectGetMaxY(button1.frame), iphoneWidth, 60);
+    button2.frame = CGRectMake(0, CGRectGetMaxY(button1.frame), iphoneWidth - 60, 60);
 //    button2.backgroundColor = [UIColor darkGrayColor];
     button2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     button2.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [button2 setTitle:@"修改登录密码" forState:(UIControlStateNormal)];
     [button2 addTarget:self action:@selector(gotoTest) forControlEvents:(UIControlEventTouchUpInside)];
-    
+    [button2 setTintColor:[UIColor blackColor]];
     [self.view addSubview:button2];
     
     UIButton * button3 = [UIButton buttonWithType:UIButtonTypeSystem];
-    button3.frame = CGRectMake(0, CGRectGetMaxY(button2.frame), iphoneWidth, 60);
+    button3.frame = CGRectMake(0, CGRectGetMaxY(button2.frame), iphoneWidth - 60, 60);
 //    button3.backgroundColor = [UIColor darkGrayColor];
     [button3 setTitle:@"关于青春" forState:(UIControlStateNormal)];
     button3.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     button3.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    [button3 setTintColor:[UIColor blackColor]];
     [button3 addTarget:self action:@selector(gotoAboutQingqing) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:button3];
     
