@@ -63,6 +63,17 @@
         [self.view addSubview:view];
     }
     
+    for (int i = 0; i < 3; i++) {
+    UIImageView *imgView = [[UIImageView alloc] init];
+    imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + i * 60, 30, 30);
+//    imgView.backgroundColor = [UIColor yellowColor];
+    UIImage *image = [UIImage imageNamed:@"forward"];
+    [imgView setImage:image];
+    [self.view addSubview:imgView];
+    
+    }
+    
+    
     [self punchRecoret];
    
 }
