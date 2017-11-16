@@ -7,6 +7,7 @@
 //
 
 #import "MessageViewController.h"
+#import "TestmanyChoicesViewController.h"
 
 @interface MessageViewController ()
 
@@ -19,7 +20,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.navigationItem setTitle:@"发送消息"];
+    [self.navigationItem setTitle:@"发送通知"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送范围" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
     
     
@@ -58,8 +59,6 @@
     [sendButton addTarget:self action:@selector(sends) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:sendButton];
-    
-    
     
     
     
@@ -123,7 +122,9 @@
 
 -(void)chageColor{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
-   
+    
+    TestmanyChoicesViewController * aboutYouthVC = [TestmanyChoicesViewController new];
+    [self.navigationController pushViewController:aboutYouthVC animated:YES];
     
 }
 

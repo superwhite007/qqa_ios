@@ -9,6 +9,8 @@
 #import "MeInformationViewController.h"
 #import "AboutYouthViewController.h"
 #import "MessageViewController.h"
+#import "TestmanyChoicesViewController.h"
+
 
 @interface MeInformationViewController ()
 
@@ -52,6 +54,8 @@
     button2.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     button2.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [button2 setTitle:@"修改登录密码" forState:(UIControlStateNormal)];
+    [button2 addTarget:self action:@selector(gotoTest) forControlEvents:(UIControlEventTouchUpInside)];
+    
     [self.view addSubview:button2];
     
     UIButton * button3 = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -74,7 +78,10 @@
    
 }
 
-
+-(void)gotoTest{
+    TestmanyChoicesViewController * aboutYouthVC = [TestmanyChoicesViewController new];
+    [self.navigationController pushViewController:aboutYouthVC animated:YES];
+}
 
 -(void)gotoAboutQingqing{
     AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
