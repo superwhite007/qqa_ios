@@ -30,7 +30,7 @@
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 90, 60);
         //    button1.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
-        
+        button.tag = i;
         button.titleLabel.textColor=[UIColor blackColor];
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
