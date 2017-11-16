@@ -77,7 +77,11 @@
         [textView resignFirstResponder];
         return NO;
         
+    }else if (range.location >= 200){
+        return NO;
     }
+    
+    
     return YES;
     
 }
