@@ -83,7 +83,7 @@
         [self.navigationController pushViewController:messageVC animated:YES];
         
     }else if (sender.tag == 1){
-        
+        [self  alert:@"敬请期待中、、、"];
         
     }else if (sender.tag == 2){
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
@@ -95,7 +95,23 @@
 }
 
 
-
+-(void)alert:(NSString *)str{
+    
+    NSString *title = str;
+    NSString *message = @"I need your attention NOW!";
+    NSString *okButtonTitle = @"OK";
+    
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        // Nothing to do.
+    }];
+    
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+    
+    
+}
 
 -(void)gotoTest{
     
