@@ -27,13 +27,14 @@
     for (int i = 0; i < [titleArray count]; i++) {
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(60, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 120, 60);
+        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 90, 60);
         //    button1.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
         
         button.titleLabel.textColor=[UIColor blackColor];
         button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        button.titleLabel.font = [UIFont systemFontOfSize: 17.0];
         [button addTarget:self action:@selector(gotoSomeForwed:) forControlEvents:UIControlEventTouchUpInside];
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
@@ -41,19 +42,23 @@
         
     }
     
+    
+    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"key", @"about",  nil];
     for (int i = 0; i < 3; i++) {
       
         UIImageView *firstimgView = [[UIImageView alloc] init];
-        firstimgView.frame = CGRectMake( 15, iphoneWidth * 2 / 3 + 64 + 10 + 15 + i * 60, 30, 30);
+        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 + 64 + 10 + 15  + 5+ i * 60, 20, 20);
         //    imgView.backgroundColor = [UIColor yellowColor];
-        UIImage *firstimage = [UIImage imageNamed:@"forward"];
+        UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
         [firstimgView setImage:firstimage];
+        firstimgView.alpha = 0.6;
         [self.view addSubview:firstimgView];
         
         UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + i * 60, 30, 30);
+        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + 5 + i * 60, 20, 20);
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
+        imgView.alpha = 0.6;
         [self.view addSubview:imgView];
     
     }
