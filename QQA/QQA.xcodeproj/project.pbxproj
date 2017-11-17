@@ -14,6 +14,10 @@
 		AA1CEC8C1FA9602E00050EFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC8B1FA9602E00050EFC /* main.m */; };
 		AA1CEC961FA9602E00050EFC /* QQATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC951FA9602E00050EFC /* QQATests.m */; };
 		AA1CECA11FA9602E00050EFC /* QQAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECA01FA9602E00050EFC /* QQAUITests.m */; };
+		AA25BCC91FBE70C6009B8CA0 /* IInitiated.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */; };
+		AA25BCCC1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCCB1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m */; };
+		AA25BCCF1FBE711C009B8CA0 /* IInitiatedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCCE1FBE711C009B8CA0 /* IInitiatedTableViewController.m */; };
+		AA25BCD21FBE7195009B8CA0 /* IInitiatedListVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD11FBE7195009B8CA0 /* IInitiatedListVIew.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
@@ -72,6 +76,14 @@
 		AA1CECBC1FA96C1600050EFC /* first_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_h.png; sourceTree = "<group>"; };
 		AA1CECBD1FA96C1600050EFC /* oversea_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oversea_n.png; sourceTree = "<group>"; };
 		AA1CECBE1FA96C1600050EFC /* first_ll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_ll.png; sourceTree = "<group>"; };
+		AA25BCC71FBE70C6009B8CA0 /* IInitiated.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiated.h; sourceTree = "<group>"; };
+		AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiated.m; sourceTree = "<group>"; };
+		AA25BCCA1FBE70EF009B8CA0 /* IInitiatedTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedTableViewCell.h; sourceTree = "<group>"; };
+		AA25BCCB1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedTableViewCell.m; sourceTree = "<group>"; };
+		AA25BCCD1FBE711C009B8CA0 /* IInitiatedTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedTableViewController.h; sourceTree = "<group>"; };
+		AA25BCCE1FBE711C009B8CA0 /* IInitiatedTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedTableViewController.m; sourceTree = "<group>"; };
+		AA25BCD01FBE7195009B8CA0 /* IInitiatedListVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedListVIew.h; sourceTree = "<group>"; };
+		AA25BCD11FBE7195009B8CA0 /* IInitiatedListVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedListVIew.m; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQA_PrefixHeader.pch; sourceTree = "<group>"; };
@@ -294,6 +306,21 @@
 			path = youth_info;
 			sourceTree = "<group>";
 		};
+		AA25BCC61FBE7048009B8CA0 /* IInitiatedtheExaminationAndApproval */ = {
+			isa = PBXGroup;
+			children = (
+				AA25BCC71FBE70C6009B8CA0 /* IInitiated.h */,
+				AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */,
+				AA25BCCA1FBE70EF009B8CA0 /* IInitiatedTableViewCell.h */,
+				AA25BCCB1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m */,
+				AA25BCD01FBE7195009B8CA0 /* IInitiatedListVIew.h */,
+				AA25BCD11FBE7195009B8CA0 /* IInitiatedListVIew.m */,
+				AA25BCCD1FBE711C009B8CA0 /* IInitiatedTableViewController.h */,
+				AA25BCCE1FBE711C009B8CA0 /* IInitiatedTableViewController.m */,
+			);
+			path = IInitiatedtheExaminationAndApproval;
+			sourceTree = "<group>";
+		};
 		AAA169F41FA98C8B00F35475 /* ExaminationApproval */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +328,7 @@
 				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
 				AAD93D701FB933FF00A7CC2A /* LanchViewController.h */,
 				AAD93D711FB933FF00A7CC2A /* LanchViewController.m */,
+				AA25BCC61FBE7048009B8CA0 /* IInitiatedtheExaminationAndApproval */,
 			);
 			path = ExaminationApproval;
 			sourceTree = "<group>";
@@ -554,13 +582,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
+				AA25BCC91FBE70C6009B8CA0 /* IInitiated.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
+				AA25BCCF1FBE711C009B8CA0 /* IInitiatedTableViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */,
+				AA25BCCC1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m in Sources */,
 				AAEF4CC41FB9615F00474C07 /* MeInformationViewController.m in Sources */,
+				AA25BCD21FBE7195009B8CA0 /* IInitiatedListVIew.m in Sources */,
 				AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */,
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
