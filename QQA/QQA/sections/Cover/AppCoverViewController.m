@@ -8,7 +8,7 @@
 
 #import "AppCoverViewController.h"
 #import "ScanImageViewController.h"
-
+#import <AVFoundation/AVFoundation.h>
 
 #define  iphoneWidth    [[UIScreen mainScreen] bounds].size.width
 #define  iphoneHeight   [[UIScreen mainScreen] bounds].size.height
@@ -240,7 +240,15 @@
     
     ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
     scanImage.delegate = self;
-
+//    iOS 判断应用是否有使用相机的权限
+    
+    NSString *mediaType = AVMediaTypeVideo;//读取媒体类型
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
+    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+        NSString *errorStr = @"应用相机权限受限,请在设置中启用";
+        [self  alert:errorStr];
+        return;
+    }
     [self.navigationController  presentViewController:scanImage animated:YES completion:nil];
     
 }
@@ -405,9 +413,9 @@
     
 }
 
--(void)alert{
+-(void)alert:(NSString *)str{
     
-    NSString *title = @"Alert Button Selected";
+    NSString *title = str;
     NSString *message = @"I need your attention NOW!";
     NSString *okButtonTitle = @"OK";
     // 初始化
