@@ -1,5 +1,5 @@
 //
-//  IInitiatedtheExaminationTableViewCell.h
+//  IInitiatedtheExaminationViewController.h
 //  QQA
 //
 //  Created by wang huiming on 2017/11/17.
@@ -7,18 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class  IInitiated;
 
-
-@interface IInitiatedtheExaminationTableViewCell : UITableViewCell
+@interface IInitiatedtheExaminationViewController : UIViewController
 
 @property (nonatomic, strong) UIImageView * imgView;
 @property (nonatomic, strong) UILabel * reasonTitleLabel;
 @property (nonatomic, strong) UILabel * reasonLabel;
 @property (nonatomic, strong) UILabel * promptLabel;
-
-
-@property (nonatomic, strong) IInitiated * iInitiated;
-
 
 @end

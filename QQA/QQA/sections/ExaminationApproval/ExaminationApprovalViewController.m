@@ -10,6 +10,7 @@
 #import "LanchViewController.h"
 #import "IInitiatedtheExaminationTableViewController.h"
 
+#import "IInitiatedtheExaminationViewController.h"
 
 @interface ExaminationApprovalViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -139,15 +140,15 @@ static NSString *identifier = @"CELL";
 ////    }
     
     
-//    if (indexPath.row == 0) {
-//        IInitiatedtheExaminationTableViewController * examinationTVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
-//        [self.navigationController pushViewController:examinationTVC animated:YES];
-//
-//    } else{
+    if (indexPath.row == 0) {
+        IInitiatedtheExaminationViewController * examinationVC = [[IInitiatedtheExaminationViewController alloc] init];
+        [self.navigationController pushViewController:examinationVC animated:YES];
+
+    } else{
         LanchViewController * lanchVC = [LanchViewController new];
         [self.navigationController pushViewController:lanchVC animated:YES];
-//    }
-    
+    }
+
 }
 
 /*
