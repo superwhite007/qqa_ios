@@ -18,6 +18,8 @@
 		AA25BCCC1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCCB1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m */; };
 		AA25BCCF1FBE711C009B8CA0 /* IInitiatedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCCE1FBE711C009B8CA0 /* IInitiatedTableViewController.m */; };
 		AA25BCD21FBE7195009B8CA0 /* IInitiatedListVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD11FBE7195009B8CA0 /* IInitiatedListVIew.m */; };
+		AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */; };
+		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
@@ -84,6 +86,10 @@
 		AA25BCCE1FBE711C009B8CA0 /* IInitiatedTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedTableViewController.m; sourceTree = "<group>"; };
 		AA25BCD01FBE7195009B8CA0 /* IInitiatedListVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedListVIew.h; sourceTree = "<group>"; };
 		AA25BCD11FBE7195009B8CA0 /* IInitiatedListVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedListVIew.m; sourceTree = "<group>"; };
+		AA25BCD31FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedtheExaminationTableViewController.h; sourceTree = "<group>"; };
+		AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewController.m; sourceTree = "<group>"; };
+		AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedtheExaminationTableViewCell.h; sourceTree = "<group>"; };
+		AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewCell.m; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQA_PrefixHeader.pch; sourceTree = "<group>"; };
@@ -309,8 +315,6 @@
 		AA25BCC61FBE7048009B8CA0 /* IInitiatedtheExaminationAndApproval */ = {
 			isa = PBXGroup;
 			children = (
-				AA25BCC71FBE70C6009B8CA0 /* IInitiated.h */,
-				AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */,
 				AA25BCCA1FBE70EF009B8CA0 /* IInitiatedTableViewCell.h */,
 				AA25BCCB1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m */,
 				AA25BCD01FBE7195009B8CA0 /* IInitiatedListVIew.h */,
@@ -321,6 +325,19 @@
 			path = IInitiatedtheExaminationAndApproval;
 			sourceTree = "<group>";
 		};
+		AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */ = {
+			isa = PBXGroup;
+			children = (
+				AA25BCC71FBE70C6009B8CA0 /* IInitiated.h */,
+				AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */,
+				AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */,
+				AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */,
+				AA25BCD31FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.h */,
+				AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */,
+			);
+			path = IInitiatedtheExamination;
+			sourceTree = "<group>";
+		};
 		AAA169F41FA98C8B00F35475 /* ExaminationApproval */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +345,7 @@
 				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
 				AAD93D701FB933FF00A7CC2A /* LanchViewController.h */,
 				AAD93D711FB933FF00A7CC2A /* LanchViewController.m */,
+				AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */,
 				AA25BCC61FBE7048009B8CA0 /* IInitiatedtheExaminationAndApproval */,
 			);
 			path = ExaminationApproval;
@@ -586,10 +604,12 @@
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
+				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AA25BCCF1FBE711C009B8CA0 /* IInitiatedTableViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */,
+				AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */,
 				AA25BCCC1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m in Sources */,
 				AAEF4CC41FB9615F00474C07 /* MeInformationViewController.m in Sources */,
 				AA25BCD21FBE7195009B8CA0 /* IInitiatedListVIew.m in Sources */,

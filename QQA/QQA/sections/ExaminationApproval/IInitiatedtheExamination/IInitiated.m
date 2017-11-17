@@ -10,14 +10,14 @@
 
 @implementation IInitiated
 
--(instancetype)initWithimageStr:(NSString *)imagestr reasonTitleStr:(NSString *)reasonTitleStr reasonStr:(NSString *)reasonStr promptStr:(NSString *)promptStr forwardImageStr:(NSString *)forwardImageStr{
+-(instancetype)initWithimageStr:(NSString *)imagestr reasonTitleStr:(NSString *)reasonTitleStr reasonStr:(NSString *)reasonStr promptStr:(NSString *)promptStr{
     self = [super init];
     if (self) {
         self.imageStr = imagestr;
         self.reasonTitleStr = reasonTitleStr;
         self.reasonStr = reasonStr;
         self.promptStr = promptStr;
-        self.forwardImageStr = forwardImageStr;
+        
     }
     return  self;
 }

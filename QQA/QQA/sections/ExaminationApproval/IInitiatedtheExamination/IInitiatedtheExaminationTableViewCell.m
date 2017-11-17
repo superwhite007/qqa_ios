@@ -1,17 +1,17 @@
 //
-//  IInitiatedTableViewCell.m
+//  IInitiatedtheExaminationTableViewCell.m
 //  QQA
 //
 //  Created by wang huiming on 2017/11/17.
 //  Copyright © 2017年 youth_huiming. All rights reserved.
 //
 
-#import "IInitiatedTableViewCell.h"
-#import "IInitiated.h"
+#import "IInitiatedtheExaminationTableViewCell.h"
 
+#import "IInitiated.h"
 #define kIInintedSPACE 5
 
-@implementation IInitiatedTableViewCell
+@implementation IInitiatedtheExaminationTableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -23,7 +23,7 @@
 
 -(void)addAllViews{
     
-    self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50, 50)];
+    self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 25, 25)];
     [self.contentView addSubview:_imgView];
     
     
@@ -65,7 +65,6 @@
     
     
 }
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -8,6 +8,8 @@
 
 #import "ExaminationApprovalViewController.h"
 #import "LanchViewController.h"
+#import "IInitiatedtheExaminationTableViewController.h"
+
 
 @interface ExaminationApprovalViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -45,9 +47,10 @@ static NSString *identifier = @"CELL";
     
     
     
-    [self.datasource addObject:@"发起的审批"];
-    [self.datasource addObject:@"待我审批的"];
+    [self.datasource addObject:@"发起审批"];
+    [self.datasource addObject:@"待审批的"];
     [self.datasource addObject:@"已审批的"];
+    [self.datasource addObject:@"未审批的"];
     [self.datasource addObject:@"抄送我的"];
     
     
@@ -130,11 +133,20 @@ static NSString *identifier = @"CELL";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+////    if (indexPath.row == 0) {
+//        LanchViewController * lanchVC = [LanchViewController new];
+//        [self.navigationController pushViewController:lanchVC animated:YES];
+////    }
+    
+    
 //    if (indexPath.row == 0) {
+//        IInitiatedtheExaminationTableViewController * examinationTVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
+//        [self.navigationController pushViewController:examinationTVC animated:YES];
+//
+//    } else{
         LanchViewController * lanchVC = [LanchViewController new];
         [self.navigationController pushViewController:lanchVC animated:YES];
 //    }
-    
     
 }
 

@@ -14,13 +14,11 @@
 @property (nonatomic, strong) NSString * reasonTitleStr;
 @property (nonatomic, strong) NSString * reasonStr;
 @property (nonatomic, strong) NSString * promptStr;
-@property (nonatomic, strong) NSString * forwardImageStr;
 
 -(instancetype)initWithimageStr:(NSString *)imagestr
                  reasonTitleStr:(NSString *)reasonTitleStr
                       reasonStr:(NSString *)reasonStr
-                      promptStr:(NSString *)promptStr
-                forwardImageStr:(NSString *)forwardImageStr;
+                      promptStr:(NSString *)promptStr;
 
 
 
