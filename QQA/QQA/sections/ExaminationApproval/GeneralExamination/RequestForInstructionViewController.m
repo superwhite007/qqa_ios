@@ -1,25 +1,27 @@
 //
-//  LeaveForExaminationAndApprovalViewController.m
+//  RequestForInstructionViewController.m
 //  QQA
 //
 //  Created by wang huiming on 2017/11/20.
 //  Copyright © 2017年 youth_huiming. All rights reserved.
 //
 
-#import "LeaveForExaminationAndApprovalViewController.h"
+#import "RequestForInstructionViewController.h"
 
-@interface LeaveForExaminationAndApprovalViewController ()
+@interface RequestForInstructionViewController ()
 
 @end
 
-@implementation LeaveForExaminationAndApprovalViewController
+@implementation RequestForInstructionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"请假"];
+    [self.navigationItem setTitle:@"请示件内容"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提  交" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
+    
     
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 30)];
     introducePersonLabel.backgroundColor = [UIColor redColor];
@@ -28,16 +30,16 @@
     for (int i = 0; i < 3 ; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
         view.backgroundColor = [UIColor redColor];
-        [self.view addSubview:view];
+//        [self.view addSubview:view];
     }
     
-    UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 245, 100, 30)];
-    reasonTitleLabel.text = @"reason";
+    UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 30)];
+    reasonTitleLabel.text = @"请示件内容";
     reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
     reasonTitleLabel.backgroundColor = [UIColor redColor];
     [self.view addSubview:reasonTitleLabel];
     
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 280, iphoneWidth - 40, iphoneWidth * 1 / 3)];
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 150, iphoneWidth - 40, iphoneWidth * 2 / 3)];
     //    messageTextView.backgroundColor = [UIColor blueColor];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:_messageTextView];
@@ -51,14 +53,9 @@
     
     [self ApproverAndCC];
     
-}
-
-
--(void)chageColor{
-    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+    
     
 }
-
 
 -(void)ApproverAndCC{
     
@@ -107,6 +104,10 @@
 
 
 
+-(void)chageColor{
+    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+    
+}
 
 
 
@@ -149,19 +150,19 @@
 
 -(void)sendNoticeToServer{
     
-//    if ([_mutableArray count] == 0) {
-//        NSLog(@"请选择发送范围");
-//        [self alert:@"请选择发送范围"];
-//    } else
+    //    if ([_mutableArray count] == 0) {
+    //        NSLog(@"请选择发送范围");
+    //        [self alert:@"请选择发送范围"];
+    //    } else
     if (_messageTextView.text.length == 0){
         NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
         [self sendToServerTOBack];
     }
-//    else if ([_mutableArray count] != 0 && _messageTextView.text.length != 0){
-//        NSLog(@"准备发送服务器");
-//        [self sendToServerTOBack];
-//    }
+    //    else if ([_mutableArray count] != 0 && _messageTextView.text.length != 0){
+    //        NSLog(@"准备发送服务器");
+    //        [self sendToServerTOBack];
+    //    }
     
 }
 
@@ -191,6 +192,9 @@
     
     
 }
+
+
+
 
 
 

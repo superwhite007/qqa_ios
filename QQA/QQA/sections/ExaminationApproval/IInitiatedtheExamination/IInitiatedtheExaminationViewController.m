@@ -8,6 +8,7 @@
 
 #import "IInitiatedtheExaminationViewController.h"
 #import "LeaveForExaminationAndApprovalViewController.h"
+#import "RequestForInstructionViewController.h"
 
 #define kIInintedSPACE 5
 
@@ -53,7 +54,8 @@
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(iphoneWidth - 35, 112.5, 25, 25);
         [button setImage:[UIImage imageNamed:@"forward"] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
+        button.tag = i;
+        [button addTarget:self action:@selector(buttonAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [cellView addSubview:button];
         
 //        UIImageView  * forwardImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 35, 112.5, 25, 25)];
@@ -114,10 +116,23 @@
     
 }
 
--(void)buttonAction{
+-(void)buttonAction:(UIButton *)sender{
     
-    LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
-    [self.navigationController pushViewController:leaveVC animated:YES];
+    if (sender.tag == 0) {
+        LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
+        [self.navigationController pushViewController:leaveVC animated:YES];
+        
+    } else if (sender.tag == 1){
+        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+        [self.navigationController pushViewController:leaveVC animated:YES];
+        
+        
+    }else if (sender.tag == 2){
+        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+        [self.navigationController pushViewController:leaveVC animated:YES];
+        
+    }
+    
     
 }
 
