@@ -7,6 +7,8 @@
 //
 
 #import "IInitiatedtheExaminationViewController.h"
+#import "LeaveForExaminationAndApprovalViewController.h"
+
 #define kIInintedSPACE 5
 
 @interface IInitiatedtheExaminationViewController ()
@@ -51,6 +53,7 @@
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(iphoneWidth - 35, 112.5, 25, 25);
         [button setImage:[UIImage imageNamed:@"forward"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(buttonAction) forControlEvents:(UIControlEventTouchUpInside)];
         [cellView addSubview:button];
         
 //        UIImageView  * forwardImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 35, 112.5, 25, 25)];
@@ -111,7 +114,12 @@
     
 }
 
-
+-(void)buttonAction{
+    
+    LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
+    [self.navigationController pushViewController:leaveVC animated:YES];
+    
+}
 
 
 
