@@ -10,4 +10,6 @@
 
 @interface SendTheScopeViewController : UIViewController
 
+@property (nonatomic , strong) NSString * sendMessage;
+
 @end

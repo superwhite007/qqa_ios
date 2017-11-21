@@ -20,7 +20,7 @@
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"发送范围"];
     
-    
+    NSLog(@"_sendMessag_sendMessag:%@", _sendMessage);
     
     
 }

@@ -198,6 +198,7 @@
 //        [self sendToServerTOBack];
         
         SendTheScopeViewController * sendTheScopeVC = [SendTheScopeViewController new];
+        sendTheScopeVC.sendMessage = _messageTextView.text;
         [self.navigationController pushViewController:sendTheScopeVC animated:YES];
         
     
