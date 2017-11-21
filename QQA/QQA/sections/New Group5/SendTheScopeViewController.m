@@ -46,6 +46,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"发送范围"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
     
     //NSLog(@"_sendMessag_sendMessag:%@", _sendMessage);
     
@@ -69,6 +70,15 @@
     
     
 }
+
+-(void)chageColor{
+    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+    [self sendSendScopeToServer];
+    
+}
+
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     //#warning Potentially incomplete method implementation.
@@ -220,9 +230,85 @@
 }
 
 
+-(void)sendSendScopeToServer{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/message/store"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    
+    //NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
+    
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:self.datasoureKeysSendScopeArray forKey:@"scope"];
+    [mdict setObject:self.sendMessage forKey:@"content"];
+    
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 由于要先对request先行处理,我们通过request初始化task
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            //                                            //NSLog(@"response, error :%@, %@", response, error);
+                                            //                                            //NSLog(@"data:%@", data);
+                                            
+                                            if (data != nil) {
+                                                
+                                                NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"api/message/store: %@", dict);
+                                                
+                                                if ( [[dict objectForKey:@"message"] intValue] == 5004 ) {
+//                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+//                                                    [array1 removeObjectAtIndex:0];
+//
+//                                                    [self setDataToDatasoureSendScopeArray:array1];
+                                                    
+                                                    [self alert:@"发送通知成功"];
+
+                                                    
+
+                                                }
+                                                
+                                            } else{
+                                                //NSLog(@"获取数据失败，问");
+                                            }
+                                        }];
+    [task resume];
+    
 
 
+}
 
+
+-(void)alert:(NSString *)str{
+    
+    NSString *title = str;
+    NSString *message = @"I need your attention NOW!";
+    NSString *okButtonTitle = @"OK";
+    
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        // Nothing to do.
+    }];
+    
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+    
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
