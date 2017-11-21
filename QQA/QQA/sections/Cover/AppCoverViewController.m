@@ -254,7 +254,7 @@
 }
 
 - (void)reportScanResult:(NSString *)result{
-    NSLog(@"%@",result);
+    //NSLog(@"%@",result);
 //    [self scanCrama:result];
     
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
@@ -293,11 +293,11 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-//                                            NSLog(@"response, error :%@, %@", response, error);
-//                                            NSLog(@"data:%@", data);
+//                                            //NSLog(@"response, error :%@, %@", response, error);
+//                                            //NSLog(@"data:%@", data);
                                             
                                             if (data != nil) {
-                                                NSLog(@"PlantKeysuccess");
+                                                //NSLog(@"PlantKeysuccess");
                                             NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 
                                               [self gitAccess_token:dict];
@@ -305,7 +305,7 @@
 //                                                [self plantIDKeyFalse];
                                              
                                             } else{
-                                                NSLog(@"获取数据失败，问李鹏");
+                                                //NSLog(@"获取数据失败，问李鹏");
                                                 
                                             }
                                             
@@ -317,7 +317,7 @@
 
 -(void)gitAccess_token:(NSDictionary *)dict{
     
-    NSLog(@"gitAccess_token:dictss:%@", dict);
+    //NSLog(@"gitAccess_token:dictss:%@", dict);
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:dict];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
     [mdict removeObjectForKey:@"server_type"];
@@ -351,20 +351,20 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-                                            NSLog(@"tokenresponse, error :%@, %@", response, error);
-                                            NSLog(@"tokendata:%@", data);
+                                            //NSLog(@"tokenresponse, error :%@, %@", response, error);
+                                            //NSLog(@"tokendata:%@", data);
                                             if (data != nil) {
-                                                NSLog(@"tokensuccess");
+                                                //NSLog(@"tokensuccess");
                                                 NSMutableDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
                                                 ;
                                                
-                                                NSLog(@"tokensuccess:%@",dictss);
-//                                              NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
+                                                //NSLog(@"tokensuccess:%@",dictss);
+//                                              //NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
 //                                              NSString * newStr = [NSString new];
                                                 [self scanCrama:dictss];
                                                 
                                             } else{
-                                                NSLog(@"token:获取数据失败，问李鹏");
+                                                //NSLog(@"token:获取数据失败，问李鹏");
                                             }
                                             
                                         }];
@@ -515,10 +515,10 @@
 //    NSDictionary *dic5 = @{@"name": @"Duke", @"age": @33, @"gender": @"male"};
 //    [dic5 writeToFile:txtPath atomically:YES];
 //
-//    NSLog(@"txtPath:%@", txtPath);
+//    //NSLog(@"txtPath:%@", txtPath);
 //
 //    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:txtPath];
-//    NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic);
+//    //NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic);
 //
     
     

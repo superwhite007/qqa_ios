@@ -93,13 +93,13 @@
 
 
 - (void)reportScanResult:(NSString *)result{
-    NSLog(@"%@",result);
+    //NSLog(@"%@",result);
 //    [self scanCrama:result];
 //
     [self scanResultPunchClock];
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
-    NSLog(@"%@", dict);
+    //NSLog(@"%@", dict);
     [self punchRecore:dict];
     
 }
@@ -125,7 +125,7 @@
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
     
     
-//    NSLog(@"resultDicresultmdict:%@ \n%@ \n %@", mdict, dict, resultDicAccess );
+//    //NSLog(@"resultDicresultmdict:%@ \n%@ \n %@", mdict, dict, resultDicAccess );
     
     
     NSError * error = nil;
@@ -138,20 +138,20 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-                                            //                                            NSLog(@"response, error :%@, %@", response, error);
-                                            //                                            NSLog(@"data:%@", data);
+                                            //                                            //NSLog(@"response, error :%@, %@", response, error);
+                                            //                                            //NSLog(@"data:%@", data);
                                             
                                             if (data != nil) {
-                                                NSLog(@"Punchsuccess");
+                                                //NSLog(@"Punchsuccess");
                                                 NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"%@", dict);
+                                                //NSLog(@"%@", dict);
                                                 
                                                 //                                            NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 
 //                                                [self gitAccess_token:dict];
                                                 
                                             } else{
-                                                NSLog(@"获取数据失败，问李鹏");
+                                                //NSLog(@"获取数据失败，问李鹏");
                                             }
                                             
                                         }];
@@ -166,7 +166,7 @@
 -(void)scanResultPunchClock{
     
     
-    NSLog(@"打卡成功");
+    //NSLog(@"打卡成功");
     
 }
 

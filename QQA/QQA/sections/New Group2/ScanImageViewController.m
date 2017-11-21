@@ -65,7 +65,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
     // 初始化输入流
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
     if (!input) {
-        NSLog(@"%@", [error localizedDescription]);
+        //NSLog(@"%@", [error localizedDescription]);
         return NO;
     }
     // 创建会话
@@ -119,7 +119,7 @@ static const char *kScanQRCodeQueueName = "ScanQRCodeQueue";
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
             result = metadataObj.stringValue;
         } else {
-            NSLog(@"不是二维码");
+            //NSLog(@"不是二维码");
         }
         //调用代理对象的协议方法来实现数据传递
         [self dismissViewControllerAnimated:YES completion:nil];

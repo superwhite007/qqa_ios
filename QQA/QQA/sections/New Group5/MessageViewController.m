@@ -145,10 +145,10 @@
         sender.backgroundColor = [UIColor purpleColor];
         
     }
-    NSLog(@" mutableArray%@", _mutableArray);
+    //NSLog(@" mutableArray%@", _mutableArray);
     
     
-    NSLog(@"%i",isbool);
+    //NSLog(@"%i",isbool);
     
     
 }
@@ -183,7 +183,7 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
-    NSLog(@"%@", textView.text);
+    //NSLog(@"%@", textView.text);
     
     
 }
@@ -191,10 +191,10 @@
 -(void)sendNoticeToServer{
     
     if (_messageTextView.text.length == 0){
-        NSLog(@"请输入通知内容");
+        //NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
     }else if ( _messageTextView.text.length != 0){
-        NSLog(@"准备发送服务器");
+        //NSLog(@"准备发送服务器");
 //        [self sendToServerTOBack];
         
         SendTheScopeViewController * sendTheScopeVC = [SendTheScopeViewController new];
@@ -208,7 +208,7 @@
 
 
 -(void)sendToServerTOBack{
-    NSLog(@"准备发送服务器：success");
+    //NSLog(@"准备发送服务器：success");
     [self alert:@"发送服务器：success"];
     
 }

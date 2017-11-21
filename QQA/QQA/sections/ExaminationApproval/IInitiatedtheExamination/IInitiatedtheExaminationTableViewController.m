@@ -100,7 +100,7 @@ static NSString * identifier = @"CELL";
 
     NSDictionary * dict = self.datadource[indexPath.row];
     
-    NSLog(@"dictdict::%@", dict);
+    //NSLog(@"dictdict::%@", dict);
     
     IInitiated * initiated = self.datadource[indexPath.row];
     cell.iInitiated = initiated;

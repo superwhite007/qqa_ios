@@ -67,13 +67,13 @@ static NSString *identifier = @"Cell";
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-                                            //                                            NSLog(@"response, error :%@, %@", response, error);
-                                            //                                            NSLog(@"data:%@", data);
+                                            //                                            //NSLog(@"response, error :%@, %@", response, error);
+                                            //                                            //NSLog(@"data:%@", data);
                                             
                                             if (data != nil) {
                                                 
                                                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"dict: %@", dict);
+                                                //NSLog(@"dict: %@", dict);
                                                 
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     [self.tableView  reloadData];
@@ -81,7 +81,7 @@ static NSString *identifier = @"Cell";
                                                 });
                                                 
                                             } else{
-                                                NSLog(@"获取数据失败，问");
+                                                //NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];

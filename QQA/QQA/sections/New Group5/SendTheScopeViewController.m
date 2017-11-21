@@ -10,9 +10,30 @@
 
 @interface SendTheScopeViewController ()
 
+@property (nonatomic, strong) NSMutableArray * datasoureSendScopeArray;
+@property (nonatomic, strong) NSMutableArray * datasourSendToServerScopeArray;
+
 @end
 
 @implementation SendTheScopeViewController
+
+
+
+
+-(NSMutableArray *)datasoureSendScopeArray{
+    if (!_datasoureSendScopeArray) {
+        self.datasoureSendScopeArray = [NSMutableArray array];
+    }
+    return _datasoureSendScopeArray;
+}
+
+-(NSMutableArray *)datasourSendToServerScopeArray{
+    if (!_datasourSendToServerScopeArray) {
+        self.datasourSendToServerScopeArray = [NSMutableArray array];
+    }
+    return _datasourSendToServerScopeArray;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -20,7 +41,9 @@
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"发送范围"];
     
-    NSLog(@"_sendMessag_sendMessag:%@", _sendMessage);
+    //NSLog(@"_sendMessag_sendMessag:%@", _sendMessage);
+    
+    [self gitMessageAboutGiveNotices];
     
     
 }
@@ -39,7 +62,7 @@
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
     
     
-    NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
+    //NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
@@ -54,25 +77,30 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-                                            //                                            NSLog(@"response, error :%@, %@", response, error);
-                                            //                                            NSLog(@"data:%@", data);
+                                            //                                            //NSLog(@"response, error :%@, %@", response, error);
+                                            //                                            //NSLog(@"data:%@", data);
                                             
                                             if (data != nil) {
                                                 
-                                                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"MessageViewControllerdict: %@", dict);
-                                                NSMutableArray * array = dict[@"departments"];
-                                                
-                                                
-                                                
-                                                
-                                                //                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                ////                                                    [self  gitSomeThingsdictionary:dict];
-                                                //
-                                                //                                                });
-                                                
+                                                NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"MessageViewControllerdict: %@", dictArray);
+                                                NSString * str =[NSString stringWithFormat:@"%@", [dictArray[0] objectForKey:@"message"]];
+                                                if ([str isEqualToString:@"5002"]) {
+                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                    [array1 removeObjectAtIndex:0];
+                                                    NSLog(@"str2：%@", str);
+                                                 
+                                                    [self setDataToDatasoureSendScopeArray:array1];
+                                                    
+//                                                    dispatch_async(dispatch_get_main_queue(), ^{
+//                                                         [self setDatasoureSendScopeArray:array1];
+                                                    
+//                                                    });
+                                                   
+                                                }
+                                              
                                             } else{
-                                                NSLog(@"获取数据失败，问");
+                                                //NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];
@@ -80,9 +108,17 @@
 }
 
 
+-(void)setDataToDatasoureSendScopeArray:(NSMutableArray *)mArray{
+    self.datasoureSendScopeArray = mArray;
+    NSLog(@"mArray:&%@", mArray);
+   
+    
+}
 
-
-
+-(void)setDataToDatasourSendToServerScopeArray:(NSMutableArray *)mToServerArray{
+    
+    
+}
 
 
 

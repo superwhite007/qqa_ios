@@ -23,7 +23,7 @@
 }
 
 -(void)setValue:(id)value forKey:(NSString *)key{
-    NSLog(@"key is NULL :%@", key);
+    //NSLog(@"key is NULL :%@", key);
 }
 
 @end

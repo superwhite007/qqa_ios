@@ -103,8 +103,8 @@ static NSString *identifier = @"Cell";
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-//                                            NSLog(@"response, error :%@, %@", response, error);
-//                                            NSLog(@"data:%@", data);
+//                                            //NSLog(@"response, error :%@, %@", response, error);
+//                                            //NSLog(@"data:%@", data);
                                             
                                             if (data != nil) {
                                                 
@@ -117,7 +117,7 @@ static NSString *identifier = @"Cell";
                                                     
                                                     [array removeObjectAtIndex:0];
                                                     
-//                                                    NSLog(@"PunchRecord1:%@", array);
+//                                                    //NSLog(@"PunchRecord1:%@", array);
 
                                                     self.datasource = array;
 
@@ -130,7 +130,7 @@ static NSString *identifier = @"Cell";
                                                 }
                        
                                             } else{
-                                                NSLog(@"获取数据失败，问李鹏");
+                                                //NSLog(@"获取数据失败，问李鹏");
                                             }
                                             
                                         }];
@@ -178,7 +178,7 @@ static NSString *identifier = @"Cell";
     }
     
     
-    NSLog(@"cell:%@",[self.datasource[indexPath.row]  objectForKey:@"clock_time"]);
+    //NSLog(@"cell:%@",[self.datasource[indexPath.row]  objectForKey:@"clock_time"]);
     cell.textLabel.text = [self.datasource[indexPath.row]  objectForKey:@"clock_time"];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     

@@ -146,6 +146,8 @@
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
     
+//    NSLog(@"mdict%@", mdict);
+    
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -155,13 +157,13 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-//                                            NSLog(@"response, error :%@, %@", response, error);
-//                                            NSLog(@"data:%@", data);
+//                                            //NSLog(@"response, error :%@, %@", response, error);
+//                                            //NSLog(@"data:%@", data);
                                             
                                             if (data != nil) {
                                                 
                                                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                               NSLog(@"dict: %@", dict);
+//                                               NSLog(@"dict: %@", dict);
                                                 
                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                      [self  gitSomeThingsdictionary:dict];
@@ -169,7 +171,7 @@
                                                 });
                                                 
                                             } else{
-                                                NSLog(@"获取数据失败，问");
+                                                //NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];
@@ -179,7 +181,7 @@
 
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
     
-    NSLog(@"dict: %@", dict);
+    //NSLog(@"dict: %@", dict);
     
     UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
     view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];

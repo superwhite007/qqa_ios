@@ -118,7 +118,7 @@
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         [self sendNoticeToServer];
-        NSLog(@"%@", text);
+        //NSLog(@"%@", text);
         return NO;
         
     }else if (range.location >= 200){
@@ -133,13 +133,13 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
-    NSLog(@"%@", textView.text);
+    //NSLog(@"%@", textView.text);
     //    if ([_mutableArray count] == 0) {
-    //        NSLog(@"请选择发送范围");
+    //        //NSLog(@"请选择发送范围");
     //    } else if (textView.text.length == 0){
-    //        NSLog(@"请输入通知内容");
+    //        //NSLog(@"请输入通知内容");
     //    }else if ([_mutableArray count] != 0 && textView.text.length != 0){
-    //        NSLog(@"准备发送服务器");
+    //        //NSLog(@"准备发送服务器");
     //        [self sendNoticeToServer];
     //    }
     
@@ -151,23 +151,23 @@
 -(void)sendNoticeToServer{
     
     //    if ([_mutableArray count] == 0) {
-    //        NSLog(@"请选择发送范围");
+    //        //NSLog(@"请选择发送范围");
     //        [self alert:@"请选择发送范围"];
     //    } else
     if (_messageTextView.text.length == 0){
-        NSLog(@"请输入通知内容");
+        //NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
         [self sendToServerTOBack];
     }
     //    else if ([_mutableArray count] != 0 && _messageTextView.text.length != 0){
-    //        NSLog(@"准备发送服务器");
+    //        //NSLog(@"准备发送服务器");
     //        [self sendToServerTOBack];
     //    }
     
 }
 
 -(void)sendToServerTOBack{
-    NSLog(@"准备发送服务器：success");
+    //NSLog(@"准备发送服务器：success");
     [self alert:@"发送服务器：success"];
     
 }
