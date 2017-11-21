@@ -10,6 +10,7 @@
 		466E2A145386609065AEE56E /* libPods-QQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECCA599687977AA5ACEDCC1 /* libPods-QQA.a */; };
 		AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */; };
 		AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */; };
+		AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA199AF81FC3F01D00BCE01A /* SendTheScopeViewController.m */; };
 		AA1CEC841FA9602E00050EFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC831FA9602E00050EFC /* AppDelegate.m */; };
 		AA1CEC861FA9602E00050EFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1CEC851FA9602E00050EFC /* Assets.xcassets */; };
 		AA1CEC891FA9602E00050EFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA1CEC871FA9602E00050EFC /* LaunchScreen.storyboard */; };
@@ -61,6 +62,8 @@
 		AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeaveForExaminationAndApprovalViewController.m; sourceTree = "<group>"; };
 		AA1394901FC277D20070B1E2 /* RequestForInstructionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestForInstructionViewController.h; sourceTree = "<group>"; };
 		AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestForInstructionViewController.m; sourceTree = "<group>"; };
+		AA199AF71FC3F01D00BCE01A /* SendTheScopeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendTheScopeViewController.h; sourceTree = "<group>"; };
+		AA199AF81FC3F01D00BCE01A /* SendTheScopeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendTheScopeViewController.m; sourceTree = "<group>"; };
 		AA1CEC7F1FA9602E00050EFC /* QQA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1CEC821FA9602E00050EFC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AA1CEC831FA9602E00050EFC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -400,6 +403,8 @@
 				AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */,
 				AAB675C11FBBE58E00BF696B /* MessageViewController.h */,
 				AAB675C21FBBE58E00BF696B /* MessageViewController.m */,
+				AA199AF71FC3F01D00BCE01A /* SendTheScopeViewController.h */,
+				AA199AF81FC3F01D00BCE01A /* SendTheScopeViewController.m */,
 				AAEF4CC51FB9646500474C07 /* AboutYouthViewController.h */,
 				AAEF4CC61FB9646500474C07 /* AboutYouthViewController.m */,
 			);
@@ -625,6 +630,7 @@
 				AA25BCDC1FBEBC5F009B8CA0 /* IInitiatedtheExaminationViewController.m in Sources */,
 				AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */,
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
+				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
 				AA25BCC91FBE70C6009B8CA0 /* IInitiated.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,

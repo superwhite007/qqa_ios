@@ -7,7 +7,7 @@
 //
 
 #import "MessageViewController.h"
-
+#import "SendTheScopeViewController.h"
 
 @interface MessageViewController ()<UIScrollViewDelegate>
 
@@ -43,15 +43,13 @@
     
     
     
-    
-    
-    
-    
-    
+
     
     UIButton  * sendButton =  [UIButton buttonWithType:UIButtonTypeSystem];
-    [sendButton setFrame:CGRectMake( ( iphoneWidth - 120 ) / 2, iphoneHeight  - 50, 120, 30)];
-    [sendButton setTitle:@"发   送" forState:UIControlStateNormal];
+//    [sendButton setFrame:CGRectMake( ( iphoneWidth - 120 ) / 2, iphoneHeight  - 50, 120, 30)];
+    [sendButton setFrame:CGRectMake( ( iphoneWidth - 120 ) / 2, iphoneWidth * 2 / 3 + 100, 120, 30)];
+    
+    [sendButton setTitle:@"下一步" forState:UIControlStateNormal];
 //    sendButton.titleLabel.font = [UIFont systemFontOfSize:24];
 //    sendButton.backgroundColor = [UIColor blueColor];
     
@@ -70,7 +68,7 @@
     rangeOfTransmissionLabel.layer.borderColor = [UIColor blackColor].CGColor;
     rangeOfTransmissionLabel.layer.borderWidth = 1;
     rangeOfTransmissionLabel.layer.cornerRadius = 5;
-    [self.view addSubview:rangeOfTransmissionLabel];
+//    [self.view addSubview:rangeOfTransmissionLabel];
     
     
     
@@ -78,7 +76,7 @@
     
     
 //    [self sendRangeoftransmission];
-    [self scrlollVIew];
+//    [self scrlollVIew];
     
 }
 
@@ -95,6 +93,9 @@
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    
+    NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
@@ -200,31 +201,7 @@
 
 
 -(void)sendRangeoftransmission{
-    
-//    self.mutableArray = [NSMutableArray new];
-//
-//
-//    NSArray * array = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"e",nil];
-//
-//    for (int i = 0 ; i  < [array count]; i++) {
-//        UIButton * clickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        //        clickBtn.backgroundColor = [UIColor clearColor];
-//
-//
-//        clickBtn.selected = NO;
-//        clickBtn.frame = CGRectMake(20, i * 50 + 124  + iphoneWidth * 2 / 3 , 100, 30);
-//        [clickBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [clickBtn setTag:i];
-//        [clickBtn setTitle:array[i] forState:(UIControlStateNormal)];
-//        clickBtn.backgroundColor = [UIColor grayColor];
-//
-//        clickBtn.layer.borderColor = [UIColor yellowColor].CGColor;
-//        clickBtn.layer.borderWidth = 2;
-//        clickBtn.layer.cornerRadius = 3;
-//
-//        [self.view addSubview:clickBtn];
-//
-//    }
+ 
     
 }
 
@@ -253,9 +230,6 @@
     NSLog(@"%i",isbool);
     
     
-    
-    
-    
 }
 
 
@@ -263,8 +237,11 @@
 
 
 -(void)sends{
+    
      [_messageTextView resignFirstResponder];
     [self sendNoticeToServer];
+  
+    
 }
 
 
@@ -292,32 +269,39 @@
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
     NSLog(@"%@", textView.text);
-//    if ([_mutableArray count] == 0) {
-//        NSLog(@"请选择发送范围");
-//    } else if (textView.text.length == 0){
-//        NSLog(@"请输入通知内容");
-//    }else if ([_mutableArray count] != 0 && textView.text.length != 0){
-//        NSLog(@"准备发送服务器");
-//        [self sendNoticeToServer];
-//    }
     
     
 }
 
 -(void)sendNoticeToServer{
-
-    if ([_mutableArray count] == 0) {
-        NSLog(@"请选择发送范围");
-        [self alert:@"请选择发送范围"];
-    } else if (_messageTextView.text.length == 0){
+    
+    if (_messageTextView.text.length == 0){
         NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
-    }else if ([_mutableArray count] != 0 && _messageTextView.text.length != 0){
+    }else if ( _messageTextView.text.length != 0){
         NSLog(@"准备发送服务器");
-        [self sendToServerTOBack];
+//        [self sendToServerTOBack];
+        
+        SendTheScopeViewController * sendTheScopeVC = [SendTheScopeViewController new];
+        [self.navigationController pushViewController:sendTheScopeVC animated:YES];
+        
+    
     }
     
 }
+
+
+-(void)sendToServerTOBack{
+    NSLog(@"准备发送服务器：success");
+    [self alert:@"发送服务器：success"];
+    
+}
+
+
+
+
+
+
 
 -(void)alert:(NSString *)str{
     
@@ -337,36 +321,6 @@
     
 }
 
-
-
-
--(void)sendToServerTOBack{
-    NSLog(@"准备发送服务器：success");
-    [self alert:@"发送服务器：success"];
-    
-}
-
-
-/*
- 
- - (BOOL)textViewShouldBeginEditing:(UITextView *)textView;
- - (BOOL)textViewShouldEndEditing:(UITextView *)textView;
- 
- - (void)textViewDidBeginEditing:(UITextView *)textView;
- - (void)textViewDidEndEditing:(UITextView *)textView;
- 
- - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
- - (void)textViewDidChange:(UITextView *)textView;
- 
- - (void)textViewDidChangeSelection:(UITextView *)textView;
- 
- - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction NS_AVAILABLE_IOS(10_0);
- - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction NS_AVAILABLE_IOS(10_0);
- 
- - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange NS_DEPRECATED_IOS(7_0, 10_0, "Use textView:shouldInteractWithURL:inRange:forInteractionType: instead");
- - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange NS_DEPRECATED_IOS(7_0, 10_0, "Use textView:shouldInteractWithTextAttachment:inRange:forInteractionType: instead");
-
- */
 
 
 
