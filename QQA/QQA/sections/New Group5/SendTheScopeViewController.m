@@ -61,19 +61,16 @@
     
     [self.view addSubview:_tableView];
     
-    
-    
-    
-    
-    
-    
-    
-    
+   
 }
 
 -(void)chageColor{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
-    [self sendSendScopeToServer];
+    if ([self.datasourSendToServerScopeArray count] > 0) {
+        [self sendSendScopeToServer];
+    } else{
+        [self alert:@"请选择发送范围"];
+    }
     
 }
 
@@ -228,6 +225,40 @@
     
     
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    BOOL isbool = [self.datasourSendToServerScopeArray containsObject: self.datasoureKeysSendScopeArray[indexPath.row]];
+    if (isbool) {
+        [self.datasourSendToServerScopeArray removeObject:self.datasoureKeysSendScopeArray[indexPath.row]];
+        
+    }else{
+        [self.datasourSendToServerScopeArray addObject:self.datasoureKeysSendScopeArray[indexPath.row]];
+        
+    }
+    
+    
+}
+
+/*
+- (void)btnClick:(UIButton *)sender{
+    
+    NSString *str = sender.titleLabel.text;
+    BOOL isbool = [_mutableArray containsObject: str];
+    if (isbool) {
+        [self.mutableArray removeObject:sender.titleLabel.text];
+        sender.backgroundColor = [UIColor grayColor];
+        
+    }else{
+        [self.mutableArray addObject:sender.titleLabel.text];
+        sender.backgroundColor = [UIColor purpleColor];
+        
+    }
+    
+}
+*/
+
 
 
 -(void)sendSendScopeToServer{
