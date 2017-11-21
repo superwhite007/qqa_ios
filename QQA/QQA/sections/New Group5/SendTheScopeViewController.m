@@ -8,7 +8,7 @@
 
 #import "SendTheScopeViewController.h"
 
-@interface SendTheScopeViewController ()
+@interface SendTheScopeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray * datasoureSendScopeArray;
 @property (nonatomic, strong) NSMutableArray * datasourSendToServerScopeArray;
@@ -45,8 +45,65 @@
     
     [self gitMessageAboutGiveNotices];
     
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+    _tableView.separatorColor = [UIColor orangeColor];
+//    _tableView.separatorInset = UIEdgeInsetsMake(0, 40, 0, 0 );
+    _tableView.rowHeight = 60;
+    _tableView.dataSource =self;
+    _tableView.delegate = self;
+    
+    [self.view addSubview:_tableView];
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    //#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    //6
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    //7表视图应该以其对应的数组为导向，数组元素个数决定了表视图的行数，不再是固定的行数
+    return self.datasoureSendScopeArray.count;
+}
+
+//8 取消注释
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    static NSString *identifier = @"CELL";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] ;
+        
+//        //if语句中可以为单元格中一些通用的属性赋值，例如可以在其辅助视图类型赋值,标示所有单元格都一直
+//        aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+    }
+    
+    
+//    cell.textLabel.text = self.datasoureSendScopeArray[indexPath.row] ;
+    return cell;
+    
+}
+
+
+
+
+
+
+
 
 -(void)gitMessageAboutGiveNotices{
     
@@ -84,18 +141,20 @@
                                                 
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"MessageViewControllerdict: %@", dictArray);
-                                                NSString * str =[NSString stringWithFormat:@"%@", [dictArray[0] objectForKey:@"message"]];
-                                                if ([str isEqualToString:@"5002"]) {
+//                                                NSString * str =[NSString stringWithFormat:@"%@", [dictArray[0] objectForKey:@"message"]];
+//                                                
+                                                
+                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002 ) {
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                     [array1 removeObjectAtIndex:0];
-                                                    NSLog(@"str2：%@", str);
-                                                 
+                                                    
                                                     [self setDataToDatasoureSendScopeArray:array1];
                                                     
-//                                                    dispatch_async(dispatch_get_main_queue(), ^{
-//                                                         [self setDatasoureSendScopeArray:array1];
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                         [self setDatasoureSendScopeArray:array1];
+                                                         [self.tableView  reloadData];
                                                     
-//                                                    });
+                                                    });
                                                    
                                                 }
                                               
@@ -109,7 +168,7 @@
 
 
 -(void)setDataToDatasoureSendScopeArray:(NSMutableArray *)mArray{
-    self.datasoureSendScopeArray = mArray;
+    self.datasoureSendScopeArray = mArray ;
     NSLog(@"mArray:&%@", mArray);
    
     

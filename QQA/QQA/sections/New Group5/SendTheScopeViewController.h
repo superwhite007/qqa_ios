@@ -10,6 +10,7 @@
 
 @interface SendTheScopeViewController : UIViewController
 
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic , strong) NSString * sendMessage;
 
 @end
