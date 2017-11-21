@@ -12,13 +12,19 @@
 
 @property (nonatomic, strong) NSMutableArray * datasoureSendScopeArray;
 @property (nonatomic, strong) NSMutableArray * datasourSendToServerScopeArray;
+@property (nonatomic, strong) NSMutableArray * datasoureKeysSendScopeArray;
 
 @end
 
 @implementation SendTheScopeViewController
 
 
-
+-(NSArray *)datasoureKeysSendScopeArrayAtIndexes:(NSIndexSet *)indexes{
+    if (!_datasoureKeysSendScopeArray) {
+        self.datasoureKeysSendScopeArray = [NSMutableArray array];
+    }
+    return _datasoureKeysSendScopeArray;
+}
 
 -(NSMutableArray *)datasoureSendScopeArray{
     if (!_datasoureSendScopeArray) {
@@ -72,18 +78,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    //7表视图应该以其对应的数组为导向，数组元素个数决定了表视图的行数，不再是固定的行数
-    return self.datasoureSendScopeArray.count;
+    
+    return self.datasoureKeysSendScopeArray.count;
 }
 
-//8 取消注释
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    NSLog(@"datasoureKeysSendScopeArray[indexPath.row]:%@", self.datasoureKeysSendScopeArray[indexPath.row]);
+  
     static NSString *identifier = @"CELL";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] ;
         
@@ -93,7 +99,11 @@
     }
     
     
-//    cell.textLabel.text = self.datasoureSendScopeArray[indexPath.row] ;
+    cell.textLabel.text = [self.datasoureSendScopeArray[indexPath.row] objectForKey:self.datasoureKeysSendScopeArray[indexPath.row]];
+    NSLog(@"datasoureKeysSendScopeArray[indexPath.row]:%@", self.datasoureKeysSendScopeArray[indexPath.row]);
+//    cell.textLabel.text = self.datasoureKeysSendScopeArray[indexPath.row];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    
     return cell;
     
 }
@@ -141,8 +151,6 @@
                                                 
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"MessageViewControllerdict: %@", dictArray);
-//                                                NSString * str =[NSString stringWithFormat:@"%@", [dictArray[0] objectForKey:@"message"]];
-//                                                
                                                 
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002 ) {
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
@@ -150,11 +158,11 @@
                                                     
                                                     [self setDataToDatasoureSendScopeArray:array1];
                                                     
-                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                         [self setDatasoureSendScopeArray:array1];
-                                                         [self.tableView  reloadData];
-                                                    
-                                                    });
+//                                                    dispatch_async(dispatch_get_main_queue(), ^{
+//                                                         [self setDatasoureSendScopeArray:array1];
+//                                                         [self.tableView  reloadData];
+//
+//                                                    });
                                                    
                                                 }
                                               
@@ -169,8 +177,40 @@
 
 -(void)setDataToDatasoureSendScopeArray:(NSMutableArray *)mArray{
     self.datasoureSendScopeArray = mArray ;
-    NSLog(@"mArray:&%@", mArray);
+//    NSLog(@"mArray:&%@", mArray);
    
+    NSMutableArray * mutabelAry = [NSMutableArray new];
+    
+    
+    for (NSDictionary * dict in mArray) {
+//        NSLog(@"遍历%@", [dict allKeys]);
+        NSMutableString * testStr = [NSMutableString stringWithFormat:@"%@",[dict allKeys]];
+        NSRange range = NSMakeRange(6, 2) ;
+        NSString *subStr3 = [testStr substringWithRange:range];
+        NSLog(@"%ld,.%@.", testStr.length, subStr3);
+        [mutabelAry addObject:subStr3];
+        
+        
+//        [testStr deleteCharactersInRange:NSMakeRange(0, 6)];
+//        [testStr deleteCharactersInRange:NSMakeRange(8, 9)];
+        
+        
+//         [testStr deleteCharactersInRange:NSMakeRange(0, 6)];
+//        NSLog(@"%ld,%@", testStr.length, subStr3);
+//        [mutabelAry addObject:];
+//        [mutabelAry addObject:[dict allKeys]];
+    }
+
+    
+    NSLog(@"%@", mutabelAry);
+    
+    self.datasoureKeysSendScopeArray = mutabelAry;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"%@",self.datasoureKeysSendScopeArray);
+        [self.tableView  reloadData];
+    });
+
     
 }
 
