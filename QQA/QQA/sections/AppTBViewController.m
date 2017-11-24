@@ -57,7 +57,7 @@
     self.viewControllers = [NSArray arrayWithObjects:companyVC, examinationApprovalVC, punchClockVC, meVC, nil];
    
 
-    self.selectedViewController = [self.viewControllers objectAtIndex:3];
+    self.selectedViewController = [self.viewControllers objectAtIndex:0];
     
 }
 
