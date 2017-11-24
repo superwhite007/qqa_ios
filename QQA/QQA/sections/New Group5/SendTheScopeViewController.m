@@ -14,6 +14,9 @@
 @property (nonatomic, strong) NSMutableArray * datasourSendToServerScopeArray;
 @property (nonatomic, strong) NSMutableArray * datasoureKeysSendScopeArray;
 
+//@property(nonatomic, strong) UIButton *selectAllBtn;//选择按钮
+
+
 @end
 
 @implementation SendTheScopeViewController
@@ -59,21 +62,58 @@
     _tableView.dataSource =self;
     _tableView.delegate = self;
     
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    self.tableView.editing = !self.tableView.editing;
+    
     [self.view addSubview:_tableView];
+    
+    self.tableView.allowsMultipleSelectionDuringEditing=YES;
     
    
 }
 
 -(void)chageColor{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+ 
     if ([self.datasourSendToServerScopeArray count] > 0) {
         [self sendSendScopeToServer];
+     
     } else{
         [self alert:@"请选择发送范围"];
     }
     
 }
 
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+    }
+    
+}
+
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [self.datasourSendToServerScopeArray addObject:self.datasoureKeysSendScopeArray[indexPath.row]];
+    
+}
+//取消选中时 将存放在self.deleteArr中的数据移除
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath  {
+    
+    [self.datasourSendToServerScopeArray removeObject:self.datasoureKeysSendScopeArray[indexPath.row]];
+    
+}
 
 
 
@@ -92,7 +132,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"datasoureKeysSendScopeArray[indexPath.row]:%@", self.datasoureKeysSendScopeArray[indexPath.row]);
+//    NSLog(@"datasoureKeysSendScopeArray[indexPath.row]:%@", self.datasoureKeysSendScopeArray[indexPath.row]);
   
     static NSString *identifier = @"CELL";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -108,7 +148,6 @@
     
     cell.textLabel.text = [self.datasoureSendScopeArray[indexPath.row] objectForKey:self.datasoureKeysSendScopeArray[indexPath.row]];
     NSLog(@"datasoureKeysSendScopeArray[indexPath.row]:%@", self.datasoureKeysSendScopeArray[indexPath.row]);
-//    cell.textLabel.text = self.datasoureKeysSendScopeArray[indexPath.row];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
     return cell;
@@ -197,19 +236,10 @@
         NSLog(@"%ld,.%@.", testStr.length, subStr3);
         [mutabelAry addObject:subStr3];
         
-        
-//        [testStr deleteCharactersInRange:NSMakeRange(0, 6)];
-//        [testStr deleteCharactersInRange:NSMakeRange(8, 9)];
-        
-        
-//         [testStr deleteCharactersInRange:NSMakeRange(0, 6)];
-//        NSLog(@"%ld,%@", testStr.length, subStr3);
-//        [mutabelAry addObject:];
-//        [mutabelAry addObject:[dict allKeys]];
     }
 
     
-    NSLog(@"%@", mutabelAry);
+    NSLog(@"mutabelAry123456%@", mutabelAry);
     
     self.datasoureKeysSendScopeArray = mutabelAry;
     
@@ -220,45 +250,6 @@
 
     
 }
-
--(void)setDataToDatasourSendToServerScopeArray:(NSMutableArray *)mToServerArray{
-    
-    
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    BOOL isbool = [self.datasourSendToServerScopeArray containsObject: self.datasoureKeysSendScopeArray[indexPath.row]];
-    if (isbool) {
-        [self.datasourSendToServerScopeArray removeObject:self.datasoureKeysSendScopeArray[indexPath.row]];
-        
-    }else{
-        [self.datasourSendToServerScopeArray addObject:self.datasoureKeysSendScopeArray[indexPath.row]];
-        
-    }
-    
-    
-}
-
-/*
-- (void)btnClick:(UIButton *)sender{
-    
-    NSString *str = sender.titleLabel.text;
-    BOOL isbool = [_mutableArray containsObject: str];
-    if (isbool) {
-        [self.mutableArray removeObject:sender.titleLabel.text];
-        sender.backgroundColor = [UIColor grayColor];
-        
-    }else{
-        [self.mutableArray addObject:sender.titleLabel.text];
-        sender.backgroundColor = [UIColor purpleColor];
-        
-    }
-    
-}
-*/
-
 
 
 -(void)sendSendScopeToServer{
@@ -306,7 +297,7 @@
 //
 //                                                    [self setDataToDatasoureSendScopeArray:array1];
                                                     
-                                                    [self alert:@"发送通知成功"];
+                                                    [self alert:[NSString stringWithFormat:@"发送通知成功.%@", self.datasourSendToServerScopeArray]];
 
                                                     
 
