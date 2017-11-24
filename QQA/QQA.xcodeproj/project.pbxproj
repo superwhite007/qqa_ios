@@ -27,6 +27,7 @@
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
+		AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */; };
 		AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB675C21FBBE58E00BF696B /* MessageViewController.m */; };
 		AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
@@ -136,6 +137,8 @@
 		AAB0F7371FA992E500A9F684 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		AAB0F7381FA992E500A9F684 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		AAB0F7391FA992E500A9F684 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		AAB3F8BB1FC7E010001327FA /* CompanyNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyNoticeViewController.h; sourceTree = "<group>"; };
+		AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyNoticeViewController.m; sourceTree = "<group>"; };
 		AAB675C11FBBE58E00BF696B /* MessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		AAB675C21FBBE58E00BF696B /* MessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		AABFE6681FB56F7E000ED5C7 /* PunchRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchRecordViewController.h; sourceTree = "<group>"; };
@@ -392,6 +395,8 @@
 			children = (
 				AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */,
 				AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */,
+				AAB3F8BB1FC7E010001327FA /* CompanyNoticeViewController.h */,
+				AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */,
 			);
 			path = Company;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
+				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AA25BCCF1FBE711C009B8CA0 /* IInitiatedTableViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,

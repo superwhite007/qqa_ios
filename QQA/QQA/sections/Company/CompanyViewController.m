@@ -8,7 +8,7 @@
 
 #import "CompanyViewController.h"
 #import "LanchViewController.h"
-
+#import "CompanyNoticeViewController.h"
 
 @interface CompanyViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -119,10 +119,14 @@ static NSString *identifier = @"CELL";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //    if (indexPath.row == 0) {
-    LanchViewController * lanchVC = [LanchViewController new];
-    [self.navigationController pushViewController:lanchVC animated:YES];
-    //    }
+        if (indexPath.row == 0) {
+          CompanyNoticeViewController * companyNoticeVC = [CompanyNoticeViewController new];
+          [self.navigationController pushViewController:companyNoticeVC animated:YES];
+    
+        } else{
+            LanchViewController * lanchVC = [LanchViewController new];
+            [self.navigationController pushViewController:lanchVC animated:YES];
+        }
     
     
 }
