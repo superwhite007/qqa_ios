@@ -166,12 +166,15 @@ static NSString *identifier = @"Cell";
     
     if (indexPath.row % 2 == 0) {
         cell.textLabel.textAlignment = NSTextAlignmentCenter ;
+        _tableView.separatorColor = [UIColor whiteColor];
+    } else if(indexPath.row % 2 == 1){
+        _tableView.separatorColor = [UIColor blackColor];
     }
     
     cell.textLabel.text = self.datasource[indexPath.row];
     
-    cell.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
-                            
+//    cell.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
+    
     
     
     return cell;
@@ -179,7 +182,7 @@ static NSString *identifier = @"Cell";
 
 
 
--(CGFloat)gitHightForCell:(int)indexPathRow{
+-(long)gitHightForCell:(int)indexPathRow{
     
     UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(30 , 340, iphoneWidth - 60 , 120)];
     mattersNeedAttentionExplianLable.text = self.datasource[indexPathRow];
