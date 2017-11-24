@@ -95,7 +95,8 @@ static NSString *identifier = @"Cell";
                                                     for (NSDictionary * dict in array1) {
                                                         [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"created_at"]]];
                                                         [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"content"]]];
-                                                        NSLog(@"_datasource_datasource:%@",_datasource );
+                                                    
+                                                        
                                                     }
                                                     
                                                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -161,8 +162,6 @@ static NSString *identifier = @"Cell";
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
         
     }
-    
-    NSLog(@"1234567890%@", self.datasource[indexPath.row]);
     
     if (indexPath.row % 2 == 0) {
         cell.textLabel.textAlignment = NSTextAlignmentCenter ;
