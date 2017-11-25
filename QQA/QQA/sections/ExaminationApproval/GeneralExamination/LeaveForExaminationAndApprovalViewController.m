@@ -10,6 +10,9 @@
 
 #import "LMJDropdownMenu.h"
 
+#import "WSDatePickerView.h"
+#define RGB(x,y,z) [UIColor colorWithRed:x/255.0 green:y/255.0 blue:z/255.0 alpha:1.0]
+
 
 @interface LeaveForExaminationAndApprovalViewController ()<LMJDropdownMenuDelegate>
 
@@ -132,7 +135,21 @@
         } else {
             UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
             view.backgroundColor = [UIColor redColor];
-            [self.view addSubview:view];
+//            [self.view addSubview:view];
+            
+            
+            UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            selectBtn.frame = CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40);
+            selectBtn.layer.cornerRadius = 5;
+            selectBtn.backgroundColor = [UIColor lightGrayColor];
+            [selectBtn setTitle:@"选择时间" forState:UIControlStateNormal];
+            [self.view addSubview:selectBtn];
+            selectBtn.tag = i;
+            [selectBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            
+            
         }
        
     }
@@ -159,6 +176,29 @@
     
 }
 
+
+- (void)selectAction:(UIButton *)btn {
+    
+    //_________________________年-月-日-时-分____________________________________________
+    
+    WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDayHourMinute CompleteBlock:^(NSDate *selectDate) {
+        if (btn.tag == 1) {
+            NSString *date = [selectDate stringWithFormat:@"开始时间：yyyy-MM-dd HH:mm"];
+            [btn setTitle:date forState:UIControlStateNormal];
+        } else if (btn.tag == 2) {
+            NSString *date = [selectDate stringWithFormat:@"结束时间：yyyy-MM-dd HH:mm"];
+            [btn setTitle:date forState:UIControlStateNormal];
+        }
+//         NSLog(@"选择的日期：%@",date);
+//        [btn setTitle:date forState:UIControlStateNormal];
+        
+    }];
+    datepicker.dateLabelColor = [UIColor orangeColor];//年-月-日-时-分 颜色
+    datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
+    datepicker.doneButtonColor = [UIColor orangeColor];//确定按钮的颜色
+    [datepicker show];
+    
+}
 
 -(void)chageColor{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];

@@ -29,6 +29,10 @@
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
 		AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */; };
 		AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */; };
+		AAB4D4941FC959F600116355 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D4931FC959F600116355 /* UIView+Extension.m */; };
+		AAB4D4971FC95A9300116355 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D4961FC95A9300116355 /* NSDate+Extension.m */; };
+		AAB4D49B1FC95D1700116355 /* WSDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D4981FC95D1600116355 /* WSDatePickerView.m */; };
+		AAB4D49C1FC95D1700116355 /* WSDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAB4D4991FC95D1600116355 /* WSDatePickerView.xib */; };
 		AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB675C21FBBE58E00BF696B /* MessageViewController.m */; };
 		AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8AD71FC814C1005058BD /* ACPApproval.m */; };
 		AABD8ADB1FC8150E005058BD /* ACPApprovalListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8ADA1FC8150E005058BD /* ACPApprovalListView.m */; };
@@ -146,6 +150,13 @@
 		AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyNoticeViewController.m; sourceTree = "<group>"; };
 		AAB4D48D1FC9249F00116355 /* LMJDropdownMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMJDropdownMenu.h; sourceTree = "<group>"; };
 		AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LMJDropdownMenu.m; sourceTree = "<group>"; };
+		AAB4D4921FC959F600116355 /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		AAB4D4931FC959F600116355 /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		AAB4D4951FC95A9300116355 /* NSDate+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		AAB4D4961FC95A9300116355 /* NSDate+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		AAB4D4981FC95D1600116355 /* WSDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDatePickerView.m; sourceTree = "<group>"; };
+		AAB4D4991FC95D1600116355 /* WSDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WSDatePickerView.xib; sourceTree = "<group>"; };
+		AAB4D49A1FC95D1600116355 /* WSDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDatePickerView.h; sourceTree = "<group>"; };
 		AAB675C11FBBE58E00BF696B /* MessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		AAB675C21FBBE58E00BF696B /* MessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		AABD8AD61FC814C1005058BD /* ACPApproval.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACPApproval.h; sourceTree = "<group>"; };
@@ -220,6 +231,7 @@
 		AA13948F1FC263F50070B1E2 /* GeneralExamination */ = {
 			isa = PBXGroup;
 			children = (
+				AAB4D4901FC9581600116355 /* WSDaePickerView */,
 				AAB4D48D1FC9249F00116355 /* LMJDropdownMenu.h */,
 				AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */,
 				AA13948C1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.h */,
@@ -435,6 +447,20 @@
 			path = "New Group5";
 			sourceTree = "<group>";
 		};
+		AAB4D4901FC9581600116355 /* WSDaePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				AAB4D49A1FC95D1600116355 /* WSDatePickerView.h */,
+				AAB4D4981FC95D1600116355 /* WSDatePickerView.m */,
+				AAB4D4991FC95D1600116355 /* WSDatePickerView.xib */,
+				AAB4D4921FC959F600116355 /* UIView+Extension.h */,
+				AAB4D4931FC959F600116355 /* UIView+Extension.m */,
+				AAB4D4951FC95A9300116355 /* NSDate+Extension.h */,
+				AAB4D4961FC95A9300116355 /* NSDate+Extension.m */,
+			);
+			path = WSDaePickerView;
+			sourceTree = "<group>";
+		};
 		AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */ = {
 			isa = PBXGroup;
 			children = (
@@ -589,6 +615,7 @@
 			files = (
 				AA1CEC861FA9602E00050EFC /* Assets.xcassets in Resources */,
 				AAEF4CC11FB93AD200474C07 /* Me.png in Resources */,
+				AAB4D49C1FC95D1700116355 /* WSDatePickerView.xib in Resources */,
 				AA1CEC891FA9602E00050EFC /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +692,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAB4D4941FC959F600116355 /* UIView+Extension.m in Sources */,
 				AA25BCDC1FBEBC5F009B8CA0 /* IInitiatedtheExaminationViewController.m in Sources */,
 				AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */,
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
@@ -674,9 +702,11 @@
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
+				AAB4D4971FC95A9300116355 /* NSDate+Extension.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
 				AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */,
+				AAB4D49B1FC95D1700116355 /* WSDatePickerView.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AA25BCCF1FBE711C009B8CA0 /* IInitiatedTableViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
