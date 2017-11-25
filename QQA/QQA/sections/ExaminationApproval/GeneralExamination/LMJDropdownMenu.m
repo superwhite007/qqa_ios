@@ -80,7 +80,7 @@
     _mainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_mainBtn setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     [_mainBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_mainBtn setTitle:@"请选择" forState:UIControlStateNormal];
+    [_mainBtn setTitle:@"请假类型" forState:UIControlStateNormal];
     [_mainBtn addTarget:self action:@selector(clickMainBtn:) forControlEvents:UIControlEventTouchUpInside];
     _mainBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _mainBtn.titleLabel.font    = [UIFont systemFontOfSize:14.f];

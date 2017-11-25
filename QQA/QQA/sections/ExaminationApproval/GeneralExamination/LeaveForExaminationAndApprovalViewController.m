@@ -138,9 +138,9 @@
     }
     
     UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 245, 100, 30)];
-    reasonTitleLabel.text = @"reason";
+    reasonTitleLabel.text = @"请假事由";
     reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
-    reasonTitleLabel.backgroundColor = [UIColor redColor];
+//    reasonTitleLabel.backgroundColor = [UIColor redColor];
     [self.view addSubview:reasonTitleLabel];
     
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 280, iphoneWidth - 40, iphoneWidth * 1 / 3)];
@@ -198,17 +198,26 @@
         UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 5 , 100, 30)];
         reasonTitleLabel.text = titleArray[i];
         reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
-        reasonTitleLabel.backgroundColor = [UIColor redColor];
+//        reasonTitleLabel.backgroundColor = [UIColor redColor];
         [self.view addSubview:reasonTitleLabel];
         
         for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
             
             UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
             
+            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
+            titleLabe.backgroundColor = [UIColor blueColor];
+            titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
+            titleLabe.text = @"刘";
+            titleLabe.layer.masksToBounds = YES;
+            titleLabe.textAlignment = NSTextAlignmentCenter;
+            titleLabe.font = [UIFont systemFontOfSize:30];
+            [self.view addSubview:titleLabe];
+            
             
             imgView.backgroundColor = [UIColor redColor];
             imgView.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
-            [self.view addSubview:imgView];
+//            [self.view addSubview:imgView];
             
             UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  +  (iphoneWidth - 70 ) / 5 + 5, (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
             nameLabel.text = titleArray[i];
