@@ -78,14 +78,19 @@
                                                 NSLog(@"CCAndApprovalGroup: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 
                                               
-//                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
-//                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6002 ) {
+                                                  
+                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
 //                                                    [array1 removeObjectAtIndex:0];
+                                                    
 //
 //                                                    for (NSDictionary * dict in array1) {
 //                                                        ACPApproval * aCPApproval = [ACPApproval new];
 //                                                        [ACPApproval setValuesForKeysWithDictionary:dict];
 //                                                        [self.datasouceArray addObject:aCPApproval];
+                                                    
+                                                    
+                                                }
 //
 //                                                        //                                                    dispatch_async(dispatch_get_main_queue(), ^{
 ////                                                        [self.aCPApprovalListView.tableView  reloadData];
