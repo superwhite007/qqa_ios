@@ -28,6 +28,7 @@
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
 		AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */; };
+		AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */; };
 		AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB675C21FBBE58E00BF696B /* MessageViewController.m */; };
 		AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8AD71FC814C1005058BD /* ACPApproval.m */; };
 		AABD8ADB1FC8150E005058BD /* ACPApprovalListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8ADA1FC8150E005058BD /* ACPApprovalListView.m */; };
@@ -143,6 +144,8 @@
 		AAB0F7391FA992E500A9F684 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		AAB3F8BB1FC7E010001327FA /* CompanyNoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyNoticeViewController.h; sourceTree = "<group>"; };
 		AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyNoticeViewController.m; sourceTree = "<group>"; };
+		AAB4D48D1FC9249F00116355 /* LMJDropdownMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMJDropdownMenu.h; sourceTree = "<group>"; };
+		AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LMJDropdownMenu.m; sourceTree = "<group>"; };
 		AAB675C11FBBE58E00BF696B /* MessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		AAB675C21FBBE58E00BF696B /* MessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		AABD8AD61FC814C1005058BD /* ACPApproval.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACPApproval.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 		AA13948F1FC263F50070B1E2 /* GeneralExamination */ = {
 			isa = PBXGroup;
 			children = (
+				AAB4D48D1FC9249F00116355 /* LMJDropdownMenu.h */,
+				AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */,
 				AA13948C1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.h */,
 				AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */,
 				AA1394901FC277D20070B1E2 /* RequestForInstructionViewController.h */,
@@ -666,6 +671,7 @@
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
 				AA25BCC91FBE70C6009B8CA0 /* IInitiated.m in Sources */,
+				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,

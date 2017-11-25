@@ -8,7 +8,12 @@
 
 #import "LeaveForExaminationAndApprovalViewController.h"
 
-@interface LeaveForExaminationAndApprovalViewController ()
+#import "LMJDropdownMenu.h"
+
+
+@interface LeaveForExaminationAndApprovalViewController ()<LMJDropdownMenuDelegate>
+
+@property (nonatomic, strong) NSMutableArray * typeMArray;
 
 @end
 
@@ -25,10 +30,24 @@
     introducePersonLabel.backgroundColor = [UIColor redColor];
     [self.view addSubview:introducePersonLabel];
     
+    _typeMArray = [NSMutableArray arrayWithObjects:@"事假", @"病假", @"懒癌晚期", nil];
+    
+    
+    
     for (int i = 0; i < 3 ; i++) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
-        view.backgroundColor = [UIColor redColor];
-        [self.view addSubview:view];
+        
+        if (i == 0) {
+            LMJDropdownMenu * dropdownMenu = [[LMJDropdownMenu alloc] init];
+            [dropdownMenu setFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
+            [dropdownMenu setMenuTitles:_typeMArray rowHeight:30];
+            dropdownMenu.delegate = self;
+            [self.view addSubview:dropdownMenu];
+        } else {
+            UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
+            view.backgroundColor = [UIColor redColor];
+            [self.view addSubview:view];
+        }
+       
     }
     
     UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 245, 100, 30)];
@@ -59,6 +78,25 @@
     
 }
 
+#pragma mark - LMJDropdownMenu Delegate
+
+- (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
+    NSLog(@"你选择了：%ld",number);
+}
+
+- (void)dropdownMenuWillShow:(LMJDropdownMenu *)menu{
+    NSLog(@"--将要显示--");
+}
+- (void)dropdownMenuDidShow:(LMJDropdownMenu *)menu{
+    NSLog(@"--已经显示--");
+}
+
+- (void)dropdownMenuWillHidden:(LMJDropdownMenu *)menu{
+    NSLog(@"--将要隐藏--");
+}
+- (void)dropdownMenuDidHidden:(LMJDropdownMenu *)menu{
+    NSLog(@"--已经隐藏--");
+}
 
 -(void)ApproverAndCC{
     
