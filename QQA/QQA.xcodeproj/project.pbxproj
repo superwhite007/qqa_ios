@@ -29,6 +29,10 @@
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
 		AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */; };
 		AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB675C21FBBE58E00BF696B /* MessageViewController.m */; };
+		AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8AD71FC814C1005058BD /* ACPApproval.m */; };
+		AABD8ADB1FC8150E005058BD /* ACPApprovalListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8ADA1FC8150E005058BD /* ACPApprovalListView.m */; };
+		AABD8ADE1FC81524005058BD /* ACPApprovalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8ADD1FC81524005058BD /* ACPApprovalTableViewCell.m */; };
+		AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8AE01FC81598005058BD /* ACPApprovelViewController.m */; };
 		AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
 		AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */; };
@@ -141,6 +145,14 @@
 		AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyNoticeViewController.m; sourceTree = "<group>"; };
 		AAB675C11FBBE58E00BF696B /* MessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		AAB675C21FBBE58E00BF696B /* MessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		AABD8AD61FC814C1005058BD /* ACPApproval.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACPApproval.h; sourceTree = "<group>"; };
+		AABD8AD71FC814C1005058BD /* ACPApproval.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACPApproval.m; sourceTree = "<group>"; };
+		AABD8AD91FC8150E005058BD /* ACPApprovalListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACPApprovalListView.h; sourceTree = "<group>"; };
+		AABD8ADA1FC8150E005058BD /* ACPApprovalListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACPApprovalListView.m; sourceTree = "<group>"; };
+		AABD8ADC1FC81524005058BD /* ACPApprovalTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACPApprovalTableViewCell.h; sourceTree = "<group>"; };
+		AABD8ADD1FC81524005058BD /* ACPApprovalTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACPApprovalTableViewCell.m; sourceTree = "<group>"; };
+		AABD8ADF1FC81598005058BD /* ACPApprovelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACPApprovelViewController.h; sourceTree = "<group>"; };
+		AABD8AE01FC81598005058BD /* ACPApprovelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACPApprovelViewController.m; sourceTree = "<group>"; };
 		AABFE6681FB56F7E000ED5C7 /* PunchRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchRecordViewController.h; sourceTree = "<group>"; };
 		AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchRecordViewController.m; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
@@ -209,6 +221,7 @@
 				AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */,
 				AA1394901FC277D20070B1E2 /* RequestForInstructionViewController.h */,
 				AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */,
+				AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */,
 			);
 			path = GeneralExamination;
 			sourceTree = "<group>";
@@ -415,6 +428,21 @@
 			);
 			name = Me;
 			path = "New Group5";
+			sourceTree = "<group>";
+		};
+		AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */ = {
+			isa = PBXGroup;
+			children = (
+				AABD8AD61FC814C1005058BD /* ACPApproval.h */,
+				AABD8AD71FC814C1005058BD /* ACPApproval.m */,
+				AABD8ADC1FC81524005058BD /* ACPApprovalTableViewCell.h */,
+				AABD8ADD1FC81524005058BD /* ACPApprovalTableViewCell.m */,
+				AABD8AD91FC8150E005058BD /* ACPApprovalListView.h */,
+				AABD8ADA1FC8150E005058BD /* ACPApprovalListView.m */,
+				AABD8ADF1FC81598005058BD /* ACPApprovelViewController.h */,
+				AABD8AE01FC81598005058BD /* ACPApprovelViewController.m */,
+			);
+			path = ApprovalCCPendingApproval;
 			sourceTree = "<group>";
 		};
 		AABFE6671FB56F7E000ED5C7 /* PunchRecord */ = {
@@ -635,18 +663,21 @@
 				AA25BCDC1FBEBC5F009B8CA0 /* IInitiatedtheExaminationViewController.m in Sources */,
 				AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */,
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
+				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
 				AA25BCC91FBE70C6009B8CA0 /* IInitiated.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
+				AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AA25BCCF1FBE711C009B8CA0 /* IInitiatedTableViewController.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */,
 				AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */,
+				AABD8ADB1FC8150E005058BD /* ACPApprovalListView.m in Sources */,
 				AA25BCCC1FBE70EF009B8CA0 /* IInitiatedTableViewCell.m in Sources */,
 				AAEF4CC41FB9615F00474C07 /* MeInformationViewController.m in Sources */,
 				AA25BCD21FBE7195009B8CA0 /* IInitiatedListVIew.m in Sources */,
@@ -656,6 +687,7 @@
 				AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,
 				AA1CEC841FA9602E00050EFC /* AppDelegate.m in Sources */,
+				AABD8ADE1FC81524005058BD /* ACPApprovalTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
