@@ -14,10 +14,97 @@
 @interface LeaveForExaminationAndApprovalViewController ()<LMJDropdownMenuDelegate>
 
 @property (nonatomic, strong) NSMutableArray * typeMArray;
+@property (nonatomic, strong) NSMutableArray * cCMarray;
+@property (nonatomic, strong) NSMutableArray * approvalMarray;
+
 
 @end
 
 @implementation LeaveForExaminationAndApprovalViewController
+
+
+-(NSMutableArray *)cCMarray{
+    if (!_cCMarray) {
+        self.cCMarray = [NSMutableArray array];
+    }
+    return _cCMarray;
+}
+-(NSMutableArray *)approvalMarray{
+    if (!_approvalMarray) {
+        self.approvalMarray = [NSMutableArray array];
+    }
+    return _approvalMarray;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self gitInformationCCAndApprovalGroup];
+    
+}
+
+-(void)gitInformationCCAndApprovalGroup{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/leave/scope"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 由于要先对request先行处理,我们通过request初始化task
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            if (data != nil) {
+                                                
+                                                NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"companyNOtice: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
+                                                
+                                              
+//                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
+//                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+//                                                    [array1 removeObjectAtIndex:0];
+//
+//                                                    for (NSDictionary * dict in array1) {
+//                                                        ACPApproval * aCPApproval = [ACPApproval new];
+//                                                        [ACPApproval setValuesForKeysWithDictionary:dict];
+//                                                        [self.datasouceArray addObject:aCPApproval];
+//
+//                                                        //                                                    dispatch_async(dispatch_get_main_queue(), ^{
+////                                                        [self.aCPApprovalListView.tableView  reloadData];
+//                                                        //                                                    });
+//                                                        //
+//                                                    }
+//                                                }
+//
+                                                
+                                                
+                                                
+                                            } else{
+                                                //NSLog(@"获取数据失败，问");
+                                            }
+                                        }];
+    [task resume];
+    
+    
+    
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
