@@ -62,7 +62,7 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
-    
+    NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -75,7 +75,7 @@
                                             if (data != nil) {
                                                 
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"companyNOtice: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
+                                                NSLog(@"CCAndApprovalGroup: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 
                                               
 //                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
