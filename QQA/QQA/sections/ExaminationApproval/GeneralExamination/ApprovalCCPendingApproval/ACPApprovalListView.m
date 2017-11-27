@@ -20,7 +20,7 @@
 
 -(void)addOneTableView{
     self.tableView = [UITableView new];
-    [self addOneTableView];
+    [self addSubview:_tableView];
 }
 
 
