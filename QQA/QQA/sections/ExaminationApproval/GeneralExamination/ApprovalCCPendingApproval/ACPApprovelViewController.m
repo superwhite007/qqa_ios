@@ -33,7 +33,7 @@ static NSString *identifier = @"Cell";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-//    [self loadNewData];
+    [self loadNewData];
     //获取数据
 }
 -(void)loadNewData
@@ -68,7 +68,7 @@ static NSString *identifier = @"Cell";
     [mdict setObject:@"G" forKey:@"status"];
     [mdict setObject:@"1" forKey:@"pageNum"];
     
-
+    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -81,23 +81,23 @@ static NSString *identifier = @"Cell";
                                             if (data != nil) {
                                                 
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"companyNOtice: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
+                                                NSLog(@"1234567: %@,\n ", dictArray);
                                                 
-                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
-                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-                                                    [array1 removeObjectAtIndex:0];
-                                                    
-                                                    for (NSDictionary * dict in array1) {
-                                                        ACPApproval * aCPApproval = [ACPApproval new];
-                                                        [ACPApproval setValuesForKeysWithDictionary:dict];
-                                                        [self.datasouceArray addObject:aCPApproval];
-                               
-//                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                        [self.aCPApprovalListView.tableView  reloadData];
-//                                                    });
+//                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
+//                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+//                                                    [array1 removeObjectAtIndex:0];
 //
-                                                    }
-                                                }
+//                                                    for (NSDictionary * dict in array1) {
+//                                                        ACPApproval * aCPApproval = [ACPApproval new];
+//                                                        [ACPApproval setValuesForKeysWithDictionary:dict];
+//                                                        [self.datasouceArray addObject:aCPApproval];
+//
+////                                                    dispatch_async(dispatch_get_main_queue(), ^{
+//                                                        [self.aCPApprovalListView.tableView  reloadData];
+////                                                    });
+////
+//                                                    }
+//                                                }
                                                 
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
@@ -160,7 +160,7 @@ static NSString *identifier = @"Cell";
 //        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
 //    }];
     
-//    cell.textLabel.text = 
+//    cell.textLabel.text =
 //    Food * food1 = self.dataSourceArray[indexPath.row];
 //    cell.food = food1;
     return cell;
