@@ -21,6 +21,12 @@
 @property (nonatomic, strong) NSMutableArray * cCMarray;
 @property (nonatomic, strong) NSMutableArray * approvalMarray;
 
+@property (nonatomic, strong) NSString * typeOfStr;
+@property (nonatomic, strong) NSString * startTimeStr;
+@property (nonatomic, strong) NSString * endTimeStr;
+//messageTextView
+
+
 
 @end
 
@@ -115,10 +121,14 @@
     
     self.cCMarray = [NSMutableArray array];
     self.approvalMarray = [NSMutableArray array];
-    
+    self.typeOfStr = [NSString new];
+    self.startTimeStr = [NSString new];
+    self.endTimeStr = [NSString new];
     
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 30)];
     introducePersonLabel.backgroundColor = [UIColor redColor];
+    NSMutableString * introduceStr = [NSMutableString stringWithFormat:@"11111"];
+    
     [self.view addSubview:introducePersonLabel];
     
     _typeMArray = [NSMutableArray arrayWithObjects:@"事假", @"病假", @"懒癌晚期", nil];
@@ -185,9 +195,15 @@
     WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDayHourMinute CompleteBlock:^(NSDate *selectDate) {
         if (btn.tag == 1) {
             NSString *date = [selectDate stringWithFormat:@"开始时间：yyyy-MM-dd HH:mm"];
+            NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            self.startTimeStr = data1;
+            NSLog(@"start：%@",self.startTimeStr);
             [btn setTitle:date forState:UIControlStateNormal];
         } else if (btn.tag == 2) {
             NSString *date = [selectDate stringWithFormat:@"结束时间：yyyy-MM-dd HH:mm"];
+            NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            self.endTimeStr = data1;
+            NSLog(@"self.endTimeStr：%@",self.endTimeStr);
             [btn setTitle:date forState:UIControlStateNormal];
         }
 //         NSLog(@"选择的日期：%@",date);
@@ -204,12 +220,27 @@
 -(void)chageColor{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     
+    [self sendNoticeToServer];
+    
 }
 
 #pragma mark - LMJDropdownMenu Delegate
 
 - (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
     NSLog(@"你选择了：%ld",number);
+    
+    
+    if (number == 0) {
+        self.typeOfStr = @"事假";
+        
+    } else if (number == 1){
+        self.typeOfStr = @"事假";
+        
+    } else if (number == 2){
+        self.typeOfStr = @"事假";
+        
+    }
+    
 }
 
 - (void)dropdownMenuWillShow:(LMJDropdownMenu *)menu{
@@ -326,21 +357,31 @@
 
 -(void)sendNoticeToServer{
     
-//    if ([_mutableArray count] == 0) {
-//        //NSLog(@"请选择发送范围");
-//        [self alert:@"请选择发送范围"];
-//    } else
     if (_messageTextView.text.length == 0){
-        //NSLog(@"请输入通知内容");
-        [self alert:@"请输入通知内容"];
-        [self sendToServerTOBack];
+        [self alert:@"请输入请假事由"];
+    } else if (_typeOfStr.length == 0){
+        [self alert:@"请选择请假类型"];
+    } else if (_startTimeStr.length == 0){
+        [self alert:@"请选择开始时间"];
+    } else if (_endTimeStr.length == 0){
+        [self alert:@"请选择结束时间"];
+    } else {
+        
+        [self sendMessagesToServer];
     }
-//    else if ([_mutableArray count] != 0 && _messageTextView.text.length != 0){
-//        //NSLog(@"准备发送服务器");
-//        [self sendToServerTOBack];
-//    }
+ 
+}
+
+-(void)sendMessagesToServer{
+    
+    [self sendToServerTOBack];
+    
     
 }
+
+
+
+
 
 -(void)sendToServerTOBack{
     //NSLog(@"准备发送服务器：success");
