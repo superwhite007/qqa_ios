@@ -181,14 +181,14 @@
 
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
     
-    //NSLog(@"dict: %@", dict);
+    NSLog(@"me:dict: %@", dict);
     
     UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
     view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     [self.view addSubview: view];
     
-    NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：", @"性别：", @"NO.", @"电话：", @"email:", @"QQ:", @"WeChat:"];
-    NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , [dict objectForKey:@"username"], [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"], [dict objectForKey:@"number"], [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"number"], [dict objectForKey:@"number"]];
+    NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：",  @"NO.", @"电话：", @"email:", @"QQ:", @"WeChat:"];
+    NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , [dict objectForKey:@"username"], [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"wei_xin"]];
     
     
     UIImageView * imgVIew = [[UIImageView alloc] initWithFrame:CGRectMake(15, iphoneWidth  / 9 , iphoneWidth * 4 / 9 , iphoneWidth * 4 / 9)];
@@ -204,10 +204,10 @@
     [view addSubview:imgVIew];
    
     
-    for (int i = 1; i < 10; i++) {
+    for (int i = 1; i < 9; i++) {
         UILabel * label = [[UILabel alloc] init];
         if ( i > 0 && i < 10) {
-            label.frame = CGRectMake(iphoneWidth * 4 / 9 + 25, iphoneWidth * 2 / 3 / 10 / 2 + ( iphoneWidth * 2 / 3 / 10  * (i - 1)), iphoneWidth  / 2 -20,  iphoneWidth * 2 / 3 / 10);
+            label.frame = CGRectMake(iphoneWidth * 4 / 9 + 25, iphoneWidth * 2 / 3 / 10 / 2 + ( iphoneWidth * 2 / 3 / 10  * (i - 1)) + 10, iphoneWidth  / 2 - 20,  iphoneWidth * 2 / 3 / 10);
             
         }
 //        label.backgroundColor = [UIColor blueColor];
