@@ -91,36 +91,17 @@
                                                         
                                                     });
                                                     
-//                                                    NSLog(@"self.approvalMarray,self.cCMarray:%@,%@", self.approvalMarray,self.cCMarray);
-                                                    
-//
-//                                                    for (NSDictionary * dict in array1) {
-//                                                        ACPApproval * aCPApproval = [ACPApproval new];
-//                                                        [ACPApproval setValuesForKeysWithDictionary:dict];
-//                                                        [self.datasouceArray addObject:aCPApproval];
-                                                    
+                    
                                                     
                                                 }
 //
-//                                                        //                                                    dispatch_async(dispatch_get_main_queue(), ^{
-////                                                        [self.aCPApprovalListView.tableView  reloadData];
-//                                                        //                                                    });
-//                                                        //
-//                                                    }
-//                                                }
-//
-                                                
-                                                
                                                 
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];
-    
-    
-    
-    
+
 }
 
 
