@@ -131,7 +131,7 @@
     
     [self.view addSubview:introducePersonLabel];
     
-    _typeMArray = [NSMutableArray arrayWithObjects:@"事假", @"病假", @"懒癌晚期", nil];
+    _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"其他", nil];
     
     
     
@@ -231,13 +231,31 @@
     
     
     if (number == 0) {
-        self.typeOfStr = @"事假";
+        self.typeOfStr = @"100";
         
     } else if (number == 1){
-        self.typeOfStr = @"事假";
+        self.typeOfStr = @"101";
         
     } else if (number == 2){
-        self.typeOfStr = @"事假";
+        self.typeOfStr = @"102";
+        
+    } else if (number == 3){
+        self.typeOfStr = @"103";
+        
+    } else if (number == 4){
+        self.typeOfStr = @"104";
+        
+    } else if (number == 5){
+        self.typeOfStr = @"105";
+        
+    } else if (number == 6){
+        self.typeOfStr = @"106";
+        
+    } else if (number == 7){
+        self.typeOfStr = @"107";
+        
+    } else if (number == 8){
+        self.typeOfStr = @"108";
         
     }
     
@@ -349,7 +367,7 @@
     //        //NSLog(@"准备发送服务器");
     //        [self sendNoticeToServer];
     //    }
-    
+     [textView resignFirstResponder];
     
 }
 
@@ -374,8 +392,63 @@
 
 -(void)sendMessagesToServer{
     
-    [self sendToServerTOBack];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/leave/store"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
     
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:_typeOfStr forKey:@"type"];
+    [mdict setObject:_startTimeStr forKey:@"starttime"];
+    [mdict setObject:_endTimeStr forKey:@"endtime"];
+    [mdict setObject:_messageTextView.text forKey:@"reason"];
+    
+    
+    
+    
+    NSLog(@"mdict%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 由于要先对request先行处理,我们通过request初始化task
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            if (data != nil) {
+                                                
+                                                NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"3dict:%@", dict);
+//                                                NSLog(@"222222CCAndApprovalGroup: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
+                                                
+                                                
+                                                if ( [[dict objectForKey:@"message"] intValue] == 6003 ) {
+//
+//
+//
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+
+                                                        [self sendToServerTOBack];
+
+                                                    });
+                                                }
+                                                
+                                            } else{
+                                                //NSLog(@"获取数据失败，问");
+                                            }
+                                        }];
+    [task resume];
+
     
 }
 

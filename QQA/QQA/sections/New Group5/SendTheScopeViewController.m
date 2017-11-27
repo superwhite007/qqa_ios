@@ -291,7 +291,7 @@
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"api/message/store: %@", dict);
                                                 
-                                                if ( [[dict objectForKey:@"message"] intValue] == 5004 ) {
+                                                if ( [[dict objectForKey:@"message"] intValue] == 6003 ) {
 //                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
 //                                                    [array1 removeObjectAtIndex:0];
 //
