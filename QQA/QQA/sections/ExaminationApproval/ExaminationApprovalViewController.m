@@ -10,6 +10,8 @@
 #import "LanchViewController.h"
 #import "IInitiatedtheExaminationTableViewController.h"
 
+#import "ACPApprovelViewController.h"
+
 #import "IInitiatedtheExaminationViewController.h"
 
 @interface ExaminationApprovalViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -134,17 +136,15 @@ static NSString *identifier = @"CELL";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-////    if (indexPath.row == 0) {
-//        LanchViewController * lanchVC = [LanchViewController new];
-//        [self.navigationController pushViewController:lanchVC animated:YES];
-////    }
-    
-    
     if (indexPath.row == 0) {
         IInitiatedtheExaminationViewController * examinationVC = [[IInitiatedtheExaminationViewController alloc] init];
         [self.navigationController pushViewController:examinationVC animated:YES];
 
-    } else{
+    } else if (indexPath.row == 3) {
+        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+        [self.navigationController pushViewController:examinationVC animated:YES];
+        
+    } else {
         LanchViewController * lanchVC = [LanchViewController new];
         [self.navigationController pushViewController:lanchVC animated:YES];
     }
