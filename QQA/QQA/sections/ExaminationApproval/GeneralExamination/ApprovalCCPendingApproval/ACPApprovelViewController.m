@@ -46,7 +46,7 @@ static NSString *identifier = @"Cell";
 #pragma mark - loadDataAndShow
 -(void)loadDataAndShowWithPageNum:(int)page
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/message/index"]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/leave/index"]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -62,6 +62,12 @@ static NSString *identifier = @"Cell";
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
     
+    
+    [mdict setObject:@"1" forKey:@"type"];
+    [mdict setObject:@"G" forKey:@"status"];
+    [mdict setObject:@"1" forKey:@"pageNum"];
+    
+
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -76,16 +82,6 @@ static NSString *identifier = @"Cell";
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"companyNOtice: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 
-                                                /*for (NSDictionary * foodDic in dishsArray) {
-                                                    Food * foodModel = [Food new]  ;
-                                                    [foodModel setValuesForKeysWithDictionary:foodDic];
-                                                    [self.dataSourceArray addObject:foodModel];
-                                                    [foodModel release];
-                                                    
-                                                }
-                                                [self.foodListView.tableView reloadData]; */
-                                                
-                        
                                                 if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                     [array1 removeObjectAtIndex:0];
