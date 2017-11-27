@@ -27,6 +27,7 @@ static NSString *identifier = @"Cell";
 
 -(void)loadView{
     self.aCPApprovalListView = [[ACPApprovalListView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.aCPApprovalListView.tableView.frame = [UIScreen mainScreen].bounds;
     self.view = _aCPApprovalListView;
     
 }
@@ -105,48 +106,6 @@ static NSString *identifier = @"Cell";
     [task resume];
     
 }
-    
-    
-    /*
-     
-    NSString * str = [_tname stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString * urlStr = [NSString stringWithFormat:@"http://api.xiangha.com/so5/getSoData/?type=caipu&s=%@&page=%d",str,page];
-    NSURL * url = [NSURL URLWithString:urlStr];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (data != nil) {
-            if (self.isDownRefresh) {
-                [self.dataSourceArray removeAllObjects];
-            }
-            NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"dictdictdictdict%@", dict);
-            NSDictionary * dataDic = dict[@"data"];
-            NSArray * dishsArray = dataDic[@"dishs"];
-            for (NSDictionary * foodDic in dishsArray) {
-                Food * foodModel = [Food new]  ;
-                [foodModel setValuesForKeysWithDictionary:foodDic];
-                [self.dataSourceArray addObject:foodModel];
-                [foodModel release];
-                
-            }
-            [self.foodListView.tableView reloadData];
-        }
-        else
-        {
-            
-            [AFAppDotNetAPIClient sharedClient];
-            
-        }
-        
-    }];
-    
-    */
-    
-
-
-
-
-
 
 
 - (void)viewDidLoad {
@@ -201,7 +160,7 @@ static NSString *identifier = @"Cell";
 //        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
 //    }];
     
-    
+//    cell.textLabel.text = 
 //    Food * food1 = self.dataSourceArray[indexPath.row];
 //    cell.food = food1;
     return cell;
