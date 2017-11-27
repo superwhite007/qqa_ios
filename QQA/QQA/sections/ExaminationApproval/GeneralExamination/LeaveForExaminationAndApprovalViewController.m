@@ -11,6 +11,7 @@
 #import "LMJDropdownMenu.h"
 
 #import "WSDatePickerView.h"
+
 #define RGB(x,y,z) [UIColor colorWithRed:x/255.0 green:y/255.0 blue:z/255.0 alpha:1.0]
 
 
@@ -26,22 +27,23 @@
 @implementation LeaveForExaminationAndApprovalViewController
 
 
--(NSMutableArray *)cCMarray{
-    if (!_cCMarray) {
-        self.cCMarray = [NSMutableArray array];
-    }
-    return _cCMarray;
-}
--(NSMutableArray *)approvalMarray{
-    if (!_approvalMarray) {
-        self.approvalMarray = [NSMutableArray array];
-    }
-    return _approvalMarray;
-}
+//-(NSMutableArray *)cCMarray{
+//    if (!_cCMarray) {
+//        self.cCMarray = [NSMutableArray array];
+//    }
+//    return _cCMarray;
+//}
+//-(NSMutableArray *)approvalMarray{
+//    if (!_approvalMarray) {
+//        self.approvalMarray = [NSMutableArray array];
+//    }
+//    return _approvalMarray;
+//}
 
 -(void)viewWillAppear:(BOOL)animated{
     
     [self gitInformationCCAndApprovalGroup];
+    
     
 }
 
@@ -80,8 +82,16 @@
                                               
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6002 ) {
                                                   
-                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-//                                                    [array1 removeObjectAtIndex:0];
+                                                    self.approvalMarray = dictArray[1];
+                                                    self.cCMarray = dictArray[2];
+                                                    
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                      
+                                                        [self ApproverAndCC];
+                                                        
+                                                    });
+                                                    
+//                                                    NSLog(@"self.approvalMarray,self.cCMarray:%@,%@", self.approvalMarray,self.cCMarray);
                                                     
 //
 //                                                    for (NSDictionary * dict in array1) {
@@ -120,6 +130,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"请假"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提  交" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
+    
+    
+    self.cCMarray = [NSMutableArray array];
+    self.approvalMarray = [NSMutableArray array];
+    
     
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 30)];
     introducePersonLabel.backgroundColor = [UIColor redColor];
@@ -177,7 +192,7 @@
     
     _messageTextView.delegate = self;
     
-    [self ApproverAndCC];
+//    [self ApproverAndCC];
     
 }
 
@@ -234,10 +249,11 @@
     
     
     NSArray * titleArray =@[@"审批人", @"抄送人"];
-    NSArray * peopleOfApprover = @[@"A", @"AA", @"A", @"A"];
-    NSArray * peopleOfCC = @[@"CC", @"CC", @"CC", @"CC", @"CC"];
+    NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
+    NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
     NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
     
+    NSLog(@"peopleOfApprover, peopleOfCC:111111%@,\n %@\n", peopleOfApprover, peopleOfCC);
     
     for (int i = 0 ; i < 2 ; i++ ) {
         UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 5 , 100, 30)];
@@ -253,7 +269,7 @@
             UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
             titleLabe.backgroundColor = [UIColor blueColor];
             titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
-            titleLabe.text = @"刘";
+            titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
             titleLabe.layer.masksToBounds = YES;
             titleLabe.textAlignment = NSTextAlignmentCenter;
             titleLabe.font = [UIFont systemFontOfSize:30];
@@ -265,7 +281,8 @@
 //            [self.view addSubview:imgView];
             
             UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  +  (iphoneWidth - 70 ) / 5 + 5, (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
-            nameLabel.text = titleArray[i];
+            nameLabel.text = mArrayOFApproverAndCC[i][j];
+            nameLabel.font = [UIFont systemFontOfSize:14];
             nameLabel.textAlignment = NSTextAlignmentCenter;
             nameLabel.backgroundColor = [UIColor redColor];
             [self.view addSubview:nameLabel];
