@@ -87,17 +87,17 @@ static NSString *identifier = @"Cell";
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                     [array1 removeObjectAtIndex:0];
                                                     NSLog(@"\n\narray1: %@,\n ", array1);
-//
-//                                                    for (NSDictionary * dict in array1) {
-//                                                        ACPApproval * aCPApproval = [ACPApproval new];
-//                                                        [ACPApproval setValuesForKeysWithDictionary:dict];
-//                                                        [self.datasouceArray addObject:aCPApproval];
-//
-////                                                    dispatch_async(dispatch_get_main_queue(), ^{
-//                                                        [self.aCPApprovalListView.tableView  reloadData];
-////                                                    });
-////
-//                                                    }
+
+                                                    for (NSDictionary * dict in array1) {
+                                                        ACPApproval * aCPApproval = [ACPApproval new];
+                                                        [aCPApproval setValuesForKeysWithDictionary:dict];
+                                                        [self.datasouceArray addObject:aCPApproval];
+
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        [self.aCPApprovalListView.tableView  reloadData];
+                                                    });
+
+                                                    }
                                                 }
                                                 
                                             } else{
@@ -117,11 +117,11 @@ static NSString *identifier = @"Cell";
     
     self.datasouceArray = [NSMutableArray arrayWithCapacity:1];
     
-    [self.datasouceArray addObject:@"1"];
-    [self.datasouceArray addObject:@"2"];
-    [self.datasouceArray addObject:@"3"];
-    [self.datasouceArray addObject:@"4"];
-    [self.datasouceArray addObject:@"5"];
+//    [self.datasouceArray addObject:@"1"];
+//    [self.datasouceArray addObject:@"2"];
+//    [self.datasouceArray addObject:@"3"];
+//    [self.datasouceArray addObject:@"4"];
+//    [self.datasouceArray addObject:@"5"];
     
     self.aCPApprovalListView.tableView.delegate = self;
     self.aCPApprovalListView.tableView.dataSource = self;
@@ -161,9 +161,11 @@ static NSString *identifier = @"Cell";
 //        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
 //    }];
     
-    cell.textLabel.text = self.datasouceArray[indexPath.row];
-//    Food * food1 = self.dataSourceArray[indexPath.row];
-//    cell.food = food1;
+
+    
+    ACPApproval * approval = self.datasouceArray[indexPath.row];
+    cell.aCPApproval = approval;
+    
     return cell;
 }
 

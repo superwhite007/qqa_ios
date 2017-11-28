@@ -11,13 +11,13 @@
 
 @interface ACPApprovalTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel * userFamily;
+//@property (nonatomic, strong) UILabel * userFamily;
 @property (nonatomic, strong) UILabel * username;
-@property (nonatomic, strong) UILabel * department;
-@property (nonatomic, strong) UILabel * created_at;
-@property (nonatomic, strong) UILabel * type;
-@property (nonatomic, strong) UILabel * status;
-@property (nonatomic, strong) UILabel * leave_id;
+//@property (nonatomic, strong) UILabel * department;
+//@property (nonatomic, strong) UILabel * created_at;
+//@property (nonatomic, strong) UILabel * type;
+//@property (nonatomic, strong) UILabel * status;
+//@property (nonatomic, strong) UILabel * leave_id;
 
 @property (nonatomic, strong) ACPApproval * aCPApproval;
 
