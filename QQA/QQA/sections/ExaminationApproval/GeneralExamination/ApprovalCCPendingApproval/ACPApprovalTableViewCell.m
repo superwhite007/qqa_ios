@@ -24,31 +24,38 @@
 }
 
 
+/*
+@property (nonatomic, strong) UILabel * userFamily;
+@property (nonatomic, strong) UILabel * username;
+@property (nonatomic, strong) UILabel * department;
+@property (nonatomic, strong) UILabel * created_at;
+@property (nonatomic, strong) UILabel * type;
+@property (nonatomic, strong) UILabel * status;
+@property (nonatomic, strong) UILabel * leave_id;
+*/
+
 -(void)addAllViews{
     
     //heigh = 1000
     
-    self.peopleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 20, 20)];
-    [self.contentView addSubview:self.peopleImageView];
+    self.userFamily = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 20, 20)];
+    [self.contentView addSubview:self.userFamily];
     
+    self.username = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 , 100, 15)];
+    [self.contentView addSubview:_username];
     
-    self.peopleNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_peopleImageView.frame) + 10, 2 , 100, 15)];
-    [self.contentView addSubview:_peopleNameLabel];
+    self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 2 , 100, 15)];
+    [self.contentView addSubview:_department];
     
-    self.byTheTimeLabel =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_peopleNameLabel.frame) + 10, 2 , 100, 15)];
-    [self.contentView addSubview:_byTheTimeLabel];
+    self.created_at = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 + 17 , 100, 15)];
+    [self.contentView addSubview:_created_at];
     
-    self.typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_peopleImageView.frame) + 10, 2 + 17 , 100, 15)];
-    [self.contentView addSubview:_typeLabel];
+    self.type =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 + 17 * 2 , 300, 10)];
+    [self.contentView addSubview:_type];
     
-    self.startTImeLabel =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_peopleImageView.frame) + 10, 2 + 17 * 2 , 300, 10)];
-    [self.contentView addSubview:_startTImeLabel];
+    self.status =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 + 17 * 3 , 300, 10)];
+    [self.contentView addSubview:_status];
     
-    self.endTimeLabel =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_peopleImageView.frame) + 10, 2 + 17 * 3 , 300, 10)];
-    [self.contentView addSubview:_endTimeLabel];
-    
-    self.statusLabel =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_peopleImageView.frame) + 10 + 305, 2 + 17 * 3 , 100, 10)];
-    [self.contentView addSubview:_statusLabel];
     
 }
 

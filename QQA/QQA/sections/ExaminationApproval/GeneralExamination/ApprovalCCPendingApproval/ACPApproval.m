@@ -10,20 +10,20 @@
 
 @implementation ACPApproval
 
--(instancetype)initWithPeopeleImgStr:(NSString *)peopleImgStr peopleNameStr:(NSString *)peopleNameStr byTheTimeStr:(NSString *)byTheTimeStr typeStr:(NSString *)typeStr startTimeStr:(NSString *)startTimeStr endTimeStr:(NSString *)endTimeStr statusEexaminationAndApprovalStr:(NSString *)statusEexaminationAndApprovalStr{
+-(instancetype)initWithusername:(NSString *)username department:(NSString *)department created_at:(NSString *)created_at type:(NSString *)type status:(NSString *)status leave_id:(NSString *)leave_id{
     self = [super init];
     if (self) {
-        self.peopleImgStr = peopleImgStr;
-        self.peopleNameStr = peopleNameStr;
-        self.byTheTimeStr = byTheTimeStr;
-        self.typeStr = typeStr;
-        self.startTimeStr = startTimeStr;
-        self.endTimeStr = endTimeStr;
-        self.statusEexaminationAndApprovalStr = statusEexaminationAndApprovalStr;
+        self.username = username;
+        self.department = department;
+        self.created_at = created_at;
+        self.type = type;
+        self.status = status;
+        self.leave_id = leave_id;
     }
     return self;
-    
 }
+
+
 
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
     NSLog(@"获取的部分字段无意义");

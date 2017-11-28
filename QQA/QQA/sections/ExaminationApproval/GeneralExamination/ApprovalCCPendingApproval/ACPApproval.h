@@ -10,25 +10,28 @@
 
 @interface ACPApproval : NSObject
 
-@property (nonatomic, strong) NSString * peopleImgStr;
-@property (nonatomic, strong) NSString * peopleNameStr;
-@property (nonatomic, strong) NSString * byTheTimeStr;
-@property (nonatomic, strong) NSString * typeStr;
-@property (nonatomic, strong) NSString * startTimeStr;
-@property (nonatomic, strong) NSString * endTimeStr;
-@property (nonatomic, strong) NSString * statusEexaminationAndApprovalStr;
+@property (nonatomic, strong) NSString * username;
+@property (nonatomic, strong) NSString * department;
+@property (nonatomic, strong) NSString * created_at;
+@property (nonatomic, strong) NSString * type;
+@property (nonatomic, strong) NSString * status;
+@property (nonatomic, strong) NSString * leave_id;
 
--(instancetype)initWithPeopeleImgStr:(NSString *)peopleImgStr
-                       peopleNameStr:(NSString *)peopleNameStr
-                        byTheTimeStr:(NSString *)byTheTimeStr
-                             typeStr:(NSString *)typeStr
-                        startTimeStr:(NSString *)startTimeStr
-                          endTimeStr:(NSString *)endTimeStr
-    statusEexaminationAndApprovalStr:(NSString *)statusEexaminationAndApprovalStr;
+-(instancetype)initWithusername:(NSString *)username
+                       department:(NSString *)department
+                        created_at:(NSString *)created_at
+                             type:(NSString *)type
+                                status:(NSString *)status
+                          leave_id:(NSString *)leave_id;
 
 
-
-
+/*"created_at" = "2017-11-27 18:44:43";
+department = "\U6280\U672f\U5f00\U53d1\U4e2d\U5fc3 ";
+id = 24;
+status = G;
+type = 105;
+username = "\U66f9\U4f1f\U6770";
+*/
 
 
 @end

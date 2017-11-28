@@ -11,16 +11,15 @@
 
 @interface ACPApprovalTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView * peopleImageView;
-@property (nonatomic, strong) UILabel * peopleNameLabel;
-@property (nonatomic, strong) UILabel * byTheTimeLabel;
-@property (nonatomic, strong) UILabel * typeLabel;
-@property (nonatomic, strong) UILabel * startTImeLabel;
-@property (nonatomic, strong) UILabel * endTimeLabel;
-@property (nonatomic, strong) UILabel * statusLabel;
+@property (nonatomic, strong) UILabel * userFamily;
+@property (nonatomic, strong) UILabel * username;
+@property (nonatomic, strong) UILabel * department;
+@property (nonatomic, strong) UILabel * created_at;
+@property (nonatomic, strong) UILabel * type;
+@property (nonatomic, strong) UILabel * status;
+@property (nonatomic, strong) UILabel * leave_id;
 
 @property (nonatomic, strong) ACPApproval * aCPApproval;
 
 @end
-
 

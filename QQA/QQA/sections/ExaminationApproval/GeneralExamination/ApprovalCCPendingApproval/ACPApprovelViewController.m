@@ -65,7 +65,7 @@ static NSString *identifier = @"Cell";
     
     
     [mdict setObject:@"1" forKey:@"type"];
-    [mdict setObject:@"G" forKey:@"status"];
+    [mdict setObject:@"ToBeApprovedOfOthers" forKey:@"status"];
     [mdict setObject:@"1" forKey:@"pageNum"];
     
     NSLog( @"66666666%@", mdict);
@@ -83,9 +83,10 @@ static NSString *identifier = @"Cell";
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"1234567: %@,\n ", dictArray);
                                                 
-                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 6005 ) {
+                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 ) {
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                     [array1 removeObjectAtIndex:0];
+                                                    NSLog(@"\n\narray1: %@,\n ", array1);
 //
 //                                                    for (NSDictionary * dict in array1) {
 //                                                        ACPApproval * aCPApproval = [ACPApproval new];
