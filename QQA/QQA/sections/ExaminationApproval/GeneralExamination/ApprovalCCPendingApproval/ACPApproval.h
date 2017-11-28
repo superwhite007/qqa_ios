@@ -12,24 +12,18 @@
 
 @property (nonatomic, copy) NSString * username;
 @property (nonatomic, copy) NSString * department;
-//@property (nonatomic, copy) NSString * created_at;
+@property (nonatomic, copy) NSString * createdAt;
 @property (nonatomic, copy) NSString * type;
 @property (nonatomic, copy) NSString * status;
-//@property (nonatomic, copy) NSString * leave_id;
+@property (nonatomic, copy) NSString * leaveId;
 
 -(instancetype)initWithusername:(NSString *)username
                      department:(NSString *)department
                            type:(NSString *)type
+                      createdAt:(NSString *)createdAt
+                        leaveId:(NSString *)leaveId
                          status:(NSString *)status;
-// created_at:(NSString *)created_at leave_id:(NSString *)leave_id
 
-/*"created_at" = "2017-11-27 18:44:43";
-department = "\U6280\U672f\U5f00\U53d1\U4e2d\U5fc3 ";
-id = 24;
-status = G;
-type = 105;
-username = "\U66f9\U4f1f\U6770";
-*/
 
 
 @end

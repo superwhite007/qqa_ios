@@ -10,33 +10,22 @@
 
 @implementation ACPApproval
 
-//-(instancetype)initWithusername:(NSString *)username department:(NSString *)department created_at:(NSString *)created_at type:(NSString *)type status:(NSString *)status leave_id:(NSString *)leave_id{
-//    self = [super init];
-//    if (self) {
-//        self.username = username;
-//        self.department = department;
-//        self.created_at = created_at;
-//        self.type = type;
-//        self.status = status;
-//        self.leave_id = leave_id;
-//    }
-//    return self;
-//}
 
-
-
--(instancetype)initWithusername:(NSString *)username department:(NSString *)department  type:(NSString *)type status:(NSString *)status{
+-(instancetype)initWithusername:(NSString *)username department:(NSString *)department type:(NSString *)type createdAt:(NSString *)createdAt leaveId:(NSString *)leaveId status:(NSString *)status{
     self = [super init];
     if (self) {
         self.username = username;
         self.department = department;
-//        self.created_at = created_at;
+        self.createdAt = createdAt;
         self.type = type;
         self.status = status;
-//        self.leave_id = leave_id;
+        self.leaveId = leaveId;
     }
     return self;
 }
+
+
+
 
 
 

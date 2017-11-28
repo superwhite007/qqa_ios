@@ -53,10 +53,10 @@
     self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 10 , iphoneWidth -  CGRectGetMaxX(_username.frame) - 20, 20)];
     [self.contentView addSubview:_department];
 
-//    self.created_at = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 + 17 , 100, 15)];
-//    [self.contentView addSubview:_created_at];
+    self.created_at = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 120, 40 , 200, 20)];
+    [self.contentView addSubview:_created_at];
 
-    self.type =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 40 , 300, 20)];
+    self.type =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 40 , 100, 20)];
     [self.contentView addSubview:_type];
 
     self.status =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 70 , 300, 20)];
@@ -74,14 +74,49 @@
     self.username.text = aCPApproval.username;
     self.userFamily.text = [aCPApproval.username substringToIndex:1];
     self.department.text = aCPApproval.department;
-//    self.created_at.text = aCPApproval.created_at;
-    self.type.text = aCPApproval.type;
+    self.created_at.text = aCPApproval.createdAt;
+//    self.type.text = aCPApproval.type;////////
     self.status.text = aCPApproval.status;
-//    self.leave_id.text = aCPApproval.leave_id;
+    self.leave_id.text = aCPApproval.leaveId;
+  
     
+    //@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"其他", nil];
+
+    if ([aCPApproval.type isEqualToString:@"100"]) {
+        self.type.text =  @"调休";
+        
+    } else if ([aCPApproval.type isEqualToString:@"101"]){
+        self.type.text =  @"年假";
+        
+    } else if ([aCPApproval.type isEqualToString:@"102"]){
+        self.type.text = @"婚假";
+        
+    } else if ([aCPApproval.type isEqualToString:@"103"]){
+        self.type.text =  @"产假";
+        
+    } else if ([aCPApproval.type isEqualToString:@"104"]){
+        self.type.text =  @"病假";
+        
+    } else if ([aCPApproval.type isEqualToString:@"105"]){
+        self.type.text = @"事假";
+        
+    } else if ([aCPApproval.type isEqualToString:@"106"]){
+        self.type.text = @"丧假";
+        
+    } else if ([aCPApproval.type isEqualToString:@"107"]){
+        self.type.text =  @"工伤假";
+        
+    } else if ([aCPApproval.type isEqualToString:@"108"]){
+        self.type.text = @"其他";
+        
+    }
+     
     
 }
 
+
+
+//@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"其他", nil];
 
 - (void)awakeFromNib {
     [super awakeFromNib];
