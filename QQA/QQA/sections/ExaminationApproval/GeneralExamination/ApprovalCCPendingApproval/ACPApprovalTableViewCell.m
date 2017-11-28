@@ -39,22 +39,27 @@
     
     //heigh = 1000
     
-    self.userFamily = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 20, 20)];
+    self.userFamily = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
+    self.userFamily.backgroundColor = [UIColor blueColor];
+    self.userFamily.layer.cornerRadius = 30;
+    self.userFamily.layer.masksToBounds = YES;
+    self.userFamily.textAlignment = NSTextAlignmentCenter;
+    self.userFamily.font = [UIFont systemFontOfSize:30];
     [self.contentView addSubview:self.userFamily];
     
-    self.username = [[UILabel alloc] initWithFrame:CGRectMake( 10, 2 , 100, 15)];
+    self.username = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_userFamily.frame) + 10, 10 , 100, 20)];
     [self.contentView addSubview:_username];
     
-    self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 2 , 100, 15)];
+    self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 10 , iphoneWidth -  CGRectGetMaxX(_username.frame) - 20, 20)];
     [self.contentView addSubview:_department];
 
 //    self.created_at = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 + 17 , 100, 15)];
 //    [self.contentView addSubview:_created_at];
 
-    self.type =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 + 17 * 2 , 300, 10)];
+    self.type =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 40 , 300, 20)];
     [self.contentView addSubview:_type];
 
-    self.status =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 2 + 17 * 3 , 300, 10)];
+    self.status =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 70 , 300, 20)];
     [self.contentView addSubview:_status];
     
 //    self.leave_id =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_userFamily.frame) + 10 + 305, 2 + 17 * 3 , 100, 10)];
@@ -67,7 +72,7 @@
         _aCPApproval = aCPApproval ;
     }
     self.username.text = aCPApproval.username;
-//    self.userFamily.text = aCPApproval.username;
+    self.userFamily.text = [aCPApproval.username substringToIndex:1];
     self.department.text = aCPApproval.department;
 //    self.created_at.text = aCPApproval.created_at;
     self.type.text = aCPApproval.type;
