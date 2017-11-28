@@ -83,9 +83,9 @@ static NSString *identifier = @"Cell";
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"1234567: %@,\n ", dictArray);
                                                 
-//                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
-//                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-//                                                    [array1 removeObjectAtIndex:0];
+                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 6005 ) {
+                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                    [array1 removeObjectAtIndex:0];
 //
 //                                                    for (NSDictionary * dict in array1) {
 //                                                        ACPApproval * aCPApproval = [ACPApproval new];
@@ -97,7 +97,7 @@ static NSString *identifier = @"Cell";
 ////                                                    });
 ////
 //                                                    }
-//                                                }
+                                                }
                                                 
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
@@ -160,7 +160,7 @@ static NSString *identifier = @"Cell";
 //        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
 //    }];
     
-//    cell.textLabel.text =
+    cell.textLabel.text = self.datasouceArray[indexPath.row];
 //    Food * food1 = self.dataSourceArray[indexPath.row];
 //    cell.food = food1;
     return cell;
