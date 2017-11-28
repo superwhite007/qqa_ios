@@ -81,7 +81,7 @@ static NSString *identifier = @"Cell";
                                             if (data != nil) {
                                                 
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                NSLog(@"1234567: %@,\n ", dictArray);
+                                                NSLog(@"1234567: %@,\n ", dictArray);
                                                 
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 ) {
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
@@ -98,10 +98,15 @@ static NSString *identifier = @"Cell";
                                                     });
 
                                                     }
+                                                } else{
+                                                    [self.datasouceArray addObject:@"暂时没有相关内容"];
+                                                    
                                                 }
                                                 
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
+                                                [self.datasouceArray addObject:@"获取数据失败"];
+                                             
                                             }
                                         }];
     [task resume];

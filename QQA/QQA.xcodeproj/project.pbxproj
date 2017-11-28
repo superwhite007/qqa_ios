@@ -43,6 +43,7 @@
 		AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */; };
 		AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D711FB933FF00A7CC2A /* LanchViewController.m */; };
 		AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */; };
+		AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */; };
 		AAEF4CC11FB93AD200474C07 /* Me.png in Resources */ = {isa = PBXBuildFile; fileRef = AAEF4CC01FB93AD200474C07 /* Me.png */; };
 		AAEF4CC41FB9615F00474C07 /* MeInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */; };
 		AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF4CC61FB9646500474C07 /* AboutYouthViewController.m */; };
@@ -177,6 +178,8 @@
 		AAD93D711FB933FF00A7CC2A /* LanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanchViewController.m; sourceTree = "<group>"; };
 		AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyViewController.h; sourceTree = "<group>"; };
 		AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
+		AADAAA2C1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestAndLeaveDetailsViewController.h; sourceTree = "<group>"; };
+		AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestAndLeaveDetailsViewController.m; sourceTree = "<group>"; };
 		AAEF4CC01FB93AD200474C07 /* Me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Me.png; sourceTree = "<group>"; };
 		AAEF4CC21FB9615F00474C07 /* MeInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeInformationViewController.h; sourceTree = "<group>"; };
 		AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeInformationViewController.m; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 		AA13948F1FC263F50070B1E2 /* GeneralExamination */ = {
 			isa = PBXGroup;
 			children = (
+				AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */,
+				AADAAA2B1FCD358900A4FC5D /* RequestAndLeaveDetails */,
 				AAB4D4901FC9581600116355 /* WSDaePickerView */,
 				AAB4D48D1FC9249F00116355 /* LMJDropdownMenu.h */,
 				AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */,
@@ -238,7 +243,6 @@
 				AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */,
 				AA1394901FC277D20070B1E2 /* RequestForInstructionViewController.h */,
 				AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */,
-				AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */,
 			);
 			path = GeneralExamination;
 			sourceTree = "<group>";
@@ -494,6 +498,15 @@
 			path = Cover;
 			sourceTree = "<group>";
 		};
+		AADAAA2B1FCD358900A4FC5D /* RequestAndLeaveDetails */ = {
+			isa = PBXGroup;
+			children = (
+				AADAAA2C1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.h */,
+				AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */,
+			);
+			path = RequestAndLeaveDetails;
+			sourceTree = "<group>";
+		};
 		AAF14DEC1FB2CE7300B210E1 /* General */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +716,7 @@
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
 				AAB4D4971FC95A9300116355 /* NSDate+Extension.m in Sources */,
+				AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
 				AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */,

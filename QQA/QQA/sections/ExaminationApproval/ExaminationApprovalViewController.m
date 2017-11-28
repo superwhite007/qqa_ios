@@ -14,6 +14,8 @@
 
 #import "IInitiatedtheExaminationViewController.h"
 
+#import "RequestAndLeaveDetailsViewController.h"
+
 @interface ExaminationApprovalViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray * datasource;
@@ -140,6 +142,10 @@ static NSString *identifier = @"CELL";
         IInitiatedtheExaminationViewController * examinationVC = [[IInitiatedtheExaminationViewController alloc] init];
         [self.navigationController pushViewController:examinationVC animated:YES];
 
+    } else if (indexPath.row == 1) {
+        RequestAndLeaveDetailsViewController * examinationVC = [[RequestAndLeaveDetailsViewController alloc] init];
+        [self.navigationController pushViewController:examinationVC animated:YES];
+        
     } else if (indexPath.row == 3) {
         ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
         [self.navigationController pushViewController:examinationVC animated:YES];
