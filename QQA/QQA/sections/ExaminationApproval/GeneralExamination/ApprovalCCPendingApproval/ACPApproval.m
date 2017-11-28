@@ -23,17 +23,26 @@
 //    return self;
 //}
 
--(instancetype)initWithusername:(NSString *)username{
+
+
+-(instancetype)initWithusername:(NSString *)username department:(NSString *)department  type:(NSString *)type status:(NSString *)status{
     self = [super init];
     if (self) {
         self.username = username;
+        self.department = department;
+//        self.created_at = created_at;
+        self.type = type;
+        self.status = status;
+//        self.leave_id = leave_id;
     }
     return self;
 }
 
 
+
+
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    NSLog(@"获取的部分字段无意义");
+//    NSLog(@"获取的部分字段无意义");
     
 }
 
