@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ACPApproval.h"
+
 @interface RequestAndLeaveDetailsViewController : UIViewController<UITextViewDelegate>
 
 @property (nonatomic, strong)UITextView * messageTextView;
+//@property (nonatomic, copy) ACPApproval * approval;
 
 @end

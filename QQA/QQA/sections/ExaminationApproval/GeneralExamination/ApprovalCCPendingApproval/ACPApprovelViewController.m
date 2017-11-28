@@ -11,6 +11,7 @@
 #import "ACPApprovalListView.h"
 #import "ACPApprovalTableViewCell.h"
 
+#import "RequestAndLeaveDetailsViewController.h"
 
 @interface ACPApprovelViewController ()
 
@@ -183,11 +184,11 @@ static NSString *identifier = @"Cell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    FoodDetailViewController * detailVC = [[[FoodDetailViewController alloc] init] autorelease];
-//    detailVC.food = self.dataSourceArray[indexPath.row];
-//    detailVC.dCode = ((Food *)self.dataSourceArray[indexPath.row]).code;
-//
-//    [self.navigationController pushViewController:detailVC animated:NO];
+    
+    RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
+//    detailVC.approval = self.datasouceArray[indexPath.row];
+    [self.navigationController pushViewController:detailVC animated:NO];
+   
     NSLog(@"gotogotos");
 }
 
