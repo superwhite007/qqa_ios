@@ -202,10 +202,12 @@ static NSString *identifier = @"Cell";
     if (_isEmpty) {
         
         UITableViewCell * acell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//        acell.backgroundView.backgroundColor = [UIColor whiteColor];
         if (!acell) {
             acell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
         acell.textLabel.text = self.datasouceArray[indexPath.row];
+        acell.textLabel.textAlignment = NSTextAlignmentCenter;
         return acell;
         
     } else{
@@ -232,10 +234,16 @@ static NSString *identifier = @"Cell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
+    
 //    detailVC.approval = self.datasouceArray[indexPath.row];
-    [self.navigationController pushViewController:detailVC animated:NO];
-    NSLog(@"gotogotos");
+    if (_isEmpty) {
+        NSLog(@"暂时没有数据");
+    }else{
+        RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
+        [self.navigationController pushViewController:detailVC animated:NO];
+        NSLog(@"gotogotos");
+    }
+    
 }
 
 

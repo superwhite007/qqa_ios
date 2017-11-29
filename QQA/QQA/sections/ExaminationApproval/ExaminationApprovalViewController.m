@@ -158,11 +158,11 @@ static NSString *identifier = @"CELL";
         [self.navigationController pushViewController:examinationVC animated:YES];
 
     } else if (indexPath.row == 4) {
-//        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
-//        examinationVC.titleStr = @"抄送我的";
-//        [self.navigationController pushViewController:examinationVC animated:YES];
-        RequestAndLeaveDetailsViewController * examinationVC = [[RequestAndLeaveDetailsViewController alloc] init];
+        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+        examinationVC.titleStr = @"抄送我的";
         [self.navigationController pushViewController:examinationVC animated:YES];
+//        RequestAndLeaveDetailsViewController * examinationVC = [[RequestAndLeaveDetailsViewController alloc] init];
+//        [self.navigationController pushViewController:examinationVC animated:YES];
 
         
     } else {
