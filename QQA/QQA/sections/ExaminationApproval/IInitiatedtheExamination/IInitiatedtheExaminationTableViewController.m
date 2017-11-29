@@ -118,8 +118,8 @@ static NSString * identifier = @"CELL";
         
         
     }else if (number == 2){
-        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
-        [self.navigationController pushViewController:leaveVC animated:YES];
+//        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+//        [self.navigationController pushViewController:leaveVC animated:YES];
         
     }
 

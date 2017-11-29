@@ -277,7 +277,6 @@
 
 -(void)ApproverAndCC{
     
-    
     NSArray * titleArray =@[@"审批人", @"抄送人"];
     NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
@@ -316,17 +315,9 @@
             nameLabel.textAlignment = NSTextAlignmentCenter;
             nameLabel.backgroundColor = [UIColor redColor];
             [self.view addSubview:nameLabel];
-            
-            
-            
+          
         }
-        
     }
-    
-    
-    
-    
-    
 }
 
 
