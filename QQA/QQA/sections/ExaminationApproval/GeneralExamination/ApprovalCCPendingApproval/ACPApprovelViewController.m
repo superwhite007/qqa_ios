@@ -115,6 +115,7 @@ static NSString *identifier = @"Cell";
                                                         for (NSDictionary * dict in array1) {
                                                             ACPApproval * aCPApproval = [ACPApproval new];
                                                             [aCPApproval setValuesForKeysWithDictionary:dict];
+                                                            [self.datasouceArray removeAllObjects];
                                                             [self.datasouceArray addObject:aCPApproval];
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
