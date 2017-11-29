@@ -238,7 +238,7 @@ static NSString *identifier = @"Cell";
 //    detailVC.approval = self.datasouceArray[indexPath.row];
     if (_isEmpty) {
         NSLog(@"暂时没有数据");
-    }else{
+    }else if([_titleStr isEqualToString:@"待审批的"]){
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveIdStr =  approval.leaveId;

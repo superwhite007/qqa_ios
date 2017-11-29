@@ -26,6 +26,7 @@
 
 @property (nonatomic, assign) BOOL isDownRefresh;
 @property (nonatomic, assign) BOOL isEmpty;
+@property (nonatomic, assign) BOOL buttonAgree;
 
 
 @end
@@ -65,7 +66,7 @@
     NSLog(@"%f, %f",iphoneWidth, iphoneHeight);
     NSLog(@"_leaveIdStr:%@", _leaveIdStr);
     
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(sendApprovalMessagesToServer)];
     
     [self setViewAboutNameTimeReason];
     [self setTextView];
@@ -141,10 +142,11 @@
     for (int i = 0; i < 2; i++) {
         UIButton * button = [UIButton buttonWithType:(UIButtonTypeSystem)];
         button.frame = CGRectMake(iphoneWidth - 230 + i * 110, 189 + iphoneWidth * 2 / 3  , 100, 30);
-        button.backgroundColor = [UIColor redColor];
+        button.backgroundColor = [UIColor blueColor];
         button.layer.cornerRadius = 5;
         NSLog(@"array[i]:%@", array[i]);
         [button setTitle:array[i] forState:(UIControlStateNormal)];
+        [button addTarget:self action:@selector(changeButtonAgree:) forControlEvents:(UIControlEventTouchUpInside)];
         button.tag = i;
         [self.view addSubview:button];
         
@@ -155,7 +157,18 @@
 //    [self ApproverAndCC];
 }
 
-
+-(void)changeButtonAgree:(UIButton *)sender{
+    
+    
+    if ([self.title isEqualToString:@"拒绝"]) {
+        _buttonAgree = NO;
+        
+        
+    } else if ([self.title isEqualToString:@"同意"]){
+        _buttonAgree = YES;
+    }
+    
+}
 
 -(void)ApproverAndCC{
     
@@ -318,6 +331,9 @@
 -(void)setvaleKeyAndValue:(NSMutableArray *)mArray{
     
     _nameLabel.text = [mArray[0] objectForKey:@"username"];
+    
+//    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
+    
     _created_atTimeLabel.text = [mArray[0] objectForKey:@"createdAt"];
     
     _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [mArray[0] objectForKey:@"type"]];
@@ -328,7 +344,7 @@
     _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [mArray[0] objectForKey:@"betweentime"]];
     
 //    [self ApproverAndCC];
-    
+    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
     
 }
 
@@ -367,38 +383,104 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
-    //NSLog(@"%@", textView.text);
-    //    if ([_mutableArray count] == 0) {
-    //        //NSLog(@"请选择发送范围");
-    //    } else if (textView.text.length == 0){
-    //        //NSLog(@"请输入通知内容");
-    //    }else if ([_mutableArray count] != 0 && textView.text.length != 0){
-    //        //NSLog(@"准备发送服务器");
-    //        [self sendNoticeToServer];
-    //    }
-    
-    
 }
 
 
 
 -(void)sendNoticeToServer{
     
-    //    if ([_mutableArray count] == 0) {
-    //        //NSLog(@"请选择发送范围");
-    //        [self alert:@"请选择发送范围"];
-    //    } else
     if (_messageTextView.text.length == 0){
         //NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
         [self sendToServerTOBack];
     }
-    //    else if ([_mutableArray count] != 0 && _messageTextView.text.length != 0){
-    //        //NSLog(@"准备发送服务器");
-    //        [self sendToServerTOBack];
-    //    }
+   
     
 }
+
+-(void)sendApprovalMessagesToServer{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/update", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:_leaveIdStr forKey:@"leaveId"];
+    if (_buttonAgree) {
+        [mdict setObject:@"agree" forKey:@"status"];
+    } else {
+         [mdict setObject:@"refuse" forKey:@"status"];
+    }
+    if (_messageTextView.text.length == 0) {
+        [mdict setObject:@"NULL" forKey:@"comment"];
+    }else{
+        [mdict setObject:_messageTextView.text forKey:@"comment"];
+    }
+    
+    NSLog( @"66666666%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    // 由于要先对request先行处理,我们通过request初始化task
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            if (data != nil) {
+                                                
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"1111111234567dictArray: %@,\n ", dictArray);
+                                                    
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6010 ) {
+                                                        self.isEmpty = NO;
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"审批完成1"];
+                                                        });
+                                                        
+                                                        
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"1234567dict: %@,\n ", dict);
+                                                    
+                                                    if ( [[dict objectForKey:@"message"] intValue] == 6010 ) {
+                                                        self.isEmpty = NO;
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"审批完成"];
+                                                        });
+                                                    }
+                                                    
+                                                    
+                                                }
+                                            } else{
+                                                self.isEmpty = YES;
+                                                
+                                            }
+                                        }];
+    [task resume];
+    
+    
+    
+    
+}
+
+
+
+
+
 
 -(void)sendToServerTOBack{
     //NSLog(@"准备发送服务器：success");
@@ -426,7 +508,6 @@
     
     
 }
-
 
 
 
