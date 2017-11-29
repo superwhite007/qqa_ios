@@ -240,8 +240,10 @@ static NSString *identifier = @"Cell";
         NSLog(@"暂时没有数据");
     }else{
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
+        ACPApproval * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveIdStr =  approval.leaveId;
         [self.navigationController pushViewController:detailVC animated:NO];
-        NSLog(@"gotogotos");
+        
     }
     
 }

@@ -12,7 +12,8 @@
 
 @interface RequestAndLeaveDetailsViewController : UIViewController<UITextViewDelegate>
 
-@property (nonatomic, strong)UITextView * messageTextView;
+@property (nonatomic, strong) UITextView * messageTextView;
 //@property (nonatomic, copy) ACPApproval * approval;
+@property (nonatomic, strong) NSString * leaveIdStr;
 
 @end
