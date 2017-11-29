@@ -143,17 +143,67 @@ static NSString *identifier = @"CELL";
         [self.navigationController pushViewController:examinationVC animated:YES];
 
     } else if (indexPath.row == 1) {
-        RequestAndLeaveDetailsViewController * examinationVC = [[RequestAndLeaveDetailsViewController alloc] init];
+        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+        examinationVC.titleStr = @"待审批的";
+        [self.navigationController pushViewController:examinationVC animated:YES];
+
+    } else if (indexPath.row == 2) {
+        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+        examinationVC.titleStr = @"已审批的";
         [self.navigationController pushViewController:examinationVC animated:YES];
         
     } else if (indexPath.row == 3) {
         ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+        examinationVC.titleStr = @"未审批的";
         [self.navigationController pushViewController:examinationVC animated:YES];
+
+    } else if (indexPath.row == 4) {
+//        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+//        examinationVC.titleStr = @"抄送我的";
+//        [self.navigationController pushViewController:examinationVC animated:YES];
+        RequestAndLeaveDetailsViewController * examinationVC = [[RequestAndLeaveDetailsViewController alloc] init];
+        [self.navigationController pushViewController:examinationVC animated:YES];
+
         
     } else {
         LanchViewController * lanchVC = [LanchViewController new];
         [self.navigationController pushViewController:lanchVC animated:YES];
+
     }
+    
+//    NSUInteger number = indexPath.row;
+//    switch (number) {
+//        case 0:
+//            IInitiatedtheExaminationViewController * examinationVC = [[IInitiatedtheExaminationViewController alloc] init];
+//            [self.navigationController pushViewController:examinationVC animated:YES];
+//
+//            break;
+//
+//        case 1:
+//            RequestAndLeaveDetailsViewController * examinationVC = [[RequestAndLeaveDetailsViewController alloc] init];
+//            [self.navigationController pushViewController:examinationVC animated:YES];
+//            break;
+//
+//        case 2:
+//            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+//            [self.navigationController pushViewController:examinationVC animated:YES];
+//            break;
+//
+//        case 3:
+//            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+//            [self.navigationController pushViewController:examinationVC animated:YES];
+//            break;
+//
+//        case 4:
+//            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+//            [self.navigationController pushViewController:examinationVC animated:YES];
+//            break;
+//
+//        default:
+//            break;
+//    }
+//
+//
 
 }
 

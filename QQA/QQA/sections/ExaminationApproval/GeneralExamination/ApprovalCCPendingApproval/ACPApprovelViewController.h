@@ -10,6 +10,6 @@
 
 @interface ACPApprovelViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSString * titleFromCompanyStr;
+@property (nonatomic, strong) NSString * titleStr;
 
 @end

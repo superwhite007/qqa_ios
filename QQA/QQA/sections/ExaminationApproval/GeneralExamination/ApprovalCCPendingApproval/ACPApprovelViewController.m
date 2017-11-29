@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray * datasouceArray;
 @property (nonatomic, strong) ACPApprovalListView * aCPApprovalListView;
 @property (nonatomic, assign) BOOL isDownRefresh;
+@property (nonatomic, assign) BOOL isEmpty;
 
 @end
 
@@ -64,10 +65,29 @@ static NSString *identifier = @"Cell";
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
     
+    //待审批的  已审批的 未审批的 抄送我的
+    NSLog(@"_titleSt:%@", _titleStr);
+    if ([_titleStr isEqualToString:@"待审批的"]) {
+        NSLog(@"_titleSt111:%@", _titleStr);
+        [mdict setObject:@"1" forKey:@"type"];
+        [mdict setObject:@"ToBeApprovedOfOthers" forKey:@"status"];
+        [mdict setObject:@"1" forKey:@"pageNum"];
+    } else if ([_titleStr isEqualToString:@"已审批的"]) {
+        [mdict setObject:@"1" forKey:@"type"];
+        [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
+        [mdict setObject:@"1" forKey:@"pageNum"];
+    } else if ([_titleStr isEqualToString:@"未审批的"]) {
+        [mdict setObject:@"1" forKey:@"type"];
+        [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
+        [mdict setObject:@"1" forKey:@"pageNum"];
+    } else if ([_titleStr isEqualToString:@"抄送我的"]) {
+        [mdict setObject:@"2" forKey:@"type"];
+        [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
+        [mdict setObject:@"1" forKey:@"pageNum"];
+    }
     
-    [mdict setObject:@"1" forKey:@"type"];
-    [mdict setObject:@"ToBeApprovedOfOthers" forKey:@"status"];
-    [mdict setObject:@"1" forKey:@"pageNum"];
+   
+    
     
     NSLog( @"66666666%@", mdict);
     NSError * error = nil;
@@ -81,33 +101,46 @@ static NSString *identifier = @"Cell";
                                             
                                             if (data != nil) {
                                                 
-                                                NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"1234567: %@,\n ", dictArray);
-                                                
-                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 ) {
-                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-                                                    [array1 removeObjectAtIndex:0];
-                                                    NSLog(@"\n\narray1: %@,\n ", array1);
-
-                                                    for (NSDictionary * dict in array1) {
-                                                        ACPApproval * aCPApproval = [ACPApproval new];
-                                                        [aCPApproval setValuesForKeysWithDictionary:dict];
-                                                        [self.datasouceArray addObject:aCPApproval];
-
-                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                        [self.aCPApprovalListView.tableView  reloadData];
-                                                    });
-
-                                                    }
-                                                } else{
-                                                    [self.datasouceArray addObject:@"暂时没有相关内容"];
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
                                                     
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 ) {
+                                                        self.isEmpty = NO;
+                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        [array1 removeObjectAtIndex:0];
+                                                        NSLog(@"\n\narray1: %@,\n ", array1);
+                                                        
+                                                        for (NSDictionary * dict in array1) {
+                                                            ACPApproval * aCPApproval = [ACPApproval new];
+                                                            [aCPApproval setValuesForKeysWithDictionary:dict];
+                                                            [self.datasouceArray addObject:aCPApproval];
+                                                            
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self.aCPApprovalListView.tableView  reloadData];
+                                                            });
+                                                        }
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"1234567dict: %@,\n ", dict);
+                                                    
+                                                    if ( [[dict objectForKey:@"message"] intValue] == 6006 ){
+                                                        self.isEmpty = YES;
+                                                        [self.datasouceArray addObject:@"暂时没有相关内容"];
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.aCPApprovalListView.tableView  reloadData];
+                                                        });
+                                                    }
                                                 }
-                                                
                                             } else{
+                                                self.isEmpty = YES;
                                                 //NSLog(@"获取数据失败，问");
                                                 [self.datasouceArray addObject:@"获取数据失败"];
-                                             
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self.aCPApprovalListView.tableView  reloadData];
+                                                });
                                             }
                                         }];
     [task resume];
@@ -120,6 +153,9 @@ static NSString *identifier = @"Cell";
     // Do any additional setup after loading the view.
     self.pageNumber = 1;
     self.isDownRefresh = NO;
+    
+    
+    [self.navigationItem setTitle:_titleStr];
     
     self.datasouceArray = [NSMutableArray arrayWithCapacity:1];
     
@@ -154,11 +190,7 @@ static NSString *identifier = @"Cell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ACPApprovalTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     
-    if (!cell) {
-        cell = [[ACPApprovalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"] ;
-    }
     
     
 //    //添加动画效果
@@ -167,12 +199,27 @@ static NSString *identifier = @"Cell";
 //        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
 //    }];
     
-
+    if (_isEmpty) {
+        
+        UITableViewCell * acell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!acell) {
+            acell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        acell.textLabel.text = self.datasouceArray[indexPath.row];
+        return acell;
+        
+    } else{
+        ACPApprovalTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        
+        if (!cell) {
+            cell = [[ACPApprovalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] ;
+        }
+        ACPApproval * approval = self.datasouceArray[indexPath.row];
+        cell.aCPApproval = approval;
+        return cell;
+    }
     
-    ACPApproval * approval = self.datasouceArray[indexPath.row];
-    cell.aCPApproval = approval;
-    
-    return cell;
+//    return cell;
 }
 
 
@@ -188,7 +235,6 @@ static NSString *identifier = @"Cell";
     RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
 //    detailVC.approval = self.datasouceArray[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:NO];
-   
     NSLog(@"gotogotos");
 }
 
