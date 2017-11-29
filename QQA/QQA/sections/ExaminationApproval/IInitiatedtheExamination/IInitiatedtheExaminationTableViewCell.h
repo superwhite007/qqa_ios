@@ -13,6 +13,6 @@
 
 @property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong) UILabel * reasonTitleLabel;
-
+@property (nonatomic, strong) UIImageView *imgViewFor;
 
 @end

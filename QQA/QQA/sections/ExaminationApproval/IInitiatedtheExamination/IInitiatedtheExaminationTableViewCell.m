@@ -24,7 +24,7 @@
     
     
     //60
-    self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
+    self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 60, 60)];
     self.imgView.backgroundColor = [UIColor redColor];
     self.imgView.layer.cornerRadius = 30;
     self.imgView.layer.borderColor = [UIColor blackColor].CGColor;
@@ -36,8 +36,17 @@
     
     self.reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_imgView.frame) + 5, 25, 250, 50)] ;
     _reasonTitleLabel.font = [UIFont systemFontOfSize:22];
-    _reasonTitleLabel.backgroundColor = [UIColor redColor];
+//    _reasonTitleLabel.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:_reasonTitleLabel];
+    
+    self.imgViewFor = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 38, 25, 25)];
+//    self.imgViewFor.backgroundColor = [UIColor redColor];
+    self.imgViewFor.layer.cornerRadius = 15;
+    self.imgViewFor.alpha = .6;
+//    self.imgViewFor.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.imgViewFor.layer.borderWidth = 0.5;
+    self.imgViewFor.layer.masksToBounds = YES;
+    [self.contentView addSubview:_imgViewFor];
     
    
     

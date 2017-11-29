@@ -8,9 +8,6 @@
 
 #import "IInitiatedtheExaminationTableViewController.h"
 #import "IInitiatedtheExaminationTableViewCell.h"
-
-#import "IInitiatedtheExaminationTableViewCell.h"
-
 #import "LeaveForExaminationAndApprovalViewController.h"
 #import "RequestForInstructionViewController.h"
 
@@ -43,7 +40,7 @@ static NSString * identifier = @"CELL";
     [self.datadource addObject:dict1];
     [self.datadource addObject:dict2];
     
-    
+    [self.navigationItem setTitle:@"发起审批"];
     
     [self.tableView registerClass:[IInitiatedtheExaminationTableViewCell class] forCellReuseIdentifier:identifier];
     
@@ -85,8 +82,10 @@ static NSString * identifier = @"CELL";
     
     NSString * str = [NSString stringWithFormat:@"%@", [self.datadource[indexPath.row] objectForKey:@"reasonTitleStr"]];
                       
-    cell.imgView.image = [UIImage imageNamed:[self.datadource[indexPath.row] objectForKey:@"imageStr"]];
+    cell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"hongjinbao"]];
     cell.reasonTitleLabel.text = str;
+    cell.imgViewFor.image = [UIImage imageNamed:[self.datadource[indexPath.row] objectForKey:@"imageStr"]];
+    
     //NSLog(@"dictdict::%@", dict);
     
     return cell;
