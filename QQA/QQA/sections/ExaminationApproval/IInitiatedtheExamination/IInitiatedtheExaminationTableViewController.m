@@ -8,7 +8,11 @@
 
 #import "IInitiatedtheExaminationTableViewController.h"
 #import "IInitiatedtheExaminationTableViewCell.h"
-#import "IInitiated.h"
+
+#import "IInitiatedtheExaminationTableViewCell.h"
+
+#import "LeaveForExaminationAndApprovalViewController.h"
+#import "RequestForInstructionViewController.h"
 
 @interface IInitiatedtheExaminationTableViewController ()
 
@@ -30,43 +34,25 @@ static NSString * identifier = @"CELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假 - 事假、病假等" };
+    NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 -- 请示领导审批" };
+    NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 -- 工作任务的描述" };
     
-//    ring * imageStr;
-//    @property (nonatomic, strong) NSString * reasonTitleStr;
-//    @property (nonatomic, strong) NSString * reasonStr;
-//    @property (nonatomic, strong) NSString * promptStr;
-//
-    NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假", @"reasonStr":@"事假、病假.", @"promptStr":@"点击发起请假" };
-    NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件", @"reasonStr":@"重要事情不可以需要请示,不可先斩后奏！", @"prompet":@"点击发起请示件" };
-    NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单", @"reasonStr":@"明确事情的经过.", @"promptStr":@"点击发起工单" };
-    
-    IInitiated * iinitated = [IInitiated new];
-    [iinitated setValuesForKeysWithDictionary:dict];
-    
-    IInitiated * iinitated1 = [IInitiated new];
-    [iinitated1 setValuesForKeysWithDictionary:dict1];
-    
-    IInitiated * iinitated2 = [IInitiated new];
-    [iinitated2 setValuesForKeysWithDictionary:dict2];
+  
+    [self.datadource addObject:dict];
+    [self.datadource addObject:dict1];
+    [self.datadource addObject:dict2];
     
     
-    [self.datadource addObject:iinitated];
-    [self.datadource addObject:iinitated1];
-    [self.datadource addObject:iinitated2];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
+    [self.tableView registerClass:[IInitiatedtheExaminationTableViewCell class] forCellReuseIdentifier:identifier];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     
     
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,16 +80,14 @@ static NSString * identifier = @"CELL";
  
     IInitiatedtheExaminationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     if (!cell) {
-        cell = [[IInitiatedtheExaminationTableViewCell alloc] initWithStyle:(UITableViewCellStyleValue2) reuseIdentifier:identifier];
+        cell = [[IInitiatedtheExaminationTableViewCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:identifier];
     }
     
-
-    NSDictionary * dict = self.datadource[indexPath.row];
-    
+    NSString * str = [NSString stringWithFormat:@"%@", [self.datadource[indexPath.row] objectForKey:@"reasonTitleStr"]];
+                      
+    cell.imgView.image = [UIImage imageNamed:[self.datadource[indexPath.row] objectForKey:@"imageStr"]];
+    cell.reasonTitleLabel.text = str;
     //NSLog(@"dictdict::%@", dict);
-    
-    IInitiated * initiated = self.datadource[indexPath.row];
-    cell.iInitiated = initiated;
     
     return cell;
 }
@@ -122,7 +106,27 @@ static NSString * identifier = @"CELL";
     return 100;
     
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger number =  indexPath.row;
+    if (number == 0) {
+        LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
+        [self.navigationController pushViewController:leaveVC animated:YES];
+        
+    } else if (number == 1){
+        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+        [self.navigationController pushViewController:leaveVC animated:YES];
+        
+        
+    }else if (number == 2){
+        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+        [self.navigationController pushViewController:leaveVC animated:YES];
+        
+    }
 
+    
+    
+}
 
 /*
 // Override to support editing the table view.

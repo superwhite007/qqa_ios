@@ -17,7 +17,6 @@
 		AA1CEC8C1FA9602E00050EFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC8B1FA9602E00050EFC /* main.m */; };
 		AA1CEC961FA9602E00050EFC /* QQATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC951FA9602E00050EFC /* QQATests.m */; };
 		AA1CECA11FA9602E00050EFC /* QQAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECA01FA9602E00050EFC /* QQAUITests.m */; };
-		AA25BCC91FBE70C6009B8CA0 /* IInitiated.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */; };
 		AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */; };
 		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
 		AA25BCDC1FBEBC5F009B8CA0 /* IInitiatedtheExaminationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCDB1FBEBC5F009B8CA0 /* IInitiatedtheExaminationViewController.m */; };
@@ -96,8 +95,6 @@
 		AA1CECBC1FA96C1600050EFC /* first_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_h.png; sourceTree = "<group>"; };
 		AA1CECBD1FA96C1600050EFC /* oversea_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oversea_n.png; sourceTree = "<group>"; };
 		AA1CECBE1FA96C1600050EFC /* first_ll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_ll.png; sourceTree = "<group>"; };
-		AA25BCC71FBE70C6009B8CA0 /* IInitiated.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiated.h; sourceTree = "<group>"; };
-		AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiated.m; sourceTree = "<group>"; };
 		AA25BCD31FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedtheExaminationTableViewController.h; sourceTree = "<group>"; };
 		AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewController.m; sourceTree = "<group>"; };
 		AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedtheExaminationTableViewCell.h; sourceTree = "<group>"; };
@@ -368,8 +365,6 @@
 			children = (
 				AA25BCDA1FBEBC5F009B8CA0 /* IInitiatedtheExaminationViewController.h */,
 				AA25BCDB1FBEBC5F009B8CA0 /* IInitiatedtheExaminationViewController.m */,
-				AA25BCC71FBE70C6009B8CA0 /* IInitiated.h */,
-				AA25BCC81FBE70C6009B8CA0 /* IInitiated.m */,
 				AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */,
 				AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */,
 				AA25BCD31FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.h */,
@@ -688,7 +683,6 @@
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
-				AA25BCC91FBE70C6009B8CA0 /* IInitiated.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,

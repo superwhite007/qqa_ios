@@ -7,18 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class  IInitiated;
 
 
 @interface IInitiatedtheExaminationTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UIImageView * imgView;
+@property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong) UILabel * reasonTitleLabel;
-@property (nonatomic, strong) UILabel * reasonLabel;
-@property (nonatomic, strong) UILabel * promptLabel;
-
-
-@property (nonatomic, strong) IInitiated * iInitiated;
 
 
 @end

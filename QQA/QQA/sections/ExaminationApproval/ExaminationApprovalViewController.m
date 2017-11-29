@@ -139,9 +139,15 @@ static NSString *identifier = @"CELL";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row == 0) {
-        IInitiatedtheExaminationViewController * examinationVC = [[IInitiatedtheExaminationViewController alloc] init];
+//        IInitiatedtheExaminationViewController * examinationVC = [[IInitiatedtheExaminationViewController alloc] init];
+//        [self.navigationController pushViewController:examinationVC animated:YES];
+
+        IInitiatedtheExaminationTableViewController * examinationVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
         [self.navigationController pushViewController:examinationVC animated:YES];
 
+        
+        
+        
     } else if (indexPath.row == 1) {
         ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
         examinationVC.titleStr = @"待审批的";
