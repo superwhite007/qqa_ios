@@ -36,14 +36,14 @@
     self.username = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_userFamily.frame) + 10, 10 , 100, 20)];
     [self.contentView addSubview:_username];
     
-//    self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 10 , iphoneWidth -  CGRectGetMaxX(_username.frame) - 20, 20)];
-//    [self.contentView addSubview:_department];
-//    
-//    self.created_at = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 40 , 200, 20)];
-//    [self.contentView addSubview:_created_at];
-//    
-//    self.status =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 70 , 300, 20)];
-//    [self.contentView addSubview:_status];
+    self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 10 , iphoneWidth -  CGRectGetMaxX(_username.frame) - 20, 20)];
+    [self.contentView addSubview:_department];
+    
+    self.created_at = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 40 , 200, 20)];
+    [self.contentView addSubview:_created_at];
+    
+    self.status =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 10, 70 , 300, 20)];
+    [self.contentView addSubview:_status];
     
     //    self.leave_id =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_userFamily.frame) + 10 + 305, 2 + 17 * 3 , 100, 10)];
     //    [self.contentView addSubview:leave_id];
@@ -56,11 +56,11 @@
         _request = request;
     }
     self.username.text = request.username;
-//    self.userFamily.text = [request.username substringToIndex:1];
-//    self.department.text = request.department;
-//    self.created_at.text = request.createdAt;
-//    self.status.text = request.status;
-//    self.askId.text = request.askId;
+    self.userFamily.text = [request.username substringToIndex:1];
+    self.department.text = request.department;
+    self.created_at.text = request.createdAt;
+    self.status.text = request.status;
+    self.askId.text = request.askId;
 }
 
 - (void)awakeFromNib {

@@ -14,10 +14,10 @@
 
 @property (nonatomic, strong) UILabel * userFamily;
 @property (nonatomic, strong) UILabel * username;
-//@property (nonatomic, strong) UILabel * department;
-//@property (nonatomic, strong) UILabel * created_at;
-//@property (nonatomic, strong) UILabel * status;
-//@property (nonatomic, strong) UILabel * askId;
+@property (nonatomic, strong) UILabel * department;
+@property (nonatomic, strong) UILabel * created_at;
+@property (nonatomic, strong) UILabel * status;
+@property (nonatomic, strong) UILabel * askId;
 
 @property (nonatomic, strong) Request * request;
 

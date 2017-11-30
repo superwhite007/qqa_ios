@@ -10,27 +10,27 @@
 
 @implementation Request
 
-//-(instancetype)initWithusername:(NSString *)username department:(NSString *)department  createdAt:(NSString *)createdAt askId:(NSString *)askId status:(NSString *)status{
-//    self = [super init];
-//    if (self) {
-//        self.username = username;
-//        self.department = department;
-//        self.createdAt = createdAt;
-//        self.askId = askId;
-//        self.status = status;
-//    }
-//    return self;
-//}
-
-
-
--(instancetype)initWithusername:(NSString *)username{
+-(instancetype)initWithusername:(NSString *)username department:(NSString *)department  createdAt:(NSString *)createdAt askId:(NSString *)askId status:(NSString *)status{
     self = [super init];
     if (self) {
         self.username = username;
+        self.department = department;
+        self.createdAt = createdAt;
+        self.askId = askId;
+        self.status = status;
     }
     return self;
 }
+
+
+
+//-(instancetype)initWithusername:(NSString *)username{
+//    self = [super init];
+//    if (self) {
+//        self.username = username;
+//    }
+//    return self;
+//}
 
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
 //        NSLog(@"获取的部分字段无意义");
