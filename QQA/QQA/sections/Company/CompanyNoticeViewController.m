@@ -55,7 +55,7 @@ static NSString *identifier = @"Cell";
 
 -(void)gitCompanyNoticeMessage{
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/message/index"]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/message/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -70,7 +70,9 @@ static NSString *identifier = @"Cell";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"1" forKey:@"pageNum"];
     
+    NSLog(@"mdict:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
