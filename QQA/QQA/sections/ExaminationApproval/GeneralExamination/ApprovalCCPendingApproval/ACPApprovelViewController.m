@@ -88,7 +88,7 @@ static NSString *identifier = @"Cell";
     
    
     
-    
+    NSLog(@"55555555%@%@", CONST_SERVER_ADDRESS, _urlStr);
     NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
@@ -116,6 +116,22 @@ static NSString *identifier = @"Cell";
                                                             ACPApproval * aCPApproval = [ACPApproval new];
                                                             [aCPApproval setValuesForKeysWithDictionary:dict];
 //                                                            [self.datasouceArray removeAllObjects];
+                                                            [self.datasouceArray addObject:aCPApproval];
+                                                            
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self.aCPApprovalListView.tableView  reloadData];
+                                                            });
+                                                        }
+                                                    }else if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6017 ) {
+                                                        self.isEmpty = NO;
+                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        [array1 removeObjectAtIndex:0];
+                                                        NSLog(@"\n\narray1: %@,\n ", array1);
+                                                        [self.datasouceArray removeAllObjects];
+                                                        for (NSDictionary * dict in array1) {
+                                                            ACPApproval * aCPApproval = [ACPApproval new];
+                                                            [aCPApproval setValuesForKeysWithDictionary:dict];
+                                                            //                                                            [self.datasouceArray removeAllObjects];
                                                             [self.datasouceArray addObject:aCPApproval];
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -247,7 +263,7 @@ static NSString *identifier = @"Cell";
         detailVC.titleIdentStr = @"请假";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"v1/api/ask/index"]){
+    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"/v1/api/ask/index1"]){
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveIdStr =  approval.leaveId;

@@ -154,7 +154,7 @@ static NSString * identifier = @"CELL";
             
             ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
             examinationVC.titleStr = @"待审批的";
-            examinationVC.urlStr = @"v1/api/ask/index";
+            examinationVC.urlStr = @"/v1/api/ask/index";
             [self.navigationController pushViewController:examinationVC animated:YES];
             
             

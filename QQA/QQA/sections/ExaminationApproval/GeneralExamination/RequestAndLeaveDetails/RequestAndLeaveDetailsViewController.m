@@ -292,7 +292,7 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1111111234567dictArray: %@,\n ", dictArray);
+                                                    NSLog(@"Request: %@,\n ", dictArray);
                                                     
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 ) {
                                                         self.isEmpty = NO;
