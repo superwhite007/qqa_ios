@@ -90,18 +90,19 @@ static NSString *identifier = @"Cell";
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"companyNOtice: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 
-                                                if ( [[dictArray[0] objectForKey:@"messages"] intValue] == 5005 ) {
+                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5005 ) {
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                     [array1 removeObjectAtIndex:0];
                                                     
                                                     for (NSDictionary * dict in array1) {
-                                                        [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"created_at"]]];
+                                                        [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"createdAt"]]];
                                                         [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"content"]]];
                                                     
 //                                                        
                                                     }
                                                     
                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                        NSLog(@"_datasource_datasource_datasource_datasource%@", _datasource);
                                                         [self.tableView  reloadData];
                                                      });
 

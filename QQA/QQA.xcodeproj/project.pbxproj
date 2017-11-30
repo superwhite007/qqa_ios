@@ -41,6 +41,7 @@
 		AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */; };
 		AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA4B1FCF9CBA0012A695 /* Request.m */; };
 		AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */; };
+		AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */; };
 		AAEF4CC11FB93AD200474C07 /* Me.png in Resources */ = {isa = PBXBuildFile; fileRef = AAEF4CC01FB93AD200474C07 /* Me.png */; };
 		AAEF4CC41FB9615F00474C07 /* MeInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */; };
 		AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF4CC61FB9646500474C07 /* AboutYouthViewController.m */; };
@@ -171,6 +172,8 @@
 		AAEEEA4B1FCF9CBA0012A695 /* Request.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		AAEEEA4D1FCF9CD50012A695 /* RequestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestTableViewCell.h; sourceTree = "<group>"; };
 		AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestTableViewCell.m; sourceTree = "<group>"; };
+		AAEEEA501FCFE5130012A695 /* RequestLeaveDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestLeaveDetailViewController.h; sourceTree = "<group>"; };
+		AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestLeaveDetailViewController.m; sourceTree = "<group>"; };
 		AAEF4CC01FB93AD200474C07 /* Me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Me.png; sourceTree = "<group>"; };
 		AAEF4CC21FB9615F00474C07 /* MeInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeInformationViewController.h; sourceTree = "<group>"; };
 		AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeInformationViewController.m; sourceTree = "<group>"; };
@@ -453,6 +456,8 @@
 				AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */,
 				AABD8ADF1FC81598005058BD /* ACPApprovelViewController.h */,
 				AABD8AE01FC81598005058BD /* ACPApprovelViewController.m */,
+				AAEEEA501FCFE5130012A695 /* RequestLeaveDetailViewController.h */,
+				AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */,
 			);
 			path = ApprovalCCPendingApproval;
 			sourceTree = "<group>";
@@ -687,6 +692,7 @@
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
+				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
