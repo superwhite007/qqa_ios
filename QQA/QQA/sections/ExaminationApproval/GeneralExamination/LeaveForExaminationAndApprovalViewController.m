@@ -126,7 +126,7 @@
     self.endTimeStr = [NSString new];
     
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 30)];
-    introducePersonLabel.backgroundColor = [UIColor redColor];
+//    introducePersonLabel.backgroundColor = [UIColor redColor];
     NSMutableString * introduceStr = [NSMutableString stringWithFormat:@"11111"];
     
     [self.view addSubview:introducePersonLabel];

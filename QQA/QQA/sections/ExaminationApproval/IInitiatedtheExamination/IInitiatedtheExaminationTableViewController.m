@@ -40,7 +40,7 @@ static NSString * identifier = @"CELL";
     [self.datadource addObject:dict1];
     [self.datadource addObject:dict2];
     
-    [self.navigationItem setTitle:@"发起审批"];
+    [self.navigationItem setTitle:_titleIdentifier];
     
     [self.tableView registerClass:[IInitiatedtheExaminationTableViewCell class] forCellReuseIdentifier:identifier];
     
@@ -108,6 +108,7 @@ static NSString * identifier = @"CELL";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger number =  indexPath.row;
+    
     if (number == 0) {
         LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
         [self.navigationController pushViewController:leaveVC animated:YES];

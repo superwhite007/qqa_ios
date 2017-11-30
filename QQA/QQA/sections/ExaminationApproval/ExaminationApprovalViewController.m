@@ -139,14 +139,18 @@ static NSString *identifier = @"CELL";
 //        [self.navigationController pushViewController:examinationVC animated:YES];
 
         IInitiatedtheExaminationTableViewController * examinationVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
+        examinationVC.titleIdentifier = @"发起审批";
         [self.navigationController pushViewController:examinationVC animated:YES];
 
         
         
         
     } else if (indexPath.row == 1) {
-        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
-        examinationVC.titleStr = @"待审批的";
+//        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+//        examinationVC.titleStr = @"待审批的";
+//        [self.navigationController pushViewController:examinationVC animated:YES];
+        IInitiatedtheExaminationTableViewController * examinationVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
+        examinationVC.titleIdentifier = @"待审批的";
         [self.navigationController pushViewController:examinationVC animated:YES];
 
     } else if (indexPath.row == 2) {

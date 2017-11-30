@@ -10,4 +10,6 @@
 
 @interface IInitiatedtheExaminationTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSString * titleIdentifier;
+
 @end
