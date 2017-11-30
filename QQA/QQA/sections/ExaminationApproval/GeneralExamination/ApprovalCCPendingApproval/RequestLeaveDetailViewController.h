@@ -10,4 +10,8 @@
 
 @interface RequestLeaveDetailViewController : UIViewController
 
+@property (nonatomic, strong) NSString * titleStr;
+@property (nonatomic, strong) NSString * urlStr;
+@property (nonatomic, strong) NSString * leaveOrAskId;
+
 @end

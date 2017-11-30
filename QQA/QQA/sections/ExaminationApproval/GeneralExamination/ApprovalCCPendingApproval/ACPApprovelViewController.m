@@ -10,11 +10,12 @@
 #import "ACPApproval.h"
 #import "ACPApprovalListView.h"
 #import "ACPApprovalTableViewCell.h"
-
 #import "Request.h"
 #import "RequestTableViewCell.h"
 
 #import "RequestAndLeaveDetailsViewController.h"
+
+#import "RequestLeaveDetailViewController.h"
 
 @interface ACPApprovelViewController ()
 
@@ -283,6 +284,14 @@ static NSString *identifierOne = @"Cell";
         detailVC.leaveIdStr =  approval.askId;
         detailVC.titleIdentStr = @"请示件";
         detailVC.urlStr = @"/v1/api/ask/show";
+        [self.navigationController pushViewController:detailVC animated:NO];
+        
+    }else if([_titleStr isEqualToString:@"已审批的"]){
+        RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
+       ACPApproval * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveOrAskId =  approval.leaveId;
+        detailVC.titleStr = @"请假";
+//        detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
         
     }
