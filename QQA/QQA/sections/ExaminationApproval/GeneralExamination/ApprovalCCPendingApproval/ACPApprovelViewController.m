@@ -111,11 +111,11 @@ static NSString *identifier = @"Cell";
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
                                                         NSLog(@"\n\narray1: %@,\n ", array1);
-                                                        
+                                                         [self.datasouceArray removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
                                                             ACPApproval * aCPApproval = [ACPApproval new];
                                                             [aCPApproval setValuesForKeysWithDictionary:dict];
-                                                            [self.datasouceArray removeAllObjects];
+//                                                            [self.datasouceArray removeAllObjects];
                                                             [self.datasouceArray addObject:aCPApproval];
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -239,10 +239,19 @@ static NSString *identifier = @"Cell";
 //    detailVC.approval = self.datasouceArray[indexPath.row];
     if (_isEmpty) {
         NSLog(@"暂时没有数据");
-    }else if([_titleStr isEqualToString:@"待审批的"]){
+        
+    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"/v1/api/leave/index"]){
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveIdStr =  approval.leaveId;
+        detailVC.titleIdentStr = @"请假";
+        [self.navigationController pushViewController:detailVC animated:NO];
+        
+    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"v1/api/ask/index"]){
+        RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
+        ACPApproval * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveIdStr =  approval.leaveId;
+        detailVC.titleIdentStr = @"请示件";
         [self.navigationController pushViewController:detailVC animated:NO];
         
     }

@@ -65,7 +65,7 @@
     
     NSLog(@"%f, %f",iphoneWidth, iphoneHeight);
     NSLog(@"_leaveIdStr:%@", _leaveIdStr);
-    
+    [self.navigationItem setTitle:_titleIdentStr];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(sendApprovalMessagesToServer)];
     
     [self setViewAboutNameTimeReason];
@@ -89,11 +89,11 @@
     
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  134, (iphoneWidth  - 50) / 2 , 25)];
     _statusLabel.backgroundColor = [UIColor redColor];
-    [self.view addSubview:_statusLabel];
+    
     
     _statusReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  134, (iphoneWidth  - 50) / 2 , 25)];
     _statusReasonLabel.backgroundColor = [UIColor redColor];
-    [self.view addSubview:_statusReasonLabel];
+    
     
     
     _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 164, iphoneWidth / 2 - 25, 25)];
@@ -104,13 +104,21 @@
     _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  164, (iphoneWidth  - 50) / 2, 25)];
     _endTimeLabel.backgroundColor = [UIColor redColor];
     _endTimeLabel.adjustsFontSizeToFitWidth = YES;
-    [self.view addSubview:_endTimeLabel];
+    
     
     
     _longTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 194, iphoneWidth - 40, 25)];
     _longTimeLabel.backgroundColor = [UIColor redColor];
-    [self.view addSubview:_longTimeLabel];
-  
+    
+    
+    if ([_titleIdentStr isEqualToString:@"请假"]) {
+        [self.view addSubview:_statusLabel];
+        [self.view addSubview:_statusReasonLabel];
+        [self.view addSubview:_endTimeLabel];
+        [self.view addSubview:_longTimeLabel];
+    }
+    
+    
     
     
     
@@ -333,14 +341,12 @@
     _nameLabel.text = [mArray[0] objectForKey:@"username"];
     
 //    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
-    
     _created_atTimeLabel.text = [mArray[0] objectForKey:@"createdAt"];
+    _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [mArray[0] objectForKey:@"starttime"]];
+     _reasonLabel.text = [mArray[0] objectForKey:@"reason"];
     
     _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [mArray[0] objectForKey:@"type"]];
-    _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [mArray[0] objectForKey:@"starttime"]];
     _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [mArray[0] objectForKey:@"endtime"]];
-    
-    _reasonLabel.text = [mArray[0] objectForKey:@"reason"];
     _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [mArray[0] objectForKey:@"betweentime"]];
     
 //    [self ApproverAndCC];

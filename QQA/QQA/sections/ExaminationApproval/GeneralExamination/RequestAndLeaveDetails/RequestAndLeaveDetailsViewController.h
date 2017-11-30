@@ -15,5 +15,6 @@
 @property (nonatomic, strong) UITextView * messageTextView;
 //@property (nonatomic, copy) ACPApproval * approval;
 @property (nonatomic, strong) NSString * leaveIdStr;
+@property (nonatomic, strong) NSString * titleIdentStr;
 
 @end
