@@ -244,7 +244,7 @@
     self.datasoureKeysSendScopeArray = mutabelAry;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"%@",self.datasoureKeysSendScopeArray);
+//        NSLog(@"%@",self.datasoureKeysSendScopeArray);
         [self.tableView  reloadData];
     });
 

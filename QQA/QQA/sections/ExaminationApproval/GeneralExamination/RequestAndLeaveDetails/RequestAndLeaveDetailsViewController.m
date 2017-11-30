@@ -99,7 +99,7 @@
     _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 164, iphoneWidth / 2 - 25, 25)];
     _startTimeLabel.backgroundColor = [UIColor redColor];
     _startTimeLabel.adjustsFontSizeToFitWidth = YES;
-    [self.view addSubview:_startTimeLabel];
+    
     
     _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  164, (iphoneWidth  - 50) / 2, 25)];
     _endTimeLabel.backgroundColor = [UIColor redColor];
@@ -112,10 +112,14 @@
     
     
     if ([_titleIdentStr isEqualToString:@"请假"]) {
+        [self.view addSubview:_startTimeLabel];
         [self.view addSubview:_statusLabel];
         [self.view addSubview:_statusReasonLabel];
         [self.view addSubview:_endTimeLabel];
         [self.view addSubview:_longTimeLabel];
+        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 234 , iphoneWidth - 40, iphoneHeight / 7 + 15)];
+    } else{
+        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 134 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
     }
     
     
@@ -123,7 +127,7 @@
     
     
     
-    _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 234 , iphoneWidth - 40, iphoneHeight / 7 + 15)];
+    
     _reasonLabel.backgroundColor = [UIColor redColor];
     _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
     _reasonLabel.layer.borderWidth = 1;
@@ -134,6 +138,8 @@
 }
 
 -(void)setTextView{
+    
+   
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 229 + iphoneWidth * 1 / 3, iphoneWidth - 40, iphoneHeight / 7 - 20)];
     //    messageTextView.backgroundColor = [UIColor blueColor];
     _messageTextView.font = [UIFont systemFontOfSize:24];
@@ -187,14 +193,14 @@
     for (int i = 0; i < [_datasourceMArray count]; i++) {
         NSString * str = [_datasourceMArray[i] objectForKey:@"type"] ;
         if ([str isEqualToString:@"approver"]) {
-            NSLog(@"");
+//            NSLog(@"");
             NSDictionary * dict = _datasourceMArray[i];
             [self.approvalMarray addObject:dict];
-            NSLog(@"%@", self.approvalMarray);
+//            NSLog(@"%@", self.approvalMarray);
         } else if ([str isEqualToString:@"reader"]){
             
             [self.cCMarray addObject:_datasourceMArray[i]];
-            NSLog(@"111%@", self.cCMarray);
+//            NSLog(@"111%@", self.cCMarray);
         }
     }
     if ([self.approvalMarray count] == 0 || self.cCMarray.count == 0) {
@@ -209,7 +215,7 @@
     
     NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
     
-    NSLog(@"peopleOfApprover, peopleOfCC:111111%@,\n %@\n", self.approvalMarray, self.cCMarray);
+//    NSLog(@"peopleOfApprover, peopleOfCC:111111%@,\n %@\n", self.approvalMarray, self.cCMarray);
     
     for (int i = 0 ; i < 2 ; i++ ) {
         UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneHeight *  7 / 10 + (iphoneHeight * 1 / 10  + 20 )  * i + 30,  60, 30)];//iphoneHeight * ( 7 / 10  + i * 1 / 10)
@@ -258,7 +264,7 @@
 -(void)loadDataAndShowWithPageNum:(int)page
 {
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/show", CONST_SERVER_ADDRESS]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, _urlStr]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -279,9 +285,7 @@
         [mdict setObject:_leaveIdStr forKey:@"askId"];
     }
     
-   
-    
-    
+
     NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
@@ -299,7 +303,7 @@
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                     NSLog(@"Request: %@,\n ", dictArray);
                                                     
-                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 ) {
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 || [[dictArray[0] objectForKey:@"message"] intValue] == 6019) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -307,7 +311,7 @@
                                                          });
                                                        
                                                         [array1 removeObjectAtIndex:0];
-                                                        NSLog(@"\n\narray1: %@,\n ", array1);
+//                                                        NSLog(@"4444444444\n\narray1: %@,\n ", array1);
                                                         self.datasourceMArray = array1;
                                                         
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -348,7 +352,13 @@
 //    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
     _created_atTimeLabel.text = [mArray[0] objectForKey:@"createdAt"];
     _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [mArray[0] objectForKey:@"starttime"]];
-     _reasonLabel.text = [mArray[0] objectForKey:@"reason"];
+    
+    if ([_titleIdentStr isEqualToString:@"请假"]) {
+       _reasonLabel.text = [mArray[0] objectForKey:@"reason"];
+    } else{
+       _reasonLabel.text = [mArray[0] objectForKey:@"content"];
+    }
+    
     
     _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [mArray[0] objectForKey:@"type"]];
     _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [mArray[0] objectForKey:@"endtime"]];
@@ -411,7 +421,15 @@
 
 -(void)sendApprovalMessagesToServer{
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/update", CONST_SERVER_ADDRESS]];
+    ///v1/api/ask/update
+    NSString  * uMStr =  [NSMutableString new];
+    if ([_titleIdentStr isEqualToString:@"请假"]) {
+        uMStr = @"/v1/api/leave/update";
+    } else{
+        uMStr = @"/v1/api/ask/update";
+    }
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, uMStr]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -426,7 +444,14 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
-    [mdict setObject:_leaveIdStr forKey:@"leaveId"];
+    
+    
+    if ([_titleIdentStr isEqualToString:@"请假"]) {
+        [mdict setObject:_leaveIdStr forKey:@"leaveId"];
+    } else{
+        [mdict setObject:_leaveIdStr forKey:@"askId"];
+    }
+ 
     if (_buttonAgree) {
         [mdict setObject:@"agree" forKey:@"status"];
     } else {
@@ -467,7 +492,7 @@
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                     NSLog(@"1234567dict: %@,\n ", dict);
                                                     
-                                                    if ( [[dict objectForKey:@"message"] intValue] == 6010 ) {
+                                                    if ( [[dict objectForKey:@"message"] intValue] == 6010 || [[dict objectForKey:@"message"] intValue] == 6022) {
                                                         self.isEmpty = NO;
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self alert:@"审批完成"];

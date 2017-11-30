@@ -16,5 +16,7 @@
 //@property (nonatomic, copy) ACPApproval * approval;
 @property (nonatomic, strong) NSString * leaveIdStr;
 @property (nonatomic, strong) NSString * titleIdentStr;
+@property (nonatomic, strong) NSString * urlStr;
+@property (nonatomic, strong) NSString * semdUrlStr;
 
 @end

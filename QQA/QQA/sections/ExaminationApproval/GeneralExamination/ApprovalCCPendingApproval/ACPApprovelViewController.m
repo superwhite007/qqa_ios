@@ -234,7 +234,6 @@ static NSString *identifierOne = @"Cell";
             cell = [[RequestTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifierOne] ;
         }
         Request * request = self.datasouceArray[indexPath.row];
-        NSLog(@"9999999:%@", request.username);
         
         cell.request = request;
         return cell;
@@ -275,13 +274,15 @@ static NSString *identifierOne = @"Cell";
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveIdStr =  approval.leaveId;
         detailVC.titleIdentStr = @"请假";
+        detailVC.urlStr = @"/v1/api/leave/show";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"v1/api/ask/index"]){
+    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"/v1/api/ask/index"]){
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
         Request * approval = self.datasouceArray[indexPath.row];
-//        detailVC.leaveIdStr =  approval.askId;
+        detailVC.leaveIdStr =  approval.askId;
         detailVC.titleIdentStr = @"请示件";
+        detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
         
     }
