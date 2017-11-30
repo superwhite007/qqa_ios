@@ -11,6 +11,9 @@
 #import "ACPApprovalListView.h"
 #import "ACPApprovalTableViewCell.h"
 
+#import "Request.h"
+#import "RequestTableViewCell.h"
+
 #import "RequestAndLeaveDetailsViewController.h"
 
 @interface ACPApprovelViewController ()
@@ -26,6 +29,7 @@
 @implementation ACPApprovelViewController
 
 static NSString *identifier = @"Cell";
+static NSString *identifierOne = @"Cell";
 
 -(void)loadView{
     self.aCPApprovalListView = [[ACPApprovalListView alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -110,18 +114,16 @@ static NSString *identifier = @"Cell";
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
-                                                        NSLog(@"\n\narray1: %@,\n ", array1);
-                                                         [self.datasouceArray removeAllObjects];
+                                                        [self.datasouceArray removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
                                                             ACPApproval * aCPApproval = [ACPApproval new];
                                                             [aCPApproval setValuesForKeysWithDictionary:dict];
-//                                                            [self.datasouceArray removeAllObjects];
                                                             [self.datasouceArray addObject:aCPApproval];
                                                             
-                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                [self.aCPApprovalListView.tableView  reloadData];
-                                                            });
                                                         }
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.aCPApprovalListView.tableView  reloadData];
+                                                        });
                                                     }else if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6017 ) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
@@ -129,15 +131,13 @@ static NSString *identifier = @"Cell";
                                                         NSLog(@"\n\narray1: %@,\n ", array1);
                                                         [self.datasouceArray removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
-                                                            ACPApproval * aCPApproval = [ACPApproval new];
-                                                            [aCPApproval setValuesForKeysWithDictionary:dict];
-                                                            //                                                            [self.datasouceArray removeAllObjects];
-                                                            [self.datasouceArray addObject:aCPApproval];
-                                                            
-                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                [self.aCPApprovalListView.tableView  reloadData];
-                                                            });
+                                                            Request * request = [Request new];
+                                                            [request setValuesForKeysWithDictionary:dict];
+                                                            [self.datasouceArray addObject:request];
                                                         }
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.aCPApprovalListView.tableView  reloadData];
+                                                        });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
@@ -185,9 +185,17 @@ static NSString *identifier = @"Cell";
     self.aCPApprovalListView.tableView.delegate = self;
     self.aCPApprovalListView.tableView.dataSource = self;
     
+    if ([_urlStr isEqualToString:@"/v1/api/leave/index"]){
+        
+         [self.aCPApprovalListView.tableView registerClass:[ACPApprovalTableViewCell class] forCellReuseIdentifier:identifier];
+    } else{
+        
+        [self.aCPApprovalListView.tableView registerClass:[RequestTableViewCell class] forCellReuseIdentifier:identifierOne];
+        
+    }
+        
     
-    [self.aCPApprovalListView.tableView registerClass:[ACPApprovalTableViewCell class] forCellReuseIdentifier:identifier];
-    
+   
     
     
     
@@ -205,21 +213,35 @@ static NSString *identifier = @"Cell";
     return self.datasouceArray.count;
 }
 
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
 {
-    
-    
-    
-//    //添加动画效果
-//    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
-//    [UIView animateWithDuration:0.5 animations:^{
-//        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-//    }];
-    
-    if (_isEmpty) {
+    if ([_urlStr isEqualToString:@"/v1/api/leave/index"] && !_isEmpty){
+        
+        ACPApprovalTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        if (!cell) {
+            cell = [[ACPApprovalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] ;
+        }
+        ACPApproval * approval = self.datasouceArray[indexPath.row];
+        cell.aCPApproval = approval;
+        return cell;
+        
+    }else if ([_urlStr isEqualToString:@"/v1/api/ask/index"] && !_isEmpty ){
+        
+        RequestTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierOne forIndexPath:indexPath];
+        if (!cell) {
+            cell = [[RequestTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifierOne] ;
+        }
+        Request * request = self.datasouceArray[indexPath.row];
+        NSLog(@"9999999:%@", request.username);
+        
+        cell.request = request;
+        return cell;
+        
+    } else {
         
         UITableViewCell * acell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//        acell.backgroundView.backgroundColor = [UIColor whiteColor];
         if (!acell) {
             acell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
@@ -227,19 +249,11 @@ static NSString *identifier = @"Cell";
         acell.textLabel.textAlignment = NSTextAlignmentCenter;
         return acell;
         
-    } else{
-        ACPApprovalTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-        
-        if (!cell) {
-            cell = [[ACPApprovalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] ;
-        }
-        ACPApproval * approval = self.datasouceArray[indexPath.row];
-        cell.aCPApproval = approval;
-        return cell;
     }
-    
-//    return cell;
+        
+   
 }
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -263,10 +277,10 @@ static NSString *identifier = @"Cell";
         detailVC.titleIdentStr = @"请假";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"/v1/api/ask/index1"]){
+    }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"v1/api/ask/index"]){
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
-        ACPApproval * approval = self.datasouceArray[indexPath.row];
-        detailVC.leaveIdStr =  approval.leaveId;
+        Request * approval = self.datasouceArray[indexPath.row];
+//        detailVC.leaveIdStr =  approval.askId;
         detailVC.titleIdentStr = @"请示件";
         [self.navigationController pushViewController:detailVC animated:NO];
         
