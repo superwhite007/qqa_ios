@@ -49,7 +49,7 @@ static NSString *identifier = @"Cell";
 #pragma mark - loadDataAndShow
 -(void)loadDataAndShowWithPageNum:(int)page
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://172.19.12.6/v1/api/leave/index"]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, _urlStr]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;

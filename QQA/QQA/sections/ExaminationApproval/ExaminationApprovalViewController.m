@@ -156,16 +156,20 @@ static NSString *identifier = @"CELL";
     } else if (indexPath.row == 2) {
         ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
         examinationVC.titleStr = @"已审批的";
+        examinationVC.urlStr = @"/v1/api/leave/index";
+        
         [self.navigationController pushViewController:examinationVC animated:YES];
         
     } else if (indexPath.row == 3) {
         ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
         examinationVC.titleStr = @"未审批的";
+        examinationVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:examinationVC animated:YES];
 
     } else if (indexPath.row == 4) {
         ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
         examinationVC.titleStr = @"抄送我的";
+        examinationVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:examinationVC animated:YES];
 //        RequestAndLeaveDetailsViewController * examinationVC = [[RequestAndLeaveDetailsViewController alloc] init];
 //        [self.navigationController pushViewController:examinationVC animated:YES];

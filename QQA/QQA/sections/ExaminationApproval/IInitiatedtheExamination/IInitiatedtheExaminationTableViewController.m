@@ -10,6 +10,7 @@
 #import "IInitiatedtheExaminationTableViewCell.h"
 #import "LeaveForExaminationAndApprovalViewController.h"
 #import "RequestForInstructionViewController.h"
+#import "ACPApprovelViewController.h"
 
 @interface IInitiatedtheExaminationTableViewController ()
 
@@ -31,14 +32,29 @@ static NSString * identifier = @"CELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假 - 事假、病假等" };
-    NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 -- 请示领导审批" };
-    NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 -- 工作任务的描述" };
+    if ([_titleIdentifier isEqualToString:@"发起审批"]) {
+        NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假 - 事假、病假等" };
+        NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 -- 请示领导审批" };
+        NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 -- 工作任务的描述" };
+        
+        
+        [self.datadource addObject:dict];
+        [self.datadource addObject:dict1];
+        [self.datadource addObject:dict2];
+    } else if ([_titleIdentifier isEqualToString:@"待审批的"]){
+        NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅假条" };
+        NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅请示件" };
+        NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅工单" };
+        
+        
+        [self.datadource addObject:dict];
+        [self.datadource addObject:dict1];
+        [self.datadource addObject:dict2];
+        
+        
+    }
     
-  
-    [self.datadource addObject:dict];
-    [self.datadource addObject:dict1];
-    [self.datadource addObject:dict2];
+   
     
     [self.navigationItem setTitle:_titleIdentifier];
     
@@ -109,21 +125,50 @@ static NSString * identifier = @"CELL";
 {
     NSInteger number =  indexPath.row;
     
-    if (number == 0) {
-        LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
-        [self.navigationController pushViewController:leaveVC animated:YES];
+    
+    if ([_titleIdentifier isEqualToString:@"发起审批"]) {
+        if (number == 0) {
+            LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
+            [self.navigationController pushViewController:leaveVC animated:YES];
+            
+        } else if (number == 1){
+            RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+            [self.navigationController pushViewController:leaveVC animated:YES];
+            
+            
+        }else if (number == 2){
+            //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+            //        [self.navigationController pushViewController:leaveVC animated:YES];
+            
+        }
+    } else if ([_titleIdentifier isEqualToString:@"待审批的"]){
+        if (number == 0) {
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"待审批的";
+            examinationVC.urlStr = @"/v1/api/leave/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+
+            
+        } else if (number == 1){
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"待审批的";
+            examinationVC.urlStr = @"v1/api/ask/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+            
+            
+        }else if (number == 2){
+            //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+            //        [self.navigationController pushViewController:leaveVC animated:YES];
+            
+        }
         
-    } else if (number == 1){
-        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
-        [self.navigationController pushViewController:leaveVC animated:YES];
-        
-        
-    }else if (number == 2){
-//        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
-//        [self.navigationController pushViewController:leaveVC animated:YES];
         
     }
-
+    
+    
+   
     
     
 }

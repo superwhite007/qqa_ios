@@ -11,5 +11,6 @@
 @interface ACPApprovelViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSString * titleStr;
+@property (nonatomic, strong) NSString * urlStr;
 
 @end
