@@ -135,9 +135,7 @@
 //
 //    NSArray * peopleOfApprover = @[@"A", @"AA", @"A", @"A"];
 //    NSArray * peopleOfCC = @[@"CC", @"CC", @"CC", @"CC", @"CC"];
-    
-
-    
+   
     NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
     
@@ -178,13 +176,6 @@
         }
     }
 }
-
-
-    
-    
-
-
-
 
 -(void)chageColor{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];

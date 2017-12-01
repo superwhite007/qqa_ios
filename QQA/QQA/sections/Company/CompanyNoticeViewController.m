@@ -94,6 +94,8 @@ static NSString *identifier = @"Cell";
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                     [array1 removeObjectAtIndex:0];
                                                     
+                                                    [_datasource removeAllObjects];
+                                                    
                                                     for (NSDictionary * dict in array1) {
                                                         [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"createdAt"]]];
                                                         [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"content"]]];
