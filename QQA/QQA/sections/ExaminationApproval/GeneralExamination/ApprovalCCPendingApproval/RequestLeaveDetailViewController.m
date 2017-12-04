@@ -55,14 +55,14 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor yellowColor];
-    
-//    [self ApproverAndCC];
+    [self loadNewData];
     [self setViewAboutNameTimeReason];
+   
     
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self loadNewData];
+//    [self loadNewData];
     //获取数据
 }
 
@@ -135,6 +135,8 @@
 
 -(void)setvaleKeyAndValue:(NSMutableArray *)mArray{
     
+    NSLog(@"RequestLeaveDetailViewController：mArray:%@", mArray[0]);
+    
     _nameLabel.text = [mArray[0] objectForKey:@"username"];
     
     //    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
@@ -146,8 +148,7 @@
     } else{
         _reasonLabel.text = [mArray[0] objectForKey:@"content"];
     }
-    
-    
+
     _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [mArray[0] objectForKey:@"type"]];
     _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [mArray[0] objectForKey:@"endtime"]];
     _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [mArray[0] objectForKey:@"betweentime"]];
@@ -157,10 +158,6 @@
     [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
     
 }
-
-
-
-
 
 
 -(void)loadNewData
@@ -185,7 +182,7 @@
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, _urlStr]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.timeoutInterval = 10.0;
+    request.timeoutInterval = 30.0;
     request.HTTPMethod = @"POST";
     
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
@@ -219,9 +216,9 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"requestleave: %@,\n ", dictArray);
+//                                                    NSLog(@"requestleave: %@,\n ", dictArray);
                                                     
-                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 ) {
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 ||  [[dictArray[0] objectForKey:@"message"] intValue] == 6019 ) {
 
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -255,21 +252,15 @@
 
 -(void)ApproverAndCC{
     
-//    NSLog(@"66663464%@", self.datasourceMArray);
-//
-//
-//
+//    NSLog(@"请假请示件详情页：%@", self.datasourceMArray);
+    
     for (int i = 0; i < [_datasourceMArray count]; i++) {
         NSString * str = [_datasourceMArray[i] objectForKey:@"type"] ;
         if ([str isEqualToString:@"approver"]) {
-            //            NSLog(@"");
             NSDictionary * dict = _datasourceMArray[i];
             [self.approvalMarray addObject:dict];
-            //            NSLog(@"%@", self.approvalMarray);
         } else if ([str isEqualToString:@"reader"]){
-
             [self.cCMarray addObject:_datasourceMArray[i]];
-            //            NSLog(@"111%@", self.cCMarray);
         }
     }
     if ([self.approvalMarray count] == 0 || self.cCMarray.count == 0) {
@@ -278,16 +269,10 @@
     NSArray * titleArray =@[@"审批人", @"抄送人"];
     NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
-//
-//        NSArray * peopleOfApprover = @[@"A", @"AA", @"A", @"A"];
-//        NSArray * peopleOfCC = @[@"CC", @"CC", @"CC", @"CC", @"CC"];
-//
+    
     NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
-    
-    //    NSLog(@"peopleOfApprover, peopleOfCC:111111%@,\n %@\n", self.approvalMarray, self.cCMarray);
-    
     for (int i = 0 ; i < 2 ; i++ ) {
-        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneHeight *  7 / 10 + (iphoneHeight * 1 / 10  + 20 )  * i + 30,  60, 30)];//iphoneHeight * ( 7 / 10  + i * 1 / 10)
+        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneHeight *  7 / 10 + (iphoneHeight * 1 / 10  + 20 )  * i + 30,  60, 30)];
         reasonTitleLabel.text = titleArray[i];
         reasonTitleLabel.textAlignment = NSTextAlignmentLeft;
         //                reasonTitleLabel.backgroundColor = [UIColor redColor];
@@ -305,9 +290,9 @@
             if (i == 0) {
                 NSString * str = [NSString stringWithFormat:@"%@", [mArrayOFApproverAndCC[i][j] objectForKey:@"type"]];
                 if ([str isEqualToString:@"Agreed"]) {
-                    titleLabe.backgroundColor = [UIColor greenColor];  //Denyed
+                    titleLabe.backgroundColor = [UIColor greenColor];
                 } else if ([str isEqualToString:@"Denyed"]) {
-                    titleLabe.backgroundColor = [UIColor redColor];  //Denyed
+                    titleLabe.backgroundColor = [UIColor redColor];  
                 }
             }
             [self.view addSubview:titleLabe];
@@ -324,24 +309,10 @@
 }
 
 
-
-
-
-
-
-
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
-
 
 
 /*

@@ -91,16 +91,13 @@ static NSString *identifierOne = @"Cell";
         [mdict setObject:@"1" forKey:@"pageNum"];
     }
     
-   
-    
-    NSLog(@"55555555%@%@", CONST_SERVER_ADDRESS, _urlStr);
-    NSLog( @"66666666%@", mdict);
+//    NSLog(@"55555555%@%@", CONST_SERVER_ADDRESS, _urlStr);
+//    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
@@ -109,7 +106,7 @@ static NSString *identifierOne = @"Cell";
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
+//                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
                                                     
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 ) {
                                                         self.isEmpty = NO;
@@ -129,7 +126,7 @@ static NSString *identifierOne = @"Cell";
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
-                                                        NSLog(@"\n\narray1: %@,\n ", array1);
+//                                                        NSLog(@"\n\narray1: %@,\n ", array1);
                                                         [self.datasouceArray removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
                                                             Request * request = [Request new];
@@ -142,7 +139,7 @@ static NSString *identifierOne = @"Cell";
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1234567dict: %@,\n ", dict);
+//                                                    NSLog(@"1234567dict: %@,\n ", dict);
                                                     
                                                     if ( [[dict objectForKey:@"message"] intValue] == 6006 ){
                                                         self.isEmpty = YES;
@@ -177,12 +174,7 @@ static NSString *identifierOne = @"Cell";
     
     self.datasouceArray = [NSMutableArray arrayWithCapacity:1];
     
-//    [self.datasouceArray addObject:@"1"];
-//    [self.datasouceArray addObject:@"2"];
-//    [self.datasouceArray addObject:@"3"];
-//    [self.datasouceArray addObject:@"4"];
-//    [self.datasouceArray addObject:@"5"];
-    
+
     self.aCPApprovalListView.tableView.delegate = self;
     self.aCPApprovalListView.tableView.dataSource = self;
     
@@ -195,10 +187,6 @@ static NSString *identifierOne = @"Cell";
         
     }
         
-    
-   
-    
-    
     
 }
 
@@ -265,8 +253,6 @@ static NSString *identifierOne = @"Cell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-//    detailVC.approval = self.datasouceArray[indexPath.row];
     if (_isEmpty) {
         NSLog(@"暂时没有数据");
         
@@ -286,12 +272,57 @@ static NSString *identifierOne = @"Cell";
         detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"已审批的"]){
+    }else if([_titleStr isEqualToString:@"已审批的"] && [_urlStr isEqualToString:@"/v1/api/leave/index"]){
+        
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
-       ACPApproval * approval = self.datasouceArray[indexPath.row];
+        ACPApproval * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveOrAskId =  approval.leaveId;
         detailVC.titleStr = @"请假";
-//        detailVC.urlStr = @"/v1/api/ask/show";
+        detailVC.urlStr = @"/v1/api/leave/index";
+        [self.navigationController pushViewController:detailVC animated:NO];
+        
+    }else if([_titleStr isEqualToString:@"已审批的"] && [_urlStr isEqualToString:@"/v1/api/ask/index"]){
+        
+        RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
+        Request * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveOrAskId =  approval.askId;
+        detailVC.titleStr = @"请示件";
+        detailVC.urlStr = @"/v1/api/ask/show";
+        [self.navigationController pushViewController:detailVC animated:NO];
+        
+    }else if([_titleStr isEqualToString:@"未审批的"]  && [_urlStr isEqualToString:@"/v1/api/leave/index"] ){
+        
+        RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
+        ACPApproval * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveOrAskId =  approval.leaveId;
+        detailVC.titleStr = @"请假";
+        detailVC.urlStr = @"/v1/api/leave/index";
+        [self.navigationController pushViewController:detailVC animated:NO];
+        
+    }else if([_titleStr isEqualToString:@"未审批的"]  && [_urlStr isEqualToString:@"/v1/api/ask/index"] ){
+        RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
+        
+        Request * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveOrAskId =  approval.askId;
+        detailVC.titleStr = @"请示件";
+        detailVC.urlStr = @"/v1/api/ask/show";
+        [self.navigationController pushViewController:detailVC animated:NO];
+        
+    }else if([_titleStr isEqualToString:@"抄送我的"]  && [_urlStr isEqualToString:@"/v1/api/ask/index"] ){
+        RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
+        
+        Request * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveOrAskId =  approval.askId;
+        detailVC.titleStr = @"请示件";
+        detailVC.urlStr = @"/v1/api/ask/show";
+        [self.navigationController pushViewController:detailVC animated:NO];
+        
+    }else if([_titleStr isEqualToString:@"抄送我的"]  && [_urlStr isEqualToString:@"/v1/api/leave/index"] ){
+        RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
+        ACPApproval * approval = self.datasouceArray[indexPath.row];
+        detailVC.leaveOrAskId =  approval.leaveId;
+        detailVC.titleStr = @"请假";
+        detailVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:detailVC animated:NO];
         
     }

@@ -68,8 +68,10 @@
     [self.navigationItem setTitle:_titleIdentStr];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(sendApprovalMessagesToServer)];
     
+    [self loadNewData];
     [self setViewAboutNameTimeReason];
     [self setTextView];
+  
     
     
 }
@@ -249,7 +251,7 @@
 
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self loadNewData];
+//    [self loadNewData];
     //获取数据
 }
 -(void)loadNewData
@@ -483,7 +485,7 @@
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6010 ) {
                                                         self.isEmpty = NO;
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            [self alert:@"审批完成1"];
+                                                            [self alert:@"审批完成"];
                                                         });
                                                         
                                                         
