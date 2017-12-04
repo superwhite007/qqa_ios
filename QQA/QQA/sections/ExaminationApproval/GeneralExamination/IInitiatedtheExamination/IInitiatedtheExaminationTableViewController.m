@@ -52,6 +52,39 @@ static NSString * identifier = @"CELL";
         [self.datadource addObject:dict2];
         
         
+    }else if ([_titleIdentifier isEqualToString:@"已审批的"]){
+        NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅假条" };
+        NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅请示件" };
+        NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅工单" };
+        
+        
+        [self.datadource addObject:dict];
+        [self.datadource addObject:dict1];
+        [self.datadource addObject:dict2];
+        
+        
+    }else if ([_titleIdentifier isEqualToString:@"未审批的"]){
+        NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"未批阅假条" };
+        NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅请示件" };
+        NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅工单" };
+        
+        
+        [self.datadource addObject:dict];
+        [self.datadource addObject:dict1];
+        [self.datadource addObject:dict2];
+        
+        
+    }else if ([_titleIdentifier isEqualToString:@"抄送我的"]){
+        NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送假条" };
+        NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送请示件" };
+        NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送工单" };
+        
+        
+        [self.datadource addObject:dict];
+        [self.datadource addObject:dict1];
+        [self.datadource addObject:dict2];
+        
+        
     }
     
    
@@ -148,7 +181,7 @@ static NSString * identifier = @"CELL";
             examinationVC.titleStr = @"待审批的";
             examinationVC.urlStr = @"/v1/api/leave/index";
             [self.navigationController pushViewController:examinationVC animated:YES];
-
+            
             
         } else if (number == 1){
             
@@ -163,10 +196,72 @@ static NSString * identifier = @"CELL";
             //        [self.navigationController pushViewController:leaveVC animated:YES];
             
         }
-        
-        
+    }else if ([_titleIdentifier isEqualToString:@"已审批的"]){
+        if (number == 0) {
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"已审批的";
+            examinationVC.urlStr = @"/v1/api/leave/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+            
+        } else if (number == 1){
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"待审批的";
+            examinationVC.urlStr = @"/v1/api/ask/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+            
+            
+        }else if (number == 2){
+            //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+            //        [self.navigationController pushViewController:leaveVC animated:YES];
+            
+        }
+    }else if ([_titleIdentifier isEqualToString:@"未审批的"]){
+        if (number == 0) {
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"未审批的";
+            examinationVC.urlStr = @"/v1/api/leave/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+            
+            
+        } else if (number == 1){
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"未审批的";
+            examinationVC.urlStr = @"/v1/api/ask/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+            
+            
+        }else if (number == 2){
+            //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+            //        [self.navigationController pushViewController:leaveVC animated:YES];
+            
+        }
+    }else if ([_titleIdentifier isEqualToString:@"抄送我的"]){
+        if (number == 0) {
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"抄送我的";
+            examinationVC.urlStr = @"/v1/api/leave/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+            
+            
+        } else if (number == 1){
+            
+            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
+            examinationVC.titleStr = @"抄送我的";
+            examinationVC.urlStr = @"/v1/api/ask/index";
+            [self.navigationController pushViewController:examinationVC animated:YES];
+            
+            
+        }else if (number == 2){
+            //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+            //        [self.navigationController pushViewController:leaveVC animated:YES];
+            
+        }
     }
-    
     
    
     
