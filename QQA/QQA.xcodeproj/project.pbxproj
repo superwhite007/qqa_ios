@@ -17,9 +17,15 @@
 		AA1CEC8C1FA9602E00050EFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC8B1FA9602E00050EFC /* main.m */; };
 		AA1CEC961FA9602E00050EFC /* QQATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC951FA9602E00050EFC /* QQATests.m */; };
 		AA1CECA11FA9602E00050EFC /* QQAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECA01FA9602E00050EFC /* QQAUITests.m */; };
+		AA20C6971FD147BC0095AF0F /* CompanyBylawsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C6961FD147BC0095AF0F /* CompanyBylawsViewController.m */; };
+		AA20C69A1FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C6991FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m */; };
+		AA20C69D1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C69C1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m */; };
+		AA20C6A01FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C69F1FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.m */; };
+		AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C6A21FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m */; };
 		AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */; };
 		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
+		AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
 		AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */; };
@@ -97,6 +103,16 @@
 		AA1CECBC1FA96C1600050EFC /* first_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_h.png; sourceTree = "<group>"; };
 		AA1CECBD1FA96C1600050EFC /* oversea_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oversea_n.png; sourceTree = "<group>"; };
 		AA1CECBE1FA96C1600050EFC /* first_ll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_ll.png; sourceTree = "<group>"; };
+		AA20C6951FD147BC0095AF0F /* CompanyBylawsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyBylawsViewController.h; sourceTree = "<group>"; };
+		AA20C6961FD147BC0095AF0F /* CompanyBylawsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyBylawsViewController.m; sourceTree = "<group>"; };
+		AA20C6981FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyOrganizationalStructureViewController.h; sourceTree = "<group>"; };
+		AA20C6991FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyOrganizationalStructureViewController.m; sourceTree = "<group>"; };
+		AA20C69B1FD14E9A0095AF0F /* CompanyOrganizationalStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyOrganizationalStructure.h; sourceTree = "<group>"; };
+		AA20C69C1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyOrganizationalStructure.m; sourceTree = "<group>"; };
+		AA20C69E1FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyOrganizationalStructureTableViewCell.h; sourceTree = "<group>"; };
+		AA20C69F1FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyOrganizationalStructureTableViewCell.m; sourceTree = "<group>"; };
+		AA20C6A11FD14EF60095AF0F /* CompanyOrganizationalStructureListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyOrganizationalStructureListView.h; sourceTree = "<group>"; };
+		AA20C6A21FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyOrganizationalStructureListView.m; sourceTree = "<group>"; };
 		AA25BCD31FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedtheExaminationTableViewController.h; sourceTree = "<group>"; };
 		AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewController.m; sourceTree = "<group>"; };
 		AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedtheExaminationTableViewCell.h; sourceTree = "<group>"; };
@@ -104,6 +120,8 @@
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQA_PrefixHeader.pch; sourceTree = "<group>"; };
+		AA9B6AF31FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyinformationAndBylawsViewController.h; sourceTree = "<group>"; };
+		AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyinformationAndBylawsViewController.m; sourceTree = "<group>"; };
 		AAA169F81FA98E0F00F35475 /* AppTBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppTBViewController.h; sourceTree = "<group>"; };
 		AAA169F91FA98E0F00F35475 /* AppTBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppTBViewController.m; sourceTree = "<group>"; };
 		AAAC3D5B1FB0561F00D54265 /* PunchClockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchClockViewController.h; sourceTree = "<group>"; };
@@ -366,6 +384,24 @@
 			path = youth_info;
 			sourceTree = "<group>";
 		};
+		AA20C6931FD1475E0095AF0F /* CompanyNotice */ = {
+			isa = PBXGroup;
+			children = (
+				AAB3F8BB1FC7E010001327FA /* CompanyNoticeViewController.h */,
+				AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */,
+			);
+			path = CompanyNotice;
+			sourceTree = "<group>";
+		};
+		AA20C6941FD1477E0095AF0F /* Companyinformation */ = {
+			isa = PBXGroup;
+			children = (
+				AA9B6AF31FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.h */,
+				AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */,
+			);
+			path = Companyinformation;
+			sourceTree = "<group>";
+		};
 		AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +411,39 @@
 				AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */,
 			);
 			path = IInitiatedtheExamination;
+			sourceTree = "<group>";
+		};
+		AA9B6AF61FD1461800D8BC9E /* CompanyOrganizationalStructure */ = {
+			isa = PBXGroup;
+			children = (
+				AA20C69B1FD14E9A0095AF0F /* CompanyOrganizationalStructure.h */,
+				AA20C69C1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m */,
+				AA20C69E1FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.h */,
+				AA20C69F1FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.m */,
+				AA20C6A11FD14EF60095AF0F /* CompanyOrganizationalStructureListView.h */,
+				AA20C6A21FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m */,
+				AA20C6981FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.h */,
+				AA20C6991FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m */,
+				AA9B6AF71FD1462E00D8BC9E /* CompanyAddressBook */,
+			);
+			path = CompanyOrganizationalStructure;
+			sourceTree = "<group>";
+		};
+		AA9B6AF71FD1462E00D8BC9E /* CompanyAddressBook */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CompanyAddressBook;
+			sourceTree = "<group>";
+		};
+		AA9B6AF81FD1469F00D8BC9E /* CompanyBylaws */ = {
+			isa = PBXGroup;
+			children = (
+				AA20C6951FD147BC0095AF0F /* CompanyBylawsViewController.h */,
+				AA20C6961FD147BC0095AF0F /* CompanyBylawsViewController.m */,
+				AA20C6941FD1477E0095AF0F /* Companyinformation */,
+			);
+			path = CompanyBylaws;
 			sourceTree = "<group>";
 		};
 		AAA169F41FA98C8B00F35475 /* ExaminationApproval */ = {
@@ -405,8 +474,9 @@
 			children = (
 				AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */,
 				AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */,
-				AAB3F8BB1FC7E010001327FA /* CompanyNoticeViewController.h */,
-				AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */,
+				AA20C6931FD1475E0095AF0F /* CompanyNotice */,
+				AA9B6AF81FD1469F00D8BC9E /* CompanyBylaws */,
+				AA9B6AF61FD1461800D8BC9E /* CompanyOrganizationalStructure */,
 			);
 			path = Company;
 			sourceTree = "<group>";
@@ -687,6 +757,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA20C69D1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m in Sources */,
 				AAB4D4941FC959F600116355 /* UIView+Extension.m in Sources */,
 				AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */,
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
@@ -694,14 +765,18 @@
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
 				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
+				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
 				AAB4D4971FC95A9300116355 /* NSDate+Extension.m in Sources */,
 				AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */,
+				AA20C6A01FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.m in Sources */,
+				AA20C6971FD147BC0095AF0F /* CompanyBylawsViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
 				AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */,
 				AAB4D49B1FC95D1700116355 /* WSDatePickerView.m in Sources */,
+				AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */,
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
@@ -713,6 +788,7 @@
 				AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */,
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
+				AA20C69A1FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m in Sources */,
 				AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */,
 				AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,

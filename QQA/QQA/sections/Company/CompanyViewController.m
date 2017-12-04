@@ -9,6 +9,8 @@
 #import "CompanyViewController.h"
 #import "LanchViewController.h"
 #import "CompanyNoticeViewController.h"
+#import "CompanyinformationAndBylawsViewController.h"
+#import "CompanyOrganizationalStructureViewController.h"
 
 @interface CompanyViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -123,11 +125,28 @@ static NSString *identifier = @"CELL";
           CompanyNoticeViewController * companyNoticeVC = [CompanyNoticeViewController new];
           [self.navigationController pushViewController:companyNoticeVC animated:YES];
     
+        } else if (indexPath.row == 1) {
+//            CompanyinformationAndBylawsViewController * companyBylawsVC = [CompanyinformationAndBylawsViewController new];
+//            companyBylawsVC.transmitTitleLabel = @"规章制度";
+//            [self.navigationController pushViewController:companyBylawsVC animated:YES];
+            
+        } else if (indexPath.row == 2) {
+            CompanyinformationAndBylawsViewController * companyBylawsVC = [CompanyinformationAndBylawsViewController new];
+            companyBylawsVC.transmitTitleLabel = @"公司信息";
+            [self.navigationController pushViewController:companyBylawsVC animated:YES];
+            
+        } else if (indexPath.row == 3) {
+            CompanyOrganizationalStructureViewController * organizationalStructurehVC = [CompanyOrganizationalStructureViewController new];
+            [self.navigationController pushViewController:organizationalStructurehVC animated:YES];
+            
+        } else if (indexPath.row == 4) {
+            LanchViewController * lanchVC = [LanchViewController new];
+            [self.navigationController pushViewController:lanchVC animated:YES];
+            
         } else{
             LanchViewController * lanchVC = [LanchViewController new];
             [self.navigationController pushViewController:lanchVC animated:YES];
         }
-    
     
 }
 
