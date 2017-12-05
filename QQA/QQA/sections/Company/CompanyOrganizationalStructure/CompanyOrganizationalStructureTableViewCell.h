@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) NSString * departmentId;
 
+
 @property (nonatomic, strong) CompanyOrganizationalStructure * companyOrganizationalStructure;
 
 

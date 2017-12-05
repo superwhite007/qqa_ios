@@ -32,13 +32,14 @@
     [self.contentView addSubview:_nameLabel];
     
     
-    UIImageView *imgViewFor = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 38, 25, 25)];
+    UIImageView *imgViewFor = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 17.5, 25, 25)];
     //    self.imgViewFor.backgroundColor = [UIColor redColor];
     imgViewFor.layer.cornerRadius = 15;
     imgViewFor.alpha = .6;
     //    self.imgViewFor.layer.borderColor = [UIColor blackColor].CGColor;
     //    self.imgViewFor.layer.borderWidth = 0.5;
     imgViewFor.layer.masksToBounds = YES;
+    imgViewFor.image = [UIImage imageNamed:[NSString stringWithFormat:@"forward"]];
     [self.contentView addSubview:imgViewFor];
     
     
