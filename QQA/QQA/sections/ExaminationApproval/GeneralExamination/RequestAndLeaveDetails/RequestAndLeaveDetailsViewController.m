@@ -308,8 +308,10 @@
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 || [[dictArray[0] objectForKey:@"message"] intValue] == 6019) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        NSDictionary * dict = array1[0];
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                             [self setvaleKeyAndValue:array1];
+                                                            
+                                                             [self setvaleKeyAndValue:dict];
                                                          });
                                                        
                                                         [array1 removeObjectAtIndex:0];
@@ -347,7 +349,7 @@
     
 }
 
--(void)setvaleKeyAndValue:(NSMutableArray *)mArray{
+-(void)setvaleKeyAndValue:(NSDictionary *)dict{
     
     
     
@@ -397,12 +399,6 @@
         _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 134 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
     }
     
-    
-    
-    
-    
-    
-    
     _reasonLabel.backgroundColor = [UIColor redColor];
     _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
     _reasonLabel.layer.borderWidth = 1;
@@ -411,25 +407,25 @@
     [self.view addSubview:_reasonLabel];
     
     
-    _nameLabel.text = [mArray[0] objectForKey:@"username"];
+    _nameLabel.text = [dict objectForKey:@"username"];
     
-//    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
-    _created_atTimeLabel.text = [mArray[0] objectForKey:@"createdAt"];
-    _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [mArray[0] objectForKey:@"starttime"]];
+//    [self.navigationItem setTitle:[dict objectForKey:@"username"]];
+    _created_atTimeLabel.text = [dict objectForKey:@"createdAt"];
+    _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [dict objectForKey:@"starttime"]];
     
     if ([_titleIdentStr isEqualToString:@"请假"]) {
-       _reasonLabel.text = [mArray[0] objectForKey:@"reason"];
+       _reasonLabel.text = [dict objectForKey:@"reason"];
     } else{
-       _reasonLabel.text = [mArray[0] objectForKey:@"content"];
+       _reasonLabel.text = [dict objectForKey:@"content"];
     }
     
     
-    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [mArray[0] objectForKey:@"type"]];
-    _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [mArray[0] objectForKey:@"endtime"]];
-    _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [mArray[0] objectForKey:@"betweentime"]];
+    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [dict objectForKey:@"type"]];
+    _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [dict objectForKey:@"endtime"]];
+    _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [dict objectForKey:@"betweentime"]];
     
 //    [self ApproverAndCC];
-    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
+    [self.navigationItem setTitle:[dict objectForKey:@"username"]];
     
 }
 
