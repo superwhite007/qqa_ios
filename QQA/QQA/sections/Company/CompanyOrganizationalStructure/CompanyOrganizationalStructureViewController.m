@@ -25,6 +25,13 @@
 
 static NSString *identifier = @"Cell";
 
+-(NSMutableArray *)datasouceArray{
+    if (!_datasouceArray) {
+        self.datasouceArray = [NSMutableArray array];
+    }
+    return _datasouceArray;
+}
+
 -(void)loadView{
     self.organizationalStructureListView = [[CompanyOrganizationalStructureListView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.organizationalStructureListView.tableView.frame = [UIScreen mainScreen].bounds;
@@ -36,10 +43,9 @@ static NSString *identifier = @"Cell";
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor grayColor];
-    
+    [self loadNewData];
     self.organizationalStructureListView.tableView.delegate = self;
     self.organizationalStructureListView.tableView.dataSource = self;
-    
     [self.organizationalStructureListView.tableView registerClass:[CompanyOrganizationalStructureTableViewCell class] forCellReuseIdentifier:identifier];
     
     
@@ -47,7 +53,7 @@ static NSString *identifier = @"Cell";
 
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self loadNewData];
+//    [self loadNewData];
 }
 
 -(void)loadNewData{
@@ -74,7 +80,7 @@ static NSString *identifier = @"Cell";
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
     
-    NSLog( @"66666666%@", mdict);
+//    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -94,18 +100,16 @@ static NSString *identifier = @"Cell";
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
-                                                        NSLog(@"\n\narray1: %@,\n ", array1);
                                                         [self.datasouceArray removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
+                                                            NSLog(@"%@\n\n", dict);
                                                             CompanyOrganizationalStructure * organizationalStructure = [CompanyOrganizationalStructure new];
                                                             [organizationalStructure setValuesForKeysWithDictionary:dict];
                                                             [self.datasouceArray addObject:organizationalStructure];
+                                                            NSLog(@"%@\n\n%@", dict, self.datasouceArray);
                                                         }
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-//                                                            NSLog(@"self.datasouceArray222%@", self.datasouceArray );
-                                                            
-                                                            
-                                                            
+                                                            NSLog(@"self.datasouceArray222%@", self.datasouceArray );
                                                             [self.organizationalStructureListView.tableView  reloadData];
                                                         });
                                                     }
@@ -151,8 +155,8 @@ static NSString *identifier = @"Cell";
 
 {
     
-    NSLog(@"_isEmpty%@", _isEmpty);
-    if (_isEmpty ){
+//    NSLog(@"_isEmpty%@", _isEmpty);
+    if (!_isEmpty){
         
         CompanyOrganizationalStructureTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
         if (!cell) {
