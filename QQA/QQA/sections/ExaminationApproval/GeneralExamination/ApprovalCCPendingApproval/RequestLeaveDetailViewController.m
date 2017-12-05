@@ -69,6 +69,73 @@
 -(void)setViewAboutNameTimeReason{
     
     
+//    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 25)];
+//    _nameLabel.backgroundColor = [UIColor redColor];
+//    _nameLabel.textAlignment = NSTextAlignmentCenter;
+//    [self.view addSubview:_nameLabel];
+//
+//    _created_atTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 104, iphoneWidth - 40, 25)];
+//    _created_atTimeLabel.backgroundColor = [UIColor redColor];
+//    _created_atTimeLabel.textAlignment = NSTextAlignmentCenter;
+//    [self.view addSubview:_created_atTimeLabel];
+//
+//    _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  134, (iphoneWidth  - 50) / 2 , 25)];
+//    _statusLabel.backgroundColor = [UIColor redColor];
+//
+//
+//    _statusReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  134, (iphoneWidth  - 50) / 2 , 25)];
+//    _statusReasonLabel.backgroundColor = [UIColor redColor];
+//
+//
+//
+//    _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 164, iphoneWidth / 2 - 25, 25)];
+//    _startTimeLabel.backgroundColor = [UIColor redColor];
+//    _startTimeLabel.adjustsFontSizeToFitWidth = YES;
+//
+//
+//    _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  164, (iphoneWidth  - 50) / 2, 25)];
+//    _endTimeLabel.backgroundColor = [UIColor redColor];
+//    _endTimeLabel.adjustsFontSizeToFitWidth = YES;
+//
+//
+//
+//    _longTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 194, iphoneWidth - 40, 25)];
+//    _longTimeLabel.backgroundColor = [UIColor redColor];
+//
+//
+//    if ([_titleStr isEqualToString:@"请假"]) {
+//        [self.view addSubview:_startTimeLabel];
+//        [self.view addSubview:_statusLabel];
+//        [self.view addSubview:_statusReasonLabel];
+//        [self.view addSubview:_endTimeLabel];
+//        [self.view addSubview:_longTimeLabel];
+//        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 234 , iphoneWidth - 40, iphoneHeight / 7 + 15)];
+//    } else{
+//        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 134 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
+//    }
+//
+//
+//    _resultStatus = [[UILabel alloc] initWithFrame: CGRectMake(iphoneWidth - 140, 260 + iphoneHeight / 7 , 100, 30)];
+//    _resultStatus.backgroundColor = [UIColor redColor];
+//    _resultStatus.textAlignment = NSTextAlignmentCenter;
+//    [self.view addSubview:_resultStatus];
+//
+//
+//
+//
+//
+//    _reasonLabel.backgroundColor = [UIColor redColor];
+//    _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
+//    _reasonLabel.layer.borderWidth = 1;
+//    _reasonLabel.layer.cornerRadius = 10;
+//    _reasonLabel.layer.masksToBounds = YES;
+//    [self.view addSubview:_reasonLabel];
+    
+}
+
+-(void)setvaleKeyAndValue:(NSDictionary *)dict{
+    
+    
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 25)];
     _nameLabel.backgroundColor = [UIColor redColor];
     _nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -131,31 +198,26 @@
     _reasonLabel.layer.masksToBounds = YES;
     [self.view addSubview:_reasonLabel];
     
-}
-
--(void)setvaleKeyAndValue:(NSMutableArray *)mArray{
+    NSLog(@"RequestLeaveDetailViewController：mArray:%@", dict);
     
-    NSLog(@"RequestLeaveDetailViewController：mArray:%@", mArray[0]);
+    _nameLabel.text = [dict objectForKey:@"username"];
     
-    _nameLabel.text = [mArray[0] objectForKey:@"username"];
-    
-    //    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
-    _created_atTimeLabel.text = [mArray[0] objectForKey:@"createdAt"];
-    _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [mArray[0] objectForKey:@"starttime"]];
-    
+    //    [self.navigationItem setTitle:[dict objectForKey:@"username"]];
+    _created_atTimeLabel.text = [dict objectForKey:@"createdAt"];
+    _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [dict objectForKey:@"starttime"]];
     if ([_titleStr isEqualToString:@"请假"]) {
-        _reasonLabel.text = [mArray[0] objectForKey:@"reason"];
+        _reasonLabel.text = [dict objectForKey:@"reason"];
     } else{
-        _reasonLabel.text = [mArray[0] objectForKey:@"content"];
+        _reasonLabel.text = [dict objectForKey:@"content"];
     }
 
-    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [mArray[0] objectForKey:@"type"]];
-    _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [mArray[0] objectForKey:@"endtime"]];
-    _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [mArray[0] objectForKey:@"betweentime"]];
-    _resultStatus.text = [NSString stringWithFormat:@"%@",  [mArray[0] objectForKey:@"status"]];
+    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [dict objectForKey:@"type"]];
+    _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [dict objectForKey:@"endtime"]];
+    _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [dict objectForKey:@"betweentime"]];
+    _resultStatus.text = [NSString stringWithFormat:@"%@",  [dict objectForKey:@"status"]];
     
     //    [self ApproverAndCC];
-    [self.navigationItem setTitle:[mArray[0] objectForKey:@"username"]];
+    [self.navigationItem setTitle:[dict objectForKey:@"username"]];
     
 }
 
@@ -221,11 +283,14 @@
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 ||  [[dictArray[0] objectForKey:@"message"] intValue] == 6019 ) {
 
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        NSDictionary * dict1 = array1[0];
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            [self setvaleKeyAndValue:array1];
+                                                            [self setvaleKeyAndValue:dict1];
                                                         });
+                                                        
+                                                        
+                                                        
                                                         [array1 removeObjectAtIndex:0];
-                                                        [self.datasourceMArray removeAllObjects];
                                                         self.datasourceMArray = array1;
 //
                                                         dispatch_async(dispatch_get_main_queue(), ^{

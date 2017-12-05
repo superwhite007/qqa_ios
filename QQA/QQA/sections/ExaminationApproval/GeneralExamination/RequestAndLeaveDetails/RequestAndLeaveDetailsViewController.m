@@ -78,65 +78,65 @@
 
 -(void)setViewAboutNameTimeReason{
     
-    
-    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 25)];
-    _nameLabel.backgroundColor = [UIColor redColor];
-    _nameLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:_nameLabel];
-    
-    _created_atTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 104, iphoneWidth - 40, 25)];
-    _created_atTimeLabel.backgroundColor = [UIColor redColor];
-    _created_atTimeLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:_created_atTimeLabel];
-    
-    _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  134, (iphoneWidth  - 50) / 2 , 25)];
-    _statusLabel.backgroundColor = [UIColor redColor];
-    
-    
-    _statusReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  134, (iphoneWidth  - 50) / 2 , 25)];
-    _statusReasonLabel.backgroundColor = [UIColor redColor];
-    
-    
-    
-    _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 164, iphoneWidth / 2 - 25, 25)];
-    _startTimeLabel.backgroundColor = [UIColor redColor];
-    _startTimeLabel.adjustsFontSizeToFitWidth = YES;
-    
-    
-    _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  164, (iphoneWidth  - 50) / 2, 25)];
-    _endTimeLabel.backgroundColor = [UIColor redColor];
-    _endTimeLabel.adjustsFontSizeToFitWidth = YES;
-    
-    
-    
-    _longTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 194, iphoneWidth - 40, 25)];
-    _longTimeLabel.backgroundColor = [UIColor redColor];
-    
-    
-    if ([_titleIdentStr isEqualToString:@"请假"]) {
-        [self.view addSubview:_startTimeLabel];
-        [self.view addSubview:_statusLabel];
-        [self.view addSubview:_statusReasonLabel];
-        [self.view addSubview:_endTimeLabel];
-        [self.view addSubview:_longTimeLabel];
-        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 234 , iphoneWidth - 40, iphoneHeight / 7 + 15)];
-    } else{
-        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 134 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
-    }
-    
-    
-    
-    
-    
-    
-    
-    _reasonLabel.backgroundColor = [UIColor redColor];
-    _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    _reasonLabel.layer.borderWidth = 1;
-    _reasonLabel.layer.cornerRadius = 10;
-    _reasonLabel.layer.masksToBounds = YES;
-    [self.view addSubview:_reasonLabel];
-    
+//
+//    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 25)];
+//    _nameLabel.backgroundColor = [UIColor redColor];
+//    _nameLabel.textAlignment = NSTextAlignmentCenter;
+//    [self.view addSubview:_nameLabel];
+//
+//    _created_atTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 104, iphoneWidth - 40, 25)];
+//    _created_atTimeLabel.backgroundColor = [UIColor redColor];
+//    _created_atTimeLabel.textAlignment = NSTextAlignmentCenter;
+//    [self.view addSubview:_created_atTimeLabel];
+//
+//    _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  134, (iphoneWidth  - 50) / 2 , 25)];
+//    _statusLabel.backgroundColor = [UIColor redColor];
+//
+//
+//    _statusReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  134, (iphoneWidth  - 50) / 2 , 25)];
+//    _statusReasonLabel.backgroundColor = [UIColor redColor];
+//
+//
+//
+//    _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 164, iphoneWidth / 2 - 25, 25)];
+//    _startTimeLabel.backgroundColor = [UIColor redColor];
+//    _startTimeLabel.adjustsFontSizeToFitWidth = YES;
+//
+//
+//    _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  164, (iphoneWidth  - 50) / 2, 25)];
+//    _endTimeLabel.backgroundColor = [UIColor redColor];
+//    _endTimeLabel.adjustsFontSizeToFitWidth = YES;
+//
+//
+//
+//    _longTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 194, iphoneWidth - 40, 25)];
+//    _longTimeLabel.backgroundColor = [UIColor redColor];
+//
+//
+//    if ([_titleIdentStr isEqualToString:@"请假"]) {
+//        [self.view addSubview:_startTimeLabel];
+//        [self.view addSubview:_statusLabel];
+//        [self.view addSubview:_statusReasonLabel];
+//        [self.view addSubview:_endTimeLabel];
+//        [self.view addSubview:_longTimeLabel];
+//        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 234 , iphoneWidth - 40, iphoneHeight / 7 + 15)];
+//    } else{
+//        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 134 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
+//    }
+//
+//
+//
+//
+//
+//
+//
+//    _reasonLabel.backgroundColor = [UIColor redColor];
+//    _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
+//    _reasonLabel.layer.borderWidth = 1;
+//    _reasonLabel.layer.cornerRadius = 10;
+//    _reasonLabel.layer.masksToBounds = YES;
+//    [self.view addSubview:_reasonLabel];
+//
 }
 
 -(void)setTextView{
@@ -348,6 +348,68 @@
 }
 
 -(void)setvaleKeyAndValue:(NSMutableArray *)mArray{
+    
+    
+    
+    
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 25)];
+    _nameLabel.backgroundColor = [UIColor redColor];
+    _nameLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_nameLabel];
+    
+    _created_atTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 104, iphoneWidth - 40, 25)];
+    _created_atTimeLabel.backgroundColor = [UIColor redColor];
+    _created_atTimeLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_created_atTimeLabel];
+    
+    _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  134, (iphoneWidth  - 50) / 2 , 25)];
+    _statusLabel.backgroundColor = [UIColor redColor];
+    
+    
+    _statusReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  134, (iphoneWidth  - 50) / 2 , 25)];
+    _statusReasonLabel.backgroundColor = [UIColor redColor];
+    
+    
+    
+    _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 164, iphoneWidth / 2 - 25, 25)];
+    _startTimeLabel.backgroundColor = [UIColor redColor];
+    _startTimeLabel.adjustsFontSizeToFitWidth = YES;
+    
+    
+    _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  164, (iphoneWidth  - 50) / 2, 25)];
+    _endTimeLabel.backgroundColor = [UIColor redColor];
+    _endTimeLabel.adjustsFontSizeToFitWidth = YES;
+    
+    
+    
+    _longTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 194, iphoneWidth - 40, 25)];
+    _longTimeLabel.backgroundColor = [UIColor redColor];
+    
+    
+    if ([_titleIdentStr isEqualToString:@"请假"]) {
+        [self.view addSubview:_startTimeLabel];
+        [self.view addSubview:_statusLabel];
+        [self.view addSubview:_statusReasonLabel];
+        [self.view addSubview:_endTimeLabel];
+        [self.view addSubview:_longTimeLabel];
+        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 234 , iphoneWidth - 40, iphoneHeight / 7 + 15)];
+    } else{
+        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 134 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
+    }
+    
+    
+    
+    
+    
+    
+    
+    _reasonLabel.backgroundColor = [UIColor redColor];
+    _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    _reasonLabel.layer.borderWidth = 1;
+    _reasonLabel.layer.cornerRadius = 10;
+    _reasonLabel.layer.masksToBounds = YES;
+    [self.view addSubview:_reasonLabel];
+    
     
     _nameLabel.text = [mArray[0] objectForKey:@"username"];
     

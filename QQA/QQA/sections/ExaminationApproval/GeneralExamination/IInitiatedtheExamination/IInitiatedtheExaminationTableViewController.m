@@ -36,17 +36,14 @@ static NSString * identifier = @"CELL";
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假 - 事假、病假等" };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 -- 请示领导审批" };
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 -- 工作任务的描述" };
-        
-        
         [self.datadource addObject:dict];
         [self.datadource addObject:dict1];
         [self.datadource addObject:dict2];
+        
     } else if ([_titleIdentifier isEqualToString:@"待审批的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅假条" };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅请示件" };
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅工单" };
-        
-        
         [self.datadource addObject:dict];
         [self.datadource addObject:dict1];
         [self.datadource addObject:dict2];
@@ -56,8 +53,6 @@ static NSString * identifier = @"CELL";
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅假条" };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅请示件" };
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅工单" };
-        
-        
         [self.datadource addObject:dict];
         [self.datadource addObject:dict1];
         [self.datadource addObject:dict2];
@@ -67,8 +62,6 @@ static NSString * identifier = @"CELL";
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"未批阅假条" };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅请示件" };
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅工单" };
-        
-        
         [self.datadource addObject:dict];
         [self.datadource addObject:dict1];
         [self.datadource addObject:dict2];
@@ -78,27 +71,17 @@ static NSString * identifier = @"CELL";
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送假条" };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送请示件" };
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送工单" };
-        
-        
         [self.datadource addObject:dict];
         [self.datadource addObject:dict1];
         [self.datadource addObject:dict2];
         
-        
     }
-    
-   
-    
+ 
     [self.navigationItem setTitle:_titleIdentifier];
-    
     [self.tableView registerClass:[IInitiatedtheExaminationTableViewCell class] forCellReuseIdentifier:identifier];
-    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
-    
-    
-
+ 
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,12 +92,10 @@ static NSString * identifier = @"CELL";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     return self.datadource.count;
 }
 

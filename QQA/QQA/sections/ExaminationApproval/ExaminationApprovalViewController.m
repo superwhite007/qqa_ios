@@ -141,9 +141,7 @@ static NSString *identifier = @"CELL";
         [self.navigationController pushViewController:examinationVC animated:YES];
 
     } else if (indexPath.row == 1) {
-//        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
-//        examinationVC.titleStr = @"待审批的";
-//        [self.navigationController pushViewController:examinationVC animated:YES];
+
         IInitiatedtheExaminationTableViewController * examinationVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
         examinationVC.titleIdentifier = @"待审批的";
         [self.navigationController pushViewController:examinationVC animated:YES];
@@ -154,21 +152,12 @@ static NSString *identifier = @"CELL";
         examinationVC.titleIdentifier = @"已审批的";
         [self.navigationController pushViewController:examinationVC animated:YES];
         
-//        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
-//        examinationVC.titleStr = @"已审批的";
-//        examinationVC.urlStr = @"/v1/api/leave/index";
-//        [self.navigationController pushViewController:examinationVC animated:YES];
-        
     } else if (indexPath.row == 3) {
         
         IInitiatedtheExaminationTableViewController * examinationVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
         examinationVC.titleIdentifier = @"未审批的";
         [self.navigationController pushViewController:examinationVC animated:YES];
         
-//        ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
-//        examinationVC.titleStr = @"未审批的";
-//        examinationVC.urlStr = @"/v1/api/leave/index";
-//        [self.navigationController pushViewController:examinationVC animated:YES];
 
     } else if (indexPath.row == 4) {
         
