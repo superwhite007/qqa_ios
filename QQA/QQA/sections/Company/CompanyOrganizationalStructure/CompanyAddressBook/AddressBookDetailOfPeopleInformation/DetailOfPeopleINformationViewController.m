@@ -39,8 +39,11 @@
 //        [self  alert:@"敬请期待中、、、"];
         
     }else if (sender.tag == 2){
-//        AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
-//        [self.navigationController pushViewController:aboutYouthVC animated:YES];
+        
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[sender.titleLabel.text substringFromIndex:5]];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
         
     }
     
@@ -152,8 +155,8 @@
     
     [self.navigationItem setTitle:[dict objectForKey:@"username"]];
     
-    NSString * emailStr = [NSString stringWithFormat:@"发邮件:%@",[dict objectForKey:@"email"]];
-    NSString * telephoneStr = [NSString stringWithFormat:@"打电话:%@",[dict objectForKey:@"telephone"]];
+    NSString * emailStr = [NSString stringWithFormat:@"发邮件  %@",[dict objectForKey:@"email"]];
+    NSString * telephoneStr = [NSString stringWithFormat:@"打电话  %@",[dict objectForKey:@"telephone"]];
     NSArray * titleArray = [NSArray arrayWithObjects:@"发消息", emailStr, telephoneStr,  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         
@@ -189,7 +192,7 @@
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
         imgView.alpha = 0.6;
-        [self.view addSubview:imgView];
+//        [self.view addSubview:imgView];
         
     }
     
