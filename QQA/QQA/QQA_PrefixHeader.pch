@@ -22,18 +22,6 @@
 
 
 #define CONST_SERVER_ADDRESS   @"http://172.19.12.6"
-//#define CONST_URL_RECV   CONST_SERVER_ADDRESS + "/v1/api/receive";
-//#define CONST_URL_LOGIN   CONST_SERVER_ADDRESS + "/v1/api/login";
-//#define CONST_URL_UPLOAD_TMFCODE   CONST_SERVER_ADDRESS + "/v1/api/attendance";
-//#define CONST_URL_CLOCKIN   CONST_SERVER_ADDRESS + "/v1/api/attendance/index";
-//#define CONST_URL_PROFILE   CONST_SERVER_ADDRESS + "/v1/api/user/show";
-//#define CONST_URL_NOTIFICATION_SCOPE   CONST_SERVER_ADDRESS + "/v1/api/message/scope";
-//#define CONST_URL_NOTIFICATION_SEND   CONST_SERVER_ADDRESS + "/v1/api/message/store";
-
-
-
-
-
 
 
 #endif /* QQA_PrefixHeader_pch */
