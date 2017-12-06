@@ -17,11 +17,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self punchRecoret];
     
+   
+    
 }
+
+
+
+-(void)gotoSomeForwed:(UIButton *)sender{
+    
+    
+    if (sender.tag == 0) {
+        
+//        MessageViewController * messageVC = [MessageViewController new];
+//        [self.navigationController pushViewController:messageVC animated:YES];
+//
+    }else if (sender.tag == 1){
+//        [self  alert:@"敬请期待中、、、"];
+        
+    }else if (sender.tag == 2){
+//        AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
+//        [self.navigationController pushViewController:aboutYouthVC animated:YES];
+        
+    }
+    
+    
+}
+
+
+
+
 
 -(void)punchRecoret{
     
@@ -123,6 +151,57 @@
     }
     
     [self.navigationItem setTitle:[dict objectForKey:@"username"]];
+    
+    NSString * emailStr = [NSString stringWithFormat:@"发邮件:%@",[dict objectForKey:@"email"]];
+    NSString * telephoneStr = [NSString stringWithFormat:@"打电话:%@",[dict objectForKey:@"telephone"]];
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发消息", emailStr, telephoneStr,  nil];
+    for (int i = 0; i < [titleArray count]; i++) {
+        
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 35, 60);
+//        button.backgroundColor = [UIColor darkGrayColor];
+        [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
+        button.tag = i;
+        button.titleLabel.textColor=[UIColor blackColor];
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        button.titleLabel.font = [UIFont systemFontOfSize: 17.0];
+        [button addTarget:self action:@selector(gotoSomeForwed:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTintColor:[UIColor blackColor]];
+        [self.view addSubview:button];
+        
+        
+    }
+    
+    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"key", @"about",  nil];
+    for (int i = 0; i < 3; i++) {
+        
+        UIImageView *firstimgView = [[UIImageView alloc] init];
+        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 + 64 + 10 + 15  + 5+ i * 60, 20, 20);
+        //    imgView.backgroundColor = [UIColor yellowColor];
+        UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
+        [firstimgView setImage:firstimage];
+        firstimgView.alpha = 0.6;
+        [self.view addSubview:firstimgView];
+        
+        UIImageView *imgView = [[UIImageView alloc] init];
+        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + 5 + i * 60, 20, 20);
+        UIImage *image = [UIImage imageNamed:@"forward"];
+        [imgView setImage:image];
+        imgView.alpha = 0.6;
+        [self.view addSubview:imgView];
+        
+    }
+    
+    for (int i = 0; i < 4; i++) {
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 72 + i * 60 , iphoneWidth, .5)];
+        view.alpha = .4;
+        view.backgroundColor = [UIColor blackColor];
+        [self.view addSubview:view];
+    }
+    
+    
+    
     
 }
 
