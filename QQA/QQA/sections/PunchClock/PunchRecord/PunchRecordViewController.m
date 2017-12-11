@@ -17,9 +17,6 @@
 @property (nonatomic, assign) BOOL isDownRefresh;
 
 
-
-
-
 @end
 
 @implementation PunchRecordViewController
@@ -66,11 +63,7 @@ static NSString *identifier = @"Cell";
     
     self.aTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.aTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    
-    
-    
-    
-    
+
     
 }
 
