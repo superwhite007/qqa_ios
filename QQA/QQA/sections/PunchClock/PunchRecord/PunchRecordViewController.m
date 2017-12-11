@@ -56,20 +56,11 @@ static NSString *identifier = @"Cell";
     self.aTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     self.aTableView.separatorColor = [UIColor orangeColor];
     
-    //04设置分割线的内边距(上、左，下，右)
-    //aTableView.separatorInset = UIEdgeInsetsMake(0, 40, 0, 0 );
-    
-    //05设置行高
+   
     self.aTableView.rowHeight = 60;
-    
-    
-    //07为tableView 指定数据源代理
     self.aTableView.dataSource =self;
-    
-    //14为tableView指定代理对象，做外管控制
     self.aTableView.delegate = self;
     
-    //02添加对象
     [self.view addSubview:self.aTableView];
     [self.aTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
     
@@ -83,12 +74,6 @@ static NSString *identifier = @"Cell";
     
 }
 
-
-//-(void)loadNewData{
-//
-//    [self punchRecoret];
-//
-//}
 
 -(void)loadNewData
 {
@@ -150,17 +135,12 @@ static NSString *identifier = @"Cell";
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
                                                 
-//                                                NSLog(@"PunchRecord111111:%@", array);
-
-                                                
                                                 NSDictionary * firDict = array[0];
                                                 NSString * str  = [NSString stringWithFormat:@"%@", [firDict objectForKey:@"message"]];
                                                 if ([str isEqualToString:@"3004" ]) {
                                                     
                                                     [array removeObjectAtIndex:0];
-                                                    
-//                                                    NSLog(@"PunchRecord1:%@", array);
-
+                                            
                                                     [self.datasource removeAllObjects];
                                                     self.datasource = array;
 
