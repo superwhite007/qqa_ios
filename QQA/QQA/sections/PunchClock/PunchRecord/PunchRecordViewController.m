@@ -13,6 +13,13 @@
 @property (nonatomic, strong)NSMutableArray *datasource;
 //@property (nonnull, strong) UITableView *aTableView;
 
+@property (nonatomic, assign) int pageNum;
+@property (nonatomic, assign) BOOL isDownRefresh;
+
+
+
+
+
 @end
 
 @implementation PunchRecordViewController
@@ -43,6 +50,9 @@ static NSString *identifier = @"Cell";
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<主页" style:UIBarButtonItemStyleDone target:self action:@selector(returnBack)] ;
     
     
+    self.pageNum = 1;
+    self.isDownRefresh = NO;
+    
     self.aTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     self.aTableView.separatorColor = [UIColor orangeColor];
     
@@ -63,17 +73,49 @@ static NSString *identifier = @"Cell";
     [self.view addSubview:self.aTableView];
     [self.aTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
     
+    self.aTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.aTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    
+    
+    
+    
+    
     
 }
 
 
--(void)loadNewData{
+//-(void)loadNewData{
+//
+//    [self punchRecoret];
+//
+//}
+
+-(void)loadNewData
+{
+    //记录是下拉刷新
+    self.isDownRefresh = YES;
+    if (self.pageNum > 1) {
+        [self punchRecoret:--self.pageNum];
+    } else{
+        [self punchRecoret:1];
+    }
     
-    [self punchRecoret];
-    
+    [self.aTableView.mj_header endRefreshing];
 }
 
--(void)punchRecoret{
+-(void)loadMoreData
+{
+    //记录不是下拉刷新
+    self.isDownRefresh = NO;
+    [self punchRecoret:++self.pageNum];
+    [self.aTableView.mj_footer endRefreshing];
+}
+
+
+
+
+-(void)punchRecoret:(int)page{
+    NSLog(@"page%d", page);
     
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/attendance/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -90,35 +132,36 @@ static NSString *identifier = @"Cell";
     
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     
-    [mdict setObject:@"1" forKey:@"pageNum"];
+    [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    
+//    NSLog(@"mdict:%@", mdict);
     
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
-    
     NSURLSession *session = [NSURLSession sharedSession];
     // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
-//                                            //NSLog(@"response, error :%@, %@", response, error);
-//                                            //NSLog(@"data:%@", data);
-                                            
+                                          
                                             if (data != nil) {
                                                 
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
-                                                                                            
+                                                
+//                                                NSLog(@"PunchRecord111111:%@", array);
+
+                                                
                                                 NSDictionary * firDict = array[0];
                                                 NSString * str  = [NSString stringWithFormat:@"%@", [firDict objectForKey:@"message"]];
                                                 if ([str isEqualToString:@"3004" ]) {
                                                     
                                                     [array removeObjectAtIndex:0];
                                                     
-//                                                    //NSLog(@"PunchRecord1:%@", array);
+//                                                    NSLog(@"PunchRecord1:%@", array);
 
+                                                    [self.datasource removeAllObjects];
                                                     self.datasource = array;
 
                                                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -139,15 +182,6 @@ static NSString *identifier = @"Cell";
     
     
 }
-
-
-
-
-
-
-
-
-
 
 
 

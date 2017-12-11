@@ -23,6 +23,7 @@
 
 #define CONST_SERVER_ADDRESS   @"http://172.19.12.6"
 
+#import "MJRefresh.h"
 
 #endif /* QQA_PrefixHeader_pch */
 
