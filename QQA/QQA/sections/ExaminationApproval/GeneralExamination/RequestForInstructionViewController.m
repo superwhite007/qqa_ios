@@ -86,7 +86,7 @@
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
@@ -249,7 +249,7 @@
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:_messageTextView.text forKey:@"content"];
     NSLog(@"mdict%@", mdict);
     NSError * error = nil;

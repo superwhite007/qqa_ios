@@ -280,7 +280,7 @@
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     if ([_titleIdentStr isEqualToString:@"请假"]) {
         [mdict setObject:_leaveIdStr forKey:@"leaveId"];
     } else if ([_titleIdentStr isEqualToString:@"请示件"]) {
@@ -503,7 +503,7 @@
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
     
     if ([_titleIdentStr isEqualToString:@"请假"]) {

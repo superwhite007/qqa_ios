@@ -80,7 +80,7 @@ static NSString *identifier = @"Cell";
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
 //    NSLog( @"66666666%@", mdict);
     NSError * error = nil;

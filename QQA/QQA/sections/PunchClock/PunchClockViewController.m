@@ -93,7 +93,7 @@
 
 
 - (void)reportScanResult:(NSString *)result{
-    //NSLog(@"%@",result);
+    NSLog(@"%@",result);
 //    [self scanCrama:result];
 //
     [self scanResultPunchClock];
@@ -122,7 +122,7 @@
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     
     [mdict setObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"TimeMachineFeatureCode"] ] forKey:@"timecardmachine_feature_code"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
     
 //    //NSLog(@"resultDicresultmdict:%@ \n%@ \n %@", mdict, dict, resultDicAccess );

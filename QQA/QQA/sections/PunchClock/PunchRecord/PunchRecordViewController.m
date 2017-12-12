@@ -111,7 +111,7 @@ static NSString *identifier = @"Cell";
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
     
     [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
 //    NSLog(@"mdict:%@", mdict);
     

@@ -69,7 +69,7 @@ static NSString *identifier = @"Cell";
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:@"1" forKey:@"pageNum"];
     
     NSLog(@"mdict:%@", mdict);

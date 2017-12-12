@@ -255,7 +255,7 @@
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     if ([_titleStr isEqualToString:@"请假"]) {
         [mdict setObject:_leaveOrAskId forKey:@"leaveId"];
     } else if ([_titleStr isEqualToString:@"请示件"]) {

@@ -254,12 +254,12 @@
 }
 
 - (void)reportScanResult:(NSString *)result{
-    //NSLog(@"%@",result);
+    NSLog(@"11111%@",result);
 //    [self scanCrama:result];
     
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
-    [dict removeObjectForKey:@"server_type"];
+    [dict removeObjectForKey:@"serverType"];
     
     NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -280,7 +280,7 @@
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
     
-    [clinetDictionaryDIct setValue:@"IOS_APP" forKey:@"client_type"];
+    [clinetDictionaryDIct setValue:@"IOS_APP" forKey:@"clientType"];
     NSDictionary * dataDic = clinetDictionaryDIct;
    
     NSError * error = nil;
@@ -293,8 +293,8 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-//                                            //NSLog(@"response, error :%@, %@", response, error);
-//                                            //NSLog(@"data:%@", data);
+                                            NSLog(@"response, error :%@, %@", response, error);
+                                            NSLog(@"data:%@", data);
                                             
                                             if (data != nil) {
                                                 //NSLog(@"PlantKeysuccess");
@@ -317,15 +317,17 @@
 
 -(void)gitAccess_token:(NSDictionary *)dict{
     
-    //NSLog(@"gitAccess_token:dictss:%@", dict);
+    NSLog(@"gitAccess_token:dictss:%@", dict);
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:dict];
-    [mdict setObject:@"IOS_APP" forKey:@"client_type"];
-    [mdict removeObjectForKey:@"server_type"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict removeObjectForKey:@"serverType"];
     [mdict removeObjectForKey:@"status"];
     [mdict removeObjectForKey:@"code"];
-    [mdict setObject:@"client_credentials" forKey:@"grant_type"];
-    [mdict setObject:@"1" forKey:@"client_id"];
-    [mdict setObject:@"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3" forKey:@"client_secret"];
+    
+    
+    [mdict setObject:@"client_credentials" forKey:@"grantType"];
+    [mdict setObject:@"1" forKey:@"clientId"];
+    [mdict setObject:@"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3" forKey:@"clientSecret"];
     [mdict setObject:@"1" forKey:@"scope"];
     
 //    [mdict writeToFile:_documentTxtPath atomically:YES];

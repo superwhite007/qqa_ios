@@ -21,7 +21,9 @@
 #define kBUTTONHEIGHT   30 //button高
 
 
-#define CONST_SERVER_ADDRESS   @"http://172.19.12.6"
+//#define CONST_SERVER_ADDRESS   @"http://172.19.12.6"
+
+#define CONST_SERVER_ADDRESS   @"http://qqoatest.youth.cn"
 
 #import "MJRefresh.h"
 
