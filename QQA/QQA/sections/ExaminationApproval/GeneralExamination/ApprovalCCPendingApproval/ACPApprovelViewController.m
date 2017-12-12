@@ -67,7 +67,7 @@ static NSString *identifierOne = @"Cell";
     
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
     //待审批的  已审批的 未审批的 抄送我的

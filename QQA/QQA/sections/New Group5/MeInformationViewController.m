@@ -143,7 +143,7 @@
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
 
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
 //    NSLog(@"mdict%@", mdict);

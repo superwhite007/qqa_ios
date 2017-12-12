@@ -178,7 +178,7 @@
     //NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
     NSError * error = nil;
@@ -269,7 +269,7 @@
     //NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:self.datasoureKeysSendScopeArray forKey:@"scope"];
     [mdict setObject:self.sendMessage forKey:@"content"];

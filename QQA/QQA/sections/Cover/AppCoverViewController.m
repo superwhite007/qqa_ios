@@ -300,7 +300,7 @@
                                                 //NSLog(@"PlantKeysuccess");
                                             NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 
-                                              [self gitAccess_token:dict];
+                                              [self gitaccessToken:dict];
                                                 
 //                                                [self plantIDKeyFalse];
                                              
@@ -315,9 +315,9 @@
 }
 
 
--(void)gitAccess_token:(NSDictionary *)dict{
+-(void)gitaccessToken:(NSDictionary *)dict{
     
-    NSLog(@"gitAccess_token:dictss:%@", dict);
+    NSLog(@"gitaccessToken:dictss:%@", dict);
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:dict];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict removeObjectForKey:@"serverType"];
@@ -343,11 +343,6 @@
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     
-
-//    NSError * error = nil;
-//    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDcitFromNewDict options:NSJSONWritingPrettyPrinted error:&error];
-//    request.HTTPBody = jsonData;
-    
     NSURLSession *session = [NSURLSession sharedSession];
     // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
@@ -361,7 +356,7 @@
                                                 ;
                                                
                                                 //NSLog(@"tokensuccess:%@",dictss);
-//                                              //NSLog(@"token%@", [dictss objectForKey:@"access_token"]);
+//                                              //NSLog(@"token%@", [dictss objectForKey:@"accessToken"]);
 //                                              NSString * newStr = [NSString new];
                                                 [self scanCrama:dictss];
                                                 
@@ -384,9 +379,7 @@
     NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"badaAccessToktn.txt"];
     [mDict  writeToFile:txtPath atomically:YES];
     
-    
-
-    
+  
     int result = 0;
     
     if (result == 1) {
@@ -394,22 +387,17 @@
     } else if (result == 0) {
         
 //        [self alert];
-        NSString *title = [mDict objectForKey:@"access_token"];
+        NSString *title = [mDict objectForKey:@"accessToken"];
         NSString *message = @"扫码成功";
         NSString *okButtonTitle = @"OK";
-        // 初始化
         UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        // 创建操作
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
 //            [self  plantIDKey];
              [self scanSuccess:@"https://"];
         }];
         
-        // 添加操作
         [alertDialog addAction:okAction];
-        // 呈现警告视图
-//        [self presentViewController:alertDialog animated:YES completion:nil];
+
         [self.navigationController  presentViewController:alertDialog animated:YES completion:nil];
     }
     
@@ -432,20 +420,13 @@
     // 添加操作
     [alertDialog addAction:okAction];
     
-    // 呈现警告视图
-//    [self presentViewController:alertDialog animated:YES completion:nil];
-    
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
     
     
 }
 
 
-
-
-
 -(void)scanSuccess:(NSString *)urlString{
-    
     
     UIView * scanSuccessView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight)];
     scanSuccessView.backgroundColor = [UIColor whiteColor];
@@ -480,14 +461,6 @@
     UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(30 , 340, iphoneWidth - 60 , 120)];
     mattersNeedAttentionExplianLable.text = @"请不要删除青青OA，也不要清理青青OA中的数据。否则IOKey丢失，导致无法登录。";
     
-//    mattersNeedAttentionExplianLable.textAlignment =  NSTextAlignmentLeft;
-//    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
-//    CGSize labelSize = [mattersNeedAttentionExplianLable.text boundingRectWithSize:CGSizeMake(200, 1500) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-//    mattersNeedAttentionExplianLable.frame = CGRectMake(mattersNeedAttentionExplianLable.frame.origin.x, mattersNeedAttentionExplianLable.frame.origin.y, mattersNeedAttentionExplianLable.frame.size.width, labelSize.height);
-//    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
-//    mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
-    
-    
     mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
     mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
     mattersNeedAttentionExplianLable.textColor = [UIColor blackColor];
@@ -509,20 +482,6 @@
 
     
 #pragma tset
-    //数据持久化
-//    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString * documentfilePath = paths.firstObject;
-//    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
-//
-//    NSDictionary *dic5 = @{@"name": @"Duke", @"age": @33, @"gender": @"male"};
-//    [dic5 writeToFile:txtPath atomically:YES];
-//
-//    //NSLog(@"txtPath:%@", txtPath);
-//
-//    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:txtPath];
-//    //NSLog(@"resultDicresultDicresultDicresultDicresultDicresultDicresultDic:%@", resultDic);
-//
-    
     
     UIButton  * scanButton =  [UIButton buttonWithType:UIButtonTypeSystem];
     [scanButton setFrame:CGRectMake( 60,  iphoneHeight * 3 / 4 , iphoneWidth -120, 50)];

@@ -119,7 +119,7 @@
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     
-    [request setValue:resultDicAccess[@"access_token"] forHTTPHeaderField:@"Authorization"];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     
     [mdict setObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"TimeMachineFeatureCode"] ] forKey:@"timecardmachine_feature_code"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
@@ -148,7 +148,7 @@
                                                 
                                                 //                                            NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 
-//                                                [self gitAccess_token:dict];
+//                                                [self gitaccessToken:dict];
                                                 
                                             } else{
                                                 //NSLog(@"获取数据失败，问李鹏");
