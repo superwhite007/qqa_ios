@@ -155,12 +155,6 @@
 }
 
 
-
-
-
-
-
-
 -(void)gitMessageAboutGiveNotices{
     
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/message/scope", CONST_SERVER_ADDRESS]];
@@ -175,11 +169,11 @@
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
     
     
-    //NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
     
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSLog(@"resultDic:%@", mdict);
     
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
@@ -189,28 +183,28 @@
     // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
-                                            //                                            //NSLog(@"response, error :%@, %@", response, error);
-                                            //                                            //NSLog(@"data:%@", data);
-                                            
+                                           
                                             if (data != nil) {
                                                 
-                                                NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"MessageViewControllerdict: %@", dictArray);
-                                                
-                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002 ) {
-                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-                                                    [array1 removeObjectAtIndex:0];
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"MessageViewControllerdict: %@", dictArray);
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002) {
+                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        [array1 removeObjectAtIndex:0];
+                                                        
+                                                        [self setDataToDatasoureSendScopeArray:array1];
+                                                        
+                                                    }
                                                     
-                                                    [self setDataToDatasoureSendScopeArray:array1];
-                                                    
-//                                                    dispatch_async(dispatch_get_main_queue(), ^{
-//                                                         [self setDatasoureSendScopeArray:array1];
-//                                                         [self.tableView  reloadData];
-//
-//                                                    });
-                                                   
+                                                }else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"1234567dict: %@,\n ", dict);
                                                 }
+                                                
+                                                
+                                                
                                               
                                             } else{
                                                 //NSLog(@"获取数据失败，问");

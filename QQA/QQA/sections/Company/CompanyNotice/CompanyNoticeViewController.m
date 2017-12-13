@@ -150,7 +150,7 @@ static NSString *identifier = @"Cell";
     if (indexPath.row % 2 == 0) {
         return 30;
     } else{
-       return  [self gitHightForCell:indexPath.row] + 30;
+       return  [self gitHightForCell:indexPath] + 30;
     }
     
     
@@ -176,6 +176,16 @@ static NSString *identifier = @"Cell";
     }
     
     cell.textLabel.text = self.datasource[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:18];
+    cell.textLabel.numberOfLines = 0;//表示label可以多行显示
+    cell.textLabel.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
+    CGRect targetRect = [cell.textLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : cell.textLabel.font} context:nil];
+    cell.textLabel.frame = CGRectMake(30, 340, iphoneWidth - 40, CGRectGetHeight(targetRect));
+    
+    
+    
+    
     
 //    cell.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     
@@ -186,10 +196,10 @@ static NSString *identifier = @"Cell";
 
 
 
--(long)gitHightForCell:(int)indexPathRow{
+-(long)gitHightForCell:(NSIndexPath *)indexPathRow{
     
     UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(30 , 340, iphoneWidth - 60 , 120)];
-    mattersNeedAttentionExplianLable.text = self.datasource[indexPathRow];
+    mattersNeedAttentionExplianLable.text = self.datasource[indexPathRow.row];
     
     
     mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
@@ -199,7 +209,7 @@ static NSString *identifier = @"Cell";
     CGRect targetRect = [mattersNeedAttentionExplianLable.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : mattersNeedAttentionExplianLable.font} context:nil];
     mattersNeedAttentionExplianLable.frame = CGRectMake(30, 340, iphoneWidth - 40, CGRectGetHeight(targetRect));
     
-    return  CGRectGetHeight(targetRect);
+    return  targetRect.size.height;
     
 }
 

@@ -163,7 +163,7 @@
                                             if (data != nil) {
                                                 
                                                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                               NSLog(@"dict: %@", dict);
+                                               NSLog(@"12345678dict: %@", dict);
                                                 
                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                      [self  gitSomeThingsdictionary:dict];
