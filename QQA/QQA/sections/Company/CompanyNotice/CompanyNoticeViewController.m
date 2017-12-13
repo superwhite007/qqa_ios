@@ -150,7 +150,7 @@ static NSString *identifier = @"Cell";
     if (indexPath.row % 2 == 0) {
         return 30;
     } else{
-       return  [self gitHightForCell:indexPath] + 30;
+       return  [self gitHightForCell:indexPath] + 10;
     }
     
     

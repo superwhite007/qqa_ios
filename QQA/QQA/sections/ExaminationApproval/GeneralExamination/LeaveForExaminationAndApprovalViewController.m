@@ -82,10 +82,26 @@
                                             
                                             if (data != nil) {
                                                 
+//                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+//                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+//                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+//                                                    NSLog(@"MessageViewControllerdict: %@", dictArray);
+//                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002) {
+//                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+//                                                        [array1 removeObjectAtIndex:0];
+//
+////                                                        [self setDataToDatasoureSendScopeArray:array1];
+//
+//                                                    }
+//
+//                                                }else if ([dataBack isKindOfClass:[NSDictionary class]]){
+//                                                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+//                                                    NSLog(@"1234567dict: %@,\n ", dict);
+//                                                }
+                                                
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"CCAndApprovalGroup: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 
-                                              
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6002 ) {
                                                   
                                                     self.approvalMarray = dictArray[1];
@@ -96,12 +112,7 @@
                                                         [self ApproverAndCC];
                                                         
                                                     });
-                                                    
-                    
-                                                    
                                                 }
-//
-                                                
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
                                             }
@@ -157,9 +168,6 @@
             [self.view addSubview:selectBtn];
             selectBtn.tag = i;
             [selectBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
-            
-            
-            
             
         }
        

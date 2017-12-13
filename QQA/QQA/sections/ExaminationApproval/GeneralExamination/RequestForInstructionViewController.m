@@ -100,7 +100,7 @@
                                             if (data != nil) {
                                                 
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                NSLog(@"CCAndApprovalGroup: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
+                                                NSLog(@"CCAndApprovalGroup:  %@\n", dictArray);
                                                 
                                                 
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6014 ) {

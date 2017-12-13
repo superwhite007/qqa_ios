@@ -139,15 +139,14 @@ static NSString * identifier = @"CELL";
 {
     NSInteger number =  indexPath.row;
     
-    
     if ([_titleIdentifier isEqualToString:@"发起审批"]) {
         if (number == 0) {
             LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
             [self.navigationController pushViewController:leaveVC animated:YES];
             
         } else if (number == 1){
-            RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
-            [self.navigationController pushViewController:leaveVC animated:YES];
+//            RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
+//            [self.navigationController pushViewController:leaveVC animated:YES];
             
             
         }else if (number == 2){
