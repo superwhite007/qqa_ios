@@ -10,9 +10,6 @@
 #import "ScanImageViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-#define  iphoneWidth    [[UIScreen mainScreen] bounds].size.width
-#define  iphoneHeight   [[UIScreen mainScreen] bounds].size.height
-
 #import "AppTBViewController.h"
 #import "AppDelegate.h"
 
@@ -261,14 +258,12 @@
 
 -(void)scanCrama:(NSMutableDictionary *)mDict {
     
-    
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
     NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"badaAccessToktn.txt"];
     [mDict  writeToFile:txtPath atomically:YES];
     
     int result = 0;
-    
     if (result == 1) {
         [self scanSuccess:@"https://"];
     } else if (result == 0) {
