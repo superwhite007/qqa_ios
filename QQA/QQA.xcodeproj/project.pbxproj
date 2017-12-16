@@ -25,6 +25,7 @@
 		AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */; };
 		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
+		AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */; };
 		AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
@@ -125,6 +126,8 @@
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQA_PrefixHeader.pch; sourceTree = "<group>"; };
+		AA3A75341FE50BC000F3EB25 /* RulesDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RulesDetailViewController.h; sourceTree = "<group>"; };
+		AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RulesDetailViewController.m; sourceTree = "<group>"; };
 		AA9B6AF31FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyinformationAndBylawsViewController.h; sourceTree = "<group>"; };
 		AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyinformationAndBylawsViewController.m; sourceTree = "<group>"; };
 		AAA169F81FA98E0F00F35475 /* AppTBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppTBViewController.h; sourceTree = "<group>"; };
@@ -466,6 +469,8 @@
 			children = (
 				AA20C6951FD147BC0095AF0F /* CompanyBylawsViewController.h */,
 				AA20C6961FD147BC0095AF0F /* CompanyBylawsViewController.m */,
+				AA3A75341FE50BC000F3EB25 /* RulesDetailViewController.h */,
+				AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */,
 				AA20C6941FD1477E0095AF0F /* Companyinformation */,
 			);
 			path = CompanyBylaws;
@@ -831,6 +836,7 @@
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
 				AA20C69A1FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m in Sources */,
 				AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */,
+				AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */,
 				AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,
 				AA1CEC841FA9602E00050EFC /* AppDelegate.m in Sources */,

@@ -12,6 +12,8 @@
 #import "CompanyinformationAndBylawsViewController.h"
 #import "CompanyOrganizationalStructureViewController.h"
 
+#import "CompanyBylawsViewController.h"
+
 @interface CompanyViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray * datasource;
@@ -126,7 +128,7 @@ static NSString *identifier = @"CELL";
           [self.navigationController pushViewController:companyNoticeVC animated:YES];
     
         } else if (indexPath.row == 1) {
-            CompanyinformationAndBylawsViewController * companyBylawsVC = [CompanyinformationAndBylawsViewController new];
+            CompanyBylawsViewController * companyBylawsVC = [CompanyBylawsViewController new];
             companyBylawsVC.transmitTitleLabel = @"规章制度";
             [self.navigationController pushViewController:companyBylawsVC animated:YES];
             

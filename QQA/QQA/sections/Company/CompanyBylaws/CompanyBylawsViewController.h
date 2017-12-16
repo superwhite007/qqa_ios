@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CompanyBylawsViewController : UIViewController
+@interface CompanyBylawsViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) NSString *   transmitTitleLabel;
+@property (nonatomic, strong) UITableView * tableView;
 
 @end
