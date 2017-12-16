@@ -173,7 +173,7 @@
 
 - (void)reportScanResult:(NSString *)result{
     
-    NSLog(@"11111%@",result);
+//    NSLog(@"scanBack%@",result);
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
     [dict removeObjectForKey:@"serverType"];
@@ -201,14 +201,24 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"response, error :%@, %@", response, error);
-                                            NSLog(@"data:%@", data);
                                             if (data != nil) {
-                                                //NSLog(@"PlantKeysuccess");
-                                            NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                            [self gitaccessToken:dict];
+                                            //NSLog(@"PlantKeysuccess");
+                                            
+                                            id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                            if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                 [self alert:@"获取失败"];
+                                            } else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSString * str = [NSString stringWithFormat:@"%@", [dict objectForKey:@"message"]];
+                                                if ( [str isEqualToString:@"1003"]) {
+                                                    [self gitaccessToken:dict];
+                                                }else if( [str isEqualToString:@"400"]) {
+                                                   [self alert:@"获取失败"];
+                                                }
+                                            }
+                                                
                                             } else{
-                                                //NSLog(@"获取数据失败，问李鹏");
+                                                [self alert:@"获取失败"];
                                             }
     }];
     [task resume];
@@ -241,13 +251,19 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
-                                                //NSLog(@"tokensuccess");
-                                                NSMutableDictionary * dictss =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil]
-                                                ;
-                                                [self scanCrama:dictss];
-                                                
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                } else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSString * str = [NSString stringWithFormat:@"%@", [dict objectForKey:@"message"]];
+                                                    if ( [str isEqualToString:@"2003"]) {
+                                                        [self scanCrama:dict];
+                                                    }else if( [str isEqualToString:@"2001"] || [str isEqualToString:@"2002"]) {
+                                                        [self alert:@"获取Token失败"];
+                                                    }
+                                                }
                                             } else{
-                                                //NSLog(@"token:获取数据失败，问李鹏");
+                                                [self alert:@"获取Token失败"];
                                             }
     }];
     [task resume];
@@ -256,7 +272,7 @@
 
 
 
--(void)scanCrama:(NSMutableDictionary *)mDict {
+-(void)scanCrama:(NSDictionary *)mDict {
     
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
@@ -292,6 +308,7 @@
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+    
 }
 
 
@@ -344,6 +361,7 @@
     
 }
 
+
 -(void)goBbackToAPP:(NSString *)userInfomation{
     
     AppTBViewController *appTBVController = [AppTBViewController new];
@@ -351,7 +369,6 @@
      ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = tbNC;
     
 }
-
 
 
 -(void)plantIDKeyFalse{
@@ -377,7 +394,6 @@
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [scanButton addTarget:self action:@selector(removeViewFroSuperVIew) forControlEvents:UIControlEventTouchUpInside];
-    
     [plantIDKeyFalseView addSubview:scanButton];
     
 }
