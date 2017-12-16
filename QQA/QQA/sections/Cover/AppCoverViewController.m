@@ -256,9 +256,9 @@
                                                 } else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                     NSString * str = [NSString stringWithFormat:@"%@", [dict objectForKey:@"message"]];
-                                                    if ( [str isEqualToString:@"2003"]) {
+                                                    if ([str isEqualToString:@"2003"]) {
                                                         [self scanCrama:dict];
-                                                    }else if( [str isEqualToString:@"2001"] || [str isEqualToString:@"2002"]) {
+                                                    }else{
                                                         [self alert:@"获取Token失败"];
                                                     }
                                                 }
@@ -279,21 +279,18 @@
     NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"badaAccessToktn.txt"];
     [mDict  writeToFile:txtPath atomically:YES];
     
-    int result = 0;
-    if (result == 1) {
+//    NSString *title = [mDict objectForKey:@"accessToken"];
+    NSString *title = [NSString stringWithFormat:@"恭喜您"];
+    NSString *message = @"扫码成功";
+    NSString *okButtonTitle = @"确定";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self gitPersonPermissions];
         [self scanSuccess:@"https://"];
-    } else if (result == 0) {
-        NSString *title = [mDict objectForKey:@"accessToken"];
-        NSString *message = @"扫码成功";
-        NSString *okButtonTitle = @"OK";
-        UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-             [self scanSuccess:@"https://"];
-        }];
-        [alertDialog addAction:okAction];
-        [self.navigationController  presentViewController:alertDialog animated:YES completion:nil];
-    }
-    
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController  presentViewController:alertDialog animated:YES completion:nil];
+   
 }
 
 -(void)alert:(NSString *)str{
@@ -369,6 +366,72 @@
      ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = tbNC;
     
 }
+
+
+-(void)gitPersonPermissions{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://qqoatest.youth.cn/v1/api/user/permissions"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    
+    NSLog( @"66666666%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"8787878787878787dictArray: %@,\n ", dictArray);
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 7004 ) {
+                                                       
+                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        [array1 removeObjectAtIndex:0];
+                                                        
+                                                    }else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"8787878787878787: %@,\n ", dict);
+                                                    if ( [[dict objectForKey:@"message"] intValue] == 6006 ){
+                                                        
+                                                    }
+                                                }
+                                            } else{
+                                               
+                                                NSLog(@"获取数据失败，问12345678");
+                                               
+                                            }
+                    }
+    }];
+    [task resume];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -(void)plantIDKeyFalse{
