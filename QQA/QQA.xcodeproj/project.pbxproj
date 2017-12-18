@@ -677,7 +677,7 @@
 				TargetAttributes = {
 					AA1CEC7E1FA9602E00050EFC = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					AA1CEC901FA9602E00050EFC = {
 						CreatedOnToolsVersion = 9.0;
@@ -996,13 +996,15 @@
 			baseConfigurationReference = CE70EE0C5B008995EA81DF25 /* Pods-QQA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YH3256X757;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = VDRV8NWW2J;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QQA/QQA_PrefixHeader.pch";
 				INFOPLIST_FILE = QQA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shown.howdyland;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChinaYouthNetwork.QQA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a852744f-fd01-4b30-8a33-863f7101178f";
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentProfileName;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1012,13 +1014,15 @@
 			baseConfigurationReference = 5EB9B0173C989AA3F3E802A8 /* Pods-QQA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YH3256X757;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = VDRV8NWW2J;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QQA/QQA_PrefixHeader.pch";
 				INFOPLIST_FILE = QQA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shown.howdyland;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChinaYouthNetwork.QQA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a852744f-fd01-4b30-8a33-863f7101178f";
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentProfileName;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

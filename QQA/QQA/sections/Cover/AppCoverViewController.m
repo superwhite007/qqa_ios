@@ -178,6 +178,7 @@
     NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
     [dict removeObjectForKey:@"serverType"];
     NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
     NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
@@ -228,7 +229,7 @@
 
 -(void)gitaccessToken:(NSDictionary *)dict{
     
-    NSLog(@"gitaccessToken:dictss:%@", dict);
+//    NSLog(@"gitaccessToken:dictss:%@", dict);
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:dict];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict removeObjectForKey:@"serverType"];
@@ -250,6 +251,7 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
@@ -375,12 +377,10 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
@@ -392,30 +392,32 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
+                                            NSLog(@"response, error-------%@,%@", response, error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"8787878787878787dictArray: %@,\n ", dictArray);
-                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 7004 ) {
-                                                       
-                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-                                                        [array1 removeObjectAtIndex:0];
+                                                    NSLog(@"gitPersonPermissionsArray: %@,\n ", dictArray);
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 8002 ) {
+                                                        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dictArray[1] ];
+                                                        
+                                                        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                                                        NSString * documentfilePath = paths.firstObject;
+                                                        NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"Permissions.txt"];
+                                                        [dict  writeToFile:txtPath atomically:YES];
+                                                        [self scanSuccess:@"https://"];
                                                         
                                                     }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"8787878787878787: %@,\n ", dict);
-                                                    if ( [[dict objectForKey:@"message"] intValue] == 6006 ){
+                                                    NSLog(@"gitPersonPermissions: %@,\n ", dict);
+                                                    if ( [[dict objectForKey:@"message"] intValue] == 8002 ){
                                                         
                                                     }
                                                 }
-                                            } else{
-                                               
-                                                NSLog(@"获取数据失败，问12345678");
-                                               
                                             }
-                    }
+                                            }else{
+                                                NSLog(@"获取数据失败，问gitPersonPermissions");
+                                            }
     }];
     [task resume];
     

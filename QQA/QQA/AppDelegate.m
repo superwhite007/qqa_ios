@@ -33,6 +33,12 @@
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
     
+    
+    NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
+    NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
+    NSLog(@"resultPermissions----%@",resultPermissions);
+    
+    //Permissions.txt
     //NSLog(@"AppDic:\nidKey:%@,\n accessToken:%@\n",  [resultDic objectForKey:@"idKey"] , [resultDicAccess objectForKey:@"accessToken"]);
     
     if (resultDic[@"idKey"] == nil || resultDicAccess[@"accessToken"] == NULL ) {

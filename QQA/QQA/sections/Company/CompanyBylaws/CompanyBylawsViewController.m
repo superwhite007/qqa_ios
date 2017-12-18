@@ -144,8 +144,9 @@ static NSString * identifier = @"CELL";
     
     RulesDetailViewController * detailVC = [[RulesDetailViewController alloc] init];
     detailVC.urlStr = [self.datasource[indexPath.row] objectForKey:@"url"];
-    [self.navigationController pushViewController:detailVC animated:NO];
-    
+    if (detailVC.urlStr.length >0 ) {
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
     
 }
 
