@@ -10,6 +10,7 @@
 #import "AppTBViewController.h"
 #import "AppCoverViewController.h"
 #import "AppCoverViewController.h"
+
 #import <UserNotifications/UserNotifications.h>
 #import "UMessage.h"
 
@@ -57,15 +58,11 @@
         UINavigationController * tbNC = [[UINavigationController alloc] initWithRootViewController:appTBVC];
         self.window.rootViewController = tbNC;
         
-        
-        
-        
-       
-        
     }
 
     //初始化方法,也可以使用(void)startWithAppkey:(NSString *)appKey launchOptions:(NSDictionary * )launchOptions httpsenable:(BOOL)value;这个方法，方便设置https请求。
-    [UMessage startWithAppkey:appkeyUM launchOptions:launchOptions];
+//    [UMessage startWithAppkey:appkeyUM launchOptions:launchOptions];
+    [UMessage startWithAppkey:appkeyUM launchOptions:launchOptions httpsenable:YES ];
     //注册通知，如果要使用category的自定义策略，可以参考demo中的代码。
     [UMessage registerForRemoteNotifications];
     
@@ -82,11 +79,14 @@
             //这里可以添加一些自己的逻辑
         }
     }];
+    
     //打开日志，方便调试
     [UMessage setLogEnabled:YES];
 
     return YES;
 }
+
+
 
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -104,22 +104,10 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     //关闭U-Push自带的弹出框
-    [UMessage setAutoAlert:NO];
+//    [UMessage setAutoAlert:NO];
     [UMessage didReceiveRemoteNotification:userInfo];
     
-    //    self.userInfo = userInfo;
-    //    //定制自定的的弹出框
-    //    if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
-    //    {
-    //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"标题"
-    //                                                            message:@"Test On ApplicationStateActive"
-    //                                                           delegate:self
-    //                                                  cancelButtonTitle:@"确定"
-    //                                                  otherButtonTitles:nil];
-    //
-    //        [alertView show];
-    //
-    //    }
+  
 }
 
 //iOS10新增：处理前台收到通知的代理方法
