@@ -43,9 +43,9 @@ static NSString *identifier = @"CELL";
 //    //允许我们自定义当前视图控制器的标题视图，可以是任意UIView子类创建的视图
 //    self.navigationItem.titleView = aLable;
     
-    [self.navigationItem setTitle:@"青春"];
+//    [self.navigationItem setTitle:@"青春"];
     
-    
+     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
     
     
     [self.datasource addObject:@"发起审批"];
