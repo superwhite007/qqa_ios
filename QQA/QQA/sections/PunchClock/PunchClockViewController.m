@@ -34,8 +34,8 @@
     punchRecordButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , 64 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 100, 30);
     [punchRecordButtom setTitle:@"打卡记录" forState:UIControlStateNormal];
 //    [punchRecordButtom setBackgroundImage:[UIImage imageNamed:@"red_button"] forState:UIControlStateNormal];
-    [punchRecordButtom setTintColor:[UIColor blackColor]];
-    punchRecordButtom.backgroundColor = [UIColor greenColor];
+    [punchRecordButtom setTintColor:[UIColor whiteColor]];
+    punchRecordButtom.backgroundColor = [UIColor blackColor];
     [punchRecordButtom addTarget:self action:@selector(puchtoPunchRecordcontroller) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:punchRecordButtom];
     
@@ -50,9 +50,11 @@
     [self.view addSubview:scanButtom];
     
    
-    UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125, 100, 30)];
+    UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125, 200, 30)];
 //    timeLable.backgroundColor = [UIColor greenColor];
-    timeLable.text = @"00:00:01";
+    timeLable.text = [NSString stringWithFormat:@"%@", [self getNowTime]];
+    
+    
     timeLable.font = [UIFont fontWithName:@"Arial" size:18];
     timeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:timeLable];
@@ -77,6 +79,20 @@
     
 }
 
+-(void)ssssssss{
+    NSTimer * timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(function:) userInfo:nil repeats:YES];
+    //每1秒运行一次function方法。
+}
+
+
+- (NSString *)getNowTime {
+    NSDate *senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"HH:mm:ss"];
+    NSString *locationString=[dateformatter stringFromDate:senddate];
+    return locationString;
+}
+
 -(void)startScanssss{
     
     //    ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
@@ -93,7 +109,7 @@
 
 
 - (void)reportScanResult:(NSString *)result{
-    NSLog(@"%@",result);
+    NSLog(@"3333333333%@",result);
 //    [self scanCrama:result];
 //
     [self scanResultPunchClock];
@@ -121,47 +137,52 @@
     
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     
-    [mdict setObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"TimeMachineFeatureCode"] ] forKey:@"timecardmachine_feature_code"];
+    [mdict setObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"TimeMachineFeatureCode"] ] forKey:@"timecardMachineFeatureCode"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
     
-//    //NSLog(@"resultDicresultmdict:%@ \n%@ \n %@", mdict, dict, resultDicAccess );
+    NSLog(@"resultDicresultmdict:%@ \n", mdict);
     
     
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
-    
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-                                            //                                            //NSLog(@"response, error :%@, %@", response, error);
-                                            //                                            //NSLog(@"data:%@", data);
-                                            
                                             if (data != nil) {
-                                                //NSLog(@"Punchsuccess");
                                                 NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                //NSLog(@"%@", dict);
-                                                
-                                                //                                            NSMutableDictionary *ddict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                
-//                                                [self gitaccessToken:dict];
-                                                
+                                                NSLog(@"%@", dict);
+                                                NSString * str = [NSString stringWithFormat:@"%@", [dict objectForKey:@"message"]];
+                                                if ([str isEqualToString:@"3003"]) {
+                                                    [self alert:@"打卡成功!"];
+                                                } else{
+                                                    [self alert:@"打卡失败!"];
+                                                }
                                             } else{
-                                                //NSLog(@"获取数据失败，问李鹏");
+                                                [self alert:@"打卡失败!"];
                                             }
                                             
                                         }];
     [task resume];
-    
-    
-    
+
 }
 
-
+-(void)alert:(NSString *)str{
+    
+    NSString *title = str;
+    NSString *message = @"I need your attention NOW!";
+    NSString *okButtonTitle = @"OK";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // 操作具体内容
+        // Nothing to do.
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+    
+}
 
 -(void)scanResultPunchClock{
     

@@ -125,9 +125,10 @@ static NSString *identifier = @"Cell";
                                           
                                             if (data != nil) {
                                                 
+                                                
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
-                                                
+                                                NSLog(@"arrayarray%@", array);
                                                 NSDictionary * firDict = array[0];
                                                 NSString * str  = [NSString stringWithFormat:@"%@", [firDict objectForKey:@"message"]];
                                                 if ([str isEqualToString:@"3004" ]) {
@@ -139,7 +140,7 @@ static NSString *identifier = @"Cell";
 
                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                     self.datasource = array;
-                                                   [self.aTableView reloadData];
+                                                    [self.aTableView reloadData];
                                                         
                                                     });
 
@@ -168,6 +169,7 @@ static NSString *identifier = @"Cell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
     
+    NSLog(@"%lu\n\n",(unsigned long)self.datasource.count );
     return self.datasource.count;
 }
 
@@ -183,10 +185,7 @@ static NSString *identifier = @"Cell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
-    
-    
-    //NSLog(@"cell:%@",[self.datasource[indexPath.row]  objectForKey:@"clock_time"]);
-    cell.textLabel.text = [self.datasource[indexPath.row]  objectForKey:@"clock_time"];
+    cell.textLabel.text = [NSString stringWithFormat:@"打卡时间：%@   成功",[self.datasource[indexPath.row]  objectForKey:@"clockTime"]];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
     //添加动画效果
