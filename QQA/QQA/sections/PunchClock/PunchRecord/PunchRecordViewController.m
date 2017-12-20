@@ -52,19 +52,15 @@ static NSString *identifier = @"Cell";
     
     self.aTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     self.aTableView.separatorColor = [UIColor orangeColor];
-    
-   
     self.aTableView.rowHeight = 60;
     self.aTableView.dataSource =self;
     self.aTableView.delegate = self;
-    
     [self.view addSubview:self.aTableView];
     [self.aTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
     
     self.aTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.aTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 
-    
 }
 
 
@@ -100,32 +96,24 @@ static NSString *identifier = @"Cell";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
-    
     [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     
 //    NSLog(@"mdict:%@", mdict);
-    
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                           
                                             if (data != nil) {
-                                                
-                                                
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
                                                 NSLog(@"arrayarray%@", array);
@@ -162,20 +150,12 @@ static NSString *identifier = @"Cell";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    
-    NSLog(@"%lu\n\n",(unsigned long)self.datasource.count );
     return self.datasource.count;
 }
-
-
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
