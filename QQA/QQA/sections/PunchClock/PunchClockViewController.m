@@ -29,11 +29,9 @@
     [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"app_face_logo"] forState:UIControlStateNormal];
     [self.view addSubview:punchCLockImageTileButton];
     
-    
     UIButton * punchRecordButtom = [UIButton buttonWithType:UIButtonTypeSystem];
     punchRecordButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , 64 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 100, 30);
     [punchRecordButtom setTitle:@"打卡记录" forState:UIControlStateNormal];
-//    [punchRecordButtom setBackgroundImage:[UIImage imageNamed:@"red_button"] forState:UIControlStateNormal];
     [punchRecordButtom setTintColor:[UIColor whiteColor]];
     punchRecordButtom.backgroundColor = [UIColor blackColor];
     [punchRecordButtom addTarget:self action:@selector(puchtoPunchRecordcontroller) forControlEvents:UIControlEventTouchUpInside];
@@ -41,41 +39,27 @@
     
     UIButton * scanButtom = [UIButton buttonWithType:UIButtonTypeSystem];
     scanButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75, 100, 100);
-//    [scanButtom setTitle:@"打卡记录" forState:UIControlStateNormal];
     [scanButtom setBackgroundImage:[UIImage imageNamed:@"scan_qrcode"] forState:UIControlStateNormal];
     [scanButtom setTintColor:[UIColor blackColor]];
-    //    punchRecordButtom.backgroundColor = [UIColor blueColor]; scan_qrcode
     [scanButtom addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:scanButtom];
-    
-   
+
     UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125, 200, 30)];
-//    timeLable.backgroundColor = [UIColor greenColor];
     timeLable.text = [NSString stringWithFormat:@"%@", [self getNowTime]];
-    
-    
     timeLable.font = [UIFont fontWithName:@"Arial" size:18];
     timeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:timeLable];
     
     UILabel * workingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10, 200, 30)];
-//    workingTimeLable.backgroundColor = [UIColor greenColor];
     workingTimeLable.text = @"上班时间：08:30--17:30";
     workingTimeLable.font = [UIFont fontWithName:@"Arial" size:18];
     workingTimeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:workingTimeLable];
-    
-    
     UILabel * explainWorkingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 300 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10 + 40 , 300, 30)];
-//    explainWorkingTimeLable.backgroundColor = [UIColor greenColor];
     explainWorkingTimeLable.text = @"扫描公司打卡机上的二维码完成打卡";
     explainWorkingTimeLable.font = [UIFont fontWithName:@"Arial" size:18];
     explainWorkingTimeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:explainWorkingTimeLable];
-    
-    
-    
     
 }
 
@@ -93,29 +77,20 @@
     return locationString;
 }
 
+
 -(void)startScanssss{
-    
-    //    ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
     
     ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
     scanImage.delegate = self;
-    //    [self presentViewController:scanImage animated:YES completion:nil];
     [self.navigationController  presentViewController:scanImage animated:YES completion:nil];
-    
     
 }
 
-
-
-
 - (void)reportScanResult:(NSString *)result{
-    NSLog(@"3333333333%@",result);
-//    [self scanCrama:result];
-//
+    
     [self scanResultPunchClock];
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
-    //NSLog(@"%@", dict);
     [self punchRecore:dict];
     
 }
@@ -127,23 +102,15 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
-    
     [mdict setObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"TimeMachineFeatureCode"] ] forKey:@"timecardMachineFeatureCode"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    
-    
-    NSLog(@"resultDicresultmdict:%@ \n", mdict);
-    
-    
+//    NSLog(@"resultDicresultmdict:%@ \n", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -172,7 +139,7 @@
 -(void)alert:(NSString *)str{
     
     NSString *title = str;
-    NSString *message = @"I need your attention NOW!";
+    NSString *message = @"请注意";
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -185,37 +152,22 @@
 }
 
 -(void)scanResultPunchClock{
-    
-    
     //NSLog(@"打卡成功");
-    
 }
-
-
-
-
-
 
 
 -(void)puchtoPunchRecordcontroller{
     
     PunchRecordViewController * prVC = [[PunchRecordViewController alloc] init];
-
     [self.navigationController pushViewController:prVC animated:YES];
-//    [self presentViewController:prVC animated:YES completion:nil];
-
     
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-    
-    
+  
 }
 
 /*

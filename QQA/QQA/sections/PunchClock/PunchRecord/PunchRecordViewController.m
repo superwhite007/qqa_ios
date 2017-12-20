@@ -21,7 +21,7 @@
 
 @implementation PunchRecordViewController
 
-//全局的静态重用标志符
+
 static NSString *identifier = @"Cell";
 
 -(NSMutableArray *)datasource{
@@ -45,7 +45,6 @@ static NSString *identifier = @"Cell";
 //    [self.datasource addObject:@"test2"];
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<主页" style:UIBarButtonItemStyleDone target:self action:@selector(returnBack)] ;
-    
     
     self.pageNum = 1;
     self.isDownRefresh = NO;
@@ -73,7 +72,6 @@ static NSString *identifier = @"Cell";
     } else{
         [self punchRecoret:1];
     }
-    
     [self.aTableView.mj_header endRefreshing];
 }
 
@@ -85,12 +83,8 @@ static NSString *identifier = @"Cell";
     [self.aTableView.mj_footer endRefreshing];
 }
 
-
-
-
 -(void)punchRecoret:(int)page{
     NSLog(@"page%d", page);
-    
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/attendance/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -120,28 +114,19 @@ static NSString *identifier = @"Cell";
                                                 NSDictionary * firDict = array[0];
                                                 NSString * str  = [NSString stringWithFormat:@"%@", [firDict objectForKey:@"message"]];
                                                 if ([str isEqualToString:@"3004" ]) {
-                                                    
                                                     [array removeObjectAtIndex:0];
-                                            
                                                     [self.datasource removeAllObjects];
                                                     self.datasource = array;
-
                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                     self.datasource = array;
                                                     [self.aTableView reloadData];
-                                                        
                                                     });
-
                                                 }
-                       
                                             } else{
                                                 //NSLog(@"获取数据失败，问李鹏");
                                             }
-                                            
                                         }];
-    
     [task resume];
-    
     
 }
 
@@ -223,11 +208,6 @@ static NSString *identifier = @"Cell";
  // Pass the selected object to the new view controller.
  }
  */
-
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
