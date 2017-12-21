@@ -62,7 +62,7 @@
 
     //初始化方法,也可以使用(void)startWithAppkey:(NSString *)appKey launchOptions:(NSDictionary * )launchOptions httpsenable:(BOOL)value;这个方法，方便设置https请求。
 //    [UMessage startWithAppkey:appkeyUM launchOptions:launchOptions];
-    [UMessage startWithAppkey:appkeyUM launchOptions:launchOptions httpsenable:YES ];
+    [UMessage startWithAppkey:@"5a3b0340f29d982788000edc" launchOptions:launchOptions httpsenable:YES ];
     //注册通知，如果要使用category的自定义策略，可以参考demo中的代码。
     [UMessage registerForRemoteNotifications];
     

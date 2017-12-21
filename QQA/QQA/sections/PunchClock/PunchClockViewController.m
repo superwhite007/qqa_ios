@@ -14,6 +14,9 @@
 
 @interface PunchClockViewController ()<ScanImageView>
 
+@property (nonatomic, strong) UILabel * timeLable;
+@property (nonatomic, strong) NSTimer * timer;
+
 @end
 
 @implementation PunchClockViewController
@@ -44,11 +47,10 @@
     [scanButtom addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scanButtom];
 
-    UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125, 200, 30)];
-    timeLable.text = [NSString stringWithFormat:@"%@", [self getNowTime]];
-    timeLable.font = [UIFont fontWithName:@"Arial" size:18];
-    timeLable.textAlignment = NSTextAlignmentCenter;
-    [self.view  addSubview:timeLable];
+    _timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125, 200, 30)];
+    _timeLable.font = [UIFont fontWithName:@"Arial" size:18];
+    _timeLable.textAlignment = NSTextAlignmentCenter;
+    [self.view  addSubview:_timeLable];
     
     UILabel * workingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10, 200, 30)];
     workingTimeLable.text = @"上班时间：08:30--17:30";
@@ -63,18 +65,26 @@
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [_timer invalidate];
+    _timer = nil;
+    
+}
+
 -(void)ssssssss{
-    NSTimer * timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(function:) userInfo:nil repeats:YES];
+    _timer =  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getNowTime) userInfo:nil repeats:YES];
     //每1秒运行一次function方法。
+    NSRunLoop *runloop=[NSRunLoop currentRunLoop];
+    [runloop addTimer:_timer forMode:NSDefaultRunLoopMode];
+    [_timer fire];
 }
 
 
-- (NSString *)getNowTime {
+- (void)getNowTime {
     NSDate *senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"HH:mm:ss"];
-    NSString *locationString=[dateformatter stringFromDate:senddate];
-    return locationString;
+    _timeLable.text = [NSString stringWithFormat:@"%@", [dateformatter stringFromDate:senddate]];
 }
 
 

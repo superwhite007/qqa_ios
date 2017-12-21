@@ -25,7 +25,10 @@
 
 #define CONST_SERVER_ADDRESS   @"http://qqoatest.youth.cn"
 
-#define  appkeyUM  @"5a3761a6f43e4818c00001d4"
+//#define  appkeyUM  @"5a3761a6f43e4818c00001d4"
+
+#define  appkeyUM  @"5a3b0340f29d982788000edc"
+
 #define  appMasterSecretUM  @"4oqjncnhnpdsxiapyeej6m6ggdxhtjj9"
 
 #import "MJRefresh.h"
