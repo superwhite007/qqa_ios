@@ -104,6 +104,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     //关闭U-Push自带的弹出框
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
 //    [UMessage setAutoAlert:NO];
     [UMessage didReceiveRemoteNotification:userInfo];
     
@@ -116,6 +117,8 @@
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于前台时的远程推送接受
         //关闭U-Push自带的弹出框
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
         [UMessage setAutoAlert:NO];
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
@@ -132,6 +135,8 @@
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于后台时的远程推送接受
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
+        
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
