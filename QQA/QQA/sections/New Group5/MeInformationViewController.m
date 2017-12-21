@@ -77,38 +77,28 @@
 }
 
 -(void)gotoSomeForwed:(UIButton *)sender{
-    
-    
     if (sender.tag == 0) {
-        
         MessageViewController * messageVC = [MessageViewController new];
         [self.navigationController pushViewController:messageVC animated:YES];
-        
     }else if (sender.tag == 1){
         [self  alert:@"敬请期待中、、、"];
-        
     }else if (sender.tag == 2){
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
         [self.navigationController pushViewController:aboutYouthVC animated:YES];
-        
     }
-    
-    
 }
 
 
 -(void)alert:(NSString *)str{
     
     NSString *title = str;
-    NSString *message = @"I need your attention NOW!";
+    NSString *message = @"请注意";
     NSString *okButtonTitle = @"OK";
-    
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         // Nothing to do.
     }];
-    
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
     
@@ -137,40 +127,26 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    
 //    NSLog(@"mdict%@", mdict);
-    
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             
-//                                            //NSLog(@"response, error :%@, %@", response, error);
-//                                            //NSLog(@"data:%@", data);
-                                            
                                             if (data != nil) {
-                                                
                                                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                               NSLog(@"12345678dict: %@", dict);
-                                                
                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                      [self  gitSomeThingsdictionary:dict];
-                                                    
                                                 });
-                                                
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
                                             }
@@ -181,21 +157,15 @@
 
 
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
-    
-    NSLog(@"me:dict: %@", dict);
-    
+
     UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
     view.backgroundColor = [ UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
     [self.view addSubview: view];
-    
     NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：",  @"NO.", @"电话：", @"email:", @"QQ:", @"WeChat:"];
     NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , [dict objectForKey:@"username"], [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"weiXin"]];
-    
-    
     UIImageView * imgVIew = [[UIImageView alloc] initWithFrame:CGRectMake(15, iphoneWidth  / 9 , iphoneWidth * 4 / 9 , iphoneWidth * 4 / 9)];
     imgVIew.backgroundColor = [UIColor redColor];
     imgVIew.layer.cornerRadius = imgVIew.frame.size.width/2;
-    
     imgVIew.clipsToBounds = YES;
     //    UIImage *image = [UIImage imageNamed:labelNameArray[0]]; hongjinbao
     

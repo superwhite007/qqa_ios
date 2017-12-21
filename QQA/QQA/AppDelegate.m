@@ -29,41 +29,26 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-   
+    NSLog(@"application:%ld", (long)application.applicationState);
     
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
-    
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
-    
     NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
     NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
     NSLog(@"resultPermissions----%@",resultPermissions);
-    
-    //Permissions.txt
-    //NSLog(@"AppDic:\nidKey:%@,\n accessToken:%@\n",  [resultDic objectForKey:@"idKey"] , [resultDicAccess objectForKey:@"accessToken"]);
-    
     if (resultDic[@"idKey"] == nil || resultDicAccess[@"accessToken"] == NULL ) {
-        
         AppCoverViewController * scanVC = [AppCoverViewController new];
         UINavigationController * scanNC = [[UINavigationController alloc] initWithRootViewController:scanVC];
         self.window.rootViewController = scanNC;
-        
     } else{
         AppTBViewController * appTBVC = [AppTBViewController new];
-//        self.window.rootViewController = appTBVC;
-        
         UINavigationController * tbNC = [[UINavigationController alloc] initWithRootViewController:appTBVC];
         self.window.rootViewController = tbNC;
-        
     }
-
-    //初始化方法,也可以使用(void)startWithAppkey:(NSString *)appKey launchOptions:(NSDictionary * )launchOptions httpsenable:(BOOL)value;这个方法，方便设置https请求。
-//    [UMessage startWithAppkey:appkeyUM launchOptions:launchOptions];
+    
     [UMessage startWithAppkey:@"5a3b0340f29d982788000edc" launchOptions:launchOptions httpsenable:YES ];
-    //注册通知，如果要使用category的自定义策略，可以参考demo中的代码。
     [UMessage registerForRemoteNotifications];
     
     //iOS10必须加下面这段代码。
@@ -93,22 +78,19 @@
 {
     // 1.2.7版本开始不需要用户再手动注册devicetoken，SDK会自动注册
     //[UMessage registerDeviceToken:deviceToken];
-    
     NSLog(@"------token------%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
                   stringByReplacingOccurrencesOfString: @">" withString: @""]
                  stringByReplacingOccurrencesOfString: @" " withString: @""]);
-    
 }
 
 //iOS10以下使用这个方法接收通知
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
+    NSLog(@"didReceiveRemoteNotification");
     //关闭U-Push自带的弹出框
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
-//    [UMessage setAutoAlert:NO];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
+    [UMessage setAutoAlert:NO];
     [UMessage didReceiveRemoteNotification:userInfo];
-    
-  
 }
 
 //iOS10新增：处理前台收到通知的代理方法
@@ -135,11 +117,8 @@
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于后台时的远程推送接受
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
-        
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
-        
     }else{
         //应用处于后台时的本地推送接受
     }
