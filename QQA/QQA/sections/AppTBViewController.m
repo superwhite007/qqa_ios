@@ -28,13 +28,14 @@
     // Do any additional setup after loading the view.
     
     [self setupAllChildViewControllers];
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoNotification:) name:@"userInfoNotification" object:nil];
+
     
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoNotification:) name:@"userInfoNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoNotification:) name:@"userInfoNotification" object:nil];
 }
 -(void)userInfoNotification:(NSNotification*)notification{
     
