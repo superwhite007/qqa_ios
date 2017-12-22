@@ -25,7 +25,6 @@
     NSURL *url = [NSURL URLWithString:self.url];
     [self.webview loadRequest:[NSURLRequest requestWithURL:url]];
 
-
 }
 
 - (void)didReceiveMemoryWarning {
