@@ -29,7 +29,7 @@
     UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
     punchCLockImageTileButton.frame = CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
     punchCLockImageTileButton.backgroundColor = [UIColor redColor];
-    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"app_face_logo"] forState:UIControlStateNormal];
+    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"everyday_1"] forState:UIControlStateNormal];
     [self.view addSubview:punchCLockImageTileButton];
     
     UIButton * punchRecordButtom = [UIButton buttonWithType:UIButtonTypeSystem];
