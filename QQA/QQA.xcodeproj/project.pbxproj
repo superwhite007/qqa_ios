@@ -1158,6 +1158,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QQA/QQA.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = VDRV8NWW2J;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QQA/QQA_PrefixHeader.pch";
@@ -1182,6 +1183,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QQA/QQA.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = VDRV8NWW2J;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QQA/QQA_PrefixHeader.pch";

@@ -289,7 +289,7 @@
 -(void)alert:(NSString *)str{
     
     NSString *title = str;
-    NSString *message = @"I need your attention NOW!";
+    NSString *message = @"请注意!";
     NSString *okButtonTitle = @"OK";
     
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];

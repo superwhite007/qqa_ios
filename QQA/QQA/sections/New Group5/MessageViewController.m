@@ -22,58 +22,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
     [self.navigationItem setTitle:@"发送通知"];
-    
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送范围" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
-    
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送范围" style:(UIBarButtonItemStyleDone) target:self action:@selector(sends)];
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 74, iphoneWidth - 20, iphoneWidth * 2 / 3)];
-//    messageTextView.backgroundColor = [UIColor blueColor];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:_messageTextView];
-    
     _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
     _messageTextView.layer.borderWidth = 1;
     _messageTextView.layer.cornerRadius = 10;
     _messageTextView.returnKeyType = UIReturnKeySend;
-    
     _messageTextView.delegate = self;
-    
-    
-    
-    
-
-    
     UIButton  * sendButton =  [UIButton buttonWithType:UIButtonTypeSystem];
-//    [sendButton setFrame:CGRectMake( ( iphoneWidth - 120 ) / 2, iphoneHeight  - 50, 120, 30)];
     [sendButton setFrame:CGRectMake( ( iphoneWidth - 120 ) / 2, iphoneWidth * 2 / 3 + 100, 120, 30)];
-    
     [sendButton setTitle:@"下一步" forState:UIControlStateNormal];
-//    sendButton.titleLabel.font = [UIFont systemFontOfSize:24];
-//    sendButton.backgroundColor = [UIColor blueColor];
-    
     sendButton.layer.borderColor = [UIColor blackColor].CGColor;
     sendButton.layer.borderWidth = 1;
     sendButton.layer.cornerRadius = 5;
-    
     [sendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sends) forControlEvents:UIControlEventTouchUpInside];
-
-    [self.view addSubview:sendButton];
-    
+//    [self.view addSubview:sendButton];
     UILabel * rangeOfTransmissionLabel = [[UILabel alloc] initWithFrame:CGRectMake( 10,  _messageTextView.frame.size.height + 84, 120, 30)];
     rangeOfTransmissionLabel.text = @"发送范围";
     rangeOfTransmissionLabel.textAlignment = NSTextAlignmentCenter;
     rangeOfTransmissionLabel.layer.borderColor = [UIColor blackColor].CGColor;
     rangeOfTransmissionLabel.layer.borderWidth = 1;
     rangeOfTransmissionLabel.layer.cornerRadius = 5;
-//    [self.view addSubview:rangeOfTransmissionLabel];
-    
- 
- 
-//    [self scrlollVIew];
-    
 }
 
 
@@ -82,159 +56,93 @@
     
     UIView * scrollView = [[UIView alloc] initWithFrame:CGRectMake(0, _messageTextView.frame.size.height + 124, iphoneWidth - 20,  iphoneWidth * 2 / 3 - 50)];
     scrollView.backgroundColor = [UIColor blueColor];
-    
-//    [self.view addSubview: scrollView];
-    
     UIScrollView * scrollsView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, _messageTextView.frame.size.height + 124, iphoneWidth - 20,  iphoneWidth * 2 / 3 - 50) ];
-//    scrollsView.backgroundColor = [UIColor redColor];
     scrollsView.contentSize = CGSizeMake(CGRectGetWidth(scrollView.bounds), CGRectGetHeight(scrollView.bounds) * 2);
-//    scrollsView.contentOffset  = CGPointMake(CGRectGetWidth(scrollView.bounds), 0);
     scrollsView.showsHorizontalScrollIndicator = NO;
-    
     scrollsView.delegate = self;
-    
     scrollsView.layer.borderColor = [UIColor blackColor].CGColor;
     scrollsView.layer.borderWidth = 1;
     scrollsView.layer.cornerRadius = 5;
-    
-    
     [self.view addSubview:scrollsView];
-    
-    
-    
-    
     self.mutableArray = [NSMutableArray new];
-    
-    
     NSArray * array = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"e",nil];
-    
     for (int i = 0 ; i  < [array count]; i++) {
         UIButton * clickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        //        clickBtn.backgroundColor = [UIColor clearColor];
-        
-        
         clickBtn.selected = NO;
         clickBtn.frame = CGRectMake(20, i * 50 + 10 , iphoneWidth - 60, 30);
         [clickBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [clickBtn setTag:i];
         [clickBtn setTitle:array[i] forState:(UIControlStateNormal)];
         clickBtn.backgroundColor = [UIColor grayColor];
-        
         clickBtn.layer.borderColor = [UIColor yellowColor].CGColor;
         clickBtn.layer.borderWidth = 2;
         clickBtn.layer.cornerRadius = 3;
-        
         [scrollsView addSubview:clickBtn];
-        
     }
-    
 }
 
-
 - (void)btnClick:(UIButton *)sender{
-    
-    
     NSString *str = sender.titleLabel.text;
     BOOL isbool = [_mutableArray containsObject: str];
     if (isbool) {
         [self.mutableArray removeObject:sender.titleLabel.text];
         sender.backgroundColor = [UIColor grayColor];
-        
     }else{
         [self.mutableArray addObject:sender.titleLabel.text];
         sender.backgroundColor = [UIColor purpleColor];
-        
     }
-    //NSLog(@" mutableArray%@", _mutableArray);
-    
-    
-    //NSLog(@"%i",isbool);
-    
-    
 }
 
 
 -(void)sends{
-    
      [_messageTextView resignFirstResponder];
-    [self sendNoticeToServer];
-  
+     [self sendNoticeToServer];
 }
 
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         [self sendNoticeToServer];
         return NO;
-        
     }else if (range.location >= 200){
         [self alert:@"最多输入200字符"];
         return NO;
     }
-    
     return YES;
-    
 }
 
-
-
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    
     //NSLog(@"%@", textView.text);
-    
-    
+
 }
 
 -(void)sendNoticeToServer{
-    
     if (_messageTextView.text.length == 0){
-        //NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
     }else if ( _messageTextView.text.length != 0){
-        //NSLog(@"准备发送服务器");
-//        [self sendToServerTOBack];
-        
         SendTheScopeViewController * sendTheScopeVC = [SendTheScopeViewController new];
         sendTheScopeVC.sendMessage = _messageTextView.text;
         [self.navigationController pushViewController:sendTheScopeVC animated:YES];
-        
-    
     }
-    
 }
 
 
 -(void)sendToServerTOBack{
-    //NSLog(@"准备发送服务器：success");
     [self alert:@"发送服务器：success"];
-    
 }
 
-
-
-
-
-
-
 -(void)alert:(NSString *)str{
-    
     NSString *title = str;
-    NSString *message = @"I need your attention NOW!";
+    NSString *message = @"请注意!";
     NSString *okButtonTitle = @"OK";
-
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
         // Nothing to do.
     }];
-
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
-    
-    
 }
 
 

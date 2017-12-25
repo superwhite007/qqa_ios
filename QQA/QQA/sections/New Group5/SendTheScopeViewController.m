@@ -162,30 +162,21 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
-    
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     NSLog(@"resultDic:%@", mdict);
-    
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                           
                                             if (data != nil) {
-                                                
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
@@ -193,137 +184,82 @@
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002) {
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
-                                                        
                                                         [self setDataToDatasoureSendScopeArray:array1];
-                                                        
                                                     }
-                                                    
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                     NSLog(@"1234567dict: %@,\n ", dict);
                                                 }
-                                                
-                                                
-                                                
-                                              
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];
-    
 }
 
 
 -(void)setDataToDatasoureSendScopeArray:(NSMutableArray *)mArray{
     self.datasoureSendScopeArray = mArray ;
-//    NSLog(@"mArray:&%@", mArray);
-   
     NSMutableArray * mutabelAry = [NSMutableArray new];
-    
-    
     for (NSDictionary * dict in mArray) {
-//        NSLog(@"遍历%@", [dict allKeys]);
         NSMutableString * testStr = [NSMutableString stringWithFormat:@"%@",[dict allKeys]];
         NSRange range = NSMakeRange(6, 2) ;
         NSString *subStr3 = [testStr substringWithRange:range];
         NSLog(@"%ld,.%@.", testStr.length, subStr3);
         [mutabelAry addObject:subStr3];
-        
     }
-
-    
-    NSLog(@"mutabelAry123456%@", mutabelAry);
-    
     self.datasoureKeysSendScopeArray = mutabelAry;
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-//        NSLog(@"%@",self.datasoureKeysSendScopeArray);
         [self.tableView  reloadData];
     });
-
-    
 }
 
 
 -(void)sendSendScopeToServer{
-    
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/message/store", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
-    
-    //NSLog(@"resultDic, resultDicAccess:%@, %@", resultDic, resultDicAccess);
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:self.datasoureKeysSendScopeArray forKey:@"scope"];
     [mdict setObject:self.sendMessage forKey:@"content"];
-    
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
-                                            //                                            //NSLog(@"response, error :%@, %@", response, error);
-                                            //                                            //NSLog(@"data:%@", data);
-                                            
                                             if (data != nil) {
-                                                
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"api/message/store: %@", dict);
-                                                
                                                 if ( [[dict objectForKey:@"message"] intValue] == 5004 ) {
-//                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-//                                                    [array1 removeObjectAtIndex:0];
-//
-//                                                    [self setDataToDatasoureSendScopeArray:array1];
-                                                    
                                                     [self alert:[NSString stringWithFormat:@"发送通知成功.%@", self.datasourSendToServerScopeArray]];
-
-                                                    
-
                                                 }
-                                                
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];
-    
-
-
 }
 
 
 -(void)alert:(NSString *)str{
-    
     NSString *title = str;
-    NSString *message = @"I need your attention NOW!";
+    NSString *message = @"请注意!";
     NSString *okButtonTitle = @"OK";
-    
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
         // Nothing to do.
     }];
-    
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
-    
-    
 }
 
 

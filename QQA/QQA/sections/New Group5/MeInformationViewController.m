@@ -21,12 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
-    
     NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"修改登录密码", @"关于青春",  nil];
     for (int i = 0; i < [titleArray count]; i++) {
-        
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 35, 60);
         //    button1.backgroundColor = [UIColor darkGrayColor];
@@ -39,14 +36,9 @@
         [button addTarget:self action:@selector(gotoSomeForwed:) forControlEvents:UIControlEventTouchUpInside];
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
-        
-        
     }
-    
-    
     NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"key", @"about",  nil];
     for (int i = 0; i < 3; i++) {
-      
         UIImageView *firstimgView = [[UIImageView alloc] init];
         firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 + 64 + 10 + 15  + 5+ i * 60, 20, 20);
         //    imgView.backgroundColor = [UIColor yellowColor];
@@ -54,26 +46,20 @@
         [firstimgView setImage:firstimage];
         firstimgView.alpha = 0.6;
         [self.view addSubview:firstimgView];
-        
         UIImageView *imgView = [[UIImageView alloc] init];
         imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + 5 + i * 60, 20, 20);
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
         imgView.alpha = 0.6;
         [self.view addSubview:imgView];
-    
     }
-    
     for (int i = 0; i < 4; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 72 + i * 60 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
     }
-    
-    
     [self punchRecoret];
-   
 }
 
 -(void)gotoSomeForwed:(UIButton *)sender{
@@ -90,19 +76,15 @@
 
 
 -(void)alert:(NSString *)str{
-    
     NSString *title = str;
     NSString *message = @"请注意";
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
         // Nothing to do.
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
-    
-    
 }
 
 -(void)gotoTest{
@@ -117,11 +99,9 @@
 -(void)gotoMessage{
     MessageViewController * messageVC = [MessageViewController new];
     [self.navigationController pushViewController:messageVC animated:YES];
-    
 }
 
 -(void)punchRecoret{
-    
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/show", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -141,7 +121,6 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
                                             if (data != nil) {
                                                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                dispatch_async(dispatch_get_main_queue(), ^{
@@ -152,12 +131,10 @@
                                             }
                                         }];
     [task resume];
-
 }
 
 
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
-
     UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
     view.backgroundColor = [ UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
     [self.view addSubview: view];
@@ -168,18 +145,14 @@
     imgVIew.layer.cornerRadius = imgVIew.frame.size.width/2;
     imgVIew.clipsToBounds = YES;
     //    UIImage *image = [UIImage imageNamed:labelNameArray[0]]; hongjinbao
-    
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[dict objectForKey:@"avatar"]]];
     UIImage *image = [UIImage imageWithData:data];
     [imgVIew setImage:image];
     [view addSubview:imgVIew];
-   
-    
     for (int i = 1; i < 9; i++) {
         UILabel * label = [[UILabel alloc] init];
         if ( i > 0 && i < 10) {
             label.frame = CGRectMake(iphoneWidth * 4 / 9 + 25, iphoneWidth * 2 / 3 / 10 / 2 + ( iphoneWidth * 2 / 3 / 10  * (i - 1)) + 10, iphoneWidth  / 2 - 20,  iphoneWidth * 2 / 3 / 10);
-            
         }
 //        label.backgroundColor = [UIColor blueColor];
         label.adjustsFontSizeToFitWidth = YES;
@@ -187,9 +160,6 @@
         [view addSubview:label];
     }
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
