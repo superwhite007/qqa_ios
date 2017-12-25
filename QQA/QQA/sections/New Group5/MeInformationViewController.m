@@ -9,7 +9,7 @@
 #import "MeInformationViewController.h"
 #import "AboutYouthViewController.h"
 #import "MessageViewController.h"
-
+#import "VersionInformationViewController.h"
 
 @interface MeInformationViewController ()
 
@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
-    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"修改登录密码", @"关于青春",  nil];
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本信息", @"关于青春",  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 35, 60);
@@ -67,7 +67,9 @@
         MessageViewController * messageVC = [MessageViewController new];
         [self.navigationController pushViewController:messageVC animated:YES];
     }else if (sender.tag == 1){
-        [self  alert:@"敬请期待中、、、"];
+        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
+        [self.navigationController pushViewController:versionInformationVC animated:YES];
+//        [self  alert:@"敬请期待中、、、"];
     }else if (sender.tag == 2){
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
         [self.navigationController pushViewController:aboutYouthVC animated:YES];
