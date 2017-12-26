@@ -86,8 +86,7 @@
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [_timer invalidate];
-//    _timer = nil;
-    
+    _timer = nil;
 }
 
 -(void)ssssssss{
@@ -103,31 +102,25 @@
     NSDate *senddate=[NSDate date];
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"HH:mm:ss"];
-    
     _timeLable.text = [NSString stringWithFormat:@"当前时间：%@", [dateformatter stringFromDate:senddate]];
-    NSLog(@"%@", self.timeLable.text);
+//    NSLog(@"%@", self.timeLable.text);
 }
 
 
 -(void)startScanssss{
-    
     ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
     scanImage.delegate = self;
     [self.navigationController  presentViewController:scanImage animated:YES completion:nil];
-    
 }
 
 - (void)reportScanResult:(NSString *)result{
-    
     [self scanResultPunchClock];
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
     [self punchRecore:dict];
-    
 }
 
 -(void)punchRecore:(NSDictionary *)dict{
-    
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/attendance", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
