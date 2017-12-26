@@ -69,6 +69,8 @@
 		AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABD8AE01FC81598005058BD /* ACPApprovelViewController.m */; };
 		AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */; };
 		AAC0B85D1FF0EFA500F5D2DB /* VersionInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC0B85C1FF0EFA500F5D2DB /* VersionInformationViewController.m */; };
+		AAC0B85F1FF21D1A00F5D2DB /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B85E1FF21D1A00F5D2DB /* history.png */; };
+		AAC0B8611FF226BB00F5D2DB /* rules.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B8601FF226BB00F5D2DB /* rules.png */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
 		AAD911FE1FD691B8002A42B5 /* CompanyAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD911FD1FD691B8002A42B5 /* CompanyAddressBookViewController.m */; };
 		AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912001FD6955D002A42B5 /* AddressBook.m */; };
@@ -234,6 +236,8 @@
 		AABFE6691FB56F7E000ED5C7 /* PunchRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchRecordViewController.m; sourceTree = "<group>"; };
 		AAC0B85B1FF0EFA500F5D2DB /* VersionInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionInformationViewController.h; sourceTree = "<group>"; };
 		AAC0B85C1FF0EFA500F5D2DB /* VersionInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionInformationViewController.m; sourceTree = "<group>"; };
+		AAC0B85E1FF21D1A00F5D2DB /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
+		AAC0B8601FF226BB00F5D2DB /* rules.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rules.png; path = ../../../../../../drawable/rules.png; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
 		AAD911FC1FD691B8002A42B5 /* CompanyAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyAddressBookViewController.h; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				AAB0F7341FA992E400A9F684 /* about.png */,
+				AAC0B8601FF226BB00F5D2DB /* rules.png */,
 				AAB0F7271FA992E300A9F684 /* app_face_title.png */,
 				AAB0F7221FA992E200A9F684 /* checkmark.png */,
 				AAB0F72D1FA992E300A9F684 /* clockin_normal.png */,
@@ -443,6 +448,7 @@
 				AAB0F7211FA992E200A9F684 /* checkmark_green.png */,
 				AAB0F71F1FA992E200A9F684 /* scan_qrcode.png */,
 				AAB0F7351FA992E400A9F684 /* app_face.png */,
+				AAC0B85E1FF21D1A00F5D2DB /* history.png */,
 				AAB0F72B1FA992E300A9F684 /* search.png */,
 				AAB0F7241FA992E300A9F684 /* text_input_box.png */,
 				AAB0F7281FA992E300A9F684 /* unlocker.png */,
@@ -625,9 +631,9 @@
 		AAA169F51FA98C8F00F35475 /* PunchClock */ = {
 			isa = PBXGroup;
 			children = (
-				AABFE6671FB56F7E000ED5C7 /* PunchRecord */,
 				AAAC3D5B1FB0561F00D54265 /* PunchClockViewController.h */,
 				AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */,
+				AABFE6671FB56F7E000ED5C7 /* PunchRecord */,
 			);
 			path = PunchClock;
 			sourceTree = "<group>";
@@ -862,6 +868,7 @@
 				AA2030361FE7BF7600CE6FDC /* index.html in Resources */,
 				AA2030411FE7BF7600CE6FDC /* style.css in Resources */,
 				AA2030421FE7BF7600CE6FDC /* UMessage.html in Resources */,
+				AAC0B8611FF226BB00F5D2DB /* rules.png in Resources */,
 				AA2030491FE7BF7600CE6FDC /* button_bar_background.png in Resources */,
 				AA20303F1FE7BF7600CE6FDC /* style.scss in Resources */,
 				AA20303B1FE7BF7600CE6FDC /* _xcode.scss in Resources */,
@@ -869,6 +876,7 @@
 				AA20303E1FE7BF7600CE6FDC /* _object.scss in Resources */,
 				AA2030441FE7BF7600CE6FDC /* script.js in Resources */,
 				AA20303C1FE7BF7600CE6FDC /* _print.scss in Resources */,
+				AAC0B85F1FF21D1A00F5D2DB /* history.png in Resources */,
 				AA2030471FE7BF7600CE6FDC /* disclosure.png in Resources */,
 				AA2030461FE7BF7600CE6FDC /* library_background.png in Resources */,
 				AA2030481FE7BF7600CE6FDC /* disclosure_open.png in Resources */,

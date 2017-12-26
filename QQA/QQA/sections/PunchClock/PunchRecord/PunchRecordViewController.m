@@ -40,12 +40,6 @@ static NSString *identifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    [self.datasource addObject:@"test1"];
-//    [self.datasource addObject:@"test2"];
-    
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"<主页" style:UIBarButtonItemStyleDone target:self action:@selector(returnBack)] ;
-    
     self.pageNum = 1;
     self.isDownRefresh = NO;
     
@@ -56,7 +50,6 @@ static NSString *identifier = @"Cell";
     self.aTableView.delegate = self;
     [self.view addSubview:self.aTableView];
     [self.aTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
-    
     self.aTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.aTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 
@@ -65,7 +58,6 @@ static NSString *identifier = @"Cell";
 
 -(void)loadNewData
 {
-    //记录是下拉刷新
     self.isDownRefresh = YES;
     if (self.pageNum > 1) {
         [self punchRecoret:--self.pageNum];
@@ -98,15 +90,12 @@ static NSString *identifier = @"Cell";
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    
-//    NSLog(@"mdict:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                          
                                             if (data != nil) {
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
