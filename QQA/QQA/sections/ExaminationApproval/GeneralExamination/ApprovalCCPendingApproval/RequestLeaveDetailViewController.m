@@ -133,6 +133,33 @@
     
 }
 
+
+-(NSString *)tepyOfLeave:(NSString *)str{
+    if ([str isEqualToString:@"100"]) {
+        return  @"调休";
+    } else if ([str isEqualToString:@"101"]){
+        return  @"年假";
+    } else if ([str isEqualToString:@"102"]){
+        return @"婚假";
+    } else if ([str isEqualToString:@"103"]){
+        return  @"产假";
+    } else if ([str isEqualToString:@"104"]){
+        return  @"病假";
+    } else if ([str isEqualToString:@"105"]){
+        return @"事假";
+    } else if ([str isEqualToString:@"106"]){
+        return @"丧假";
+    } else if ([str isEqualToString:@"107"]){
+        return  @"工伤假";
+    } else if ([str isEqualToString:@"108"]){
+        return @"其他";
+    }
+    return @"其他";
+//    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [self tepyOfLeave:[NSString stringWithFormat:@"%@", [dict objectForKey:@"type"]]]];
+
+}
+
+
 -(void)setvaleKeyAndValue:(NSDictionary *)dict{
     
     
@@ -210,8 +237,7 @@
     } else{
         _reasonLabel.text = [dict objectForKey:@"content"];
     }
-
-    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [dict objectForKey:@"type"]];
+    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [self tepyOfLeave:[NSString stringWithFormat:@"%@", [dict objectForKey:@"type"]]]];
     _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [dict objectForKey:@"endtime"]];
     _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [dict objectForKey:@"betweentime"]];
     _resultStatus.text = [NSString stringWithFormat:@"%@",  [dict objectForKey:@"status"]];

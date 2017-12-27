@@ -59,18 +59,13 @@ static NSString *identifierOne = @"Cell";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    
-    //待审批的  已审批的 未审批的 抄送我的
     NSLog(@"_titleSt:%@", _titleStr);
     if ([_titleStr isEqualToString:@"待审批的"]) {
         NSLog(@"_titleSt111:%@", _titleStr);
