@@ -247,7 +247,7 @@
         [self.view addSubview:reasonTitleLabel];
         for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
             UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80  , (iphoneWidth - 110 ) / 5 , (iphoneWidth - 110 ) / 5)];
-            titleLabe.backgroundColor = [UIColor blueColor];
+            titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
             titleLabe.layer.cornerRadius = (iphoneWidth - 110 ) / 5 / 2;
             titleLabe.text = [[mArrayOFApproverAndCC[i][j] objectForKey:@"name"] substringToIndex:1];
             titleLabe.layer.masksToBounds = YES;

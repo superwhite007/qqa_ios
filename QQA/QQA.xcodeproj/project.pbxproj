@@ -71,6 +71,9 @@
 		AAC0B85D1FF0EFA500F5D2DB /* VersionInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC0B85C1FF0EFA500F5D2DB /* VersionInformationViewController.m */; };
 		AAC0B85F1FF21D1A00F5D2DB /* history.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B85E1FF21D1A00F5D2DB /* history.png */; };
 		AAC0B8611FF226BB00F5D2DB /* rules.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B8601FF226BB00F5D2DB /* rules.png */; };
+		AAC0B8631FF3838900F5D2DB /* askware.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B8621FF3838900F5D2DB /* askware.png */; };
+		AAC0B8651FF3839B00F5D2DB /* vacation.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B8641FF3839B00F5D2DB /* vacation.png */; };
+		AAC0B8671FF383A800F5D2DB /* worksheet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B8661FF383A800F5D2DB /* worksheet.jpg */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
 		AAD911FE1FD691B8002A42B5 /* CompanyAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD911FD1FD691B8002A42B5 /* CompanyAddressBookViewController.m */; };
 		AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912001FD6955D002A42B5 /* AddressBook.m */; };
@@ -238,6 +241,9 @@
 		AAC0B85C1FF0EFA500F5D2DB /* VersionInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionInformationViewController.m; sourceTree = "<group>"; };
 		AAC0B85E1FF21D1A00F5D2DB /* history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = history.png; sourceTree = "<group>"; };
 		AAC0B8601FF226BB00F5D2DB /* rules.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rules.png; path = ../../../../../../drawable/rules.png; sourceTree = "<group>"; };
+		AAC0B8621FF3838900F5D2DB /* askware.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = askware.png; sourceTree = "<group>"; };
+		AAC0B8641FF3839B00F5D2DB /* vacation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vacation.png; sourceTree = "<group>"; };
+		AAC0B8661FF383A800F5D2DB /* worksheet.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = worksheet.jpg; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
 		AAD911FC1FD691B8002A42B5 /* CompanyAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyAddressBookViewController.h; sourceTree = "<group>"; };
@@ -448,10 +454,13 @@
 				AAB0F71F1FA992E200A9F684 /* scan_qrcode.png */,
 				AAB0F7351FA992E400A9F684 /* app_face.png */,
 				AAC0B85E1FF21D1A00F5D2DB /* history.png */,
+				AAC0B8641FF3839B00F5D2DB /* vacation.png */,
 				AAB0F72B1FA992E300A9F684 /* search.png */,
 				AAB0F7241FA992E300A9F684 /* text_input_box.png */,
 				AAB0F7281FA992E300A9F684 /* unlocker.png */,
+				AAC0B8621FF3838900F5D2DB /* askware.png */,
 				AAB0F72C1FA992E300A9F684 /* youth_info.png */,
+				AAC0B8661FF383A800F5D2DB /* worksheet.jpg */,
 				AA1CECB41FA960EF00050EFC /* account.png */,
 			);
 			path = youth_info;
@@ -865,6 +874,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAC0B8631FF3838900F5D2DB /* askware.png in Resources */,
 				AA2030361FE7BF7600CE6FDC /* index.html in Resources */,
 				AA2030411FE7BF7600CE6FDC /* style.css in Resources */,
 				AA2030421FE7BF7600CE6FDC /* UMessage.html in Resources */,
@@ -876,6 +886,7 @@
 				AA20303E1FE7BF7600CE6FDC /* _object.scss in Resources */,
 				AA2030441FE7BF7600CE6FDC /* script.js in Resources */,
 				AA20303C1FE7BF7600CE6FDC /* _print.scss in Resources */,
+				AAC0B8671FF383A800F5D2DB /* worksheet.jpg in Resources */,
 				AAC0B85F1FF21D1A00F5D2DB /* history.png in Resources */,
 				AA2030471FE7BF7600CE6FDC /* disclosure.png in Resources */,
 				AA2030461FE7BF7600CE6FDC /* library_background.png in Resources */,
@@ -889,6 +900,7 @@
 				AA1CEC891FA9602E00050EFC /* LaunchScreen.storyboard in Resources */,
 				AA20304A1FE7BF7600CE6FDC /* title_background.png in Resources */,
 				AA2030401FE7BF7600CE6FDC /* _normalize.scss in Resources */,
+				AAC0B8651FF3839B00F5D2DB /* vacation.png in Resources */,
 				AA2030431FE7BF7600CE6FDC /* hierarchy.html in Resources */,
 				AA20303D1FE7BF7600CE6FDC /* _layout.scss in Resources */,
 				AA7749811FEA303E0095C378 /* Assets.xcassets in Resources */,

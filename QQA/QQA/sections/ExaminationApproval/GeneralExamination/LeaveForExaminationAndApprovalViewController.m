@@ -209,6 +209,13 @@
     NSLog(@"--已经隐藏--");
 }
 
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (![_messageTextView isExclusiveTouch]) {
+        [_messageTextView resignFirstResponder];
+    }
+}
+
 -(void)ApproverAndCC{
     
     NSArray * titleArray =@[@"审批人", @"抄送人"];
@@ -225,7 +232,7 @@
             UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
             titleLabe.layer.borderColor = [UIColor blackColor].CGColor;
             titleLabe.layer.borderWidth = 1;
-            
+            titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
             titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
             titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
             titleLabe.layer.masksToBounds = YES;

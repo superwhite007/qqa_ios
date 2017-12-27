@@ -30,7 +30,7 @@
     //heigh = 1000
     
     self.userFamily = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
-    self.userFamily.backgroundColor = [UIColor blueColor];
+    self.userFamily.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
     self.userFamily.layer.cornerRadius = 30;
     self.userFamily.layer.masksToBounds = YES;
     self.userFamily.textAlignment = NSTextAlignmentCenter;
