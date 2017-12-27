@@ -72,11 +72,11 @@ static NSString *identifierOne = @"Cell";
         [mdict setObject:@"1" forKey:@"type"];
         [mdict setObject:@"ToBeApprovedOfOthers" forKey:@"status"];
         [mdict setObject:@"1" forKey:@"pageNum"];
-    } else if ([_titleStr isEqualToString:@"已审批的"]) {
+    } else if ([_titleStr isEqualToString:@"已通过的"]) {
         [mdict setObject:@"1" forKey:@"type"];
         [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
         [mdict setObject:@"1" forKey:@"pageNum"];
-    } else if ([_titleStr isEqualToString:@"未审批的"]) {
+    } else if ([_titleStr isEqualToString:@"未通过的"]) {
         [mdict setObject:@"1" forKey:@"type"];
         [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
         [mdict setObject:@"1" forKey:@"pageNum"];
@@ -267,7 +267,7 @@ static NSString *identifierOne = @"Cell";
         detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"已审批的"] && [_urlStr isEqualToString:@"/v1/api/leave/index"]){
+    }else if([_titleStr isEqualToString:@"已通过的"] && [_urlStr isEqualToString:@"/v1/api/leave/index"]){
         
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
@@ -276,7 +276,7 @@ static NSString *identifierOne = @"Cell";
         detailVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"已审批的"] && [_urlStr isEqualToString:@"/v1/api/ask/index"]){
+    }else if([_titleStr isEqualToString:@"已通过的"] && [_urlStr isEqualToString:@"/v1/api/ask/index"]){
         
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         Request * approval = self.datasouceArray[indexPath.row];
@@ -285,7 +285,7 @@ static NSString *identifierOne = @"Cell";
         detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"未审批的"]  && [_urlStr isEqualToString:@"/v1/api/leave/index"] ){
+    }else if([_titleStr isEqualToString:@"未通过的"]  && [_urlStr isEqualToString:@"/v1/api/leave/index"] ){
         
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
@@ -294,7 +294,7 @@ static NSString *identifierOne = @"Cell";
         detailVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:detailVC animated:NO];
         
-    }else if([_titleStr isEqualToString:@"未审批的"]  && [_urlStr isEqualToString:@"/v1/api/ask/index"] ){
+    }else if([_titleStr isEqualToString:@"未通过的"]  && [_urlStr isEqualToString:@"/v1/api/ask/index"] ){
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         
         Request * approval = self.datasouceArray[indexPath.row];

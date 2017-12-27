@@ -35,8 +35,8 @@ static NSString *identifier = @"CELL";
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
     [self.datasource addObject:@"发起审批"];
     [self.datasource addObject:@"待审批的"];
-    [self.datasource addObject:@"已审批的"];
-    [self.datasource addObject:@"未审批的"];
+    [self.datasource addObject:@"已通过的"];
+    [self.datasource addObject:@"未通过的"];
     [self.datasource addObject:@"抄送我的"];
     UITableView * examinationAndApprovel = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     examinationAndApprovel.dataSource = self;
@@ -87,9 +87,9 @@ static NSString *identifier = @"CELL";
     } else if (indexPath.row == 1) {
         examinationVC.titleIdentifier = @"待审批的";
     } else if (indexPath.row == 2) {
-        examinationVC.titleIdentifier = @"已审批的";
+        examinationVC.titleIdentifier = @"已通过的";
     } else if (indexPath.row == 3) {
-        examinationVC.titleIdentifier = @"未审批的";
+        examinationVC.titleIdentifier = @"未通过的";
     } else if (indexPath.row == 4) {
         examinationVC.titleIdentifier = @"抄送我的";
     }
