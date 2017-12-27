@@ -47,7 +47,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     NSLog(@"%f, %f",iphoneWidth, iphoneHeight);
     NSLog(@"_leaveIdStr:%@", _leaveIdStr);
@@ -108,7 +108,7 @@
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
     NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
     for (int i = 0 ; i < 2 ; i++ ) {
-        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneHeight *  7 / 10 + (iphoneHeight * 1 / 10  + 20 )  * i + 30,  60, 30)];
+        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, iphoneHeight *  7 / 10 + (iphoneHeight * 1 / 10  + 20 )  * i + 30,  60, 30)];
         reasonTitleLabel.text = titleArray[i];
         reasonTitleLabel.textAlignment = NSTextAlignmentLeft;
         [self.view addSubview:reasonTitleLabel];
