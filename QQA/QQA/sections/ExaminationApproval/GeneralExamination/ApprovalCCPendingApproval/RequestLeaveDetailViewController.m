@@ -124,6 +124,8 @@
     _resultStatus.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_resultStatus];
     _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    
     _reasonLabel.layer.borderWidth = 1;
     _reasonLabel.layer.cornerRadius = 10;
     _reasonLabel.layer.masksToBounds = YES;

@@ -19,4 +19,9 @@
 @property (nonatomic, strong) NSString * urlStr;
 @property (nonatomic, strong) NSString * semdUrlStr;
 
+@property (nonatomic, strong) UIButton * buttonReject;
+@property (nonatomic, strong) UIButton * buttonAgreement;
+
+
+
 @end

@@ -23,6 +23,10 @@
 @property (nonatomic, assign) BOOL isDownRefresh;
 @property (nonatomic, assign) BOOL isEmpty;
 @property (nonatomic, assign) BOOL buttonAgree;
+
+
+//@property (nonatomic, strong) UIButton * buttonAgree;
+
 @end
 
 @implementation RequestAndLeaveDetailsViewController
@@ -68,29 +72,42 @@
     _messageTextView.returnKeyType = UIReturnKeySend;
     _messageTextView.delegate = self;
     NSArray * array = @[@"拒绝", @"同意"];
-    for (int i = 0; i < 2; i++) {
-        UIButton * button = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        button.frame = CGRectMake(iphoneWidth - 230 + i * 110, 189 + iphoneWidth * 2 / 3  , 100, 30);
-        button.backgroundColor = [UIColor blueColor];
-        button.layer.cornerRadius = 5;
-        [button setTitle:array[i] forState:(UIControlStateNormal)];
-        [button addTarget:self action:@selector(changeButtonAgree:) forControlEvents:(UIControlEventTouchUpInside)];
-        button.tag = i;
-        [self.view addSubview:button];
-    }
+    
+    _buttonReject = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _buttonReject.frame = CGRectMake(iphoneWidth - 230 , 189 + iphoneWidth * 2 / 3  , 100, 30);
+    _buttonReject.layer.cornerRadius = 5;
+    _buttonReject.layer.borderColor = [UIColor blackColor].CGColor;
+    _buttonReject.layer.borderWidth = 1;
+    [_buttonReject setTitle:@"拒绝" forState:(UIControlStateNormal)];
+    [_buttonReject addTarget:self action:@selector(changeButtonAgree:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:_buttonReject];
+    
+    _buttonAgreement = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  110, 189 + iphoneWidth * 2 / 3  , 100, 30);
+    _buttonAgreement.layer.cornerRadius = 5;
+    _buttonAgreement.layer.borderColor = [UIColor blackColor].CGColor;
+    _buttonAgreement.layer.borderWidth = 1;
+    [_buttonAgreement setTitle:@"拒绝" forState:(UIControlStateNormal)];
+    [_buttonAgreement addTarget:self action:@selector(changeButtonAgrees:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:_buttonAgreement];
+    
+//    }
     [self.view addSubview:_messageTextView];
 }
-
 -(void)changeButtonAgree:(UIButton *)sender{
-    if ([self.title isEqualToString:@"拒绝"]) {
-        _buttonAgree = NO;
-    } else if ([self.title isEqualToString:@"同意"]){
-        _buttonAgree = YES;
-    }
+    _buttonAgree = NO;
+    _buttonReject.backgroundColor = [UIColor redColor];
+    _buttonAgreement.backgroundColor = [UIColor whiteColor];
+}
+
+-(void)changeButtonAgrees:(UIButton *)sender{
+    _buttonAgree = YES;
+    _buttonReject.backgroundColor = [UIColor whiteColor];
+    _buttonAgreement.backgroundColor = [UIColor redColor];
 }
 
 -(void)ApproverAndCC{
-    NSLog(@"66663464%@", self.datasourceMArray);
+//    NSLog(@"66663464%@", self.datasourceMArray);
     for (int i = 0; i < [_datasourceMArray count]; i++) {
         NSString * str = [_datasourceMArray[i] objectForKey:@"type"] ;
         if ([str isEqualToString:@"approver"]) {
@@ -197,7 +214,7 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"Request: %@,\n ", dictArray);
+//                                                    NSLog(@"Request: %@,\n ", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 || [[dictArray[0] objectForKey:@"message"] intValue] == 6019) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
