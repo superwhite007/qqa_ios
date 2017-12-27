@@ -40,7 +40,8 @@
     self.username = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_userFamily.frame) + 10, 10 , 100, 20)];
     [self.contentView addSubview:_username];
     
-    self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 10 , iphoneWidth -  CGRectGetMaxX(_username.frame) - 20, 20)];
+    self.department =  [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_username.frame) + 10, 10 , iphoneWidth -  CGRectGetMaxX(_username.frame) - 10, 20)];
+    self.department.adjustsFontSizeToFitWidth = YES;
     [self.contentView addSubview:_department];
 
     self.created_at = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userFamily.frame) + 120, 40 , 200, 20)];
@@ -72,6 +73,14 @@
     
     //@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"其他", nil];
 
+    if ([aCPApproval.status isEqualToString:@"Unapproved"]) {
+        self.status.text = [NSString stringWithFormat:@"审批中"];
+    } else  if ([aCPApproval.status isEqualToString:@"Agreed"]) {
+        self.status.text = [NSString stringWithFormat:@"已同意"];
+    }else  if ([aCPApproval.status isEqualToString:@"Denyed"]) {
+        self.status.text = [NSString stringWithFormat:@"已拒绝"];
+    }
+    
     if ([aCPApproval.type isEqualToString:@"100"]) {
         self.type.text =  @"调休";
         
