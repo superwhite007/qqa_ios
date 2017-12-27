@@ -73,7 +73,6 @@
         button.frame = CGRectMake(iphoneWidth - 230 + i * 110, 189 + iphoneWidth * 2 / 3  , 100, 30);
         button.backgroundColor = [UIColor blueColor];
         button.layer.cornerRadius = 5;
-        NSLog(@"array[i]:%@", array[i]);
         [button setTitle:array[i] forState:(UIControlStateNormal)];
         [button addTarget:self action:@selector(changeButtonAgree:) forControlEvents:(UIControlEventTouchUpInside)];
         button.tag = i;
@@ -131,6 +130,33 @@
     }
 }
 
+
+-(NSString *)tepyOfLeave:(NSString *)str{
+    if ([str isEqualToString:@"100"]) {
+        return  @"调休";
+    } else if ([str isEqualToString:@"101"]){
+        return  @"年假";
+    } else if ([str isEqualToString:@"102"]){
+        return @"婚假";
+    } else if ([str isEqualToString:@"103"]){
+        return  @"产假";
+    } else if ([str isEqualToString:@"104"]){
+        return  @"病假";
+    } else if ([str isEqualToString:@"105"]){
+        return @"事假";
+    } else if ([str isEqualToString:@"106"]){
+        return @"丧假";
+    } else if ([str isEqualToString:@"107"]){
+        return  @"工伤假";
+    } else if ([str isEqualToString:@"108"]){
+        return @"其他";
+    }
+    return @"其他";
+}
+
+
+
+
 -(void)loadNewData
 {
     //记录是下拉刷新
@@ -160,7 +186,7 @@
     } else if ([_titleIdentStr isEqualToString:@"请示件"]) {
         [mdict setObject:_leaveIdStr forKey:@"askId"];
     }
-    NSLog( @"66666666%@", mdict);
+//    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -210,25 +236,18 @@
 
 -(void)setvaleKeyAndValue:(NSDictionary *)dict{
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 25)];
-    _nameLabel.backgroundColor = [UIColor redColor];
     _nameLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_nameLabel];
     _created_atTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 104, iphoneWidth - 40, 25)];
-    _created_atTimeLabel.backgroundColor = [UIColor redColor];
     _created_atTimeLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_created_atTimeLabel];
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  134, (iphoneWidth  - 50) / 2 , 25)];
-    _statusLabel.backgroundColor = [UIColor redColor];
     _statusReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  134, (iphoneWidth  - 50) / 2 , 25)];
-    _statusReasonLabel.backgroundColor = [UIColor redColor];
     _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 164, iphoneWidth / 2 - 25, 25)];
-    _startTimeLabel.backgroundColor = [UIColor redColor];
     _startTimeLabel.adjustsFontSizeToFitWidth = YES;
     _endTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  164, (iphoneWidth  - 50) / 2, 25)];
-    _endTimeLabel.backgroundColor = [UIColor redColor];
     _endTimeLabel.adjustsFontSizeToFitWidth = YES;
     _longTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 194, iphoneWidth - 40, 25)];
-    _longTimeLabel.backgroundColor = [UIColor redColor];
     if ([_titleIdentStr isEqualToString:@"请假"]) {
         [self.view addSubview:_startTimeLabel];
         [self.view addSubview:_statusLabel];
@@ -239,7 +258,6 @@
     } else{
         _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 134 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
     }
-    _reasonLabel.backgroundColor = [UIColor redColor];
     _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
     _reasonLabel.layer.borderWidth = 1;
     _reasonLabel.layer.cornerRadius = 10;
@@ -253,7 +271,7 @@
     } else{
        _reasonLabel.text = [dict objectForKey:@"content"];
     }
-    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [dict objectForKey:@"type"]];
+    _statusLabel.text =[NSString stringWithFormat:@"类型:%@", [self tepyOfLeave:[NSString stringWithFormat:@"%@", [dict objectForKey:@"type"]]]];
     _endTimeLabel.text = [NSString stringWithFormat:@"结束:%@", [dict objectForKey:@"endtime"]];
     _longTimeLabel.text =[NSString stringWithFormat:@"请假天数:%@",  [dict objectForKey:@"betweentime"]];
     [self.navigationItem setTitle:[dict objectForKey:@"username"]];

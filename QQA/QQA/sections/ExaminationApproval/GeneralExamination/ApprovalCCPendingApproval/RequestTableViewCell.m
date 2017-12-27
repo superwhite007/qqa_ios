@@ -63,6 +63,7 @@
     self.askId.text = request.askId;
 }
 
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
