@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
-    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本信息", @"关于青春",  nil];
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青春",  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 35, 60);
@@ -37,7 +37,7 @@
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
     }
-    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"key", @"about",  nil];
+    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"update", @"about",  nil];
     for (int i = 0; i < 3; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
         firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 + 64 + 10 + 15  + 5+ i * 60, 20, 20);
