@@ -23,7 +23,7 @@
 
 -(void)addAllViews{
     
-    //heigh = 1000
+    //heigh = 100
     
     self.userFamily = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
     self.userFamily.backgroundColor = [UIColor blueColor];

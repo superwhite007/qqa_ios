@@ -24,6 +24,4 @@
                         leaveId:(NSString *)leaveId
                          status:(NSString *)status;
 
-
-
 @end

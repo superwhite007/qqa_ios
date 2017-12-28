@@ -51,6 +51,11 @@
 }
 
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (![_messageTextView isExclusiveTouch]) {
+        [_messageTextView resignFirstResponder];
+    }
+}
 
 -(void)scrlollVIew{
     

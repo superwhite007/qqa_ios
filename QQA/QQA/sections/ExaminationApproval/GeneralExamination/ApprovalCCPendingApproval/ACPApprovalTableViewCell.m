@@ -83,19 +83,14 @@
     
     if ([aCPApproval.type isEqualToString:@"100"]) {
         self.type.text =  @"调休";
-        
     } else if ([aCPApproval.type isEqualToString:@"101"]){
         self.type.text =  @"年假";
-        
     } else if ([aCPApproval.type isEqualToString:@"102"]){
         self.type.text = @"婚假";
-        
     } else if ([aCPApproval.type isEqualToString:@"103"]){
         self.type.text =  @"产假";
-        
     } else if ([aCPApproval.type isEqualToString:@"104"]){
         self.type.text =  @"病假";
-        
     } else if ([aCPApproval.type isEqualToString:@"105"]){
         self.type.text = @"事假";
         

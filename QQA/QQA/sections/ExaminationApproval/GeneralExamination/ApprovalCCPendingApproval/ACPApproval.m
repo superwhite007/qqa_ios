@@ -10,7 +10,6 @@
 
 @implementation ACPApproval
 
-
 -(instancetype)initWithusername:(NSString *)username department:(NSString *)department type:(NSString *)type createdAt:(NSString *)createdAt leaveId:(NSString *)leaveId status:(NSString *)status{
     self = [super init];
     if (self) {
