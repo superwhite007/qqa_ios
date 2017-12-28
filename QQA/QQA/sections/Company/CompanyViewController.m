@@ -45,6 +45,7 @@ static NSString *identifier = @"CELL";
     examinationAndApprovel.dataSource = self;
     examinationAndApprovel.delegate = self;
     examinationAndApprovel.rowHeight = 60;
+    examinationAndApprovel.scrollEnabled = NO;
     //03设置分割线
     //    examinationAndApprovel.separatorColor = [UIColor orangeColor];
     examinationAndApprovel.sectionHeaderHeight =  [UIScreen mainScreen].bounds.size.width * 2 /3;

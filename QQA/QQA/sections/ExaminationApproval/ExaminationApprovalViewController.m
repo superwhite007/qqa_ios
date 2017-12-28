@@ -42,6 +42,7 @@ static NSString *identifier = @"CELL";
     examinationAndApprovel.dataSource = self;
     examinationAndApprovel.delegate = self;
     examinationAndApprovel.rowHeight = 60;
+    examinationAndApprovel.scrollEnabled = NO;
     examinationAndApprovel.sectionHeaderHeight =  [UIScreen mainScreen].bounds.size.width * 2 /3;
     [examinationAndApprovel registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
     [self.view addSubview:examinationAndApprovel];
