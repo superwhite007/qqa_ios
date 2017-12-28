@@ -622,7 +622,6 @@
 				AA20C6961FD147BC0095AF0F /* CompanyBylawsViewController.m */,
 				AA3A75341FE50BC000F3EB25 /* RulesDetailViewController.h */,
 				AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */,
-				AA20C6941FD1477E0095AF0F /* Companyinformation */,
 			);
 			path = CompanyBylaws;
 			sourceTree = "<group>";
@@ -655,6 +654,7 @@
 				AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */,
 				AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */,
 				AA20C6931FD1475E0095AF0F /* CompanyNotice */,
+				AA20C6941FD1477E0095AF0F /* Companyinformation */,
 				AA9B6AF81FD1469F00D8BC9E /* CompanyBylaws */,
 				AA9B6AF61FD1461800D8BC9E /* CompanyOrganizationalStructure */,
 			);

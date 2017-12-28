@@ -7,6 +7,7 @@
 //
 
 #import "CompanyinformationAndBylawsViewController.h"
+#import "RulesDetailViewController.h"
 
 @interface CompanyinformationAndBylawsViewController ()
 
@@ -18,7 +19,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    RulesDetailViewController * detailVC = [[RulesDetailViewController alloc] init];
+    detailVC.urlStr = [NSString stringWithFormat:@"http://qqoatest.youth.cn/v1/api/company/index"];
+    if (detailVC.urlStr.length >0 ) {
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
     
 }
 

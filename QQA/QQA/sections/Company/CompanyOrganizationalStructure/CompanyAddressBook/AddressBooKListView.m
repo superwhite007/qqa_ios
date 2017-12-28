@@ -18,18 +18,10 @@
     return self;
 }
 
-
 -(void)addCostomTableview{
-    
     self.tableView = [UITableView new];
     [self addSubview:_tableView];
-    
 }
-
-
-
-
-
 
 /*
 // Only override drawRect: if you perform custom drawing.

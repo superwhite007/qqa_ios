@@ -24,11 +24,9 @@
     self.shortName = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
     self.shortName.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:self.shortName];
-    
     _peopleName = [[UILabel alloc] initWithFrame:CGRectMake(60 , 10, iphoneWidth - 120 , 40)];
     _peopleName.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:_peopleName];
-    
 }
 
 -(void)setAddressBook:(AddressBook *)addressBook{
@@ -39,9 +37,6 @@
     self.shortName.text = [addressBook.username substringToIndex:1];
     
 }
-
-
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];

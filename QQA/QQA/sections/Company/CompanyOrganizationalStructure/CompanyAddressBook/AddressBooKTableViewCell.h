@@ -12,10 +12,7 @@
 @interface AddressBooKTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel * peopleName;
-
 @property (nonatomic, strong) AddressBook * addressBook;
 @property (nonatomic, strong) UILabel * shortName;
-
-
 
 @end

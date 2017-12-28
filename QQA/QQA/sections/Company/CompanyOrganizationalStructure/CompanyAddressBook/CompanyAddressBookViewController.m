@@ -19,7 +19,6 @@
 @property (nonatomic, strong) NSMutableArray * datasouceArray;
 @property (nonatomic, assign) BOOL isEmpty;
 
-
 @end
 
 @implementation CompanyAddressBookViewController
@@ -34,26 +33,18 @@ static NSString * identifier = @"cell";
 }
 
 -(void)loadView{
-    
     self.addressBooKListView = [[AddressBooKListView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.addressBooKListView.tableView.frame = [UIScreen mainScreen].bounds;
     self.view = _addressBooKListView;
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor redColor];
-    
-    NSLog(@"_departmentName:%@,%@", _departmentName, _departmentId);
-    
     self.addressBooKListView.tableView.delegate = self;
     self.addressBooKListView.tableView.dataSource = self;
-    
     [self.addressBooKListView.tableView registerClass:[AddressBooKTableViewCell class] forCellReuseIdentifier:identifier];
-    
-    
 }
 
 
@@ -65,43 +56,33 @@ static NSString * identifier = @"cell";
     [self loadDataAndShowWithPageNum:1];
 }
 
-#pragma mark - loadDataAndShow
 -(void)loadDataAndShowWithPageNum:(int)page{
-    
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/department/users", CONST_SERVER_ADDRESS]];
     NSLog(@"url%@", url);
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:_departmentId forKey:@"departmentId"];
-    
-    NSLog( @"66666666%@", mdict);
+//    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
-                                                    
+//                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 7006 ) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
@@ -122,7 +103,6 @@ static NSString * identifier = @"cell";
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                     NSLog(@"7777777dict: %@,\n ", dict);
-                                                    
                                                     if ( [[dict objectForKey:@"message"] intValue] == 7005 ){
                                                         self.isEmpty = YES;
                                                         [self.datasouceArray addObject:@"暂时没有相关内容"];
@@ -141,7 +121,6 @@ static NSString * identifier = @"cell";
                                             }
                                         }];
     [task resume];
-    
 }
 
 
@@ -151,11 +130,9 @@ static NSString * identifier = @"cell";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  self.datasouceArray.count;
 }
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (!_isEmpty){
-        
         AddressBooKTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
         if (!cell) {
             cell = [[AddressBooKTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] ;
@@ -165,7 +142,6 @@ static NSString * identifier = @"cell";
         return cell;
         
     } else {
-        
         UITableViewCell * acell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!acell) {
             acell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -173,10 +149,7 @@ static NSString * identifier = @"cell";
         acell.textLabel.text = self.datasouceArray[0];
         acell.textLabel.textAlignment = NSTextAlignmentCenter;
         return acell;
-        
     }
-    
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

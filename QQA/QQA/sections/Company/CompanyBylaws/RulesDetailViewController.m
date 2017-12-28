@@ -22,7 +22,6 @@
     CGRect bouds = [[UIScreen mainScreen] bounds];
     UIWebView * webView = [[UIWebView alloc] initWithFrame:bouds];
     [self.view addSubview:webView];
-   
     NSURL * url = [NSURL URLWithString:_urlStr];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
