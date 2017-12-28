@@ -18,39 +18,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
     [self punchRecoret];
-    
-   
-    
 }
 
-
-
 -(void)gotoSomeForwed:(UIButton *)sender{
-    
-    
     if (sender.tag == 0) {
-        
-//        MessageViewController * messageVC = [MessageViewController new];
-//        [self.navigationController pushViewController:messageVC animated:YES];
-//
+        [self  alert:@"开发中、、、"];
     }else if (sender.tag == 1){
-//        [self  alert:@"敬请期待中、、、"];
-        
+        [self  alert:@"开发中、、、"];
     }else if (sender.tag == 2){
-        
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[sender.titleLabel.text substringFromIndex:5]];
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
-        
     }
-    
-    
 }
 
-
+-(void)alert:(NSString *)str{
+    NSString *title = str;
+    NSString *message = @"敬请期待";
+    NSString *okButtonTitle = @"OK";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // 操作具体内容
+        // Nothing to do.
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+}
 
 
 
