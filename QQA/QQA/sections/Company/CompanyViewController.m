@@ -106,12 +106,26 @@ static NSString *identifier = @"CELL";
             CompanyOrganizationalStructureViewController * organizationalStructurehVC = [CompanyOrganizationalStructureViewController new];
             [self.navigationController pushViewController:organizationalStructurehVC animated:YES];
         } else if (indexPath.row == 4) {
-            LanchViewController * lanchVC = [LanchViewController new];
-            [self.navigationController pushViewController:lanchVC animated:YES];
+//            LanchViewController * lanchVC = [LanchViewController new];
+//            [self.navigationController pushViewController:lanchVC animated:YES];
+            [self alert:@"开发中、、、"];
         } else{
             LanchViewController * lanchVC = [LanchViewController new];
             [self.navigationController pushViewController:lanchVC animated:YES];
         }
+}
+
+-(void)alert:(NSString *)str{
+    NSString *title = str;
+    NSString *message = @"请注意!";
+    NSString *okButtonTitle = @"OK";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // 操作具体内容
+        // Nothing to do.
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

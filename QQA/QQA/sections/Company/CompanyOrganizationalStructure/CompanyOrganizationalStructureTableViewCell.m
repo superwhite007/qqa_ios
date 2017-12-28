@@ -23,10 +23,14 @@
     
     //60
     _nameShorthandLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
-    _nameShorthandLabel.backgroundColor = [UIColor redColor];
+    _nameShorthandLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+    _nameShorthandLabel.layer.cornerRadius = 20;
+    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    _nameShorthandLabel.layer.borderWidth = 1;
+    _nameShorthandLabel.layer.masksToBounds = YES;
+    _nameShorthandLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_nameShorthandLabel];
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, iphoneWidth - 110, 30)];
-    _nameLabel.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:_nameLabel];
     UIImageView *imgViewFor = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 17.5, 25, 25)];
     imgViewFor.layer.cornerRadius = 15;

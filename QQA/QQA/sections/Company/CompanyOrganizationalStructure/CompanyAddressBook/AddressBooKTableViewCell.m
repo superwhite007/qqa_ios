@@ -22,11 +22,21 @@
 -(void)addCellView{
     //60
     self.shortName = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
-    self.shortName.backgroundColor = [UIColor redColor];
+    _shortName.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+    _shortName.layer.cornerRadius = 20;
+    _shortName.layer.borderColor = [UIColor blackColor].CGColor;
+    _shortName.layer.borderWidth = 1;
+    _shortName.layer.masksToBounds = YES;
+    _shortName.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.shortName];
     _peopleName = [[UILabel alloc] initWithFrame:CGRectMake(60 , 10, iphoneWidth - 120 , 40)];
-    _peopleName.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:_peopleName];
+    UIImageView *imgViewFor = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 17.5, 25, 25)];
+    imgViewFor.layer.cornerRadius = 15;
+    imgViewFor.alpha = .5;
+    imgViewFor.layer.masksToBounds = YES;
+    imgViewFor.image = [UIImage imageNamed:[NSString stringWithFormat:@"forward"]];
+    [self.contentView addSubview:imgViewFor];
 }
 
 -(void)setAddressBook:(AddressBook *)addressBook{

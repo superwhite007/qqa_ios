@@ -43,6 +43,7 @@ static NSString *identifier = @"Cell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor grayColor];
+    [self.navigationItem setTitle:@"组织架构"];
     [self loadNewData];
     self.organizationalStructureListView.tableView.delegate = self;
     self.organizationalStructureListView.tableView.dataSource = self;
