@@ -62,17 +62,14 @@ static NSString *identifier = @"Cell";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"companyNOtice: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5005 ) {
                                                     NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                     [array1 removeObjectAtIndex:0];
                                                     [_datasource removeAllObjects];
                                                     for (NSDictionary * dict in array1) {
-                                                        [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"createdAt"]]];
-                                                        [_datasource addObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"content"]]];
+                                                        [_datasource addObject:[NSString stringWithFormat:@"%@\n\n        %@",[dict objectForKey:@"createdAt"], [dict objectForKey:@"content"]]];
                                                     }
                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                        NSLog(@"_datasource_datasource_datasource_datasource%@", _datasource);
                                                         [self.tableView  reloadData];
                                                      });
                                                 }
@@ -96,11 +93,7 @@ static NSString *identifier = @"Cell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row % 2 == 0) {
-        return 30;
-    } else{
-       return  [self gitHightForCell:indexPath] + 10;
-    }
+       return  [self gitHightForCell:indexPath] + 20;
 }
 
 
@@ -110,14 +103,8 @@ static NSString *identifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
-        
     }
-    if (indexPath.row % 2 == 0) {
-        cell.textLabel.textAlignment = NSTextAlignmentCenter ;
-        _tableView.separatorColor = [UIColor whiteColor];
-    } else if(indexPath.row % 2 == 1){
-        _tableView.separatorColor = [UIColor blackColor];
-    }
+    _tableView.separatorColor = [UIColor blackColor];
     cell.textLabel.text = self.datasource[indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:18];
     cell.textLabel.numberOfLines = 0;//表示label可以多行显示
