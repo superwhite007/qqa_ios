@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setupAllChildViewControllers];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoNotification:) name:@"userInfoNotification" object:nil];
 }
@@ -35,24 +36,10 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userInfoNotification:) name:@"userInfoNotification" object:nil];
 }
 -(void)userInfoNotification:(NSNotification*)notification{
-    
     NSDictionary *dict = [notification userInfo];
-    NSString *type=[dict valueForKey:@"type"];
-    NSLog(@"typetypetype:%@ dict:%@", type, dict);
-//    if ([type isEqualToString:@"url"]) {
-//        UMSecondViewController *secondvc=[[UMSecondViewController alloc]init];
-//        secondvc.url=[dict valueForKey:@"content"];
-//        [self.navigationController pushViewController:secondvc animated:YES];
-//    }else if ([type isEqualToString:@"home"])
-//    {
-        UMFirstViewController *firstvc=[[UMFirstViewController alloc]init];
-        //firstvc.url=[aps valueForKey:@"content"];
-        [self.navigationController pushViewController:firstvc animated:YES];
-//    }else if ([type isEqualToString:@"userinfo"])
-//    {
-//
-//    };
-    
+    UMFirstViewController *firstvc=[[UMFirstViewController alloc]init];
+    firstvc.notcieString=[NSString stringWithFormat:@"%@", [[dict objectForKey:@"aps"] objectForKey:@"alert"]];
+    [self.navigationController pushViewController:firstvc animated:YES];
 }
 
 

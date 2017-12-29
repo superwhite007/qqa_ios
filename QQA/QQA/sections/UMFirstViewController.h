@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UMFirstViewController : UIViewController
-
+@property (nonatomic, strong) NSString * notcieString;
 @end
