@@ -64,8 +64,15 @@
 
 -(void)gotoSomeForwed:(UIButton *)sender{
     if (sender.tag == 0) {
-        MessageViewController * messageVC = [MessageViewController new];
-        [self.navigationController pushViewController:messageVC animated:YES];
+        NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
+        NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
+        NSLog(@"resultPermissions----%@",resultPermissions);//notices
+        if (resultPermissions[@"notices"]) {
+            MessageViewController * messageVC = [MessageViewController new];
+            [self.navigationController pushViewController:messageVC animated:YES];
+        } else{
+            [self alert:@"暂时没有发送通知权限"];
+        }
     }else if (sender.tag == 1){
         VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
         [self.navigationController pushViewController:versionInformationVC animated:YES];

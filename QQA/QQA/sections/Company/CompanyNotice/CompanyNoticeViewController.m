@@ -96,9 +96,6 @@ static NSString *identifier = @"Cell";
        return  [self gitHightForCell:indexPath] + 20;
 }
 
-
-
-//8 取消注释
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
