@@ -16,8 +16,7 @@
 
 @interface AppCoverViewController ()<ScanImageView>
 
-//数据持久化存储
-//@property (nonatomic, strong) NSMutableDictionary * documentTxtPathDictionary;
+//@property (nonatomic, strong) NSTimer * timer;
 @property (nonatomic, strong) NSString * documentTxtPath;
 
 @end
@@ -54,6 +53,8 @@
     [welcomeButton addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
     [imgView addSubview:welcomeButton];
     imgView.userInteractionEnabled=YES;
+    
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(clicked:) userInfo:nil repeats:NO];
  
 }
 
