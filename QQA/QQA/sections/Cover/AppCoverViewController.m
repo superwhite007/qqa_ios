@@ -174,7 +174,7 @@
 
 - (void)reportScanResult:(NSString *)result{
     
-//    NSLog(@"scanBack%@",result);
+    NSLog(@"1111111111111scanBack%@",result);
     NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
     [dict removeObjectForKey:@"serverType"];
@@ -203,9 +203,11 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"response:%@   \nerror:%@", response, error);
                                             if (data != nil) {
                                             //NSLog(@"PlantKeysuccess");
-                                            
+                                             NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"dictdictdictdictdictdict2222222%@", dict);
                                             id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                             if ([dataBack isKindOfClass:[NSArray class]]) {
                                                  [self alert:@"获取失败"];
@@ -220,7 +222,7 @@
                                             }
                                                 
                                             } else{
-                                                [self alert:@"获取失败"];
+                                                [self alert:@"获取失败:请核对网络!"];
                                             }
     }];
     [task resume];

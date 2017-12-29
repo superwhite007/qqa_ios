@@ -30,7 +30,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+    _isOK = NO;
     NSLog(@"application:%ld", (long)application.applicationState);
     
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
@@ -108,7 +108,7 @@
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];//deviceToken
     [mdict setObject:UMdevicetoken forKey:@"deviceToken"];
-    //    NSLog(@"mdict%@", mdict);
+    NSLog(@"mdict12345678%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -117,7 +117,8 @@
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"messgee%@", [dict objectForKey:@"message"]);
+                                                 NSLog(@"----------1-----------%@", dict);
+//                                                NSLog(@"messgee%@", [dict objectForKey:@"message"]);
                                                 
                                                 
 //                                                dispatch_async(dispatch_get_main_queue(), ^{

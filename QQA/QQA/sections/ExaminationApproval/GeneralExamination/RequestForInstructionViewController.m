@@ -23,67 +23,47 @@
     
     self.cCMarray = [NSMutableArray array];
     self.approvalMarray = [NSMutableArray array];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"请示件内容"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提  交" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
-    
-    
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 30)];
 //    introducePersonLabel.backgroundColor = [UIColor redColor];
     [self.view addSubview:introducePersonLabel];
-    
     for (int i = 0; i < 3 ; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
         view.backgroundColor = [UIColor redColor];
 //        [self.view addSubview:view];
     }
-    
     UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 110, 100, 30)];
     reasonTitleLabel.text = @"请示件内容";
     reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
-//    reasonTitleLabel.backgroundColor = [UIColor redColor];
     [self.view addSubview:reasonTitleLabel];
-    
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 150, iphoneWidth - 40, iphoneWidth * 2 / 3)];
     //    messageTextView.backgroundColor = [UIColor blueColor];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:_messageTextView];
-    
     _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
     _messageTextView.layer.borderWidth = 1;
     _messageTextView.layer.cornerRadius = 10;
     _messageTextView.returnKeyType = UIReturnKeySend;
-    
     _messageTextView.delegate = self;
-    
     [self ApproverAndCC];
-    
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     [self gitInformationCCAndApprovalGroup];
-    
-    
 }
 
 -(void)gitInformationCCAndApprovalGroup{
-    
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/ask/scope", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
@@ -91,36 +71,23 @@
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
                                             if (data != nil) {
-                                                
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"CCAndApprovalGroup:  %@\n", dictArray);
-                                                
-                                                
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6014 ) {
-                                                    
                                                     self.approvalMarray = dictArray[1];
                                                     self.cCMarray = dictArray[2];
-                                                    
                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                        
                                                         [self ApproverAndCC];
-                                                        
                                                     });
-                                                    
-                                                    
-                                                    
                                                 }
                                                 //
                                                 
                                             } else{
-                                                //NSLog(@"获取数据失败，问");
+                                                NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];
@@ -131,14 +98,10 @@
 -(void)ApproverAndCC{
     
     NSArray * titleArray =@[@"审批人", @"抄送人"];
-    
-//
 //    NSArray * peopleOfApprover = @[@"A", @"AA", @"A", @"A"];
 //    NSArray * peopleOfCC = @[@"CC", @"CC", @"CC", @"CC", @"CC"];
-   
     NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
-    
     NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
     
     for (int i = 0 ; i < 2 ; i++ ) {
@@ -240,13 +203,10 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
-    
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    
-    
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
@@ -255,18 +215,12 @@
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
-    
     NSURLSession *session = [NSURLSession sharedSession];
-    // 由于要先对request先行处理,我们通过request初始化task
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
                                             if (data != nil) {
-                                                
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"back%@,\n %@\n", dict, [dict objectForKey:@"message"]);
-                                                
-                                                
+                                                NSLog(@"333333back%@,\n %@\n", dict, [dict objectForKey:@"message"]);
                                                 if ([[dict objectForKey:@"message"] intValue] == 6015) {
                                                     
                                                     dispatch_async(dispatch_get_main_queue(), ^{

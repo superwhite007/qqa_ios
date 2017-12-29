@@ -51,8 +51,6 @@
     [self.navigationItem setTitle:@"发送范围"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
     
-    //NSLog(@"_sendMessag_sendMessag:%@", _sendMessage);
-    
     [self gitMessageAboutGiveNotices];
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
@@ -64,20 +62,14 @@
     
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.editing = !self.tableView.editing;
-    
     [self.view addSubview:_tableView];
-    
     self.tableView.allowsMultipleSelectionDuringEditing=YES;
-    
-   
 }
 
 -(void)chageColor{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
- 
     if ([self.datasourSendToServerScopeArray count] > 0) {
         [self sendSendScopeToServer];
-     
     } else{
         [self alert:@"请选择发送范围"];
     }
@@ -236,6 +228,7 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"response, error...........%@, %@", response, error);
                                             if (data != nil) {
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"api/message/store: %@", dict);
@@ -243,7 +236,7 @@
                                                     [self alert:[NSString stringWithFormat:@"发送通知成功.%@", self.datasourSendToServerScopeArray]];
                                                 }
                                             } else{
-                                                //NSLog(@"获取数据失败，问");
+                                                NSLog(@"获取数据失败，问");
                                             }
                                         }];
     [task resume];

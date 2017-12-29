@@ -74,9 +74,9 @@
             [self alert:@"暂时没有发送通知权限"];
         }
     }else if (sender.tag == 1){
-        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
-        [self.navigationController pushViewController:versionInformationVC animated:YES];
-//        [self  alert:@"敬请期待中、、、"];
+//        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
+//        [self.navigationController pushViewController:versionInformationVC animated:YES];
+        [self  alert:@"开发中、、、"];
     }else if (sender.tag == 2){
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
         [self.navigationController pushViewController:aboutYouthVC animated:YES];
