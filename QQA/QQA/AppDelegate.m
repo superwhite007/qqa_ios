@@ -18,6 +18,8 @@
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
+@property (nonatomic, assign) BOOL isOK;
+
 @end
 
 @implementation AppDelegate
@@ -81,7 +83,54 @@
     NSLog(@"------token------%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
                   stringByReplacingOccurrencesOfString: @">" withString: @""]
                  stringByReplacingOccurrencesOfString: @" " withString: @""]);
+    NSString * tokenStr = [NSString stringWithFormat:@"%@", [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                                                              stringByReplacingOccurrencesOfString: @">" withString: @""]
+                                                             stringByReplacingOccurrencesOfString: @" " withString: @""]];
+    if (!_isOK) {
+        [self sendUMdevicetokenToServer:tokenStr];
+    }
 }
+
+
+-(void)sendUMdevicetokenToServer:(NSString *)UMdevicetoken{
+    
+    _isOK = YES;
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/device/store", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];//deviceToken
+    [mdict setObject:UMdevicetoken forKey:@"deviceToken"];
+    //    NSLog(@"mdict%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"messgee%@", [dict objectForKey:@"message"]);
+                                                
+                                                
+//                                                dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                                                });
+                                            } else{
+                                                //NSLog(@"获取数据失败，问");
+                                            }
+                                        }];
+    [task resume];
+}
+
+
 
 //iOS10以下使用这个方法接收通知
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
