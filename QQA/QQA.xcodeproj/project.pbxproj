@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		466E2A145386609065AEE56E /* libPods-QQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECCA599687977AA5ACEDCC1 /* libPods-QQA.a */; };
-		AA1322571FFCD2D600A18188 /* aps_development.cer in Resources */ = {isa = PBXBuildFile; fileRef = AA1322561FFCD2D600A18188 /* aps_development.cer */; };
+		AA0D35381FFDBA9C00CA2A43 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D35371FFDBA9C00CA2A43 /* UserNotificationsUI.framework */; };
 		AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */; };
 		AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */; };
 		AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA199AF81FC3F01D00BCE01A /* SendTheScopeViewController.m */; };
@@ -91,7 +91,7 @@
 /* Begin PBXFileReference section */
 		2ECCA599687977AA5ACEDCC1 /* libPods-QQA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QQA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB9B0173C989AA3F3E802A8 /* Pods-QQA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QQA.release.xcconfig"; path = "Pods/Target Support Files/Pods-QQA/Pods-QQA.release.xcconfig"; sourceTree = "<group>"; };
-		AA1322561FFCD2D600A18188 /* aps_development.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = aps_development.cer; sourceTree = "<group>"; };
+		AA0D35371FFDBA9C00CA2A43 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		AA13948C1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeaveForExaminationAndApprovalViewController.h; sourceTree = "<group>"; };
 		AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeaveForExaminationAndApprovalViewController.m; sourceTree = "<group>"; };
 		AA1394901FC277D20070B1E2 /* RequestForInstructionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestForInstructionViewController.h; sourceTree = "<group>"; };
@@ -241,6 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA0D35381FFDBA9C00CA2A43 /* UserNotificationsUI.framework in Frameworks */,
 				AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */,
 				AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */,
 				466E2A145386609065AEE56E /* libPods-QQA.a in Frameworks */,
@@ -276,6 +277,7 @@
 		200EDB938BA67950C84FAE9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA0D35371FFDBA9C00CA2A43 /* UserNotificationsUI.framework */,
 				AA5545121FE7BD410031F846 /* libz.tbd */,
 				AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */,
 				2ECCA599687977AA5ACEDCC1 /* libPods-QQA.a */,
@@ -378,7 +380,6 @@
 		AA1CECB21FA960D800050EFC /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				AA1322561FFCD2D600A18188 /* aps_development.cer */,
 				AA1CECB31FA960EF00050EFC /* youth_info */,
 			);
 			path = resource;
@@ -705,6 +706,9 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -748,7 +752,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAC0B8631FF3838900F5D2DB /* askware.png in Resources */,
-				AA1322571FFCD2D600A18188 /* aps_development.cer in Resources */,
 				AAC0B8611FF226BB00F5D2DB /* rules.png in Resources */,
 				AAC0B8671FF383A800F5D2DB /* worksheet.jpg in Resources */,
 				AAC0B85F1FF21D1A00F5D2DB /* history.png in Resources */,

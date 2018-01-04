@@ -76,7 +76,6 @@
                 [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
                     if (granted) {
                     } else {
-                        
                     }
                 }];
             }
@@ -85,10 +84,21 @@
             }
         }];
         
+    }else if (@available(iOS 8.0, *)) {
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+        
     } else {
-        // Fallback on earlier versions
+        UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+        
     }
     // 必须写代理，不然无法监听通知的接收与点击
+    
+    [application registerForRemoteNotifications];
+    
+    
     return YES;
 }
 
@@ -97,8 +107,8 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // 1.2.7版本开始不需要用户再手动注册devicetoken，SDK会自动注册
-    //[UMessage registerDeviceToken:deviceToken];
+    
+    NSLog(@"deviceTokendeviceTokendeviceTokendeviceTokendeviceToken:%@", deviceToken);
     NSLog(@"------token------%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
                   stringByReplacingOccurrencesOfString: @">" withString: @""]
                  stringByReplacingOccurrencesOfString: @" " withString: @""]);
@@ -106,7 +116,7 @@
                                                               stringByReplacingOccurrencesOfString: @">" withString: @""]
                                                              stringByReplacingOccurrencesOfString: @" " withString: @""]];
     if (!_isOK) {
-//        [self sendUMdevicetokenToServer:tokenStr];
+        [self sendUMdevicetokenToServer:tokenStr];
     }
 }
 
