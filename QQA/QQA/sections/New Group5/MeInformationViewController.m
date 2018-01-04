@@ -76,7 +76,11 @@
     }else if (sender.tag == 1){
 //        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
 //        [self.navigationController pushViewController:versionInformationVC animated:YES];
-        [self  alert:@"开发中、、、"];
+//        [self  alert:@"开发中、、、"];
+        
+        NSString * url = @"https://www.pgyer.com/youthqqoa";
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+        
     }else if (sender.tag == 2){
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
         [self.navigationController pushViewController:aboutYouthVC animated:YES];

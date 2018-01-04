@@ -10,11 +10,7 @@
 #import "AppTBViewController.h"
 #import "AppCoverViewController.h"
 #import "AppCoverViewController.h"
-
 #import <UserNotifications/UserNotifications.h>
-#import "UMessage.h"
-
-
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
@@ -50,26 +46,49 @@
         self.window.rootViewController = tbNC;
     }
     
-    [UMessage startWithAppkey:@"5a3b0340f29d982788000edc" launchOptions:launchOptions httpsenable:YES ];
-    [UMessage registerForRemoteNotifications];
+//    [UMessage startWithAppkey:@"5a3b0340f29d982788000edc" launchOptions:launchOptions httpsenable:YES ];
+//    [UMessage registerForRemoteNotifications];
+//
+//    //iOS10必须加下面这段代码。
+//    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+//    center.delegate=self;
+//    UNAuthorizationOptions types10=UNAuthorizationOptionBadge|  UNAuthorizationOptionAlert|UNAuthorizationOptionSound;
+//    [center requestAuthorizationWithOptions:types10     completionHandler:^(BOOL granted, NSError * _Nullable error) {
+//        if (granted) {
+//            //点击允许
+//            //这里可以添加一些自己的逻辑
+//        } else {
+//            //点击不允许
+//            //这里可以添加一些自己的逻辑
+//        }
+//    }];
+//
+//    //打开日志，方便调试
+//    [UMessage setLogEnabled:YES];
     
-    //iOS10必须加下面这段代码。
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    center.delegate=self;
-    UNAuthorizationOptions types10=UNAuthorizationOptionBadge|  UNAuthorizationOptionAlert|UNAuthorizationOptionSound;
-    [center requestAuthorizationWithOptions:types10     completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        if (granted) {
-            //点击允许
-            //这里可以添加一些自己的逻辑
-        } else {
-            //点击不允许
-            //这里可以添加一些自己的逻辑
-        }
-    }];
-    
-    //打开日志，方便调试
-    [UMessage setLogEnabled:YES];
-
+    if (@available(iOS 10.0, *)) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        //设置预设好的交互类型，NSSet里面是设置好的UNNotificationCategory
+        //    [center setNotificationCategories:[self createNotificationCategoryActions]];
+        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            if (settings.authorizationStatus==UNAuthorizationStatusNotDetermined) {
+                [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                    if (granted) {
+                    } else {
+                        
+                    }
+                }];
+            }
+            else{
+                //do other things
+            }
+        }];
+        
+    } else {
+        // Fallback on earlier versions
+    }
+    // 必须写代理，不然无法监听通知的接收与点击
     return YES;
 }
 
@@ -87,7 +106,7 @@
                                                               stringByReplacingOccurrencesOfString: @">" withString: @""]
                                                              stringByReplacingOccurrencesOfString: @" " withString: @""]];
     if (!_isOK) {
-        [self sendUMdevicetokenToServer:tokenStr];
+//        [self sendUMdevicetokenToServer:tokenStr];
     }
 }
 
@@ -139,28 +158,30 @@
     NSLog(@"以下使用这个方法接收通知didReceiveRemoteNotification");
     //关闭U-Push自带的弹出框
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
-    [UMessage setAutoAlert:NO];
-    [UMessage didReceiveRemoteNotification:userInfo];
+//    [UMessage setAutoAlert:NO];
+//    [UMessage didReceiveRemoteNotification:userInfo];
 }
 
 //iOS10新增：处理前台收到通知的代理方法
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
     NSDictionary * userInfo = notification.request.content.userInfo;
     NSLog(@"处理前台收到通知的代理方法userInfo:%@", userInfo);
-    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        //应用处于前台时的远程推送接受
-        //关闭U-Push自带的弹出框
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
-        [UMessage setAutoAlert:NO];
-        //必须加这句代码
-        [UMessage didReceiveRemoteNotification:userInfo];
-        
-    }else{
-        //应用处于前台时的本地推送接受
+    if (@available(iOS 10.0, *)) {
+        if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
+        }else{
+            //应用处于前台时的本地推送接受
+        }
+    } else {
+        // Fallback on earlier versions
     }
     //当应用处于前台时提示设置，需要哪个可以设置哪一个
-    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+    if (@available(iOS 10.0, *)) {
+        completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 //iOS10新增：处理后台点击通知的代理方法
@@ -170,10 +191,8 @@
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于后台时的远程推送接受
         //必须加这句代码
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
         
-        [UMessage didReceiveRemoteNotification:userInfo];
     }else{
         //应用处于后台时的本地推送接受
     }
