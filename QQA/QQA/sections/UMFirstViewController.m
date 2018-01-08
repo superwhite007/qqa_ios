@@ -21,7 +21,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectZero];
-    plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
+//    plantIDKeyExplianLable.backgroundColor = [UIColor redColor];
     plantIDKeyExplianLable.text = _notcieString;
     plantIDKeyExplianLable.font = [UIFont systemFontOfSize:18];
     plantIDKeyExplianLable.numberOfLines = 0;//表示label可以多行显示
