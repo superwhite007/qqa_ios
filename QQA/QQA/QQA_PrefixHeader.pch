@@ -23,6 +23,7 @@
 
 //#define CONST_SERVER_ADDRESS   @"http://172.19.12.6"
 
+
 #define CONST_SERVER_ADDRESS   @"http://qqoatest.youth.cn"
 
 //#define  appkeyUM  @"5a3761a6f43e4818c00001d4"
