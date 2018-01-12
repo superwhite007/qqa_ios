@@ -18,6 +18,7 @@
 
 //@property (nonatomic, strong) NSTimer * timer;
 @property (nonatomic, strong) NSString * documentTxtPath;
+@property (nonatomic, strong) UIView * scanSuccessView;
 
 @end
 
@@ -292,6 +293,11 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self gitPersonPermissions];
         [self scanSuccess:@"https://"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+
+       
     }];
     [alertDialog addAction:okAction];
     [self.navigationController  presentViewController:alertDialog animated:YES completion:nil];
@@ -316,24 +322,26 @@
 
 -(void)scanSuccess:(NSString *)urlString{
     
-    UIView * scanSuccessView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight)];
-    scanSuccessView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:scanSuccessView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+    
+    _scanSuccessView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight)];
+    _scanSuccessView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_scanSuccessView];
     UILabel * plantIDKeySuccessLable = [[UILabel alloc] initWithFrame:CGRectMake((iphoneWidth - 200) / 2, 64, 200, 30)];
     plantIDKeySuccessLable.text = @"种植IDKey完成";
     plantIDKeySuccessLable.textAlignment =  NSTextAlignmentCenter;
     plantIDKeySuccessLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
-    [scanSuccessView addSubview:plantIDKeySuccessLable];
+    [_scanSuccessView addSubview:plantIDKeySuccessLable];
     UIImageView *imgView = [[UIImageView alloc] init];
     imgView.frame = CGRectMake((iphoneWidth - 150) / 2, 114, 150, 150);
     UIImage *image = [UIImage imageNamed:@"checkmark_green"];
     [imgView setImage:image];
-    [scanSuccessView addSubview:imgView];
+    [_scanSuccessView addSubview:imgView];
     UILabel * mattersNeedAttentionLable = [[UILabel alloc] initWithFrame:CGRectMake((iphoneWidth - 200) / 2, 284, 200, 30)];
     mattersNeedAttentionLable.text = @"注意事项";
     mattersNeedAttentionLable.textAlignment =  NSTextAlignmentCenter;
     mattersNeedAttentionLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
-    [scanSuccessView addSubview:mattersNeedAttentionLable];
+    [_scanSuccessView addSubview:mattersNeedAttentionLable];
     UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(30 , 340, iphoneWidth - 60 , 120)];
     mattersNeedAttentionExplianLable.text = @"请不要删除青青OA，也不要清理青青OA中的数据。否则IOKey丢失，导致无法登录。";
     mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:18];
@@ -342,7 +350,7 @@
     CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
     CGRect targetRect = [mattersNeedAttentionExplianLable.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : mattersNeedAttentionExplianLable.font} context:nil];
     mattersNeedAttentionExplianLable.frame = CGRectMake(30, 340, iphoneWidth - 40, CGRectGetHeight(targetRect));
-    [scanSuccessView addSubview:mattersNeedAttentionExplianLable];
+    [_scanSuccessView addSubview:mattersNeedAttentionExplianLable];
     UILabel * nameLable = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight * 3 / 4 - 60, iphoneWidth - 40, 50)];
     nameLable.text = @"用户 ：小明";
     nameLable.textAlignment =  NSTextAlignmentCenter;
@@ -354,12 +362,14 @@
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [scanButton addTarget:self action:@selector(goBbackToAPP:) forControlEvents:UIControlEventTouchUpInside];
-    [scanSuccessView addSubview:scanButton];
+    [_scanSuccessView addSubview:scanButton];
     UILabel * statementLable = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight - 60, iphoneWidth - 40, 30)];
     statementLable.text = @"2017 版权所有 ：中国青年网";
     statementLable.textAlignment =  NSTextAlignmentCenter;
     statementLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
-    [scanSuccessView addSubview:statementLable];
+    [_scanSuccessView addSubview:statementLable];
+        
+    });
     
 }
 
