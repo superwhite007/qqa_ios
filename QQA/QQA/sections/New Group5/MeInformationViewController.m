@@ -242,7 +242,7 @@
     }];
     [alertDialog addAction:okAction];
     
-    UIAlertAction *cancellAction = [UIAlertAction actionWithTitle:@"cancell" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *cancellAction = [UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 //        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
     }];
     [alertDialog addAction:cancellAction];
