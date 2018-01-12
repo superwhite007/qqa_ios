@@ -234,13 +234,19 @@
     
 -(void)alertSS:(NSString *)str urlStr:(NSString *)url{
     NSString *title = str;
-    NSString *message = @" ";
+    NSString *message = @"注  意";
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
     }];
     [alertDialog addAction:okAction];
+    
+    UIAlertAction *cancellAction = [UIAlertAction actionWithTitle:@"cancell" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+    }];
+    [alertDialog addAction:cancellAction];
+    
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
 
