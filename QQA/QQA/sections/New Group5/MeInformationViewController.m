@@ -66,7 +66,7 @@
     if (sender.tag == 0) {
         NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
         NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
-        NSLog(@"resultPermissions----%@",resultPermissions);//notices
+//        NSLog(@"resultPermissions----%@",resultPermissions);//notices
         if (resultPermissions[@"notices"]) {
             MessageViewController * messageVC = [MessageViewController new];
             [self.navigationController pushViewController:messageVC animated:YES];
@@ -77,9 +77,8 @@
 //        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
 //        [self.navigationController pushViewController:versionInformationVC animated:YES];
 //        [self  alert:@"开发中、、、"];
-        
-        NSString * url = @"https://www.pgyer.com/youthqqoa";
-        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+        // app版本
+        [self versionCheck];
         
     }else if (sender.tag == 2){
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
@@ -147,6 +146,7 @@
 }
 
 
+
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
     UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
     view.backgroundColor = [ UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
@@ -172,6 +172,76 @@
         [label setText:[NSString stringWithFormat:@"%@%@", labelNameArray[i], urlRebackArray[i]]];
         [view addSubview:label];
     }
+}
+
+
+
+
+-(void)versionCheck{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://qqoatest.youth.cn/v1/api/version/check"]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSLog( @"versionCheck66666666%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self compareVersion:dict];
+                                                });
+                                                
+                                            } else{
+                                                NSLog(@"versionCheck获取数据失败，问12345678");
+                                            }
+                                        }];
+    [task resume];
+}
+-(void)compareVersion:(NSDictionary *)dic{
+    
+    NSString * versionNumber = [NSString stringWithFormat:@"%@", [dic objectForKey:@"verMinor"]];
+    NSString * url = [NSString stringWithFormat:@"%@", [dic objectForKey:@"url"]];
+    NSComparisonResult result = [@"0" compare:versionNumber options:NSNumericSearch];//比较的是字符串的值,如果有多个比较条件,加一个|然后加比较条件
+    switch (result) {
+        case NSOrderedAscending:
+            [self alertSS:@"前往更新版本！" urlStr:url];
+//            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+            break;
+        case NSOrderedSame:
+            [self alert:@"已经是最新版本!"];
+            break;
+        case NSOrderedDescending:
+            [self alert:@"已经是最新版本!"];
+            break;
+        default:
+            [self alert:@"已经是最新版本!"];
+            break;
+    }
+}
+    
+-(void)alertSS:(NSString *)str urlStr:(NSString *)url{
+    NSString *title = str;
+    NSString *message = @" ";
+    NSString *okButtonTitle = @"OK";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
 
 
