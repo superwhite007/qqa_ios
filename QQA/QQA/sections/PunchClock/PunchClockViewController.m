@@ -45,6 +45,7 @@
     
     UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 + 124, 64 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 22, 25, 26)];
     [imageView2 setImage:[UIImage imageNamed:@"forward"]];
+    imageView2.alpha = 0.5;
     [self.view addSubview:imageView2];
     
     
