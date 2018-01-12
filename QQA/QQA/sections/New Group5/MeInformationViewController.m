@@ -174,9 +174,6 @@
     }
 }
 
-
-
-
 -(void)versionCheck{
     
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://qqoatest.youth.cn/v1/api/version/check"]];
@@ -205,6 +202,7 @@
                                                 });
                                                 
                                             } else{
+                                                [self alert:@"已经是最新版本!"];
                                                 NSLog(@"versionCheck获取数据失败，问12345678");
                                             }
                                         }];
@@ -235,14 +233,14 @@
 -(void)alertSS:(NSString *)str urlStr:(NSString *)url{
     NSString *title = str;
     NSString *message = @"注  意";
-    NSString *okButtonTitle = @"OK";
+    NSString *okButtonTitle = @"同意";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
     }];
     [alertDialog addAction:okAction];
     
-    UIAlertAction *cancellAction = [UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *cancellAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 //        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
     }];
     [alertDialog addAction:cancellAction];
