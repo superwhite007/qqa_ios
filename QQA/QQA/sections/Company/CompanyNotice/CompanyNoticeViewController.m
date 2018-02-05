@@ -11,6 +11,8 @@
 @interface CompanyNoticeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray * datasource;
+@property (nonatomic, assign) int pageNum;
+@property (nonatomic, assign) BOOL isDownRefresh;
 
 @end
 
@@ -31,14 +33,47 @@ static NSString *identifier = @"Cell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor redColor];
+    
+    self.pageNum = 1;
+    self.isDownRefresh = NO;
+    
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
-    [self gitCompanyNoticeMessage];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
--(void)gitCompanyNoticeMessage{
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadNewData];
+}
+-(void)loadNewData
+{
+    self.isDownRefresh = YES;
+    if (self.pageNum > 1) {
+        [self gitCompanyNoticeMessage:--self.pageNum];
+    } else{
+        [self gitCompanyNoticeMessage:1];
+    }
+    [self.tableView.mj_header endRefreshing];
+}
+
+-(void)loadMoreData
+{
+    //记录不是下拉刷新
+    self.isDownRefresh = NO;
+    [self gitCompanyNoticeMessage:++self.pageNum];
+    [self.tableView.mj_footer endRefreshing];
+}
+
+
+
+
+
+
+-(void)gitCompanyNoticeMessage:(int)page{
     
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/message/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -52,7 +87,7 @@ static NSString *identifier = @"Cell";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    [mdict setObject:@"1" forKey:@"pageNum"];
+    [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
 //    NSLog(@"mdict:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
