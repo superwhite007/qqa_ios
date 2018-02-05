@@ -220,8 +220,9 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    [mdict setObject:self.datasoureKeysSendScopeArray forKey:@"scope"];
+    [mdict setObject:self.datasourSendToServerScopeArray forKey:@"scope"];
     [mdict setObject:self.sendMessage forKey:@"content"];
+    NSLog(@"mdictmdict:::%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -233,7 +234,7 @@
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"api/message/store: %@", dict);
                                                 if ( [[dict objectForKey:@"message"] intValue] == 5004 ) {
-                                                    [self alert:[NSString stringWithFormat:@"发送通知成功.%@", self.datasourSendToServerScopeArray]];
+                                                    [self alert:[NSString stringWithFormat:@"发送通知成功"]];
                                                 }
                                             } else{
                                                 NSLog(@"获取数据失败，问");
