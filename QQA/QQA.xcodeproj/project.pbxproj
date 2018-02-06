@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		466E2A145386609065AEE56E /* libPods-QQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECCA599687977AA5ACEDCC1 /* libPods-QQA.a */; };
 		AA0D35381FFDBA9C00CA2A43 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D35371FFDBA9C00CA2A43 /* UserNotificationsUI.framework */; };
+		AA0F3D16202984F100D140A0 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F3D14202984F100D140A0 /* AFAppDotNetAPIClient.m */; };
 		AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */; };
 		AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */; };
 		AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA199AF81FC3F01D00BCE01A /* SendTheScopeViewController.m */; };
@@ -17,6 +18,7 @@
 		AA1CEC8C1FA9602E00050EFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC8B1FA9602E00050EFC /* main.m */; };
 		AA1CEC961FA9602E00050EFC /* QQATests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC951FA9602E00050EFC /* QQATests.m */; };
 		AA1CECA11FA9602E00050EFC /* QQAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECA01FA9602E00050EFC /* QQAUITests.m */; };
+		AA1E54A520297955009A532A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1E54A420297955009A532A /* Reachability.m */; };
 		AA20C6971FD147BC0095AF0F /* CompanyBylawsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C6961FD147BC0095AF0F /* CompanyBylawsViewController.m */; };
 		AA20C69A1FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C6991FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m */; };
 		AA20C69D1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C69C1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m */; };
@@ -92,6 +94,8 @@
 		2ECCA599687977AA5ACEDCC1 /* libPods-QQA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QQA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB9B0173C989AA3F3E802A8 /* Pods-QQA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QQA.release.xcconfig"; path = "Pods/Target Support Files/Pods-QQA/Pods-QQA.release.xcconfig"; sourceTree = "<group>"; };
 		AA0D35371FFDBA9C00CA2A43 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		AA0F3D14202984F100D140A0 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFAppDotNetAPIClient.m; path = QQA/sections/General/AFAppDotNetAPIClient.m; sourceTree = SOURCE_ROOT; };
+		AA0F3D15202984F100D140A0 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFAppDotNetAPIClient.h; path = QQA/sections/General/AFAppDotNetAPIClient.h; sourceTree = SOURCE_ROOT; };
 		AA13948C1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeaveForExaminationAndApprovalViewController.h; sourceTree = "<group>"; };
 		AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeaveForExaminationAndApprovalViewController.m; sourceTree = "<group>"; };
 		AA1394901FC277D20070B1E2 /* RequestForInstructionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestForInstructionViewController.h; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 		AA1CECA01FA9602E00050EFC /* QQAUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QQAUITests.m; sourceTree = "<group>"; };
 		AA1CECA21FA9602E00050EFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA1CECB41FA960EF00050EFC /* account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account.png; sourceTree = "<group>"; };
+		AA1E54A320297955009A532A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = QQA/sections/General/Reachability.h; sourceTree = SOURCE_ROOT; };
+		AA1E54A420297955009A532A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = QQA/sections/General/Reachability.m; sourceTree = SOURCE_ROOT; };
 		AA20C6951FD147BC0095AF0F /* CompanyBylawsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyBylawsViewController.h; sourceTree = "<group>"; };
 		AA20C6961FD147BC0095AF0F /* CompanyBylawsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyBylawsViewController.m; sourceTree = "<group>"; };
 		AA20C6981FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyOrganizationalStructureViewController.h; sourceTree = "<group>"; };
@@ -627,6 +633,10 @@
 		AAF14DEC1FB2CE7300B210E1 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				AA0F3D15202984F100D140A0 /* AFAppDotNetAPIClient.h */,
+				AA0F3D14202984F100D140A0 /* AFAppDotNetAPIClient.m */,
+				AA1E54A320297955009A532A /* Reachability.h */,
+				AA1E54A420297955009A532A /* Reachability.m */,
 				AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */,
 				AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */,
 			);
@@ -848,12 +858,14 @@
 				AAC0B85D1FF0EFA500F5D2DB /* VersionInformationViewController.m in Sources */,
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
+				AA1E54A520297955009A532A /* Reachability.m in Sources */,
 				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
 				AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
+				AA0F3D16202984F100D140A0 /* AFAppDotNetAPIClient.m in Sources */,
 				AAB4D4971FC95A9300116355 /* NSDate+Extension.m in Sources */,
 				AA392A561FEC94D100C1C581 /* UMFirstViewController.m in Sources */,
 				AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */,

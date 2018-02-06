@@ -11,6 +11,7 @@
 #import "AppCoverViewController.h"
 #import "AppCoverViewController.h"
 #import <UserNotifications/UserNotifications.h>
+#import "AFAppDotNetAPIClient.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
@@ -26,6 +27,9 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    //网络
+    [AFAppDotNetAPIClient sharedClient];
+
     _isOK = NO;
     NSLog(@"application:%ld", (long)application.applicationState);
     
