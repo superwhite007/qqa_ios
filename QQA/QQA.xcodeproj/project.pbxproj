@@ -288,8 +288,6 @@
 		AA13948F1FC263F50070B1E2 /* GeneralExamination */ = {
 			isa = PBXGroup;
 			children = (
-				AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */,
-				AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */,
 				AAB4D4901FC9581600116355 /* WSDaePickerView */,
 				AAB4D48D1FC9249F00116355 /* LMJDropdownMenu.h */,
 				AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */,
@@ -504,6 +502,8 @@
 			children = (
 				AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */,
 				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
+				AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */,
+				AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */,
 				AAD93D701FB933FF00A7CC2A /* LanchViewController.h */,
 				AAD93D711FB933FF00A7CC2A /* LanchViewController.m */,
 				AA13948F1FC263F50070B1E2 /* GeneralExamination */,
@@ -569,6 +569,8 @@
 		AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */ = {
 			isa = PBXGroup;
 			children = (
+				AABD8ADF1FC81598005058BD /* ACPApprovelViewController.h */,
+				AABD8AE01FC81598005058BD /* ACPApprovelViewController.m */,
 				AABD8AD91FC8150E005058BD /* ACPApprovalListView.h */,
 				AABD8ADA1FC8150E005058BD /* ACPApprovalListView.m */,
 				AABD8AD61FC814C1005058BD /* ACPApproval.h */,
@@ -579,8 +581,6 @@
 				AAEEEA4B1FCF9CBA0012A695 /* Request.m */,
 				AAEEEA4D1FCF9CD50012A695 /* RequestTableViewCell.h */,
 				AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */,
-				AABD8ADF1FC81598005058BD /* ACPApprovelViewController.h */,
-				AABD8AE01FC81598005058BD /* ACPApprovelViewController.m */,
 				AADAAA2B1FCD358900A4FC5D /* RequestAndLeaveDetails */,
 				AAEEEA501FCFE5130012A695 /* RequestLeaveDetailViewController.h */,
 				AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */,

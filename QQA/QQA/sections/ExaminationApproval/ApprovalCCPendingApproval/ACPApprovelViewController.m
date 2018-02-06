@@ -12,9 +12,7 @@
 #import "ACPApprovalTableViewCell.h"
 #import "Request.h"
 #import "RequestTableViewCell.h"
-
 #import "RequestAndLeaveDetailsViewController.h"
-
 #import "RequestLeaveDetailViewController.h"
 
 @interface ACPApprovelViewController ()
@@ -25,6 +23,9 @@
 @property (nonatomic, assign) BOOL isDownRefresh;
 @property (nonatomic, assign) BOOL isEmpty;
 
+@property (nonatomic, assign) int pageNum;
+
+
 @end
 
 @implementation ACPApprovelViewController
@@ -33,6 +34,7 @@ static NSString *identifier = @"Cell";
 static NSString *identifierOne = @"Cell";
 
 -(void)loadView{
+    
     self.aCPApprovalListView = [[ACPApprovalListView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.aCPApprovalListView.tableView.frame = [UIScreen mainScreen].bounds;
     self.view = _aCPApprovalListView;
@@ -41,15 +43,25 @@ static NSString *identifierOne = @"Cell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [self loadNewData];
-    //获取数据
 }
 -(void)loadNewData
 {
-    //记录是下拉刷新
     self.isDownRefresh = YES;
-    [self loadDataAndShowWithPageNum:1];
-//    [self.foodListView.tableView.header endRefreshing];
+    if (self.pageNum > 1) {
+        [self loadDataAndShowWithPageNum:--self.pageNum];
+    } else{
+        [self loadDataAndShowWithPageNum:1];
+    }
+    [self.aCPApprovalListView.tableView.mj_header endRefreshing];
 }
+-(void)loadMoreData
+{
+    self.isDownRefresh = NO;
+    [self loadDataAndShowWithPageNum:++self.pageNum];
+    [self.aCPApprovalListView.tableView.mj_footer endRefreshing];
+}
+
+
 
 #pragma mark - loadDataAndShow
 -(void)loadDataAndShowWithPageNum:(int)page
@@ -71,19 +83,19 @@ static NSString *identifierOne = @"Cell";
         NSLog(@"_titleSt111:%@", _titleStr);
         [mdict setObject:@"1" forKey:@"type"];
         [mdict setObject:@"ToBeApprovedOfOthers" forKey:@"status"];
-        [mdict setObject:@"1" forKey:@"pageNum"];
+        [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     } else if ([_titleStr isEqualToString:@"已通过的"]) {
         [mdict setObject:@"1" forKey:@"type"];
         [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
-        [mdict setObject:@"1" forKey:@"pageNum"];
+        [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     } else if ([_titleStr isEqualToString:@"未通过的"]) {
         [mdict setObject:@"1" forKey:@"type"];
         [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
-        [mdict setObject:@"1" forKey:@"pageNum"];
+        [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     } else if ([_titleStr isEqualToString:@"抄送我的"]) {
         [mdict setObject:@"2" forKey:@"type"];
         [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
-        [mdict setObject:@"1" forKey:@"pageNum"];
+        [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     }
     
 //    NSLog(@"55555555%@%@", CONST_SERVER_ADDRESS, _urlStr);
@@ -163,26 +175,17 @@ static NSString *identifierOne = @"Cell";
     // Do any additional setup after loading the view.
     self.pageNumber = 1;
     self.isDownRefresh = NO;
-    
-    
     [self.navigationItem setTitle:_titleStr];
-    
     self.datasouceArray = [NSMutableArray arrayWithCapacity:1];
-    
-
     self.aCPApprovalListView.tableView.delegate = self;
     self.aCPApprovalListView.tableView.dataSource = self;
-    
     if ([_urlStr isEqualToString:@"/v1/api/leave/index"]){
-        
          [self.aCPApprovalListView.tableView registerClass:[ACPApprovalTableViewCell class] forCellReuseIdentifier:identifier];
     } else{
-        
         [self.aCPApprovalListView.tableView registerClass:[RequestTableViewCell class] forCellReuseIdentifier:identifierOne];
-        
     }
-        
-    
+//    self.aCPApprovalListView.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+//    self.aCPApprovalListView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 
@@ -196,13 +199,10 @@ static NSString *identifierOne = @"Cell";
 {
     return self.datasouceArray.count;
 }
-
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 
 {
     if ([_urlStr isEqualToString:@"/v1/api/leave/index"] && !_isEmpty){
-        
         ACPApprovalTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
         if (!cell) {
             cell = [[ACPApprovalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] ;
@@ -210,20 +210,15 @@ static NSString *identifierOne = @"Cell";
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         cell.aCPApproval = approval;
         return cell;
-        
     }else if ([_urlStr isEqualToString:@"/v1/api/ask/index"] && !_isEmpty ){
-        
         RequestTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifierOne forIndexPath:indexPath];
         if (!cell) {
             cell = [[RequestTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifierOne] ;
         }
         Request * request = self.datasouceArray[indexPath.row];
-        
         cell.request = request;
         return cell;
-        
     } else {
-        
         UITableViewCell * acell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!acell) {
             acell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -231,26 +226,18 @@ static NSString *identifierOne = @"Cell";
         acell.textLabel.text = self.datasouceArray[indexPath.row];
         acell.textLabel.textAlignment = NSTextAlignmentCenter;
         return acell;
-        
     }
-        
-   
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
 }
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (_isEmpty) {
         NSLog(@"暂时没有数据");
-        
     }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"/v1/api/leave/index"]){
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
@@ -258,7 +245,6 @@ static NSString *identifierOne = @"Cell";
         detailVC.titleIdentStr = @"请假";
         detailVC.urlStr = @"/v1/api/leave/show";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }else if([_titleStr isEqualToString:@"待审批的" ]  && [_urlStr isEqualToString:@"/v1/api/ask/index"]){
         RequestAndLeaveDetailsViewController * detailVC = [[RequestAndLeaveDetailsViewController alloc] init];
         Request * approval = self.datasouceArray[indexPath.row];
@@ -266,52 +252,41 @@ static NSString *identifierOne = @"Cell";
         detailVC.titleIdentStr = @"请示件";
         detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }else if([_titleStr isEqualToString:@"已通过的"] && [_urlStr isEqualToString:@"/v1/api/leave/index"]){
-        
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveOrAskId =  approval.leaveId;
         detailVC.titleStr = @"请假";
         detailVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }else if([_titleStr isEqualToString:@"已通过的"] && [_urlStr isEqualToString:@"/v1/api/ask/index"]){
-        
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         Request * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveOrAskId =  approval.askId;
         detailVC.titleStr = @"请示件";
         detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }else if([_titleStr isEqualToString:@"未通过的"]  && [_urlStr isEqualToString:@"/v1/api/leave/index"] ){
-        
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveOrAskId =  approval.leaveId;
         detailVC.titleStr = @"请假";
         detailVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }else if([_titleStr isEqualToString:@"未通过的"]  && [_urlStr isEqualToString:@"/v1/api/ask/index"] ){
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
-        
         Request * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveOrAskId =  approval.askId;
         detailVC.titleStr = @"请示件";
         detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }else if([_titleStr isEqualToString:@"抄送我的"]  && [_urlStr isEqualToString:@"/v1/api/ask/index"] ){
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
-        
         Request * approval = self.datasouceArray[indexPath.row];
         detailVC.leaveOrAskId =  approval.askId;
         detailVC.titleStr = @"请示件";
         detailVC.urlStr = @"/v1/api/ask/show";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }else if([_titleStr isEqualToString:@"抄送我的"]  && [_urlStr isEqualToString:@"/v1/api/leave/index"] ){
         RequestLeaveDetailViewController * detailVC = [[RequestLeaveDetailViewController alloc] init];
         ACPApproval * approval = self.datasouceArray[indexPath.row];
@@ -319,9 +294,7 @@ static NSString *identifierOne = @"Cell";
         detailVC.titleStr = @"请假";
         detailVC.urlStr = @"/v1/api/leave/index";
         [self.navigationController pushViewController:detailVC animated:NO];
-        
     }
-    
 }
 
 -(NSString *)tepyOfLeave:(NSString *)str{
@@ -346,8 +319,6 @@ static NSString *identifierOne = @"Cell";
     }
     return @"其他";
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {

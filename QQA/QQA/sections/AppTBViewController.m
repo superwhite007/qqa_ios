@@ -58,7 +58,7 @@
     MeInformationViewController *meVC = [[MeInformationViewController alloc] init];
     [self setupChildViewController:meVC title:@"我" imageName:@"me_normal" selectedImageName:@"me_normal"];
     self.viewControllers = [NSArray arrayWithObjects:companyVC, examinationApprovalVC, punchClockVC, meVC, nil];
-    self.selectedViewController = [self.viewControllers objectAtIndex:0];
+    self.selectedViewController = [self.viewControllers objectAtIndex:1];
 }
 
 
