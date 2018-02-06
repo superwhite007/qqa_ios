@@ -16,16 +16,11 @@
 #import "RequestLeaveDetailViewController.h"
 
 @interface ACPApprovelViewController ()
-
-@property (nonatomic, assign) int pageNumber;
 @property (nonatomic, strong) NSMutableArray * datasouceArray;
 @property (nonatomic, strong) ACPApprovalListView * aCPApprovalListView;
 @property (nonatomic, assign) BOOL isDownRefresh;
 @property (nonatomic, assign) BOOL isEmpty;
-
 @property (nonatomic, assign) int pageNum;
-
-
 @end
 
 @implementation ACPApprovelViewController
@@ -60,8 +55,6 @@ static NSString *identifierOne = @"Cell";
     [self loadDataAndShowWithPageNum:++self.pageNum];
     [self.aCPApprovalListView.tableView.mj_footer endRefreshing];
 }
-
-
 
 #pragma mark - loadDataAndShow
 -(void)loadDataAndShowWithPageNum:(int)page
@@ -132,9 +125,12 @@ static NSString *identifierOne = @"Cell";
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                    NSLog(@"1234567dict: %@,\n ", dict);
-                                                    
+                                                    NSLog(@"1234567dict: %@,\n, %d ", dict, _pageNum);
                                                     if ( [[dict objectForKey:@"message"] intValue] == 6006 ){
+                                                        if (_pageNum > 1) {
+                                                            self.isEmpty = NO;
+                                                            return ;
+                                                        }
                                                         self.isEmpty = YES;
                                                         [self.datasouceArray addObject:@"暂时没有相关内容"];
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -159,7 +155,7 @@ static NSString *identifierOne = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.pageNumber = 1;
+    self.pageNum = 1;
     self.isDownRefresh = NO;
     [self.navigationItem setTitle:_titleStr];
     self.datasouceArray = [NSMutableArray arrayWithCapacity:1];
@@ -170,8 +166,8 @@ static NSString *identifierOne = @"Cell";
     } else{
         [self.aCPApprovalListView.tableView registerClass:[RequestTableViewCell class] forCellReuseIdentifier:identifierOne];
     }
-//    self.aCPApprovalListView.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-//    self.aCPApprovalListView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    self.aCPApprovalListView.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.aCPApprovalListView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 
