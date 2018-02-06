@@ -59,19 +59,12 @@ static NSString *identifier = @"Cell";
     }
     [self.tableView.mj_header endRefreshing];
 }
-
 -(void)loadMoreData
 {
-    //记录不是下拉刷新
     self.isDownRefresh = NO;
     [self gitCompanyNoticeMessage:++self.pageNum];
     [self.tableView.mj_footer endRefreshing];
 }
-
-
-
-
-
 
 -(void)gitCompanyNoticeMessage:(int)page{
     

@@ -115,7 +115,7 @@ static NSString *identifierOne = @"Cell";
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 //                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
                                                     
-                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 ) {
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 || [[dictArray[0] objectForKey:@"message"] intValue] == 6017 ) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
@@ -125,20 +125,6 @@ static NSString *identifierOne = @"Cell";
                                                             [aCPApproval setValuesForKeysWithDictionary:dict];
                                                             [self.datasouceArray addObject:aCPApproval];
                                                             
-                                                        }
-                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                            [self.aCPApprovalListView.tableView  reloadData];
-                                                        });
-                                                    }else if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6017 ) {
-                                                        self.isEmpty = NO;
-                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-                                                        [array1 removeObjectAtIndex:0];
-//                                                        NSLog(@"\n\narray1: %@,\n ", array1);
-                                                        [self.datasouceArray removeAllObjects];
-                                                        for (NSDictionary * dict in array1) {
-                                                            Request * request = [Request new];
-                                                            [request setValuesForKeysWithDictionary:dict];
-                                                            [self.datasouceArray addObject:request];
                                                         }
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self.aCPApprovalListView.tableView  reloadData];

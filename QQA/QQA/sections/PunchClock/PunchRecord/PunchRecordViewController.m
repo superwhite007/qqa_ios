@@ -108,6 +108,7 @@ static NSString *identifier = @"Cell";
                                                     self.datasource = array;
                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                     self.datasource = array;
+                                                        NSLog(@"\n\n\n\n array.count:%lu", (unsigned long)array.count);
                                                     [self.aTableView reloadData];
                                                     });
                                                 }
