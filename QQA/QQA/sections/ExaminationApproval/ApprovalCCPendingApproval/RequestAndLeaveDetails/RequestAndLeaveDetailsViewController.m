@@ -87,7 +87,7 @@
     _buttonAgreement.layer.cornerRadius = 5;
     _buttonAgreement.layer.borderColor = [UIColor blackColor].CGColor;
     _buttonAgreement.layer.borderWidth = 1;
-    [_buttonAgreement setTitle:@"拒绝" forState:(UIControlStateNormal)];
+    [_buttonAgreement setTitle:@"同意" forState:(UIControlStateNormal)];
     [_buttonAgreement addTarget:self action:@selector(changeButtonAgrees:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:_buttonAgreement];
     
