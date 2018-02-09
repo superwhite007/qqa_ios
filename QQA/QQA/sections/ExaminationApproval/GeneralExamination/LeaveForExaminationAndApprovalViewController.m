@@ -99,7 +99,7 @@
     self.typeOfStr = [NSString new];
     self.startTimeStr = [NSString new];
     self.endTimeStr = [NSString new];
-    UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 74, iphoneWidth - 40, 30)];
+    UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, iphoneWidth - 40, 30)];
 //    introducePersonLabel.backgroundColor = [UIColor redColor];
 //    NSMutableString * introduceStr = [NSMutableString stringWithFormat:@"11111"];
     [self.view addSubview:introducePersonLabel];
@@ -107,7 +107,7 @@
     for (int i = 0; i < 3 ; i++) {
         if (i == 0) {
             LMJDropdownMenu * dropdownMenu = [[LMJDropdownMenu alloc] init];
-            [dropdownMenu setFrame:CGRectMake(20, 74, iphoneWidth - 40, 40)];
+            [dropdownMenu setFrame:CGRectMake(20, 10, iphoneWidth - 40, 40)];
             [dropdownMenu setMenuTitles:_typeMArray rowHeight:30];
             dropdownMenu.delegate = self;
             [self.view addSubview:dropdownMenu];
@@ -116,7 +116,7 @@
             view.backgroundColor = [UIColor redColor];
 //            [self.view addSubview:view];
             UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            selectBtn.frame = CGRectMake(20, 120 + ( i - 1 ) * 45, iphoneWidth - 40, 40);
+            selectBtn.frame = CGRectMake(20, 56 + ( i - 1 ) * 45, iphoneWidth - 40, 40);
             selectBtn.layer.cornerRadius = 5;
             selectBtn.backgroundColor = [UIColor lightGrayColor];
             [selectBtn setTitle:@"选择时间" forState:UIControlStateNormal];
@@ -125,12 +125,12 @@
             [selectBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-    UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 215, 100, 30)];
+    UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 151, 100, 30)];
     reasonTitleLabel.text = @"请假事由";
     reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
 //    reasonTitleLabel.backgroundColor = [UIColor redColor];
     [self.view addSubview:reasonTitleLabel];
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 250, iphoneWidth - 40, iphoneWidth * 1 / 3 + 30)];
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 186, iphoneWidth - 40, iphoneWidth * 1 / 3 + 30)];
     //    messageTextView.backgroundColor = [UIColor blueColor];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:_messageTextView];
@@ -223,13 +223,13 @@
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
     NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
     for (int i = 0 ; i < 2 ; i++ ) {
-        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 5 , 100, 30)];
+        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 5 , 100, 30)];
         reasonTitleLabel.text = titleArray[i];
         reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:reasonTitleLabel];
         for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
-            UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
-            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
+            UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
+            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
             titleLabe.layer.borderColor = [UIColor blackColor].CGColor;
             titleLabe.layer.borderWidth = 1;
             titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
@@ -241,7 +241,7 @@
             [self.view addSubview:titleLabe];
             imgView.layer.borderWidth = 1;
             imgView.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
-            UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 280 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  +  (iphoneWidth - 70 ) / 5 + 5, (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
+            UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  +  (iphoneWidth - 70 ) / 5 + 5, (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
             nameLabel.text = mArrayOFApproverAndCC[i][j];
             nameLabel.font = [UIFont systemFontOfSize:14];
             nameLabel.textAlignment = NSTextAlignmentCenter;
