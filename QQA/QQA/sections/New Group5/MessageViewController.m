@@ -25,7 +25,7 @@
     [self.navigationItem setTitle:@"发送通知"];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送范围" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送范围" style:(UIBarButtonItemStyleDone) target:self action:@selector(sends)];
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 74, iphoneWidth - 20, iphoneWidth * 2 / 3)];
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, iphoneWidth - 20, iphoneWidth * 2 / 3)];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:_messageTextView];
     _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;

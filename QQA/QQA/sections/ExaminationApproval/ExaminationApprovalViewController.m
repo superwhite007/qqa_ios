@@ -36,6 +36,9 @@ static NSString *identifier = @"CELL";
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
     NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [navBar setTitleTextAttributes:dict];
+    navBar.translucent = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
     [self.datasource addObject:@"发起审批"];

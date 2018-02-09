@@ -28,15 +28,19 @@
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
     NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [navBar setTitleTextAttributes:dict];
+    navBar.translucent = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
     UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    punchCLockImageTileButton.frame = CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
+    punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
     punchCLockImageTileButton.backgroundColor = [UIColor redColor];
     [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"everyday_1"] forState:UIControlStateNormal];
     [self.view addSubview:punchCLockImageTileButton];
     UIButton * punchRecordButtom = [UIButton buttonWithType:UIButtonTypeSystem];
-    punchRecordButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 , 64 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 150, 30);
+    punchRecordButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 150, 30);
     [punchRecordButtom setTitle:@"打卡记录" forState:UIControlStateNormal];
     punchRecordButtom.layer.cornerRadius = 5;
     [punchRecordButtom setTintColor:[UIColor whiteColor]];
@@ -44,18 +48,18 @@
     [punchRecordButtom addTarget:self action:@selector(puchtoPunchRecordcontroller) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:punchRecordButtom];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 , 64 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 30, 30)];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 30, 30)];
     [imageView setImage:[UIImage imageNamed:@"history"]];
     [self.view addSubview:imageView];
     
-    UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 + 124, 64 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 22, 25, 26)];
+    UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 + 124, [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 22, 25, 26)];
     [imageView2 setImage:[UIImage imageNamed:@"forward"]];
     imageView2.alpha = 0.5;
     [self.view addSubview:imageView2];
     
     
     UIButton * scanButtom = [UIButton buttonWithType:UIButtonTypeSystem];
-    scanButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 85, 100, 100);
+    scanButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 100 ) / 2 , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 85, 100, 100);
     scanButtom.backgroundColor = [UIColor colorWithRed:0 green:.99 blue:0 alpha:1];
     scanButtom.layer.cornerRadius = 5;
     [scanButtom setBackgroundImage:[UIImage imageNamed:@"scan_qrcode"] forState:UIControlStateNormal];
@@ -64,22 +68,22 @@
     [scanButtom addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scanButtom];
 
-    _timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 140, 200, 30)];
+    _timeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 140, 200, 30)];
     _timeLable.font = [UIFont fontWithName:@"Arial" size:16];
     _timeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:_timeLable];
     
-    UILabel * workingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10, 200, 30)];
+    UILabel * workingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 200 ) / 2 , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10, 200, 30)];
     workingTimeLable.text = @"上班时间：08:30--17:30";
     workingTimeLable.font = [UIFont fontWithName:@"Arial" size:18];
     workingTimeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:workingTimeLable];
     
-    UIImageView * imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 300 ) / 2 , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10 + 28 , 25, 25)];
+    UIImageView * imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 300 ) / 2 , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10 + 28 , 25, 25)];
     [imageView3 setImage:[UIImage imageNamed:@"rules"]];
     [self.view addSubview:imageView3];
     
-    UILabel * explainWorkingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 250 ) / 2  , 44 + [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10 + 25 , 300, 30)];
+    UILabel * explainWorkingTimeLable = [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width - 250 ) / 2  , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 75 + 125 + 30 + 10 + 25 , 300, 30)];
     explainWorkingTimeLable.text = @"扫描公司打卡机上的二维码完成打卡";
     explainWorkingTimeLable.font = [UIFont fontWithName:@"Arial" size:18];
     explainWorkingTimeLable.textAlignment = NSTextAlignmentCenter;

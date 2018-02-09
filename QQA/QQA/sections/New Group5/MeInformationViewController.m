@@ -26,12 +26,16 @@
     navBar.barTintColor = [UIColor redColor];
     NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [navBar setTitleTextAttributes:dict];
+    navBar.translucent = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
     NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青春",  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 35, 60);
+        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 10 + i * 60, iphoneWidth - 35, 60);
         //    button1.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
         button.tag = i;
@@ -46,21 +50,21 @@
     NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"update", @"about",  nil];
     for (int i = 0; i < 3; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
-        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 + 64 + 10 + 15  + 5+ i * 60, 20, 20);
+        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 +  10 + 15  + 5+ i * 60, 20, 20);
         //    imgView.backgroundColor = [UIColor yellowColor];
         UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
         [firstimgView setImage:firstimage];
         firstimgView.alpha = 0.6;
         [self.view addSubview:firstimgView];
         UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + 5 + i * 60, 20, 20);
+        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 10 + 15 + 5 + i * 60, 20, 20);
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
         imgView.alpha = 0.6;
         [self.view addSubview:imgView];
     }
     for (int i = 0; i < 4; i++) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 72 + i * 60 , iphoneWidth, .5)];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 10 + i * 60 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
@@ -154,7 +158,7 @@
 
 
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
-    UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
+    UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneWidth * 2 / 3)];
     view.backgroundColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
 //    [ UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:.8];
     [self.view addSubview: view];
