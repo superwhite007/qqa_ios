@@ -32,7 +32,12 @@ static NSString *identifier = @"CELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
+    UINavigationBar *navBar = [UINavigationBar appearance];
+    navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
+    NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [navBar setTitleTextAttributes:dict];
+
+//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
     [self.datasource addObject:@"发起审批"];
     [self.datasource addObject:@"待审批的"];
     [self.datasource addObject:@"已通过的"];

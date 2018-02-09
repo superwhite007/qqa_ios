@@ -35,7 +35,13 @@ static NSString *identifier = @"CELL";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tabBarController.navigationItem.title = @"青青";
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:1];
+    
+    UINavigationBar *navBar = [UINavigationBar appearance];
+    navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
+    NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [navBar setTitleTextAttributes:dict];
+
+//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
     [self.datasource addObject:@"公司通知"];
     [self.datasource addObject:@"规章制度"];
     [self.datasource addObject:@"公司信息"];
