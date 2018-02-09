@@ -115,10 +115,21 @@
 }
 
 - (void)reportScanResult:(NSString *)result{
-    [self scanResultPunchClock];
-    NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
-    [self punchRecore:dict];
+//    NSLog(@"resultresultresultresultresult%@", result);
+    [self competeScanResult:result];
+}
+
+-(void)competeScanResult:(NSString *)result{
+    if([result rangeOfString:@"appName"].location !=NSNotFound && [result rangeOfString:@"qqoa"].location !=NSNotFound ){
+        NSLog(@"yes");
+        [self scanResultPunchClock];
+        NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
+        [self punchRecore:dict];
+    }else{
+        NSLog(@"no");
+        [self alert:@"异常二维码"];
+    }
 }
 
 -(void)punchRecore:(NSDictionary *)dict{
