@@ -174,19 +174,26 @@
 }
 
 - (void)reportScanResult:(NSString *)result{
-    
     NSLog(@"1111111111111scanBack%@",result);
-    NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
-    [dict removeObjectForKey:@"serverType"];
-    NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
-    
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * documentfilePath = paths.firstObject;
-    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
-    [ddict writeToFile:txtPath atomically:YES];
-    [self clientSendInformationsToServer:dict resultString:result];
-    
+    [self competeScanResult:result];
+}
+
+-(void)competeScanResult:(NSString *)result{
+    if([result rangeOfString:@"appName"].location !=NSNotFound && [result rangeOfString:@"qqoa"].location !=NSNotFound ){
+        NSLog(@"yes");
+        NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
+        NSMutableDictionary * dict = [NSJSONSerialization JSONObjectWithData:dictionartData options:NSJSONReadingMutableContainers error:nil];
+        [dict removeObjectForKey:@"serverType"];
+        NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * documentfilePath = paths.firstObject;
+        NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
+        [ddict writeToFile:txtPath atomically:YES];
+        [self clientSendInformationsToServer:dict resultString:result];
+    }else{
+        NSLog(@"no");
+        [self alert:@"异常二维码"];
+    }
 }
 
 -(void)clientSendInformationsToServer:(NSMutableDictionary *)clinetDictionaryDIct  resultString:(NSString *)str{
