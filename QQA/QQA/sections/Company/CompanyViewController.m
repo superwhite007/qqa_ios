@@ -87,11 +87,16 @@ static NSString *identifier = @"CELL";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc ] init];
 //    view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
-    UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
-    punchCLockImageTileButton.backgroundColor = [UIColor redColor];
-    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"everyday_1"] forState:UIControlStateNormal];
-    [view addSubview:punchCLockImageTileButton];
+//    UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
+//    punchCLockImageTileButton.backgroundColor = [UIColor redColor];
+//    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"everyday_1"] forState:UIControlStateNormal];
+//    [view addSubview:punchCLockImageTileButton];
+    
+    UIImageView * imageViewHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3)];
+    [imageViewHeader setImage:[UIImage imageNamed:@"everyday_1"]];
+    [self.view addSubview:imageViewHeader];
+    
     return  view ;
 }
 

@@ -34,11 +34,16 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
-    UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
-    punchCLockImageTileButton.backgroundColor = [UIColor redColor];
-    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"everyday_1"] forState:UIControlStateNormal];
-    [self.view addSubview:punchCLockImageTileButton];
+//    UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
+//    punchCLockImageTileButton.backgroundColor = [UIColor redColor];
+//    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"everyday_1"] forState:UIControlStateNormal];
+//    [self.view addSubview:punchCLockImageTileButton];
+    
+    UIImageView * imageViewHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3)];
+    [imageViewHeader setImage:[UIImage imageNamed:@"everyday_1"]];
+    [self.view addSubview:imageViewHeader];
+    
     UIButton * punchRecordButtom = [UIButton buttonWithType:UIButtonTypeSystem];
     punchRecordButtom.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - 150 ) / 2 , [[UIScreen mainScreen] bounds].size.width * 2 / 3 + 20, 150, 30);
     [punchRecordButtom setTitle:@"打卡记录" forState:UIControlStateNormal];
