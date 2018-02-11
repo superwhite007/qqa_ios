@@ -119,9 +119,9 @@
     NSString * tokenStr = [NSString stringWithFormat:@"%@", [[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
                                                               stringByReplacingOccurrencesOfString: @">" withString: @""]
                                                              stringByReplacingOccurrencesOfString: @" " withString: @""]];
-    if (!_isOK) {
+//    if (!_isOK) {
         [self sendUMdevicetokenToServer:tokenStr];
-    }
+//    }
 }
 
 
