@@ -220,8 +220,8 @@
     [task resume];
 }
 -(void)compareVersion:(NSDictionary *)dic{
-    
-    NSString * versionNumber = [NSString stringWithFormat:@"%@", [dic objectForKey:@"verMinor"]];
+    NSLog(@"dicdicdicdicdicdicdicdic:%@", dic);
+    NSString * versionNumber = [NSString stringWithFormat:@"%@", [dic objectForKey:@"newVerMajor"]];
     NSString * url = [NSString stringWithFormat:@"%@", [dic objectForKey:@"url"]];
     NSComparisonResult result = [@"0" compare:versionNumber options:NSNumericSearch];//比较的是字符串的值,如果有多个比较条件,加一个|然后加比较条件
     switch (result) {
