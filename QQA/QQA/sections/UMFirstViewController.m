@@ -28,7 +28,7 @@
     plantIDKeyExplianLable.textColor = [UIColor blackColor];
     CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
     CGRect targetRect = [plantIDKeyExplianLable.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : plantIDKeyExplianLable.font} context:nil];
-        plantIDKeyExplianLable.frame = CGRectMake(20, 130, iphoneWidth - 40, CGRectGetHeight(targetRect));
+    plantIDKeyExplianLable.frame = CGRectMake(20, 84, iphoneWidth - 40, CGRectGetHeight(targetRect));
     [self.view addSubview:plantIDKeyExplianLable];
     
     
