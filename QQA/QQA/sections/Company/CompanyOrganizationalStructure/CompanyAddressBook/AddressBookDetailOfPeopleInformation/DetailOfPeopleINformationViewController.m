@@ -107,7 +107,7 @@
 
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
     
-    UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
+    UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneWidth * 2 / 3)];
     [self.view addSubview: view];
     NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：",  @"NO.", @"电话：", @"email:", @"QQ:", @"WeChat:"];
     NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , [dict objectForKey:@"username"], [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"weiXin"]];
@@ -135,7 +135,7 @@
     NSArray * titleArray = [NSArray arrayWithObjects:@"发消息", emailStr, telephoneStr,  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 35, 60);
+        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 10 + i * 60, iphoneWidth - 35, 60);
 //        button.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
         button.tag = i;
@@ -152,7 +152,7 @@
     for (int i = 0; i < 3; i++) {
         
         UIImageView *firstimgView = [[UIImageView alloc] init];
-        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 + 64 + 10 + 15  + 5+ i * 60, 20, 20);
+        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3  + 10 + 15  + 5+ i * 60, 20, 20);
         //    imgView.backgroundColor = [UIColor yellowColor];
         UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
         [firstimgView setImage:firstimage];
@@ -160,14 +160,14 @@
         [self.view addSubview:firstimgView];
         
         UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 64 + 10 + 15 + 5 + i * 60, 20, 20);
+        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3  + 10 + 15 + 5 + i * 60, 20, 20);
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
         imgView.alpha = 0.6;
     }
     
     for (int i = 0; i < 4; i++) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 72 + i * 60 , iphoneWidth, .5)];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 8 + i * 60 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
