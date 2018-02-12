@@ -118,7 +118,6 @@
     NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"HH:mm:ss"];
     _timeLable.text = [NSString stringWithFormat:@"当前时间：%@", [dateformatter stringFromDate:senddate]];
-//    NSLog(@"%@", self.timeLable.text);
 }
 
 
@@ -129,12 +128,12 @@
 }
 
 - (void)reportScanResult:(NSString *)result{
-//    NSLog(@"resultresultresultresultresult%@", result);
     [self competeScanResult:result];
 }
 
 -(void)competeScanResult:(NSString *)result{
-    if([result rangeOfString:@"appName"].location !=NSNotFound && [result rangeOfString:@"qqoa"].location !=NSNotFound ){
+    NSLog(@"resultresult:%@", result);
+    if([result rangeOfString:@"TimeMachineFeatureCode"].location !=NSNotFound && [result rangeOfString:@"code"].location !=NSNotFound ){
         NSLog(@"yes");
         [self scanResultPunchClock];
         NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
@@ -160,7 +159,6 @@
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:[NSString stringWithFormat:@"%@",[dict objectForKey:@"TimeMachineFeatureCode"] ] forKey:@"timecardMachineFeatureCode"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-//    NSLog(@"resultDicresultmdict:%@ \n", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -170,7 +168,6 @@
                                             
                                             if (data != nil) {
                                                 NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"%@", dict);
                                                 NSString * str = [NSString stringWithFormat:@"%@", [dict objectForKey:@"message"]];
                                                 if ([str isEqualToString:@"3003"]) {
                                                     [self alert:@"打卡成功!"];
