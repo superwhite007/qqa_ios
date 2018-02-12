@@ -67,7 +67,6 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -76,7 +75,6 @@
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"CCAndApprovalGroup:  %@\n", dictArray);
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6014 ) {
                                                     self.approvalMarray = dictArray[1];
                                                     self.cCMarray = dictArray[2];
@@ -84,7 +82,6 @@
                                                         [self ApproverAndCC];
                                                     });
                                                 }
-                                                //
                                                 
                                             } else{
                                                 NSLog(@"获取数据失败，问");
@@ -150,21 +147,15 @@
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         [self sendNoticeToServer];
-        //NSLog(@"%@", text);
         return NO;
-        
     }else if (range.location >= 200){
         [self alert:@"最多输入200字符"];
         return NO;
     }
-    
-    
     return YES;
-    
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
@@ -179,16 +170,12 @@
     //        [self sendNoticeToServer];
     //    }
     
-    
 }
 
 
 
 -(void)sendNoticeToServer{
-    
-  
     if (_messageTextView.text.length == 0){
-        //NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
     }else {
         [self sendToServerTOBack];
@@ -211,7 +198,6 @@
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:_messageTextView.text forKey:@"content"];
-    NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -220,7 +206,6 @@
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"333333back%@,\n %@\n", dict, [dict objectForKey:@"message"]);
                                                 if ([[dict objectForKey:@"message"] intValue] == 6015) {
                                                     
                                                     dispatch_async(dispatch_get_main_queue(), ^{

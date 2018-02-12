@@ -76,7 +76,6 @@
     if (sender.tag == 0) {
         NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
         NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
-//        NSLog(@"resultPermissions----%@",resultPermissions);//notices
         if (resultPermissions[@"notices"]) {
             MessageViewController * messageVC = [MessageViewController new];
             [self.navigationController pushViewController:messageVC animated:YES];
@@ -136,7 +135,6 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-//    NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -214,13 +212,12 @@
                                                 
                                             } else{
                                                 [self alert:@"已经是最新版本!"];
-                                                NSLog(@"versionCheck获取数据失败，问12345678");
+                                                NSLog(@"获取数据失败");
                                             }
                                         }];
     [task resume];
 }
 -(void)compareVersion:(NSDictionary *)dic{
-    NSLog(@"dicdicdicdicdicdicdicdic:%@", dic);
     NSString * versionNumber = [NSString stringWithFormat:@"%@", [dic objectForKey:@"newVerMajor"]];
     NSString * url = [NSString stringWithFormat:@"%@", [dic objectForKey:@"url"]];
     NSComparisonResult result = [@"0" compare:versionNumber options:NSNumericSearch];//比较的是字符串的值,如果有多个比较条件,加一个|然后加比较条件

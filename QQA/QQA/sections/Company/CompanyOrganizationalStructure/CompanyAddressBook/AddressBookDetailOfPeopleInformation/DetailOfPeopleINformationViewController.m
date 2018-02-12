@@ -66,8 +66,6 @@
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:_userId forKey:@"user_id"];
-    
-    NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -81,8 +79,6 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
-                                                    
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 7006 ) {
 //                                                        self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
@@ -94,8 +90,6 @@
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"7777777dict: %@,\n ", dict);
-                                                    
                                                     if ( [[dict objectForKey:@"message"] intValue] == 4001 ){
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                              [self  gitSomeThingsdictionary:dict];
@@ -113,48 +107,33 @@
 
 -(void)gitSomeThingsdictionary:(NSDictionary *)dict{
     
-    NSLog(@"me:dict: %@", dict);
-    
     UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 64, iphoneWidth, iphoneWidth * 2 / 3)];
-//    view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     [self.view addSubview: view];
-    
     NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：",  @"NO.", @"电话：", @"email:", @"QQ:", @"WeChat:"];
     NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , [dict objectForKey:@"username"], [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"weiXin"]];
-    
-    
     UIImageView * imgVIew = [[UIImageView alloc] initWithFrame:CGRectMake(15, iphoneWidth  / 9 , iphoneWidth * 4 / 9 , iphoneWidth * 4 / 9)];
     imgVIew.backgroundColor = [UIColor redColor];
     imgVIew.layer.cornerRadius = imgVIew.frame.size.width/2;
-    
     imgVIew.clipsToBounds = YES;
-    //    UIImage *image = [UIImage imageNamed:labelNameArray[0]]; hongjinbao
-    
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[dict objectForKey:@"avatar"]]];
     UIImage *image = [UIImage imageWithData:data];
     [imgVIew setImage:image];
     [view addSubview:imgVIew];
-    
-    
     for (int i = 1; i < 9; i++) {
         UILabel * label = [[UILabel alloc] init];
         if ( i > 0 && i < 10) {
             label.frame = CGRectMake(iphoneWidth * 4 / 9 + 25, iphoneWidth * 2 / 3 / 10 / 2 + ( iphoneWidth * 2 / 3 / 10  * (i - 1)) + 10, iphoneWidth  / 2 - 20,  iphoneWidth * 2 / 3 / 10);
-            
         }
-        //        label.backgroundColor = [UIColor blueColor];
         label.adjustsFontSizeToFitWidth = YES;
         [label setText:[NSString stringWithFormat:@"%@%@", labelNameArray[i], urlRebackArray[i]]];
         [view addSubview:label];
     }
     
     [self.navigationItem setTitle:[dict objectForKey:@"username"]];
-    
     NSString * emailStr = [NSString stringWithFormat:@"发邮件  %@",[dict objectForKey:@"email"]];
     NSString * telephoneStr = [NSString stringWithFormat:@"打电话  %@",[dict objectForKey:@"telephone"]];
     NSArray * titleArray = [NSArray arrayWithObjects:@"发消息", emailStr, telephoneStr,  nil];
     for (int i = 0; i < [titleArray count]; i++) {
-        
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 74 + i * 60, iphoneWidth - 35, 60);
 //        button.backgroundColor = [UIColor darkGrayColor];
@@ -167,8 +146,6 @@
         [button addTarget:self action:@selector(gotoSomeForwed:) forControlEvents:UIControlEventTouchUpInside];
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
-        
-        
     }
     
     NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"key", @"about",  nil];
@@ -187,8 +164,6 @@
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
         imgView.alpha = 0.6;
-//        [self.view addSubview:imgView];
-        
     }
     
     for (int i = 0; i < 4; i++) {
@@ -198,18 +173,7 @@
         [self.view addSubview:view];
     }
     
-    
-    
-    
 }
-
-
-
-
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

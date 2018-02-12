@@ -43,7 +43,6 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -71,7 +70,6 @@
 //                                                }
                                                 
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"CCAndApprovalGroup: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6002 ) {
                                                     self.approvalMarray = dictArray[1];
                                                     self.cCMarray = dictArray[2];
@@ -149,17 +147,13 @@
             NSString *date = [selectDate stringWithFormat:@"开始时间：yyyy-MM-dd HH:mm"];
             NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
             self.startTimeStr = data1;
-            NSLog(@"start：%@",self.startTimeStr);
             [btn setTitle:date forState:UIControlStateNormal];
         } else if (btn.tag == 2) {
             NSString *date = [selectDate stringWithFormat:@"结束时间：yyyy-MM-dd HH:mm"];
             NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
             self.endTimeStr = data1;
-            NSLog(@"self.endTimeStr：%@",self.endTimeStr);
             [btn setTitle:date forState:UIControlStateNormal];
         }
-//         NSLog(@"选择的日期：%@",date);
-//        [btn setTitle:date forState:UIControlStateNormal];
     }];
     datepicker.dateLabelColor = [UIColor orangeColor];//年-月-日-时-分 颜色
     datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
@@ -173,7 +167,6 @@
 }
 
 - (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
-//    NSLog(@"你选择了：%ld",number);
     if (number == 0) {
         self.typeOfStr = @"100";
     } else if (number == 1){
@@ -301,7 +294,6 @@
     [mdict setObject:_startTimeStr forKey:@"starttime"];
     [mdict setObject:_endTimeStr forKey:@"endtime"];
     [mdict setObject:_messageTextView.text forKey:@"reason"];
-//    NSLog(@"mdict%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -310,8 +302,6 @@
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"3dict:%@", dict);
-//                                                NSLog(@"222222CCAndApprovalGroup: %@,\n %@\n", dictArray, [dictArray[0] objectForKey:@"message"]);
                                                 if ( [[dict objectForKey:@"message"] intValue] == 6003 ) {
                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                         [self sendToServerTOBack];
@@ -325,7 +315,6 @@
 }
 
 -(void)sendToServerTOBack{
-    //NSLog(@"准备发送服务器：success");
     [self alert:@"发送服务器：success"];
 }
 

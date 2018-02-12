@@ -174,7 +174,6 @@
 }
 
 - (void)reportScanResult:(NSString *)result{
-    NSLog(@"1111111111111scanBack%@",result);
     [self competeScanResult:result];
 }
 
@@ -211,11 +210,8 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"response:%@   \nerror:%@", response, error);
                                             if (data != nil) {
-                                            //NSLog(@"PlantKeysuccess");
                                              NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"dictdictdictdictdictdict2222222%@", dict);
                                             id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                             if ([dataBack isKindOfClass:[NSArray class]]) {
                                                  [self alert:@"获取失败"];
@@ -240,7 +236,6 @@
 
 -(void)gitaccessToken:(NSDictionary *)dict{
     
-//    NSLog(@"gitaccessToken:dictss:%@", dict);
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:dict];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict removeObjectForKey:@"serverType"];
@@ -412,12 +407,10 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"response, error-------%@,%@", response, error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"gitPersonPermissionsArray: %@,\n ", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 8002 ) {
                                                         NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dictArray[1] ];
                                                         
@@ -429,7 +422,6 @@
                                                         
                                                     }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"gitPersonPermissions: %@,\n ", dict);
                                                     if ( [[dict objectForKey:@"message"] intValue] == 8002 ){
                                                         
                                                     }

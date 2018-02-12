@@ -71,9 +71,7 @@ static NSString *identifierOne = @"Cell";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    NSLog(@"_titleSt:%@", _titleStr);
     if ([_titleStr isEqualToString:@"待审批的"]) {
-        NSLog(@"_titleSt111:%@", _titleStr);
         [mdict setObject:@"1" forKey:@"type"];
         [mdict setObject:@"ToBeApprovedOfOthers" forKey:@"status"];
         [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
@@ -90,9 +88,6 @@ static NSString *identifierOne = @"Cell";
         [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
         [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     }
-    
-//    NSLog(@"55555555%@%@", CONST_SERVER_ADDRESS, _urlStr);
-//    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -106,8 +101,6 @@ static NSString *identifierOne = @"Cell";
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
-                                                    
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 || [[dictArray[0] objectForKey:@"message"] intValue] == 6017 ) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
@@ -125,7 +118,6 @@ static NSString *identifierOne = @"Cell";
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1234567dict: %@,\n, %d ", dict, _pageNum);
                                                     if ( [[dict objectForKey:@"message"] intValue] == 6006 ){
                                                         if (_pageNum > 1) {
                                                             self.isEmpty = NO;
@@ -140,7 +132,6 @@ static NSString *identifierOne = @"Cell";
                                                 }
                                             } else{
                                                 self.isEmpty = YES;
-                                                //NSLog(@"获取数据失败，问");
                                                 [self.datasouceArray addObject:@"获取数据失败"];
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     [self.aCPApprovalListView.tableView  reloadData];

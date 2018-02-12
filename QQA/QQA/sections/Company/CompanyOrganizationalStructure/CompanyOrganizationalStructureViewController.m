@@ -110,7 +110,7 @@ static NSString *identifier = @"Cell";
                                                 }
                                             } else{
                                                 self.isEmpty = YES;
-                                                NSLog(@"获取数据失败，问");
+                                                NSLog(@"获取数据失败");
                                                 [self.datasouceArray addObject:@"获取数据失败"];
                                                 dispatch_async(dispatch_get_main_queue(), ^{
 //                                                    [self.aCPApprovalListView.tableView  reloadData];

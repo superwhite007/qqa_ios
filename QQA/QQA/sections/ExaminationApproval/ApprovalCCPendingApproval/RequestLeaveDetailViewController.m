@@ -130,7 +130,6 @@
     _reasonLabel.layer.cornerRadius = 10;
     _reasonLabel.layer.masksToBounds = YES;
     [self.view addSubview:_reasonLabel];
-    NSLog(@"RequestLeaveDetailViewController：mArray:%@", dict);
     _nameLabel.text = [dict objectForKey:@"username"];
     _created_atTimeLabel.text = [dict objectForKey:@"createdAt"];
     _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [dict objectForKey:@"starttime"]];
@@ -196,7 +195,6 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                    NSLog(@"requestleave: %@,\n ", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 ||  [[dictArray[0] objectForKey:@"message"] intValue] == 6019 ) {
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         NSDictionary * dict1 = array1[0];
@@ -211,7 +209,6 @@
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1234567dict: %@,\n ", dict);
                                                     if ( [[dict objectForKey:@"message"] intValue] == 6006 ){
                                                     }
                                                 }

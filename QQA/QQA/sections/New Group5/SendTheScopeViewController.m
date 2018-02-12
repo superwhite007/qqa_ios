@@ -123,27 +123,14 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    NSLog(@"datasoureKeysSendScopeArray[indexPath.row]:%@", self.datasoureKeysSendScopeArray[indexPath.row]);
-  
     static NSString *identifier = @"CELL";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] ;
-        
-//        //if语句中可以为单元格中一些通用的属性赋值，例如可以在其辅助视图类型赋值,标示所有单元格都一直
-//        aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
     }
-    
-    
     cell.textLabel.text = [self.datasoureSendScopeArray[indexPath.row] objectForKey:self.datasoureKeysSendScopeArray[indexPath.row]];
-    NSLog(@"datasoureKeysSendScopeArray[indexPath.row]:%@", self.datasoureKeysSendScopeArray[indexPath.row]);
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    
     return cell;
-    
 }
 
 
@@ -161,7 +148,6 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    NSLog(@"resultDic:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -172,7 +158,6 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"MessageViewControllerdict: %@", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002) {
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
@@ -180,7 +165,6 @@
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"1234567dict: %@,\n ", dict);
                                                 }
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
@@ -197,7 +181,6 @@
         NSMutableString * testStr = [NSMutableString stringWithFormat:@"%@",[dict allKeys]];
         NSRange range = NSMakeRange(6, 2) ;
         NSString *subStr3 = [testStr substringWithRange:range];
-        NSLog(@"%ld,.%@.", testStr.length, subStr3);
         [mutabelAry addObject:subStr3];
     }
     self.datasoureKeysSendScopeArray = mutabelAry;
@@ -222,22 +205,19 @@
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:self.datasourSendToServerScopeArray forKey:@"scope"];
     [mdict setObject:self.sendMessage forKey:@"content"];
-    NSLog(@"mdictmdict:::%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"response, error...........%@, %@", response, error);
                                             if (data != nil) {
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"api/message/store: %@", dict);
                                                 if ( [[dict objectForKey:@"message"] intValue] == 5004 ) {
                                                     [self alert:[NSString stringWithFormat:@"发送通知成功"]];
                                                 }
                                             } else{
-                                                NSLog(@"获取数据失败，问");
+                                                NSLog(@"获取数据失败");
                                             }
                                         }];
     [task resume];

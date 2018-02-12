@@ -31,15 +31,14 @@
     [AFAppDotNetAPIClient sharedClient];
 
     _isOK = NO;
-    NSLog(@"application:%ld", (long)application.applicationState);
-    
+   
     NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
     NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
     NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
     NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
     NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
     NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
-    NSLog(@"resultPermissions----%@",resultPermissions);
+
     if (resultDic[@"idKey"] == nil || resultDicAccess[@"accessToken"] == NULL ) {
         AppCoverViewController * scanVC = [AppCoverViewController new];
         UINavigationController * scanNC = [[UINavigationController alloc] initWithRootViewController:scanVC];
@@ -106,13 +105,9 @@
     return YES;
 }
 
-
-
-
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    
-    NSLog(@"deviceTokendeviceTokendeviceTokendeviceTokendeviceToken:%@", deviceToken);
+   
     NSLog(@"------token------%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
                   stringByReplacingOccurrencesOfString: @">" withString: @""]
                  stringByReplacingOccurrencesOfString: @" " withString: @""]);
@@ -141,7 +136,6 @@
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];//deviceToken
     [mdict setObject:UMdevicetoken forKey:@"deviceToken"];
-    NSLog(@"mdict12345678%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -150,9 +144,7 @@
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                 NSLog(@"----------1-----------%@", dict);
-//                                                NSLog(@"messgee%@", [dict objectForKey:@"message"]);
-                                                
+                                                NSLog(@"2通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知2");
                                                 
 //                                                dispatch_async(dispatch_get_main_queue(), ^{
 //
@@ -201,7 +193,6 @@
 //iOS10新增：处理后台点击通知的代理方法
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
     NSDictionary * userInfo = response.notification.request.content.userInfo;
-    NSLog(@"处理后台点击通知的代理方法userInfo:%@", userInfo);
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         //应用处于后台时的远程推送接受
         //必须加这句代码

@@ -76,7 +76,6 @@ static NSString *identifier = @"Cell";
 }
 
 -(void)punchRecoret:(int)page{
-    NSLog(@"page%d", page);
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/attendance/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -99,7 +98,6 @@ static NSString *identifier = @"Cell";
                                             if (data != nil) {
                                                 NSArray *array1 = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSMutableArray * array = [[NSMutableArray alloc] initWithArray:array1];
-                                                NSLog(@"arrayarray%@", array);
                                                 NSDictionary * firDict = array[0];
                                                 NSString * str  = [NSString stringWithFormat:@"%@", [firDict objectForKey:@"message"]];
                                                 if ([str isEqualToString:@"3004" ]) {
@@ -108,7 +106,6 @@ static NSString *identifier = @"Cell";
                                                     self.datasource = array;
                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                     self.datasource = array;
-                                                        NSLog(@"\n\n\n\n array.count:%lu", (unsigned long)array.count);
                                                     [self.aTableView reloadData];
                                                     });
                                                 }

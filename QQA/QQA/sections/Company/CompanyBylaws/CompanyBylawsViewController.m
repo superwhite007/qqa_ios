@@ -61,23 +61,21 @@ static NSString * identifier = @"CELL";
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"8787878787878787dictArray: %@,\n ", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 7008 ) {
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
                                                         _datasource = array1;
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            NSLog(@"555555%@", _datasource);
                                                             [self.tableView  reloadData];
                                                         });
                                                     }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                         NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                        NSLog(@"8787878787878787: %@,\n ", dict);
+                                                       
                                                         if ( [[dict objectForKey:@"message"] intValue] == 7007 ){
                                                         }
                                                     }
                                                 } else{
-                                                    NSLog(@"获取数据失败，问12345678");
+                                                    NSLog(@"获取数据失败");
                                                 }
                                             }
                                         }];
@@ -89,7 +87,6 @@ static NSString * identifier = @"CELL";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSLog(@"self.datasource.count:%lu",(unsigned long)self.datasource.count );
     return self.datasource.count;
 }
 

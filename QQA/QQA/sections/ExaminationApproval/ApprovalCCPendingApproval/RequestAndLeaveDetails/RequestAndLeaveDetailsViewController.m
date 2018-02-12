@@ -53,8 +53,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
-    NSLog(@"%f, %f",iphoneWidth, iphoneHeight);
-    NSLog(@"_leaveIdStr:%@", _leaveIdStr);
     [self.navigationItem setTitle:_titleIdentStr];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(sendApprovalMessagesToServer)];
     [self loadNewData];
@@ -107,7 +105,6 @@
 }
 
 -(void)ApproverAndCC{
-//    NSLog(@"66663464%@", self.datasourceMArray);
     for (int i = 0; i < [_datasourceMArray count]; i++) {
         NSString * str = [_datasourceMArray[i] objectForKey:@"type"] ;
         if ([str isEqualToString:@"approver"]) {
@@ -218,7 +215,6 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                    NSLog(@"Request: %@,\n ", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6008 || [[dictArray[0] objectForKey:@"message"] intValue] == 6019) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
@@ -320,7 +316,6 @@
 
 -(void)sendNoticeToServer{
     if (_messageTextView.text.length == 0){
-        //NSLog(@"请输入通知内容");
         [self alert:@"请输入通知内容"];
         [self sendToServerTOBack];
     }
@@ -394,7 +389,6 @@
 }
 
 -(void)sendToServerTOBack{
-    //NSLog(@"准备发送服务器：success");
     [self alert:@"发送服务器：success"];
 }
 

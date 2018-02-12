@@ -58,7 +58,6 @@ static NSString * identifier = @"cell";
 
 -(void)loadDataAndShowWithPageNum:(int)page{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/department/users", CONST_SERVER_ADDRESS]];
-    NSLog(@"url%@", url);
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -82,27 +81,22 @@ static NSString * identifier = @"cell";
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                    NSLog(@"1234567dictArray: %@,\n ", dictArray);
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 7006 ) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         [array1 removeObjectAtIndex:0];
                                                         [self.datasouceArray removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
-                                                            NSLog(@"%@\n\n", dict);
                                                             AddressBook * addressBook = [AddressBook new];
                                                             [addressBook setValuesForKeysWithDictionary:dict];
                                                             [self.datasouceArray addObject:addressBook];
-                                                            NSLog(@"%@\n\n%@", dict, self.datasouceArray);
                                                         }
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            NSLog(@"self.datasouceArray222%@", self.datasouceArray );
                                                             [self.addressBooKListView.tableView  reloadData];
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    NSLog(@"7777777dict: %@,\n ", dict);
                                                     if ( [[dict objectForKey:@"message"] intValue] == 7005 ){
                                                         self.isEmpty = YES;
                                                         [self.datasouceArray addObject:@"暂时没有相关内容"];
@@ -113,7 +107,7 @@ static NSString * identifier = @"cell";
                                                 }
                                             } else{
                                                 self.isEmpty = YES;
-                                                NSLog(@"获取数据失败，问");
+                                                NSLog(@"获取数据失败");
                                                 [self.datasouceArray addObject:@"获取数据失败"];
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                 [self.addressBooKListView.tableView  reloadData];
