@@ -224,7 +224,6 @@
     switch (result) {
         case NSOrderedAscending:
             [self alertSS:@"前往更新版本！" urlStr:url];
-//            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:url]];
             break;
         case NSOrderedSame:
             [self alert:@"已经是最新版本!"];

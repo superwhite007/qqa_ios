@@ -13,10 +13,9 @@
 @property (nonatomic, strong) NSMutableArray * datasource;
 @property (nonatomic, assign) int pageNum;
 @property (nonatomic, assign) BOOL isDownRefresh;
+@property (nonatomic, assign) BOOL isEmpty;
 
 @end
-
-
 
 @implementation CompanyNoticeViewController
 
@@ -88,20 +87,38 @@ static NSString *identifier = @"Cell";
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
-                                                NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5005 ) {
-                                                    NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-                                                    [array1 removeObjectAtIndex:0];
-                                                    [_datasource removeAllObjects];
-                                                    for (NSDictionary * dict in array1) {
-                                                        [_datasource addObject:[NSString stringWithFormat:@"%@\n\n        %@",[dict objectForKey:@"createdAt"], [dict objectForKey:@"content"]]];
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5005 ) {
+                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        self.isEmpty = NO;
+                                                        [array1 removeObjectAtIndex:0];
+                                                        [_datasource removeAllObjects];
+                                                        for (NSDictionary * dict in array1) {
+                                                            [_datasource addObject:[NSString stringWithFormat:@"%@\n\n        %@",[dict objectForKey:@"createdAt"], [dict objectForKey:@"content"]]];
+                                                        }
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.tableView  reloadData];
+                                                        });
+                                                    }else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                            NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                            if ( [[dict objectForKey:@"message"] intValue] == 5006 ){
+                                                                self.isEmpty = YES;
+                                                                [self.datasource addObject:@"暂时没有相关内容"];
+                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.tableView  reloadData];
+                                                                });
+                                                            }
+                                                        }
                                                     }
-                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                        [self.tableView  reloadData];
-                                                     });
-                                                }
                                             } else{
                                                 //NSLog(@"获取数据失败，问");
+                                                self.isEmpty = YES;
+                                                [self.datasource addObject:@"暂时没有相关内容"];
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self.tableView  reloadData];
+                                                });
                                             }
                                         }];
     [task resume];
@@ -120,10 +137,11 @@ static NSString *identifier = @"Cell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-       return  [self gitHightForCell:indexPath] + 20;
+    return  [self gitHightForCell:indexPath] + 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!_isEmpty){
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:identifier];
@@ -137,6 +155,15 @@ static NSString *identifier = @"Cell";
     CGRect targetRect = [cell.textLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : cell.textLabel.font} context:nil];
     cell.textLabel.frame = CGRectMake(30, 340, iphoneWidth - 40, CGRectGetHeight(targetRect));
     return cell;
+    } else{
+        UITableViewCell * acell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!acell) {
+            acell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        acell.textLabel.text = self.datasource[indexPath.row];
+        acell.textLabel.textAlignment = NSTextAlignmentCenter;
+        return acell;
+    }
 }
 
 
