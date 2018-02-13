@@ -81,11 +81,11 @@ static NSString *identifierOne = @"Cell";
         [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     } else if ([_titleStr isEqualToString:@"未通过的"]) {
         [mdict setObject:@"1" forKey:@"type"];
-        [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
+        [mdict setObject:@"UnapprovedOfOwn" forKey:@"status"];
         [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     } else if ([_titleStr isEqualToString:@"抄送我的"]) {
         [mdict setObject:@"2" forKey:@"type"];
-        [mdict setObject:@"HaveBeenApprovedOfAll" forKey:@"status"];
+        [mdict setObject:@"CopyedOfOthers" forKey:@"status"];
         [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     }
     NSError * error = nil;
