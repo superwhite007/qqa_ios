@@ -124,6 +124,7 @@ static NSString *identifierOne = @"Cell";
                                                             return ;
                                                         }
                                                         self.isEmpty = YES;
+                                                        [self.datasouceArray removeAllObjects];
                                                         [self.datasouceArray addObject:@"暂时没有相关内容"];
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self.aCPApprovalListView.tableView  reloadData];
@@ -132,6 +133,7 @@ static NSString *identifierOne = @"Cell";
                                                 }
                                             } else{
                                                 self.isEmpty = YES;
+                                                [self.datasouceArray removeAllObjects];
                                                 [self.datasouceArray addObject:@"获取数据失败"];
                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                     [self.aCPApprovalListView.tableView  reloadData];
