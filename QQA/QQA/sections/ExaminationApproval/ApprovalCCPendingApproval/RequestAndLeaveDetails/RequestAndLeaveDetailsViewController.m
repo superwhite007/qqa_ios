@@ -69,7 +69,7 @@
     _messageTextView.layer.cornerRadius = 10;
     _messageTextView.returnKeyType = UIReturnKeySend;
     _messageTextView.delegate = self;
-    NSArray * array = @[@"拒绝", @"同意"];
+//    NSArray * array = @[@"拒绝", @"同意"];
     
     _buttonReject = [UIButton buttonWithType:(UIButtonTypeSystem)];
     _buttonReject.frame = CGRectMake(iphoneWidth - 230 , 125 + iphoneWidth * 2 / 3  , 100, 30);
@@ -346,9 +346,9 @@
         [mdict setObject:_leaveIdStr forKey:@"askId"];
     }
     if (_buttonAgree) {
-        [mdict setObject:@"agree" forKey:@"status"];
-    } else {
-         [mdict setObject:@"refuse" forKey:@"status"];
+        [mdict setObject:@"Agreed" forKey:@"status"];
+    } else{
+         [mdict setObject:@"Denyed" forKey:@"status"];
     }
     if (_messageTextView.text.length == 0) {
         [mdict setObject:@"NULL" forKey:@"comment"];
