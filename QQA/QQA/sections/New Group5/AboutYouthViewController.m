@@ -32,7 +32,7 @@
     [self.view addSubview:imgView];
     imgView.contentMode =  UIViewContentModeScaleAspectFill;
     UIButton  * welcomeButton =  [UIButton buttonWithType:UIButtonTypeSystem];
-    [welcomeButton setFrame:CGRectMake( (iphoneWidth - 200) / 2,  (iphoneHeight - 30) - 290, 200, 30)];
+    [welcomeButton setFrame:CGRectMake( (iphoneWidth - 200) / 2,  iphoneHeight * 3 / 5 - 60, 200, 30)];
     [welcomeButton setTitle:title forState:UIControlStateNormal];
     welcomeButton.titleLabel.font = [UIFont systemFontOfSize:24];
     [welcomeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
