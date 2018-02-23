@@ -61,8 +61,8 @@
 
 
 -(void)setTextView{
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 165 + iphoneWidth * 1 / 3, iphoneWidth - 40, iphoneHeight / 7 - 20)];
-    //    messageTextView.backgroundColor = [UIColor blueColor];
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 165 + iphoneWidth * 1 / 3, iphoneWidth - 40, iphoneWidth / 3 - 50)];
+//        _messageTextView.backgroundColor = [UIColor blueColor];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
     _messageTextView.layer.borderWidth = 1;
@@ -122,7 +122,7 @@
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
     NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
     for (int i = 0 ; i < 2 ; i++ ) {
-        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, iphoneHeight *  7 / 10 + (iphoneHeight * 1 / 10  + 20 )  * i - 34,  60, 30)];
+        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, iphoneWidth  + (iphoneWidth / 5  + 20 )  * i + 55,  60, 30)];
         reasonTitleLabel.text = titleArray[i];
         reasonTitleLabel.textAlignment = NSTextAlignmentLeft;
         [self.view addSubview:reasonTitleLabel];
@@ -271,10 +271,11 @@
         [self.view addSubview:_statusReasonLabel];
         [self.view addSubview:_endTimeLabel];
         [self.view addSubview:_longTimeLabel];
-        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 170 , iphoneWidth - 40, iphoneHeight / 7 + 15)];
+        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 170 , iphoneWidth - 40, iphoneWidth / 3 - 20)];
     } else{
-        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 70 , iphoneWidth - 40, iphoneHeight / 7 + 115)];
+        _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 70 , iphoneWidth - 40, iphoneWidth / 3 + 80)];
     }
+//    _reasonLabel.backgroundColor = [UIColor redColor];
     _reasonLabel.layer.borderColor = [UIColor blackColor].CGColor;
     _reasonLabel.layer.borderWidth = 1;
     _reasonLabel.layer.cornerRadius = 10;
