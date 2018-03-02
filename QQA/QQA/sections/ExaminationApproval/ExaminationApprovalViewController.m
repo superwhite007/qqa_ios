@@ -49,7 +49,12 @@ static NSString *identifier = @"CELL";
     UITableView * examinationAndApprovel = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     examinationAndApprovel.dataSource = self;
     examinationAndApprovel.delegate = self;
-    examinationAndApprovel.rowHeight = 60;
+//    examinationAndApprovel.rowHeight = 60;
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+        examinationAndApprovel.rowHeight = 60;
+    }else{
+        examinationAndApprovel.rowHeight = 60 * 4 / 5;
+    }
     examinationAndApprovel.scrollEnabled = NO;
     examinationAndApprovel.sectionHeaderHeight =  [UIScreen mainScreen].bounds.size.width * 2 /3;
     [examinationAndApprovel registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
