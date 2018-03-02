@@ -62,9 +62,81 @@
 
 - (void)clicked:(id)sender{
     
-    [self setFirstLogin:@"首次登陆"  buttonTitle:@"下一步"];
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+         [self setFirstLogin:@"首次登陆"  buttonTitle:@"下一步"];
+    }else{
+//         [self setFirstLogin:@"首次登陆"  buttonTitle:@"下一步"];
+         [self setFirstLoginSEAnd5s:@"首次登陆" buttonTitle:@"下一步"];
+    }
+    
+
+    
+//    [self setFirstLogin:@"首次登陆"  buttonTitle:@"下一步"];
     
 }
+
+-(void)setFirstLoginSEAnd5s:(NSString *)loginString   buttonTitle:(NSString *)buttonTitle{
+    
+    UIView * firstAPPLoginView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight)];
+    firstAPPLoginView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:firstAPPLoginView];
+    UILabel * firstLoginTitleLable = [[UILabel alloc] initWithFrame:CGRectMake((iphoneWidth - 100) / 2, 64, 100, 30)];
+    firstLoginTitleLable.text = loginString;
+    firstLoginTitleLable.textAlignment =  NSTextAlignmentCenter;
+    firstLoginTitleLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    [firstAPPLoginView addSubview:firstLoginTitleLable];
+    UIImageView *imgView = [[UIImageView alloc] init];
+    imgView.frame = CGRectMake((iphoneWidth - 50) / 2, 110, 50, 50);
+    UIImage *image = [UIImage imageNamed:@"info.png"];
+    [imgView setImage:image];
+    [firstAPPLoginView addSubview:imgView];
+    
+    UILabel * plantIDKeyLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 180, 200, 30)];
+    plantIDKeyLable.text = @"种植IDKey";
+    plantIDKeyLable.textAlignment =  NSTextAlignmentLeft;
+    plantIDKeyLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    [firstAPPLoginView addSubview:plantIDKeyLable];
+    UILabel * plantIDKeyExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, iphoneWidth - 40, 90)];
+    plantIDKeyExplianLable.text = @"首次登陆或者丢失IDKey的同事，需要在手机内种植IDKey，该IDKey会授权只有此手机可以登陆青青OA系统。\n请不要择换其它手机登录，因为只有种植IDKey的手机才可以登录。";
+    plantIDKeyExplianLable.textAlignment =  NSTextAlignmentLeft;
+    //    plantIDKeyExplianLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14]};
+    CGSize labelSize = [plantIDKeyExplianLable.text boundingRectWithSize:CGSizeMake(200, 150) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
+    plantIDKeyExplianLable.frame = CGRectMake(plantIDKeyExplianLable.frame.origin.x, plantIDKeyExplianLable.frame.origin.y, plantIDKeyExplianLable.frame.size.width, labelSize.height);
+    plantIDKeyExplianLable.numberOfLines = 0;//表示label可以多行显示
+    plantIDKeyExplianLable.font = [UIFont systemFontOfSize:14];
+    [firstAPPLoginView addSubview:plantIDKeyExplianLable];
+    
+    UILabel * mattersNeedAttentionLable = [[UILabel alloc] initWithFrame:CGRectMake(20, 330, 200, 30)];
+    mattersNeedAttentionLable.text = @"注意事项";
+    //    mattersNeedAttentionLable.backgroundColor = [UIColor redColor];
+    mattersNeedAttentionLable.textAlignment =  NSTextAlignmentLeft;
+    mattersNeedAttentionLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+    [firstAPPLoginView addSubview:mattersNeedAttentionLable];
+    UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectZero];
+    mattersNeedAttentionExplianLable.text = @"请不要删除青青OA，也不要清理青青OA中的数据。否则IOKey丢失，导致无法登录。";
+    mattersNeedAttentionExplianLable.font = [UIFont systemFontOfSize:14];
+    mattersNeedAttentionExplianLable.numberOfLines = 0;//表示label可以多行显示
+    mattersNeedAttentionExplianLable.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
+    CGRect targetRect = [mattersNeedAttentionExplianLable.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : mattersNeedAttentionExplianLable.font} context:nil];
+    mattersNeedAttentionExplianLable.frame = CGRectMake(20, 365, iphoneWidth - 40, CGRectGetHeight(targetRect));
+    [firstAPPLoginView addSubview:mattersNeedAttentionExplianLable];
+    
+    
+    UIButton  * nestStepButton =  [UIButton buttonWithType:UIButtonTypeSystem];
+    [nestStepButton setFrame:CGRectMake( 60,  iphoneHeight * 3 / 4 , iphoneWidth -120, 50)];
+    [nestStepButton setTitle:buttonTitle forState:UIControlStateNormal];
+    nestStepButton.titleLabel.font = [UIFont systemFontOfSize:24];
+    nestStepButton.backgroundColor = [UIColor redColor];
+    [nestStepButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [nestStepButton addTarget:self action:@selector(plantIDKey) forControlEvents:UIControlEventTouchUpInside];
+    [firstAPPLoginView addSubview:nestStepButton];
+    
+}
+
+
 
 -(void)setFirstLogin:(NSString *)loginString   buttonTitle:(NSString *)buttonTitle{
     
