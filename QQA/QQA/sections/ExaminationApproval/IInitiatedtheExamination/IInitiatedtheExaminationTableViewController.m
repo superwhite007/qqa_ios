@@ -33,8 +33,8 @@ static NSString * identifier = @"CELL";
     [super viewDidLoad];
     if ([_titleIdentifier isEqualToString:@"发起审批"]) {
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假 - 事假、病假等",@"peopleImageStr":@"vacation"  };
-        NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 -- 请示领导审批" ,@"peopleImageStr":@"askware"};
-        NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 -- 工作任务的描述" ,@"peopleImageStr":@"worksheet"};
+        NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 - 请领导审批" ,@"peopleImageStr":@"askware"};
+        NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 - 工作任务描述" ,@"peopleImageStr":@"worksheet"};
         [self.datadource addObject:dict1];
         [self.datadource addObject:dict];
         [self.datadource addObject:dict2];
