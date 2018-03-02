@@ -38,12 +38,12 @@
     [welcomeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [imgView addSubview:welcomeButton];
     imgView.userInteractionEnabled=YES;
-    UILabel * statementLable = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight  - 200, iphoneWidth - 40, 30)];
+    UILabel * statementLable = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight  - 150, iphoneWidth - 40, 30)];
     statementLable.text = @"版本所有 中国青年网";
     statementLable.textAlignment =  NSTextAlignmentCenter;
     statementLable.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
     [imgView addSubview:statementLable];
-    UILabel * statementLable2 = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight   - 170, iphoneWidth - 40, 30)];
+    UILabel * statementLable2 = [[UILabel alloc] initWithFrame:CGRectMake( 20 , iphoneHeight   - 120, iphoneWidth - 40, 30)];
     statementLable2.text = @"Copyright © 2017 China Youth Computer information Network. All Right Reserved.";
     statementLable2.textAlignment =  NSTextAlignmentCenter;
     statementLable2.font = [UIFont fontWithName:@"Helvetica-Bold" size:8];
