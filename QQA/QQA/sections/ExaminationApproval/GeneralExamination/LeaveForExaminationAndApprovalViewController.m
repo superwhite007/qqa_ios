@@ -210,6 +210,48 @@
 }
 
 -(void)ApproverAndCC{
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+        [self ApproverAndCCAfteriPhone6];;
+    }else{
+        [self ApproverAndCCSEAnd5S];
+    }
+}
+
+-(void)ApproverAndCCSEAnd5S{
+    
+    NSArray * titleArray =@[@"审批人", @"抄送人"];
+    NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
+    NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
+    NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
+    for (int i = 0 ; i < 2 ; i++ ) {
+        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5  ) + 5 , 100, 30)];
+        reasonTitleLabel.text = titleArray[i];
+        reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:reasonTitleLabel];
+        for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
+//            UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 8 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 8 + 30 ) + 40  , (iphoneWidth - 70 ) / 10 , (iphoneWidth - 70 ) / 10)];
+            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 ) + 30  , (iphoneWidth - 70 ) / 6 , (iphoneWidth - 70 ) / 6)];
+            titleLabe.layer.borderColor = [UIColor blackColor].CGColor;
+            titleLabe.layer.borderWidth = 1;
+            titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+            titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 6 / 2;
+            titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
+            titleLabe.layer.masksToBounds = YES;
+            titleLabe.textAlignment = NSTextAlignmentCenter;
+            titleLabe.font = [UIFont systemFontOfSize:30];
+            [self.view addSubview:titleLabe];
+//            imgView.layer.borderWidth = 1;
+//            imgView.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
+            UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5  ) + 25  +  (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
+            nameLabel.text = mArrayOFApproverAndCC[i][j];
+            nameLabel.font = [UIFont systemFontOfSize:14];
+            nameLabel.textAlignment = NSTextAlignmentCenter;
+            [self.view addSubview:nameLabel];
+        }
+    }
+}
+
+-(void)ApproverAndCCAfteriPhone6{
     
     NSArray * titleArray =@[@"审批人", @"抄送人"];
     NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
