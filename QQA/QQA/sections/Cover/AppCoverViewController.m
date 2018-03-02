@@ -229,6 +229,62 @@
 }
 
 
+-(void)startScanssssDelete{
+    NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"xnUqFb3I",@"userId":@"15"};
+    NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentfilePath = paths.firstObject;
+    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
+    [ddict writeToFile:txtPath atomically:YES];
+    [self clientSendInformationsToServer:ddict];
+}
+
+
+
+-(void)clientSendInformationsToServer:(NSMutableDictionary *)clinetDictionaryDIct{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/receive", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    [clinetDictionaryDIct setValue:@"IOS_APP" forKey:@"clientType"];
+    NSDictionary * dataDic = clinetDictionaryDIct;
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dataDic options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    [self alert:@"获取失败"];
+                                                } else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSString * str = [NSString stringWithFormat:@"%@", [dict objectForKey:@"message"]];
+                                                    if ( [str isEqualToString:@"1003"]) {
+                                                        [self gitaccessToken:dict];
+                                                    }else if( [str isEqualToString:@"400"]) {
+                                                        [self alert:@"获取失败"];
+                                                    }
+                                                }
+                                                
+                                            } else{
+                                                [self alert:@"获取失败:请核对网络!"];
+                                            }
+                                        }];
+    [task resume];
+    
+}
+
+
+
+
+
+
+
 -(void)startScanssss{
     
     ScanImageViewController *scanImage =[[ScanImageViewController alloc]init];
