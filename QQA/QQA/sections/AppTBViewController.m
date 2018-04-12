@@ -13,7 +13,6 @@
 #import "ExaminationApprovalViewController.h"
 #import "CompanyViewController.h"
 
-
 #import "UMFirstViewController.h"
 #import "UMSecondViewController.h"
 
@@ -26,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getStartTimerAboutRedPoint];
+//    [self getStartTimerAboutRedPoint];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupAllChildViewControllers];

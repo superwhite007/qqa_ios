@@ -27,6 +27,7 @@
 		AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */; };
 		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
+		AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA342F4E207F43E400438EFD /* CompanyTableViewCell.m */; };
 		AA392A531FEC947800C1C581 /* UMSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA392A521FEC947800C1C581 /* UMSecondViewController.m */; };
 		AA392A561FEC94D100C1C581 /* UMFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA392A551FEC94D100C1C581 /* UMFirstViewController.m */; };
 		AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */; };
@@ -133,6 +134,8 @@
 		AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewCell.m; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
+		AA342F4D207F43E400438EFD /* CompanyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyTableViewCell.h; sourceTree = "<group>"; };
+		AA342F4E207F43E400438EFD /* CompanyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyTableViewCell.m; sourceTree = "<group>"; };
 		AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQA_PrefixHeader.pch; sourceTree = "<group>"; };
 		AA392A511FEC947800C1C581 /* UMSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMSecondViewController.h; sourceTree = "<group>"; };
 		AA392A521FEC947800C1C581 /* UMSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMSecondViewController.m; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 			children = (
 				AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */,
 				AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */,
+				AA342F4D207F43E400438EFD /* CompanyTableViewCell.h */,
+				AA342F4E207F43E400438EFD /* CompanyTableViewCell.m */,
 				AA20C6931FD1475E0095AF0F /* CompanyNotice */,
 				AA20C6941FD1477E0095AF0F /* Companyinformation */,
 				AA9B6AF81FD1469F00D8BC9E /* CompanyBylaws */,
@@ -881,6 +886,7 @@
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
+				AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */,
 				AAD912071FD6959C002A42B5 /* AddressBooKListView.m in Sources */,
@@ -1053,8 +1059,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QQA/QQA.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: China Youth Network New Media (Beijing) Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos11.3]" = "iPhone Developer: JianBing Zhao (TDWG6W5JS2)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = VDRV8NWW2J;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QQA/QQA_PrefixHeader.pch";
@@ -1068,8 +1074,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ChinaYouthNetwork.QQA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "39953631-f981-49de-a1ca-a0db4e141db9";
-				PROVISIONING_PROFILE_SPECIFIER = ChinaYouthNetworkDictributionProfileName;
+				PROVISIONING_PROFILE = "b0f67a4d-457e-4477-8f58-354fe943b338";
+				PROVISIONING_PROFILE_SPECIFIER = DevelopmentProfileName;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1080,7 +1086,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = QQA/QQA.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: China Youth Network New Media (Beijing) Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = VDRV8NWW2J;

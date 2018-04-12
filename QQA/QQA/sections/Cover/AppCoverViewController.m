@@ -223,7 +223,7 @@
     scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [scanButton addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
+    [scanButton addTarget:self action:@selector(startScanssssDelete) forControlEvents:UIControlEventTouchUpInside];
     [plantIDEeyView addSubview:scanButton];
     
 }
@@ -272,6 +272,7 @@
                                                 }
                                                 
                                             } else{
+                                                NSLog(@"获取用户权限失败");
                                                 [self alert:@"获取失败:请核对网络!"];
                                             }
                                         }];
@@ -535,13 +536,13 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"%@", error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 8002 ) {
                                                         NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dictArray[1] ];
-                                                        
                                                         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                                                         NSString * documentfilePath = paths.firstObject;
                                                         NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"Permissions.txt"];
@@ -562,18 +563,6 @@
     [task resume];
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 -(void)plantIDKeyFalse{
