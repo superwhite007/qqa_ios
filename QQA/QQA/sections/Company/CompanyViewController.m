@@ -47,7 +47,7 @@ static NSString *identifier = @"CELL";
     // Do any additional setup after loading the view.
     self.tabBarController.navigationItem.title = @"青青";
     [self.datasourceRedpoint addObject:@"0"];
-    [self getStartTimerAboutRedPoint];
+//    [self getStartTimerAboutRedPoint];
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
