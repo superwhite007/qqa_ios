@@ -539,25 +539,21 @@
                                             NSLog(@"%@", error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                if ([dataBack isKindOfClass:[NSArray class]]) {
-                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 8002 ) {
-                                                        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dictArray[1] ];
+                                                NSLog(@"dataBackdataBack:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 8002 ) {
+                                                        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dataBack];
                                                         NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                                                         NSString * documentfilePath = paths.firstObject;
                                                         NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"Permissions.txt"];
                                                         [dict  writeToFile:txtPath atomically:YES];
                                                         [self scanSuccess:@"https://"];
-                                                        
-                                                    }else if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                    if ( [[dict objectForKey:@"message"] intValue] == 8002 ){
-                                                        
                                                     }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSLog(@"获取数据失败，问gitPersonPermissions");
                                                 }
-                                            }
                                             }else{
-                                                NSLog(@"获取数据失败，问gitPersonPermissions");
+                                                
                                             }
     }];
     [task resume];
