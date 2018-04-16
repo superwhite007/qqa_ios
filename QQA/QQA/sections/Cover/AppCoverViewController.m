@@ -229,6 +229,7 @@
 }
 
 
+
 -(void)startScanssssDelete{
     NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"xnUqFb3I",@"userId":@"15"};
     NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
@@ -257,7 +258,6 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
-                                                NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     [self alert:@"获取失败"];
@@ -340,7 +340,7 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
-                                             NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                           
                                             id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                             if ([dataBack isKindOfClass:[NSArray class]]) {
                                                  [self alert:@"获取失败"];
