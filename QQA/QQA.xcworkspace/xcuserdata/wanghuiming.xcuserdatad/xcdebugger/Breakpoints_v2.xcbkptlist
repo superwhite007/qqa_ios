@@ -29,13 +29,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QQA/sections/ExaminationApproval/ExaminationApprovalViewController.m"
-            timestampString = "545274867.014201"
+            filePath = "QQA/sections/ExaminationApproval/ApprovalCCPendingApproval/ACPApprovelViewController.m"
+            timestampString = "545365897.6503969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "-getRedpointOfNoticeFromServer"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-loadDataAndShowWithPageNum:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

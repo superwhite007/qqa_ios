@@ -31,7 +31,7 @@
     [self.contentView addSubview:_nameShorthandLabel];
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, iphoneWidth - 110, 30)];
     [self.contentView addSubview:_nameLabel];
-    UIImageView *imgViewFor = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 17.5, 25, 25)];
+    UIImageView *imgViewFor = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 17.5, 20, 20)];
     imgViewFor.layer.cornerRadius = 15;
     imgViewFor.alpha = .6;
     //    self.imgViewFor.layer.borderColor = [UIColor blackColor].CGColor;

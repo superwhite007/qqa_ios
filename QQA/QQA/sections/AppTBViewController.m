@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self getStartTimerAboutRedPoint];
+    [self getStartTimerAboutRedPoint];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupAllChildViewControllers];
@@ -84,7 +84,7 @@
 }
 
 -(void)getStartTimerAboutRedPoint{
-        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getRedpointFromServer) userInfo:nil repeats:YES];
+        timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(getRedpointFromServer) userInfo:nil repeats:YES];
 }
 
 

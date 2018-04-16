@@ -158,7 +158,7 @@ static NSString *identifier = @"CELL";
 }
 
 -(void)getStartTimerAboutRedPoint{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
 }
 
 -(void)getRedpointOfNoticeFromServer{

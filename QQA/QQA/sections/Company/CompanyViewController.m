@@ -47,7 +47,7 @@ static NSString *identifier = @"CELL";
     // Do any additional setup after loading the view.
     self.tabBarController.navigationItem.title = @"青青";
     [self.datasourceRedpoint addObject:@"0"];
-//    [self getStartTimerAboutRedPoint];
+    [self getStartTimerAboutRedPoint];
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
@@ -171,7 +171,7 @@ static NSString *identifier = @"CELL";
 }
 
 -(void)getStartTimerAboutRedPoint{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
 }
 
 -(void)getRedpointOfNoticeFromServer{

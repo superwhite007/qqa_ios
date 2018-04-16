@@ -101,6 +101,8 @@ static NSString *identifierOne = @"Cell";
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    NSLog(@"98765432%@", dictArray);
+                                                    
                                                     if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6005 || [[dictArray[0] objectForKey:@"message"] intValue] == 6017 ) {
                                                         self.isEmpty = NO;
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
