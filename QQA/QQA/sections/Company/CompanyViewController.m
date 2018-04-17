@@ -201,7 +201,7 @@ static NSString *identifier = @"CELL";
                                                 if ( [object isKindOfClass:[NSArray class]] ) {
                                                     NSLog(@"Notice出现异常，服务器约定为字典类型");
                                                 }else if ([object isKindOfClass:[NSDictionary class]]){
-                                                    NSLog(@"Noticeredpoint字典%@", object);
+//                                                    NSLog(@"Noticeredpoint字典%@", object);
                                                     if ([[object objectForKey:@"message"] intValue] != 20001 ) {
                                                         NSLog(@"Notice服务获得到数据，但是数据异常");
                                                     }else {

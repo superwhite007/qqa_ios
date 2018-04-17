@@ -40,9 +40,18 @@
 }
 -(void)userInfoNotification:(NSNotification*)notification{
     NSDictionary *dict = [notification userInfo];
+    NSLog(@"notification%@", dict);
     UMFirstViewController *firstvc=[[UMFirstViewController alloc]init];
     firstvc.notcieString=[NSString stringWithFormat:@"%@", [[dict objectForKey:@"aps"] objectForKey:@"alert"]];
-    [self.navigationController pushViewController:firstvc animated:YES];
+//    [self.navigationController pushViewController:firstvc animated:YES];
+    
+    if ( [[dict objectForKey:@"type"]  intValue] == 1 ) {
+        self.selectedViewController = [self.viewControllers objectAtIndex:0];
+    } else if ([[dict objectForKey:@"type"]  intValue] == 2 ){
+        self.selectedViewController = [self.viewControllers objectAtIndex:1];
+    }
+    
+    
 }
 
 
@@ -115,7 +124,7 @@
             if ( [object isKindOfClass:[NSArray class]] ) {
                 NSLog(@"出现异常，服务器约定为字典类型");
             }else if ([object isKindOfClass:[NSDictionary class]]){
-                NSLog(@"redpoint字典%@", object);
+//                NSLog(@"redpoint字典%@", object);
                 if ([[object objectForKey:@"message"] intValue] != 20003 ) {
                     NSLog(@"服务获得到数据，但是数据异常");
                 }else {

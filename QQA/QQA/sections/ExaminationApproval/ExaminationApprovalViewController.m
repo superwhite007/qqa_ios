@@ -188,7 +188,7 @@ static NSString *identifier = @"CELL";
                                                 if ( [object isKindOfClass:[NSArray class]] ) {
                                                     NSLog(@"审核red出现异常，服务器约定为字典类型");
                                                 }else if ([object isKindOfClass:[NSDictionary class]]){
-                                                    NSLog(@"审核redNoticeredpoint字典%@", object);
+//                                                    NSLog(@"审核redNoticeredpoint字典%@", object);
                                                     if ([[object objectForKey:@"message"] intValue] != 20002 ) {
                                                         NSLog(@"审核red服务获得到数据，但是数据异常");
                                                     }else {
@@ -203,7 +203,7 @@ static NSString *identifier = @"CELL";
                                                             [self.datasourceRedpoint addObject:str1];
                                                             [self.datasourceRedpoint addObject:str2];
                                                             [self.datasourceRedpoint addObject:str3];
-                                                            NSLog(@"self.datasourceRedpoint%@", self.datasourceRedpoint);
+//                                                            NSLog(@"self.datasourceRedpoint%@", self.datasourceRedpoint);
                                                             [self.examinationAndApprovel reloadData];
                                                         });
                                                     }
