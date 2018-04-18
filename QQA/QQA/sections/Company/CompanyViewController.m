@@ -56,6 +56,7 @@ static NSString *identifier = @"CELL";
     navBar.translucent = NO;
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
     [self.datasource addObject:@"公司通知"];

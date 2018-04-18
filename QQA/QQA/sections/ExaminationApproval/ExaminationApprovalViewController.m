@@ -49,7 +49,8 @@ static NSString *identifier = @"CELL";
     navBar.translucent = NO;
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     
     [self.datasourceRedpoint addObject:@"0"];
     [self.datasourceRedpoint addObject:@"0"];

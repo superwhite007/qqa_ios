@@ -34,7 +34,8 @@ static NSString * identifier = @"cell";
 
 -(void)loadView{
     self.addressBooKListView = [[AddressBooKListView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.addressBooKListView.tableView.frame = [UIScreen mainScreen].bounds;
+//    self.addressBooKListView.tableView.frame = [UIScreen mainScreen].bounds;
+    self.addressBooKListView.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
     self.view = _addressBooKListView;
 }
 

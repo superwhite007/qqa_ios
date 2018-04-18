@@ -30,6 +30,8 @@
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
     NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青春",  nil];

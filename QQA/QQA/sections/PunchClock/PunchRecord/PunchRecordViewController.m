@@ -44,6 +44,7 @@ static NSString *identifier = @"Cell";
     self.isDownRefresh = NO;
     
     self.aTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+    self.aTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
     self.aTableView.separatorColor = [UIColor orangeColor];
     self.aTableView.rowHeight = 60;
     self.aTableView.dataSource =self;

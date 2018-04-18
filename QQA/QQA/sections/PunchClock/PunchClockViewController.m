@@ -32,6 +32,8 @@
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
 //    UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];

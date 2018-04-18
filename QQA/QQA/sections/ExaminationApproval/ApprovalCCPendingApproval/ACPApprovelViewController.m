@@ -31,7 +31,7 @@ static NSString *identifierOne = @"Cell";
 -(void)loadView{
     
     self.aCPApprovalListView = [[ACPApprovalListView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.aCPApprovalListView.tableView.frame = [UIScreen mainScreen].bounds;
+    self.aCPApprovalListView.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);;
     self.view = _aCPApprovalListView;
     
 }
