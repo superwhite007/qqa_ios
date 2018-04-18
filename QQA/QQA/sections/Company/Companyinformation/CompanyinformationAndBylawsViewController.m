@@ -21,7 +21,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     RulesDetailViewController * detailVC = [[RulesDetailViewController alloc] init];
-    detailVC.urlStr = [NSString stringWithFormat:@"http://qqoatest.youth.cn/v1/api/company/index"];
+    detailVC.urlStr = [NSString stringWithFormat:@"%@/v1/api/company/index", CONST_SERVER_ADDRESS];
     if (detailVC.urlStr.length >0 ) {
         [self.navigationController pushViewController:detailVC animated:YES];
     }

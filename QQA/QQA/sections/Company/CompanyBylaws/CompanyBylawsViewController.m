@@ -38,7 +38,7 @@ static NSString * identifier = @"CELL";
 }
 
 -(void)gitDatasourceAboutRules{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://qqoatest.youth.cn/v1/api/company/rules"]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/rules", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;

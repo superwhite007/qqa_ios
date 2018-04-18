@@ -516,7 +516,7 @@
 
 -(void)gitPersonPermissions{
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"http://qqoatest.youth.cn/v1/api/user/permissions"]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/permissions", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
