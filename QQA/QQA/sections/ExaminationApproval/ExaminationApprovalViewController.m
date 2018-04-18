@@ -74,6 +74,7 @@ static NSString *identifier = @"CELL";
     }else{
         _examinationAndApprovel.rowHeight = 60 * 4 / 5;
     }
+    _examinationAndApprovel.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _examinationAndApprovel.scrollEnabled = NO;
     _examinationAndApprovel.sectionHeaderHeight =  [UIScreen mainScreen].bounds.size.width * 2 /3;
     [_examinationAndApprovel registerClass:[CompanyTableViewCell class] forCellReuseIdentifier:identifier];

@@ -74,6 +74,7 @@ static NSString *identifier = @"CELL";
         _examinationAndApprovel.rowHeight = 60 * 4 / 5;
     }
     _examinationAndApprovel.scrollEnabled = NO;
+    _examinationAndApprovel.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //03设置分割线
     //    examinationAndApprovel.separatorColor = [UIColor orangeColor];
     _examinationAndApprovel.sectionHeaderHeight =  [UIScreen mainScreen].bounds.size.width * 2 /3;
