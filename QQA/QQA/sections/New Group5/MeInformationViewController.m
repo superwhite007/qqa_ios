@@ -79,7 +79,7 @@
         NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
         NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
         NSLog(@"1234567890%@", resultPermissions);
-        if (resultPermissions[@"notices"]) {
+        if ([resultPermissions[@"notices"] isEqualToString:@"yes"]) {
             MessageViewController * messageVC = [MessageViewController new];
             [self.navigationController pushViewController:messageVC animated:YES];
         } else{
