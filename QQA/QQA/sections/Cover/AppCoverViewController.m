@@ -372,7 +372,8 @@
     [mdict removeObjectForKey:@"code"];
     [mdict setObject:@"client_credentials" forKey:@"grantType"];
     [mdict setObject:@"1" forKey:@"clientId"];
-    [mdict setObject:@"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3" forKey:@"clientSecret"];
+//    [mdict setObject:@"rgQx0K4ibiNVzIYhltqaRj9g8gr0w3T1fa8XKUz3" forKey:@"clientSecret"];//测试环境
+    [mdict setObject:@"O8aDwrECJTtYBnvxm8KJffysQ0yImNwNQR6kcXzC" forKey:@"clientSecret"];//正式环境
     [mdict setObject:@"1" forKey:@"scope"];
  
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/login", CONST_SERVER_ADDRESS]];
