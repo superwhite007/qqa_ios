@@ -69,10 +69,27 @@
     _messageTextView.layer.cornerRadius = 10;
     _messageTextView.returnKeyType = UIReturnKeySend;
     _messageTextView.delegate = self;
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+        self.messageTextView.frame = CGRectMake(20, 165 + iphoneWidth * 1 / 3, iphoneWidth - 40, iphoneWidth / 3 - 50);
+    }else{
+        self.messageTextView.frame = CGRectMake(20, 165 + iphoneWidth * 1 / 3, iphoneWidth - 40, iphoneWidth / 3 - 70);
+    }
+    
+    
 //    NSArray * array = @[@"拒绝", @"同意"];
     
     _buttonReject = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    _buttonReject.frame = CGRectMake(iphoneWidth - 230 , 125 + iphoneWidth * 2 / 3  , 100, 30);
+    _buttonAgreement = [UIButton buttonWithType:(UIButtonTypeSystem)];
+     if ([[UIScreen mainScreen] bounds].size.width > 321) {
+         _buttonReject.frame = CGRectMake(iphoneWidth - 230 , 125 + iphoneWidth * 2 / 3  , 100, 30);
+         _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  110, 125 + iphoneWidth * 2 / 3  , 100, 30);
+         
+     } else {
+         _buttonReject.frame = CGRectMake(iphoneWidth - 150 , 125 + iphoneWidth * 2 / 3 - 25  , 60, 25);
+         _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  150, 125 + iphoneWidth * 2 / 3 - 25 , 60, 25);
+     }
+    
+    
     _buttonReject.layer.cornerRadius = 5;
     _buttonReject.layer.borderColor = [UIColor blackColor].CGColor;
     _buttonReject.layer.borderWidth = 1;
@@ -80,8 +97,7 @@
     [_buttonReject addTarget:self action:@selector(changeButtonAgree:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:_buttonReject];
     
-    _buttonAgreement = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  110, 125 + iphoneWidth * 2 / 3  , 100, 30);
+   
     _buttonAgreement.layer.cornerRadius = 5;
     _buttonAgreement.layer.borderColor = [UIColor blackColor].CGColor;
     _buttonAgreement.layer.borderWidth = 1;

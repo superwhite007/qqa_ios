@@ -223,7 +223,7 @@
     scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [scanButton addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
+    [scanButton addTarget:self action:@selector(startScanssssDelete) forControlEvents:UIControlEventTouchUpInside];
     [plantIDEeyView addSubview:scanButton];
     
 }
@@ -231,7 +231,12 @@
 
 
 -(void)startScanssssDelete{
-    NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"xnUqFb3I",@"userId":@"15"};
+//    NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"xnUqFb3I",@"userId":@"15"};
+    
+    //weibin shengchang
+    NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"M1BK5SjW",@"userId":@"2"};
+    
+    
     NSMutableDictionary * ddict = [NSMutableDictionary dictionaryWithDictionary:dict];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
@@ -307,6 +312,9 @@
 }
 
 -(void)competeScanResult:(NSString *)result{
+    
+    NSLog(@"resultresult:%@", result);
+    
     if([result rangeOfString:@"appName"].location !=NSNotFound && [result rangeOfString:@"qqoa"].location !=NSNotFound ){
         NSLog(@"yes");
         NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
@@ -382,14 +390,16 @@
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
     NSError * error = nil;
+    NSLog(@"666666%@", mdict);
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
+                                            NSLog(@"dataBackdataBackerror:%@", error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"dataBackdataBack:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                 } else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
