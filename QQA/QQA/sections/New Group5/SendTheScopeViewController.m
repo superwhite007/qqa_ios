@@ -7,6 +7,7 @@
 //
 
 #import "SendTheScopeViewController.h"
+#import "AppTBViewController.h"
 
 @interface SendTheScopeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -231,10 +232,19 @@
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Nothing to do.
+        if ([title isEqualToString:@"发送通知成功"]) {
+            for (UIViewController *controller in self.navigationController.viewControllers) {
+                NSLog(@"Class:%@", [controller class]);
+                if ([controller isKindOfClass:[AppTBViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }
+            }
+        }
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
+
 
 
 - (void)didReceiveMemoryWarning {
