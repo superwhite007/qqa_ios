@@ -367,7 +367,10 @@
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Nothing to do.
-        [self.navigationController popViewControllerAnimated:YES];
+        if ([title isEqualToString:@"发送服务器：success"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
