@@ -222,8 +222,9 @@
 }
 -(void)compareVersion:(NSDictionary *)dic{
     NSString * versionNumber = [NSString stringWithFormat:@"%@", [dic objectForKey:@"newVerMajor"]];
+    NSLog(@"versionNumberversionNumber:%@", versionNumber);
     NSString * url = [NSString stringWithFormat:@"%@", [dic objectForKey:@"url"]];
-    NSComparisonResult result = [@"0" compare:versionNumber options:NSNumericSearch];//比较的是字符串的值,如果有多个比较条件,加一个|然后加比较条件
+    NSComparisonResult result = [@"1" compare:versionNumber options:NSNumericSearch];//比较的是字符串的值,如果有多个比较条件,加一个|然后加比较条件
     switch (result) {
         case NSOrderedAscending:
             [self alertSS:@"前往更新版本！" urlStr:url];
