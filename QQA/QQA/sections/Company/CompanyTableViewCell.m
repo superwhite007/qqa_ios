@@ -27,6 +27,7 @@
 //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
 //    _nameShorthandLabel.layer.borderWidth = 1;
     _nameShorthandLabel.layer.masksToBounds = YES;
+    _nameShorthandLabel.textColor = [UIColor whiteColor];
     _nameShorthandLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_nameShorthandLabel];
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, iphoneWidth - 110, 30)];
