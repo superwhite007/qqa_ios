@@ -476,6 +476,9 @@
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Nothing to do.
+        if ([title isEqualToString:@"审批完成"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
