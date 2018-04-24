@@ -22,15 +22,21 @@
 }
 
 -(void)gotoSomeForwed:(UIButton *)sender{
-    if (sender.tag == 0) {
+    if (sender.tag == 2) {
         [self  alert:@"开发中、、、"];
     }else if (sender.tag == 1){
-        [self  alert:@"开发中、、、"];
-    }else if (sender.tag == 2){
+        NSString * str = [NSString stringWithFormat:@"sms://%@",[sender.titleLabel.text substringFromIndex:5]];
+        NSURL *url = [NSURL URLWithString:str];
+        [[UIApplication sharedApplication] openURL:url];
+    }else if (sender.tag == 0){
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[sender.titleLabel.text substringFromIndex:5]];
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
+    }else if (sender.tag == 3){
+        [self  alert:@"开发中、、、"];
+    }else if (sender.tag == 4){
+        [self  alert:@"开发中、、、"];
     }
 }
 
@@ -142,7 +148,10 @@
     [self.navigationItem setTitle:[dict objectForKey:@"username"]];
     NSString * emailStr = [NSString stringWithFormat:@"发邮件  %@",[dict objectForKey:@"email"]];
     NSString * telephoneStr = [NSString stringWithFormat:@"打电话  %@",[dict objectForKey:@"telephone"]];
-    NSArray * titleArray = [NSArray arrayWithObjects:@"发消息", emailStr, telephoneStr,  nil];
+    NSString * sendMessage = [NSString stringWithFormat:@"发消息  %@",[dict objectForKey:@"telephone"]];
+    NSString * weixin = [NSString stringWithFormat:@"微信  %@",[dict objectForKey:@"weiXin"]];
+    NSString * QQ = [NSString stringWithFormat:@"QQ  %@",[dict objectForKey:@"qq"]];
+    NSArray * titleArray = [NSArray arrayWithObjects:telephoneStr, sendMessage, weixin, QQ , emailStr,  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 10 + i * 60, iphoneWidth - 35, 60);
@@ -176,7 +185,7 @@
         imgView.alpha = 0.6;
     }
     
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 6; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 8 + i * 60 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
