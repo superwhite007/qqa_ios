@@ -268,7 +268,32 @@
                     //                    titleLabe.backgroundColor = [UIColor redColor];
                 }
             }
-            [self.view addSubview:titleLabe];
+            if ( i == 1 ) {
+                [self.view addSubview:titleLabe];
+            }else if( i == 0 ){
+                UIButton * titleLabe = [UIButton buttonWithType:UIButtonTypeSystem];
+                titleLabe.frame = CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 30  , (iphoneWidth - 110 ) / 5 , (iphoneWidth - 110 ) / 5);
+                titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+                titleLabe.layer.cornerRadius = (iphoneWidth - 110 ) / 5 / 2;
+                NSString * str = [NSString stringWithFormat:@"%@", [[mArrayOFApproverAndCC[i][j] objectForKey:@"name"] substringToIndex:1]];
+                [titleLabe setTitle:str forState:(UIControlStateNormal)];
+                [titleLabe setTintColor:[UIColor blackColor]];
+                titleLabe.layer.masksToBounds = YES;
+                titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
+                titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
+                [self.view addSubview:titleLabe];
+                [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
+                titleLabe.tag = 100 + j;
+                
+                UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + (iphoneWidth - 110 ) / 5) + (iphoneWidth - 110 ) / 5 -15, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 30 , 15, 15)];
+                pointLabel.backgroundColor = [UIColor redColor];
+                pointLabel.layer.cornerRadius = 7.5;
+                //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
+                //    _nameShorthandLabel.layer.borderWidth = 1;
+                pointLabel.layer.masksToBounds = YES;
+                [self.view addSubview:pointLabel];
+                
+            }
             UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 25  +  (iphoneWidth - 110 ) / 5 + 5, (iphoneWidth - 110 ) / 5, (iphoneWidth - 110 ) / 5 / 3)];
             nameLabel.text = [mArrayOFApproverAndCC[i][j] objectForKey:@"name"];
             nameLabel.font = [UIFont systemFontOfSize:13];
