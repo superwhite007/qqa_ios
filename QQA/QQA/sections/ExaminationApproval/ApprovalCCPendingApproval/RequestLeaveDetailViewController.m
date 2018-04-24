@@ -285,7 +285,7 @@
                 [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
                 titleLabe.tag = 100 + j;
                 
-                UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + (iphoneWidth - 110 ) / 5) + (iphoneWidth - 110 ) / 5 -15, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 30 , 15, 15)];
+                UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5) + (iphoneWidth - 110 ) / 5 -15, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 30 , 15, 15)];
                 pointLabel.backgroundColor = [UIColor redColor];
                 pointLabel.layer.cornerRadius = 7.5;
                 //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
@@ -362,7 +362,7 @@
                 [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
                 titleLabe.tag = 100 + j;
                 
-                UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + (iphoneWidth - 110 ) / 5) + (iphoneWidth - 110 ) / 5 -15, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80 , 15, 15)];
+                UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 8) + (iphoneWidth - 110 ) / 5 -15, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80 , 15, 15)];
                 pointLabel.backgroundColor = [UIColor redColor];
                 pointLabel.layer.cornerRadius = 7.5;
                 //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
