@@ -110,7 +110,17 @@
     UIView *view = [[UIView alloc ] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneWidth * 2 / 3)];
     [self.view addSubview: view];
     NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：",  @"NO.", @"电话：", @"email:", @"QQ:", @"微信:"];
-    NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , [dict objectForKey:@"username"], [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"weiXin"]];
+    
+    NSMutableString * nameAndSex = [NSMutableString new];
+    if ([[dict objectForKey:@"sex"] intValue] == 1) {
+        nameAndSex = [NSMutableString stringWithFormat:@"%@ ♂", [dict objectForKey:@"username"]];
+    } else if ([[dict objectForKey:@"sex"] intValue] == 2) {
+        nameAndSex = [NSMutableString stringWithFormat:@"%@ ♀", [dict objectForKey:@"username"]];
+    } else  {
+        nameAndSex = [NSMutableString stringWithFormat:@"%@ 未知", [dict objectForKey:@"username"]];
+    }
+    
+    NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , nameAndSex, [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"weiXin"]];
     UIImageView * imgVIew = [[UIImageView alloc] initWithFrame:CGRectMake(15, iphoneWidth  / 9 , iphoneWidth * 4 / 9 , iphoneWidth * 4 / 9)];
     imgVIew.backgroundColor = [UIColor redColor];
     imgVIew.layer.cornerRadius = imgVIew.frame.size.width/2;
