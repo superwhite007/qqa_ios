@@ -174,8 +174,8 @@
         [self.view addSubview:button];
     }
     
-    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"key", @"about",  nil];
-    for (int i = 0; i < 3; i++) {
+    NSArray * imageArray = [NSArray arrayWithObjects:@"tel", @"sms", @"wechat", @"qq", @"email",  nil];
+    for (int i = 0; i < 5; i++) {
         
         UIImageView *firstimgView = [[UIImageView alloc] init];
         firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3  + 10 + 15  + 5+ i * 60, 20, 20);
