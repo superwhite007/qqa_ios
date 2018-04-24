@@ -37,6 +37,9 @@
         [self  alert:@"开发中、、、"];
     }else if (sender.tag == 4){
         [self  alert:@"开发中、、、"];
+        NSString * str = [NSString stringWithFormat:@"mailto://%@",[sender.titleLabel.text substringFromIndex:5]];
+        NSURL *url = [NSURL URLWithString:str];
+        [[UIApplication sharedApplication] openURL:url];
     }
 }
 
