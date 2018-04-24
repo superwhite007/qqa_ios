@@ -210,7 +210,34 @@
             titleLabe.layer.masksToBounds = YES;
             titleLabe.textAlignment = NSTextAlignmentCenter;
             titleLabe.font = [UIFont systemFontOfSize:30];
-            [self.view addSubview:titleLabe];
+            if ( i == 1 ) {
+                [self.view addSubview:titleLabe];
+            }else if( i == 0 ){
+                UIButton * titleLabe = [UIButton buttonWithType:UIButtonTypeSystem];
+                titleLabe.frame = CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80  , (iphoneWidth - 110 ) / 5 , (iphoneWidth - 110 ) / 5);
+                titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+                titleLabe.layer.cornerRadius = (iphoneWidth - 110 ) / 5 / 2;
+                NSString * str = [NSString stringWithFormat:@"%@", [[mArrayOFApproverAndCC[i][j] objectForKey:@"name"] substringToIndex:1]];
+                [titleLabe setTitle:str forState:(UIControlStateNormal)];
+                [titleLabe setTintColor:[UIColor blackColor]];
+                titleLabe.layer.masksToBounds = YES;
+                titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
+                titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
+                [self.view addSubview:titleLabe];
+                [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
+                titleLabe.tag = 100 + j;
+                
+                UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + (iphoneWidth - 110 ) / 5) + (iphoneWidth - 110 ) / 5 -15, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80 , 15, 15)];
+                pointLabel.backgroundColor = [UIColor redColor];
+                pointLabel.layer.cornerRadius = 7.5;
+                //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
+                //    _nameShorthandLabel.layer.borderWidth = 1;
+                pointLabel.layer.masksToBounds = YES;
+                [self.view addSubview:pointLabel];
+                
+            }
+            
+            
             UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80  +  (iphoneWidth - 110 ) / 5 + 5, (iphoneWidth - 110 ) / 5, (iphoneWidth - 110 ) / 5 / 3)];
             nameLabel.text = [mArrayOFApproverAndCC[i][j] objectForKey:@"name"];
             nameLabel.font = [UIFont systemFontOfSize:14];
@@ -300,6 +327,7 @@
                                                          });
                                                         [array1 removeObjectAtIndex:0];
                                                         self.datasourceMArray = array1;
+                                                        NSLog(@"array1array1array1array1:%@", array1);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self ApproverAndCC];
                                                         });
@@ -469,9 +497,13 @@
     [self alert:@"发送服务器：success"];
 }
 
+-(void)displayComment:(UIButton *)sender{
+    [self alert:[self.approvalMarray[(long)sender.tag - 100] objectForKey:@"comment"]];
+}
+
 -(void)alert:(NSString *)str{
     NSString *title = str;
-    NSString *message = @"请注意!";
+    NSString *message = @" ";
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
