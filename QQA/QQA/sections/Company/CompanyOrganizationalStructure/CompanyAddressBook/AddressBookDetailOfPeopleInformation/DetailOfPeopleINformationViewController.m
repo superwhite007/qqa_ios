@@ -23,7 +23,7 @@
 
 -(void)gotoSomeForwed:(UIButton *)sender{
     if (sender.tag == 2) {
-        [self  alert:@"开发中、、、"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"weixin://"]];
     }else if (sender.tag == 1){
         NSString * str = [NSString stringWithFormat:@"sms://%@",[sender.titleLabel.text substringFromIndex:5]];
         NSURL *url = [NSURL URLWithString:str];
@@ -34,13 +34,17 @@
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
     }else if (sender.tag == 3){
-        [self  alert:@"开发中、、、"];
+        [self openQQ];
     }else if (sender.tag == 4){
-        [self  alert:@"开发中、、、"];
         NSString * str = [NSString stringWithFormat:@"mailto://%@",[sender.titleLabel.text substringFromIndex:5]];
         NSURL *url = [NSURL URLWithString:str];
         [[UIApplication sharedApplication] openURL:url];
     }
+}
+- (void)openQQ
+{
+    NSURL *url = [NSURL URLWithString:@"mqq://"];
+        [[UIApplication sharedApplication] openURL:url];
 }
 
 -(void)alert:(NSString *)str{
