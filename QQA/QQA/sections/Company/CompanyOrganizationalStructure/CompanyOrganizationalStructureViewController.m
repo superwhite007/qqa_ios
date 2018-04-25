@@ -47,6 +47,7 @@ static NSString *identifier = @"Cell";
     [self loadNewData];
     self.organizationalStructureListView.tableView.delegate = self;
     self.organizationalStructureListView.tableView.dataSource = self;
+    self.organizationalStructureListView.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
     [self.organizationalStructureListView.tableView registerClass:[CompanyOrganizationalStructureTableViewCell class] forCellReuseIdentifier:identifier];
 }
 
