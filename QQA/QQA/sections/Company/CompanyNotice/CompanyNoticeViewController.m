@@ -97,7 +97,7 @@ static NSString *identifier = @"Cell";
                                                         [array1 removeObjectAtIndex:0];
                                                         [_datasource removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
-                                                            [_datasource addObject:[NSString stringWithFormat:@"%@\n\n        %@",[dict objectForKey:@"createdAt"], [dict objectForKey:@"content"]]];
+                                                            [_datasource addObject:[NSString stringWithFormat:@"%@ %@\n\n        %@",[dict objectForKey:@"sender"],[dict objectForKey:@"createdAt"], [dict objectForKey:@"content"]]];//sender
                                                         }
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self.tableView  reloadData];
