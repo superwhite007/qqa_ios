@@ -93,13 +93,12 @@ static NSString *identifier = @"CELL";
     return self.datasource.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     CompanyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     if (!cell) {
         cell = [[CompanyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-//    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = self.datasource[indexPath.row];
+    cell.nameLabel.text = self.datasource[indexPath.row];
     
     if (indexPath.row == 1 && [self.datasourceRedpoint[0] intValue] > 0 ) {
         cell.nameShorthandLabel.text = [NSString stringWithFormat:@"%@", self.datasourceRedpoint[0]];

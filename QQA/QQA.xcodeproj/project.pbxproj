@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		466E2A145386609065AEE56E /* libPods-QQA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECCA599687977AA5ACEDCC1 /* libPods-QQA.a */; };
-		AA0D35381FFDBA9C00CA2A43 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D35371FFDBA9C00CA2A43 /* UserNotificationsUI.framework */; };
+		AA0D35381FFDBA9C00CA2A43 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D35371FFDBA9C00CA2A43 /* UserNotificationsUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AA0F3D16202984F100D140A0 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0F3D14202984F100D140A0 /* AFAppDotNetAPIClient.m */; };
 		AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */; };
 		AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */; };
