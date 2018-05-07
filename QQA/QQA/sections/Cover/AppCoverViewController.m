@@ -32,7 +32,7 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
     _documentTxtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
-    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.0.0"];
+    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.0.1"];
     
 }
 
@@ -223,7 +223,7 @@
     scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [scanButton addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
+    [scanButton addTarget:self action:@selector(startScanssssDelete) forControlEvents:UIControlEventTouchUpInside];
     [plantIDEeyView addSubview:scanButton];
     
 }
@@ -231,7 +231,9 @@
 
 
 -(void)startScanssssDelete{
-    NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"xnUqFb3I",@"userId":@"15"};
+    NSDictionary * medict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"xnUqFb3I",@"userId":@"15"};
+    
+    NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"M1BK5SjW",@"userId":@"2"};
     
     //weibin shengchang
 //    NSDictionary * dict = @{@"appName":@"qqoa",@"verMajor":@"0",@"verMinor":@"1",@"verFixs":@"0",@"verBuilds":@"1",@"serverType":@"QQOA_SERVER",@"idKey":@"M1BK5SjW",@"userId":@"2"};
