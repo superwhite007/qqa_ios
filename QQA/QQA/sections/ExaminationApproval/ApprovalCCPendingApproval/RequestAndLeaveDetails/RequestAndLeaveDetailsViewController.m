@@ -125,18 +125,23 @@
     _buttonAgreement.layer.borderWidth = 1;
     [_buttonAgreement setTitle:@"同意" forState:(UIControlStateNormal)];
     [_buttonAgreement addTarget:self action:@selector(changeButtonAgrees:) forControlEvents:(UIControlEventTouchUpInside)];
+    _buttonAgreement.backgroundColor = [UIColor redColor];
+    _buttonAgree = YES;
+    
     [self.view addSubview:_buttonAgreement];
     
 //    }
     [self.view addSubview:_messageTextView];
 }
 -(void)changeButtonAgree:(UIButton *)sender{
+    NSLog(@"000000000000000000");
     _buttonAgree = NO;
     _buttonReject.backgroundColor = [UIColor redColor];
     _buttonAgreement.backgroundColor = [UIColor whiteColor];
 }
 
 -(void)changeButtonAgrees:(UIButton *)sender{
+    NSLog(@"1111111111111111111");
     _buttonAgree = YES;
     _buttonReject.backgroundColor = [UIColor whiteColor];
     _buttonAgreement.backgroundColor = [UIColor redColor];
@@ -202,8 +207,8 @@
                 titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
                 titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
                 [self.view addSubview:titleLabe];
-                [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
-                titleLabe.tag = 100 + j;
+                
+                
                 
                 UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5) + (iphoneWidth - 110 ) / 5 -15, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 30 , 15, 15)];
                 pointLabel.backgroundColor = [UIColor redColor];
@@ -211,7 +216,17 @@
                 //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
                 //    _nameShorthandLabel.layer.borderWidth = 1;
                 pointLabel.layer.masksToBounds = YES;
-                [self.view addSubview:pointLabel];
+//                [self.view addSubview:pointLabel];
+                
+                if ([[self.approvalMarray[j] objectForKey:@"comment"] isEqualToString:@"暂无"]) {
+                    NSLog(@"暂时无评论");
+                }else{
+                    [self.view addSubview:pointLabel];
+                    [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
+                    titleLabe.tag = 100 + j;
+                }
+                
+                
                 
             }
             UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 25  +  (iphoneWidth - 110 ) / 5 + 5, (iphoneWidth - 110 ) / 5, (iphoneWidth - 110 ) / 5 / 3)];
@@ -271,8 +286,8 @@
                 titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
                 titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
                 [self.view addSubview:titleLabe];
-                [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
-                titleLabe.tag = 100 + j;
+//                [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
+//                titleLabe.tag = 100 + j;
                 
                 UILabel * pointLabel = [[UILabel alloc] initWithFrame:CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5  + 8) + (iphoneWidth - 110 ) / 5 - 20, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80 , 15, 15)];
                 pointLabel.backgroundColor = [UIColor redColor];
@@ -280,8 +295,13 @@
                 //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
                 //    _nameShorthandLabel.layer.borderWidth = 1;
                 pointLabel.layer.masksToBounds = YES;
-                [self.view addSubview:pointLabel];
-                
+                if ([[self.approvalMarray[j] objectForKey:@"comment"] isEqualToString:@"暂无"]) {
+                    NSLog(@"暂时无评论");
+                }else{
+                    [self.view addSubview:pointLabel];
+                    [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
+                    titleLabe.tag = 100 + j;
+                }
             }
             
             
@@ -322,6 +342,8 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if (![_messageTextView isExclusiveTouch]) {
         [_messageTextView resignFirstResponder];
+    }else{
+//        [self removeKeyNotice];
     }
 }
 
@@ -463,7 +485,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    
+//    [self removeKeyNotice];
 }
 
 -(void)sendNoticeToServer{
@@ -561,6 +583,10 @@
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+}
+
+-(void)removeKeyNotice{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
