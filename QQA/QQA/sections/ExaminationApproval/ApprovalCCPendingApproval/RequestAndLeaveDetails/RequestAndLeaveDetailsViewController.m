@@ -57,7 +57,29 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(sendApprovalMessagesToServer)];
     [self loadNewData];
     [self setTextView];
+   
+    //注册键盘出现的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    //注册键盘消失的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+
 }
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    //键盘高度
+    self.view.frame = CGRectMake(0, -64, iphoneWidth, iphoneWidth);
+}
+
+-(void)keyboardWillBeHidden:(NSNotification*)aNotification{
+    self.view.frame = CGRectMake(0, 64, iphoneWidth, iphoneWidth);
+}
+
+
 
 
 -(void)setTextView{
