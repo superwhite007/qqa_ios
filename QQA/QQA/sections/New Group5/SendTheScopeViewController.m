@@ -180,9 +180,19 @@
     NSMutableArray * mutabelAry = [NSMutableArray new];
     for (NSDictionary * dict in mArray) {
         NSMutableString * testStr = [NSMutableString stringWithFormat:@"%@",[dict allKeys]];
-        NSRange range = NSMakeRange(6, 2) ;
-        NSString *subStr3 = [testStr substringWithRange:range];
-        [mutabelAry addObject:subStr3];
+        if (testStr.length < 11) {
+            NSRange range = NSMakeRange(6, 2) ;
+            NSString *subStr3 = [testStr substringWithRange:range];
+            [mutabelAry addObject:subStr3];
+        }else if (testStr.length > 10) {
+            NSRange range = NSMakeRange(6, 3) ;
+            NSString *subStr3 = [testStr substringWithRange:range];
+            [mutabelAry addObject:subStr3];
+        }else if (testStr.length > 11) {
+            NSRange range = NSMakeRange(6, 4) ;
+            NSString *subStr3 = [testStr substringWithRange:range];
+            [mutabelAry addObject:subStr3];
+        }
     }
     self.datasoureKeysSendScopeArray = mutabelAry;
     dispatch_async(dispatch_get_main_queue(), ^{
