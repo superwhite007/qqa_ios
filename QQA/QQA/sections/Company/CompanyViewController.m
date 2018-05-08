@@ -19,6 +19,7 @@
 @interface CompanyViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray * datasource;
+@property (nonatomic, strong) NSMutableArray * cyclePicturesDatasource;
 @property (nonatomic, strong) NSMutableArray * datasourceRedpoint;
 @property (nonatomic, strong) UITableView * examinationAndApprovel;
 @property (nonatomic, strong) NSTimer * timer;
@@ -42,6 +43,12 @@ static NSString *identifier = @"CELL";
     }
     return _datasourceRedpoint;
 }
+-(NSMutableArray *)cyclePicturesDatasource{
+    if (!_cyclePicturesDatasource) {
+        self.cyclePicturesDatasource = [NSMutableArray array];
+    }
+    return _cyclePicturesDatasource;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,6 +56,7 @@ static NSString *identifier = @"CELL";
     self.tabBarController.navigationItem.title = @"青青";
     [self.datasourceRedpoint addObject:@"0"];
 //    [self getStartTimerAboutRedPoint];
+    [self getCycleScrollPitures];
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
@@ -115,19 +123,27 @@ static NSString *identifier = @"CELL";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc ] init];
-
-//    UIImageView * imageViewHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3)];
-//    [imageViewHeader setImage:[UIImage imageNamed:@"everyday_1"]];
-//    [self.view addSubview:imageViewHeader];
     
+    UIView *view = [[UIView alloc ] init];
     NSMutableArray *viewsArray = [@[] mutableCopy];
-    for (int i = 0; i < 3; ++i) {
-        UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
-        UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-        imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
-        [viewsArray addObject:imgView];
+    if (_cyclePicturesDatasource.count > 0) {
+        for (int i = 0; i < 3; ++i) {
+            NSURL * url = [NSURL URLWithString:_cyclePicturesDatasource[i]];
+            NSData * data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [UIImage imageWithData:data];
+            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+            [viewsArray addObject:imgView];
+        }
+    } else{
+        for (int i = 0; i < 3; ++i) {
+            UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
+            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+            [viewsArray addObject:imgView];
+        }
     }
+    
     
     self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
     self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
@@ -146,9 +162,8 @@ static NSString *identifier = @"CELL";
     return  view ;
 }
 
--(NSMutableArray *)getCycleScrollPitures{
+-(void)getCycleScrollPitures{
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/getImg", CONST_SERVER_ADDRESS]];
-    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
@@ -174,16 +189,13 @@ static NSString *identifier = @"CELL";
                                                 if ( [object isKindOfClass:[NSArray class]] ) {
                                                     NSLog(@"Notice出现异常，服务器约定为字典类型");
                                                 }else if ([object isKindOfClass:[NSDictionary class]]){
-                                                    //                                                    NSLog(@"Noticeredpoint字典%@", object);
                                                     if ([[object objectForKey:@"message"] intValue] != 30001 ) {
                                                         NSLog(@"Notice服务获得到数据，但是数据异常");
                                                     }else {
-                                                        NSLog(@"%@/n,img:%@",object,  [[object  objectForKey:@"data"] objectForKey:@"img"][0]);
-                                                        NSArray * array = @[@"1", @"2", @"3"];
-                                                        NSLog(@"%@", array);
+                                                        
+                                                        _cyclePicturesDatasource = [[object  objectForKey:@"data"] objectForKey:@"img"];
+                                                        NSLog(@"_cyclePicturesDatasource:%@", _cyclePicturesDatasource);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            
-                                                            return [[object  objectForKey:@"data"] objectForKey:@"img"];
                                                             [self.examinationAndApprovel reloadData];
                                                         });
                                                     }
