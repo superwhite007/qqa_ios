@@ -13,8 +13,8 @@
 #import "CompanyOrganizationalStructureViewController.h"
 #import "RulesDetailViewController.h"
 #import "CompanyBylawsViewController.h"
-
 #import "CompanyTableViewCell.h"
+#import "CycleScrollView.h"
 
 @interface CompanyViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray * datasourceRedpoint;
 @property (nonatomic, strong) UITableView * examinationAndApprovel;
 @property (nonatomic, strong) NSTimer * timer;
+@property (nonatomic , retain) CycleScrollView *mainScorllView;
 
 @end
 
@@ -47,7 +48,7 @@ static NSString *identifier = @"CELL";
     // Do any additional setup after loading the view.
     self.tabBarController.navigationItem.title = @"青青";
     [self.datasourceRedpoint addObject:@"0"];
-    [self getStartTimerAboutRedPoint];
+//    [self getStartTimerAboutRedPoint];
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
@@ -115,16 +116,32 @@ static NSString *identifier = @"CELL";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc ] init];
-//    view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
-//    UIButton * punchCLockImageTileButton = [UIButton buttonWithType:UIButtonTypeSystem];
-//    punchCLockImageTileButton.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3);
-//    punchCLockImageTileButton.backgroundColor = [UIColor redColor];
-//    [punchCLockImageTileButton setBackgroundImage:[UIImage imageNamed:@"everyday_1"] forState:UIControlStateNormal];
-//    [view addSubview:punchCLockImageTileButton];
+
+//    UIImageView * imageViewHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3)];
+//    [imageViewHeader setImage:[UIImage imageNamed:@"everyday_1"]];
+//    [self.view addSubview:imageViewHeader];
     
-    UIImageView * imageViewHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width * 2 / 3)];
-    [imageViewHeader setImage:[UIImage imageNamed:@"everyday_1"]];
-    [self.view addSubview:imageViewHeader];
+    NSMutableArray *viewsArray = [@[] mutableCopy];
+    for (int i = 0; i < 3; ++i) {
+        UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
+        UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+        imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+        [viewsArray addObject:imgView];
+    }
+    
+    self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
+    self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
+    self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+        return viewsArray[pageIndex];
+    };
+    self.mainScorllView.totalPagesCount = ^NSInteger(void){
+        return 3;
+    };
+    self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
+        NSLog(@"点击了第%ld个",(long)pageIndex);
+    };
+    [self.view addSubview:self.mainScorllView];
+
     
     return  view ;
 }
@@ -173,7 +190,7 @@ static NSString *identifier = @"CELL";
 }
 
 -(void)getStartTimerAboutRedPoint{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
 }
 
 -(void)getRedpointOfNoticeFromServer{

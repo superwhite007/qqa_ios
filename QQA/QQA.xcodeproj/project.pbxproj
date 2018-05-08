@@ -33,6 +33,8 @@
 		AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
+		AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676020A13A1A0088CF64 /* CycleScrollView.m */; };
+		AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */; };
 		AA7749811FEA303E0095C378 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7749801FEA303E0095C378 /* Assets.xcassets */; };
 		AA7749831FEA34280095C378 /* me_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7749821FEA34280095C378 /* me_normal.png */; };
 		AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */; };
@@ -146,6 +148,10 @@
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		AA5545121FE7BD410031F846 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA5545141FE7BE160031F846 /* QQA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QQA.entitlements; sourceTree = "<group>"; };
+		AA75675E20A13A1A0088CF64 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
+		AA75675F20A13A1A0088CF64 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
+		AA75676020A13A1A0088CF64 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
+		AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
 		AA7749801FEA303E0095C378 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = resource/youth_info/Assets.xcassets; sourceTree = "<group>"; };
 		AA7749821FEA34280095C378 /* me_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_normal.png; sourceTree = "<group>"; };
 		AA9B6AF31FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyinformationAndBylawsViewController.h; sourceTree = "<group>"; };
@@ -463,6 +469,17 @@
 			path = IInitiatedtheExamination;
 			sourceTree = "<group>";
 		};
+		AA75675D20A139E50088CF64 /* CycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				AA75675E20A13A1A0088CF64 /* CycleScrollView.h */,
+				AA75676020A13A1A0088CF64 /* CycleScrollView.m */,
+				AA75675F20A13A1A0088CF64 /* NSTimer+Addition.h */,
+				AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */,
+			);
+			path = CycleScrollView;
+			sourceTree = "<group>";
+		};
 		AA9B6AF61FD1461800D8BC9E /* CompanyOrganizationalStructure */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +552,7 @@
 			children = (
 				AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */,
 				AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */,
+				AA75675D20A139E50088CF64 /* CycleScrollView */,
 				AA342F4D207F43E400438EFD /* CompanyTableViewCell.h */,
 				AA342F4E207F43E400438EFD /* CompanyTableViewCell.m */,
 				AA20C6931FD1475E0095AF0F /* CompanyNotice */,
@@ -860,6 +878,7 @@
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
 				AA392A531FEC947800C1C581 /* UMSecondViewController.m in Sources */,
 				AAD9120B1FD780A4002A42B5 /* DetailOfPeopleINformationViewController.m in Sources */,
+				AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */,
 				AAC0B85D1FF0EFA500F5D2DB /* VersionInformationViewController.m in Sources */,
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
@@ -884,6 +903,7 @@
 				AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */,
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
+				AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */,
