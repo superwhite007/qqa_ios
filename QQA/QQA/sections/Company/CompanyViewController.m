@@ -146,6 +146,55 @@ static NSString *identifier = @"CELL";
     return  view ;
 }
 
+-(NSMutableArray *)getCycleScrollPitures{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/getImg", CONST_SERVER_ADDRESS]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (error) {
+                                                NSLog(@"Noticeredpoint服务器返回错误：%@", error);
+                                            }else {
+                                                
+                                                id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+                                                if ( [object isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Notice出现异常，服务器约定为字典类型");
+                                                }else if ([object isKindOfClass:[NSDictionary class]]){
+                                                    //                                                    NSLog(@"Noticeredpoint字典%@", object);
+                                                    if ([[object objectForKey:@"message"] intValue] != 30001 ) {
+                                                        NSLog(@"Notice服务获得到数据，但是数据异常");
+                                                    }else {
+                                                        NSLog(@"%@/n,img:%@",object,  [[object  objectForKey:@"data"] objectForKey:@"img"][0]);
+                                                        NSArray * array = @[@"1", @"2", @"3"];
+                                                        NSLog(@"%@", array);
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            
+                                                            return [[object  objectForKey:@"data"] objectForKey:@"img"];
+                                                            [self.examinationAndApprovel reloadData];
+                                                        });
+                                                    }
+                                                }
+                                            }
+                                        }];
+    [task resume];
+}
+
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         if (indexPath.row == 0) {
           CompanyNoticeViewController * companyNoticeVC = [CompanyNoticeViewController new];
