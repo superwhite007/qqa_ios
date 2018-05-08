@@ -9,20 +9,30 @@
 #import "PunchClockViewController.h"
 #import "PunchRecordViewController.h"
 #import "ScanImageViewController.h"
-
-
+#import "CycleScrollView.h"
 
 @interface PunchClockViewController ()<ScanImageView>
 
 @property (nonatomic, strong) UILabel * timeLable;
 @property (nonatomic, strong) NSTimer * timer;
+@property (nonatomic, strong) NSMutableArray * cyclePicturesDatasource;
+@property (nonatomic , retain) CycleScrollView *mainScorllView;
 
 @end
 
 @implementation PunchClockViewController
 
+-(NSMutableArray *)cyclePicturesDatasource{
+    if (!_cyclePicturesDatasource) {
+        self.cyclePicturesDatasource = [NSMutableArray array];
+    }
+    return _cyclePicturesDatasource;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getCycleScrollPitures];
+
     // Do any additional setup after loading the view.
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
@@ -96,6 +106,43 @@
     explainWorkingTimeLable.textAlignment = NSTextAlignmentCenter;
     [self.view  addSubview:explainWorkingTimeLable];
     
+}
+
+-(void)addCyclePictures{
+    
+    NSMutableArray *viewsArray = [@[] mutableCopy];
+    if (_cyclePicturesDatasource.count > 0) {
+        for (int i = 0; i < 3; ++i) {
+            NSURL * url = [NSURL URLWithString:_cyclePicturesDatasource[i]];
+            NSData * data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [UIImage imageWithData:data];
+            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+            [viewsArray addObject:imgView];
+        }
+    } else{
+        for (int i = 0; i < 3; ++i) {
+            UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
+            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+            [viewsArray addObject:imgView];
+        }
+    }
+    
+    
+    self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
+    self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
+    self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+        return viewsArray[pageIndex];
+    };
+    self.mainScorllView.totalPagesCount = ^NSInteger(void){
+        return 3;
+    };
+    self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
+        NSLog(@"点击了第%ld个",(long)pageIndex);
+    };
+    [self.view addSubview:self.mainScorllView];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -211,6 +258,51 @@
     [self.navigationController pushViewController:prVC animated:YES];
     
 }
+
+-(void)getCycleScrollPitures{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/getImg", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (error) {
+                                                NSLog(@"Noticeredpoint服务器返回错误：%@", error);
+                                            }else {
+                                                
+                                                id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+                                                if ( [object isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Notice出现异常，服务器约定为字典类型");
+                                                }else if ([object isKindOfClass:[NSDictionary class]]){
+                                                    if ([[object objectForKey:@"message"] intValue] != 30001 ) {
+                                                        NSLog(@"Notice服务获得到数据，但是数据异常");
+                                                    }else {
+                                                        
+                                                        _cyclePicturesDatasource = [[object  objectForKey:@"data"] objectForKey:@"img"];
+                                                        NSLog(@"_cyclePicturesDatasource:%@", _cyclePicturesDatasource);
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self addCyclePictures];
+                                                        });
+                                                    }
+                                                }
+                                            }
+                                        }];
+    [task resume];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {
