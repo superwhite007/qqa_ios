@@ -263,7 +263,6 @@
                                                             [self.datasourceRedpoint addObject:str1];
                                                             [self.datasourceRedpoint addObject:str2];
                                                             [self.datasourceRedpoint addObject:str3];
-                                                            NSLog(@"datasourceRedpoint3:%@", self.datasourceRedpoint);
                                                             [self addRedPoint];
                                                         });
                                                     }
@@ -273,8 +272,6 @@
     [task resume];
 }
 -(void)addRedPoint{
-    NSLog(@"2222222");
-    
     for (int i = 0; i < self.datasourceRedpoint.count; i++) {
         UILabel *redpointLabel = [[UILabel alloc] init];
         redpointLabel.frame = CGRectMake(iphoneWidth - 105, iphoneWidth * 2 / 3 + 10 + 15 + 55 + i * 60, 20, 20);

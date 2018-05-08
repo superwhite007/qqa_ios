@@ -23,6 +23,7 @@
 @property (nonatomic, assign) BOOL isDownRefresh;
 @property (nonatomic, assign) BOOL isEmpty;
 @property (nonatomic, assign) BOOL buttonAgree;
+@property (nonatomic, strong) UIView * moveView;
 
 
 //@property (nonatomic, strong) UIButton * buttonAgree;
@@ -55,6 +56,10 @@
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:_titleIdentStr];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(sendApprovalMessagesToServer)];
+    _moveView = [UIView new];
+    _moveView.frame = CGRectMake(0, 0, iphoneWidth, 125 + iphoneWidth * 2 / 3);
+//    _moveView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:_moveView];
     [self loadNewData];
     [self setTextView];
    
@@ -72,11 +77,11 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
     //键盘高度
-    self.view.frame = CGRectMake(0, -64, iphoneWidth, iphoneWidth);
+    _moveView.frame = CGRectMake(0, -104, iphoneWidth, iphoneWidth);
 }
 
 -(void)keyboardWillBeHidden:(NSNotification*)aNotification{
-    self.view.frame = CGRectMake(0, 64, iphoneWidth, iphoneWidth);
+    _moveView.frame = CGRectMake(0, 0, iphoneWidth, iphoneWidth);
 }
 
 
@@ -99,6 +104,11 @@
     
     
 //    NSArray * array = @[@"拒绝", @"同意"];
+    
+   
+    
+    
+    
     
     _buttonReject = [UIButton buttonWithType:(UIButtonTypeSystem)];
     _buttonAgreement = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -131,7 +141,7 @@
     [self.view addSubview:_buttonAgreement];
     
 //    }
-    [self.view addSubview:_messageTextView];
+    [_moveView addSubview:_messageTextView];
 }
 -(void)changeButtonAgree:(UIButton *)sender{
     NSLog(@"000000000000000000");
@@ -216,7 +226,6 @@
                 //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
                 //    _nameShorthandLabel.layer.borderWidth = 1;
                 pointLabel.layer.masksToBounds = YES;
-//                [self.view addSubview:pointLabel];
                 
                 if ([[self.approvalMarray[j] objectForKey:@"comment"] isEqualToString:@"暂无"]) {
                     NSLog(@"暂时无评论");
@@ -427,10 +436,10 @@
 -(void)setvaleKeyAndValue:(NSDictionary *)dict{
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, iphoneWidth - 40, 25)];
     _nameLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:_nameLabel];
+    [_moveView addSubview:_nameLabel];
     _created_atTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, iphoneWidth - 40, 25)];
     _created_atTimeLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:_created_atTimeLabel];
+    [_moveView addSubview:_created_atTimeLabel];
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  70, (iphoneWidth  - 50) / 2 , 25)];
     _statusReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(30 + (iphoneWidth  - 50) / 2 ,  134, (iphoneWidth  - 50) / 2 , 25)];
     _startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 100, iphoneWidth / 2 - 25, 25)];
@@ -439,11 +448,11 @@
     _endTimeLabel.adjustsFontSizeToFitWidth = YES;
     _longTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 130, iphoneWidth - 40, 25)];
     if ([_titleIdentStr isEqualToString:@"请假"]) {
-        [self.view addSubview:_startTimeLabel];
-        [self.view addSubview:_statusLabel];
-        [self.view addSubview:_statusReasonLabel];
-        [self.view addSubview:_endTimeLabel];
-        [self.view addSubview:_longTimeLabel];
+        [_moveView addSubview:_startTimeLabel];
+        [_moveView addSubview:_statusLabel];
+        [_moveView addSubview:_statusReasonLabel];
+        [_moveView addSubview:_endTimeLabel];
+        [_moveView addSubview:_longTimeLabel];
         _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 170 , iphoneWidth - 40, iphoneWidth / 3 - 20)];
     } else{
         _reasonLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 70 , iphoneWidth - 40, iphoneWidth / 3 + 80)];
@@ -453,7 +462,7 @@
     _reasonLabel.layer.borderWidth = 1;
     _reasonLabel.layer.cornerRadius = 10;
     _reasonLabel.layer.masksToBounds = YES;
-    [self.view addSubview:_reasonLabel];
+    [_moveView addSubview:_reasonLabel];
     _nameLabel.text = [dict objectForKey:@"username"];
     _created_atTimeLabel.text = [dict objectForKey:@"createdAt"];
     _startTimeLabel.text = [NSString stringWithFormat:@"起始:%@", [dict objectForKey:@"starttime"]];
@@ -588,7 +597,12 @@
 -(void)removeKeyNotice{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+//    self.view.frame = CGRectMake(0, 64, iphoneWidth, iphoneWidth);
+    _buttonReject.frame = CGRectMake(iphoneWidth - 230 , 125 + iphoneWidth * 2 / 3  , 100, 30);
+    _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  110, 125 + iphoneWidth * 2 / 3  , 100, 30);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
