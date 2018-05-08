@@ -12,7 +12,7 @@
 #import "MeInformationViewController.h"
 #import "ExaminationApprovalViewController.h"
 #import "CompanyViewController.h"
-
+#import "CompanyViewControllerNoCell.h"
 #import "UMFirstViewController.h"
 #import "UMSecondViewController.h"
 
@@ -58,8 +58,13 @@
 //初始化所有的控制器
 - (void)setupAllChildViewControllers{
     //1.公司
-    CompanyViewController * companyVC = [[CompanyViewController alloc] init];
+//    CompanyViewController * companyVC = [[CompanyViewController alloc] init];
+//    [self setupChildViewController:companyVC title:@"公司" imageName:@"home_normal" selectedImageName:@"home_normal"];
+//
+    CompanyViewControllerNoCell * companyVC = [[CompanyViewControllerNoCell alloc] init];
     [self setupChildViewController:companyVC title:@"公司" imageName:@"home_normal" selectedImageName:@"home_normal"];
+    
+    
     //2.审核
     ExaminationApprovalViewController * examinationApprovalVC = [[ExaminationApprovalViewController alloc] init];
     [self setupChildViewController:examinationApprovalVC title:@"审核" imageName:@"checkmark" selectedImageName:@"checkmark"];
