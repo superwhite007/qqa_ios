@@ -1,19 +1,16 @@
 //
-//  CompanyViewControllerNoCell.m
+//  ExaminationApprovalViewControllerNOCell.m
 //  QQA
 //
 //  Created by wang huiming on 2018/5/8.
 //  Copyright © 2018年 youth_huiming. All rights reserved.
 //
 
-#import "CompanyViewControllerNoCell.h"
+#import "ExaminationApprovalViewControllerNOCell.h"
 #import "CycleScrollView.h"
-#import "CompanyNoticeViewController.h"
-#import "CompanyBylawsViewController.h"
-#import "RulesDetailViewController.h"
-#import "CompanyOrganizationalStructureViewController.h"
+#import "IInitiatedtheExaminationTableViewController.h"
 
-@interface CompanyViewControllerNoCell ()
+@interface ExaminationApprovalViewControllerNOCell ()
 @property (nonatomic, strong) NSMutableArray * datasource;
 @property (nonatomic, strong) NSMutableArray * datasourceRedpoint;
 @property (nonatomic, strong) NSMutableArray * cyclePicturesDatasource;
@@ -23,7 +20,7 @@
 
 @end
 
-@implementation CompanyViewControllerNoCell
+@implementation ExaminationApprovalViewControllerNOCell
 
 -(NSMutableArray *)datasource{
     if (!_datasource) {
@@ -51,6 +48,9 @@
     // Do any additional setup after loading the view.
     self.tabBarController.navigationItem.title = @"青青";
     [self.datasourceRedpoint addObject:@"0"];
+    [self.datasourceRedpoint addObject:@"0"];
+    [self.datasourceRedpoint addObject:@"0"];
+    [self.datasourceRedpoint addObject:@"0"];
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
     NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
@@ -59,18 +59,18 @@
     //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self.datasource addObject:@"公司通知"];
-    [self.datasource addObject:@"规章制度"];
-    [self.datasource addObject:@"公司信息"];
-    [self.datasource addObject:@"组织架构与通讯录"];
-    [self.datasource addObject:@"公司云盘"];
+    [self.datasource addObject:@"发起审批"];
+    [self.datasource addObject:@"待审批的"];
+    [self.datasource addObject:@"已通过的"];
+    [self.datasource addObject:@"未通过的"];
+    [self.datasource addObject:@"抄送我的"];
     [self addPagesButtonCell];
     
     
 }
 
 -(void)addPagesButtonCell{
-    NSArray * titleArray = [NSArray arrayWithObjects:@"公司通知", @"规章制度", @"公司信息",  @"组织架构与通讯录", @"公司云盘", nil];
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发起审批", @"待审批的", @"已通过的",  @"未通过的", @"抄送我的", nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 10 + i * 60, iphoneWidth - 35, 60);
@@ -112,30 +112,19 @@
     
 }
 -(void)gotoSomeForwed:(UIButton *)sender{
+    IInitiatedtheExaminationTableViewController * examinationVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
     if (sender.tag == 1000) {
-        CompanyNoticeViewController * companyNoticeVC = [CompanyNoticeViewController new];
-        [self.navigationController pushViewController:companyNoticeVC animated:YES];
+         examinationVC.titleIdentifier = @"发起审批";
     }else if (sender.tag == 1001){
-        CompanyBylawsViewController * companyBylawsVC = [CompanyBylawsViewController new];
-        companyBylawsVC.transmitTitleLabel = @"规章制度";
-        [self.navigationController pushViewController:companyBylawsVC animated:YES];
-        
-        
+        examinationVC.titleIdentifier = @"待审批的";
     }else if (sender.tag == 1002){
-        RulesDetailViewController * detailVC = [[RulesDetailViewController alloc] init];
-        detailVC.urlStr = [NSString stringWithFormat:@"%@/v1/api/company/index", CONST_SERVER_ADDRESS];
-        if (detailVC.urlStr.length >0 ) {
-            [self.navigationController pushViewController:detailVC animated:YES];
-        }
-        
+        examinationVC.titleIdentifier = @"已通过的";
     }else if (sender.tag == 1003){
-        CompanyOrganizationalStructureViewController * organizationalStructurehVC = [CompanyOrganizationalStructureViewController new];
-        [self.navigationController pushViewController:organizationalStructurehVC animated:YES];
-        
+        examinationVC.titleIdentifier = @"未通过的";
     }else if (sender.tag == 1004){
-        [self alert:@"开发中、、、"];
-        
+        examinationVC.titleIdentifier = @"抄送我的";
     }
+    [self.navigationController pushViewController:examinationVC animated:YES];
 }
 -(void)alert:(NSString *)str{
     NSString *title = str;
@@ -230,10 +219,10 @@
 }
 
 -(void)getStartTimerAboutRedPoint{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(getRedpointOfNoticeFromServer) userInfo:nil repeats:YES];
 }
 -(void)getRedpointOfNoticeFromServer{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/message/unread", CONST_SERVER_ADDRESS]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/unread", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
@@ -252,21 +241,29 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (error) {
-                                                NSLog(@"Noticeredpoint服务器返回错误：%@", error);
+                                                NSLog(@"审核red服务器返回错误：%@", error);
                                             }else {
                                                 
                                                 id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
                                                 if ( [object isKindOfClass:[NSArray class]] ) {
-                                                    NSLog(@"Notice出现异常，服务器约定为字典类型");
+                                                    NSLog(@"审核red出现异常，服务器约定为字典类型");
                                                 }else if ([object isKindOfClass:[NSDictionary class]]){
-                                                    //                                                    NSLog(@"Noticeredpoint字典%@", object);
-                                                    if ([[object objectForKey:@"message"] intValue] != 20001 ) {
-                                                        NSLog(@"Notice服务获得到数据，但是数据异常");
+                                                    //                                                    NSLog(@"审核redNoticeredpoint字典%@", object);
+                                                    if ([[object objectForKey:@"message"] intValue] != 20002 ) {
+                                                        NSLog(@"审核red服务获得到数据，但是数据异常");
                                                     }else {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            NSString * str = [NSString stringWithFormat:@"%@", [object objectForKey:@"messagesUnreadTotalNum"]];
+                                                            NSString * str = [NSString stringWithFormat:@"%@", [object objectForKey:@"leavesUnreadApprovedTotalNum"]];
+                                                            NSString * str1 = [NSString stringWithFormat:@"%@", [object objectForKey:@"leavesUnreadAgreedTotalNum"]];
+                                                            NSString * str2 = [NSString stringWithFormat:@"%@", [object objectForKey:@"leavesUnreadDenyedTotalNum"]];
+                                                            NSString * str3 = [NSString stringWithFormat:@"%@", [object objectForKey:@"leavesUnreadCopyedTotalNum"]];
+                                                            
                                                             [self.datasourceRedpoint removeAllObjects];
                                                             [self.datasourceRedpoint addObject:str];
+                                                            [self.datasourceRedpoint addObject:str1];
+                                                            [self.datasourceRedpoint addObject:str2];
+                                                            [self.datasourceRedpoint addObject:str3];
+                                                            NSLog(@"datasourceRedpoint3:%@", self.datasourceRedpoint);
                                                             [self addRedPoint];
                                                         });
                                                     }
@@ -276,22 +273,30 @@
     [task resume];
 }
 -(void)addRedPoint{
+    NSLog(@"2222222");
     
-    _nameShorthandLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 100, iphoneWidth * 2 / 3 + 20, 20, 20)];
-//    _nameShorthandLabel.backgroundColor = [UIColor redColor];
-    _nameShorthandLabel.layer.cornerRadius = 10;
-    //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    //    _nameShorthandLabel.layer.borderWidth = 1;
-    _nameShorthandLabel.layer.masksToBounds = YES;
-    _nameShorthandLabel.textColor = [UIColor whiteColor];
-    [self.view addSubview:_nameShorthandLabel];
-    if ([self.datasourceRedpoint[0] intValue] > 0 ) {
-        _nameShorthandLabel.text = [NSString stringWithFormat:@"%@", self.datasourceRedpoint[0]];
-        _nameShorthandLabel.backgroundColor = [UIColor redColor];
-    } else if ([self.datasourceRedpoint[0] intValue] == 0 ) {
-        _nameShorthandLabel.text = [NSString stringWithFormat:@" "];
-        _nameShorthandLabel.backgroundColor = [UIColor whiteColor];
+    for (int i = 0; i < self.datasourceRedpoint.count; i++) {
+        UILabel *redpointLabel = [[UILabel alloc] init];
+        redpointLabel.frame = CGRectMake(iphoneWidth - 105, iphoneWidth * 2 / 3 + 10 + 15 + 55 + i * 60, 20, 20);
+        redpointLabel.layer.cornerRadius = 10;
+        redpointLabel.layer.masksToBounds = YES;
+        redpointLabel.textColor = [UIColor whiteColor];
+        redpointLabel.textAlignment = NSTextAlignmentCenter;
+//        redpointLabel.backgroundColor = [UIColor redColor];
+        [self.view addSubview:redpointLabel];
+        if ([self.datasourceRedpoint[i] intValue] > 0 ) {
+            redpointLabel.text = [NSString stringWithFormat:@"%@", self.datasourceRedpoint[i]];
+            redpointLabel.backgroundColor = [UIColor redColor];
+        } else if ([self.datasourceRedpoint[i] intValue] == 0 ) {
+            redpointLabel.text = [NSString stringWithFormat:@" "];
+            redpointLabel.backgroundColor = [UIColor whiteColor];
+        }else {
+            redpointLabel.text = [NSString stringWithFormat:@" "];
+            redpointLabel.backgroundColor = [UIColor whiteColor];
+        }
     }
+    
+    
 }
 
 

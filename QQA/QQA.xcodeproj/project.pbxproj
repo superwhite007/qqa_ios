@@ -60,6 +60,7 @@
 		AAC0B8671FF383A800F5D2DB /* worksheet.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B8661FF383A800F5D2DB /* worksheet.jpg */; };
 		AAC0B8691FF38B4B00F5D2DB /* update.png in Resources */ = {isa = PBXBuildFile; fileRef = AAC0B8681FF38B4B00F5D2DB /* update.png */; };
 		AAC191F820A183D700494B62 /* CompanyViewControllerNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC191F720A183D700494B62 /* CompanyViewControllerNoCell.m */; };
+		AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
 		AAD911FE1FD691B8002A42B5 /* CompanyAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD911FD1FD691B8002A42B5 /* CompanyAddressBookViewController.m */; };
 		AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912001FD6955D002A42B5 /* AddressBook.m */; };
@@ -221,6 +222,8 @@
 		AAC0B8681FF38B4B00F5D2DB /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
 		AAC191F620A183D700494B62 /* CompanyViewControllerNoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyViewControllerNoCell.h; sourceTree = "<group>"; };
 		AAC191F720A183D700494B62 /* CompanyViewControllerNoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyViewControllerNoCell.m; sourceTree = "<group>"; };
+		AAC191F920A1948200494B62 /* ExaminationApprovalViewControllerNOCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExaminationApprovalViewControllerNOCell.h; sourceTree = "<group>"; };
+		AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExaminationApprovalViewControllerNOCell.m; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
 		AAD911FC1FD691B8002A42B5 /* CompanyAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyAddressBookViewController.h; sourceTree = "<group>"; };
@@ -531,6 +534,8 @@
 			children = (
 				AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */,
 				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
+				AAC191F920A1948200494B62 /* ExaminationApprovalViewControllerNOCell.h */,
+				AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */,
 				AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */,
 				AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */,
 				AAD93D701FB933FF00A7CC2A /* LanchViewController.h */,
@@ -910,6 +915,7 @@
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
 				AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */,
+				AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */,

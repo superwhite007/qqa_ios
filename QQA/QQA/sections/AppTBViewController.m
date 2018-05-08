@@ -11,6 +11,7 @@
 #import "PunchClockViewController.h"
 #import "MeInformationViewController.h"
 #import "ExaminationApprovalViewController.h"
+#import "ExaminationApprovalViewControllerNOCell.h"
 #import "CompanyViewController.h"
 #import "CompanyViewControllerNoCell.h"
 #import "UMFirstViewController.h"
@@ -66,7 +67,9 @@
     
     
     //2.审核
-    ExaminationApprovalViewController * examinationApprovalVC = [[ExaminationApprovalViewController alloc] init];
+//    ExaminationApprovalViewController * examinationApprovalVC = [[ExaminationApprovalViewController alloc] init];
+//    [self setupChildViewController:examinationApprovalVC title:@"审核" imageName:@"checkmark" selectedImageName:@"checkmark"];
+    ExaminationApprovalViewControllerNOCell * examinationApprovalVC = [[ExaminationApprovalViewControllerNOCell alloc] init];
     [self setupChildViewController:examinationApprovalVC title:@"审核" imageName:@"checkmark" selectedImageName:@"checkmark"];
     //3.打卡
     PunchClockViewController *punchClockVC = [PunchClockViewController new];
