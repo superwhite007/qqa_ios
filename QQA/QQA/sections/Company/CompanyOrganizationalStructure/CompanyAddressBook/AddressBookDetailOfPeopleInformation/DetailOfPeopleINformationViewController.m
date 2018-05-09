@@ -28,7 +28,7 @@
         NSString * str = [NSString stringWithFormat:@"sms://%@",[sender.titleLabel.text substringFromIndex:5]];
         NSURL *url = [NSURL URLWithString:str];
         [[UIApplication sharedApplication] openURL:url];
-    }else if (sender.tag == 0){
+    }else if (sender.tag == 0 || sender.tag == 5){
         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",[sender.titleLabel.text substringFromIndex:5]];
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
@@ -150,10 +150,14 @@
     NSString * sendMessage = [NSString stringWithFormat:@"发消息  %@",[dict objectForKey:@"telephone"]];
     NSString * weixin = [NSString stringWithFormat:@"微信  %@",[dict objectForKey:@"weiXin"]];
     NSString * QQ = [NSString stringWithFormat:@"QQ  %@",[dict objectForKey:@"qq"]];
-    NSArray * titleArray = [NSArray arrayWithObjects:telephoneStr, sendMessage, weixin, QQ , emailStr,  nil];
+    NSString * mobileTelephoneStr = [NSString stringWithFormat:@"打固话  %@",[dict objectForKey:@"mobile"]];
+    NSMutableArray * titleArray = [NSMutableArray arrayWithObjects:telephoneStr, sendMessage, weixin, QQ , emailStr,  nil];
+    if (![[dict objectForKey:@"mobile"] isEqualToString:@"暂无"]) {
+        [titleArray addObject:mobileTelephoneStr];
+    }
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 10 + i * 60, iphoneWidth - 35, 60);
+        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 10 + i * 50, iphoneWidth - 35, 50);
 //        button.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
         button.tag = i;
@@ -165,12 +169,13 @@
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
     }
-    
-    NSArray * imageArray = [NSArray arrayWithObjects:@"tel", @"sms", @"wechat", @"qq", @"email",  nil];
-    for (int i = 0; i < 5; i++) {
-        
+    NSMutableArray * imageArray = [NSMutableArray arrayWithObjects:@"tel", @"sms", @"wechat", @"qq", @"email",  nil];
+    if (![[dict objectForKey:@"mobile"] isEqualToString:@"暂无"]) {
+        [imageArray addObject:@"tel"];
+    }
+    for (int i = 0; i < titleArray.count ; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
-        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3  + 10 + 15  + 5+ i * 60, 20, 20);
+        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3  + 10 + 15 + i * 50, 20, 20);
         //    imgView.backgroundColor = [UIColor yellowColor];
         UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
         [firstimgView setImage:firstimage];
@@ -178,14 +183,14 @@
         [self.view addSubview:firstimgView];
         
         UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3  + 10 + 15 + 5 + i * 60, 20, 20);
+        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3  + 10 + 15 + i * 50, 20, 20);
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
         imgView.alpha = 0.6;
     }
     
-    for (int i = 0; i < 6; i++) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 8 + i * 60 , iphoneWidth, .5)];
+    for (int i = 0; i < titleArray.count+1 ; i++) {
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 8 + i * 50 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
