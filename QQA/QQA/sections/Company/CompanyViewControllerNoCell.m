@@ -278,16 +278,15 @@
 -(void)addRedPoint{
     
     _nameShorthandLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 100, iphoneWidth * 2 / 3 + 20, 20, 20)];
-//    _nameShorthandLabel.backgroundColor = [UIColor redColor];
     _nameShorthandLabel.layer.cornerRadius = _nameShorthandLabel.bounds.size.width/2;
-    //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    //    _nameShorthandLabel.layer.borderWidth = 1;
     _nameShorthandLabel.layer.masksToBounds = YES;
+    _nameShorthandLabel.textAlignment = NSTextAlignmentCenter;
     _nameShorthandLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:_nameShorthandLabel];
     if ([self.datasourceRedpoint[0] intValue] > 0 ) {
         _nameShorthandLabel.text = [NSString stringWithFormat:@"%@", self.datasourceRedpoint[0]];
         _nameShorthandLabel.backgroundColor = [UIColor redColor];
+//        _nameShorthandLabel.layer.borderColor = [UIColor redColor].CGColor;
     } else if ([self.datasourceRedpoint[0] intValue] == 0 ) {
         _nameShorthandLabel.text = [NSString stringWithFormat:@" "];
         _nameShorthandLabel.backgroundColor = [UIColor whiteColor];
