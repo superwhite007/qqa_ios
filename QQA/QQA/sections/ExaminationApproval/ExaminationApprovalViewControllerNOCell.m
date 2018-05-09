@@ -275,7 +275,7 @@
     for (int i = 0; i < self.datasourceRedpoint.count; i++) {
         UILabel *redpointLabel = [[UILabel alloc] init];
         redpointLabel.frame = CGRectMake(iphoneWidth - 105, iphoneWidth * 2 / 3 + 10 + 15 + 55 + i * 60, 20, 20);
-        redpointLabel.layer.cornerRadius = 10;
+        redpointLabel.layer.cornerRadius = redpointLabel.bounds.size.width/2;
         redpointLabel.layer.masksToBounds = YES;
         redpointLabel.textColor = [UIColor whiteColor];
         redpointLabel.textAlignment = NSTextAlignmentCenter;

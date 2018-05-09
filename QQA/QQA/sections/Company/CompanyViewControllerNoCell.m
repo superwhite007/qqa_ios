@@ -279,7 +279,7 @@
     
     _nameShorthandLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 100, iphoneWidth * 2 / 3 + 20, 20, 20)];
 //    _nameShorthandLabel.backgroundColor = [UIColor redColor];
-    _nameShorthandLabel.layer.cornerRadius = 10;
+    _nameShorthandLabel.layer.cornerRadius = _nameShorthandLabel.bounds.size.width/2;
     //    _nameShorthandLabel.layer.borderColor = [UIColor blackColor].CGColor;
     //    _nameShorthandLabel.layer.borderWidth = 1;
     _nameShorthandLabel.layer.masksToBounds = YES;
