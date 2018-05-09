@@ -76,15 +76,7 @@
 
 -(void)gotoSomeForwed:(UIButton *)sender{
     if (sender.tag == 0) {
-        NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
-        NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
-        NSLog(@"1234567890%@", resultPermissions);
-        if ([resultPermissions[@"notices"] isEqualToString:@"yes"]) {
-            MessageViewController * messageVC = [MessageViewController new];
-            [self.navigationController pushViewController:messageVC animated:YES];
-        } else{
-            [self alert:@"暂时没有发送通知权限"];
-        }
+        [self gitPersonPermissions];
     }else if (sender.tag == 1){
 //        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
 //        [self.navigationController pushViewController:versionInformationVC animated:YES];
@@ -265,6 +257,67 @@
     [alertDialog addAction:cancellAction];
     
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+}
+
+-(void)gitPersonPermissions{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/permissions", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    
+    NSLog( @"66666666%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"%@", error);
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"dataBackdataBack:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 8002 ) {
+                                                        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dataBack];
+                                                        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                                                        NSString * documentfilePath = paths.firstObject;
+                                                        NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"Permissions.txt"];
+                                                        [dict  writeToFile:txtPath atomically:YES];
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self haveNoticeYesORNo];
+                                                        });
+                                                        
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSLog(@"获取数据失败，问gitPersonPermissions");
+                                                }
+                                            }else{
+                                                
+                                            }
+                                        }];
+    [task resume];
+    
+}
+-(void)haveNoticeYesORNo{
+    
+    NSString *sTextPathPermissions = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Permissions.txt"];
+    NSDictionary *resultPermissions = [NSDictionary dictionaryWithContentsOfFile:sTextPathPermissions];
+    NSLog(@"1234567890%@", resultPermissions);
+    if ([resultPermissions[@"notices"] isEqualToString:@"yes"]) {
+        MessageViewController * messageVC = [MessageViewController new];
+        [self.navigationController pushViewController:messageVC animated:YES];
+    } else{
+        [self alert:@"暂时没有发送通知权限"];
+    }
 }
 
 
