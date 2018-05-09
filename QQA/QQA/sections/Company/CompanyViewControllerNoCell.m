@@ -13,7 +13,10 @@
 #import "RulesDetailViewController.h"
 #import "CompanyOrganizationalStructureViewController.h"
 
-@interface CompanyViewControllerNoCell ()
+
+#import "SDCycleScrollView.h"
+
+@interface CompanyViewControllerNoCell ()<SDCycleScrollViewDelegate>
 @property (nonatomic, strong) NSMutableArray * datasource;
 @property (nonatomic, strong) NSMutableArray * datasourceRedpoint;
 @property (nonatomic, strong) NSMutableArray * cyclePicturesDatasource;
@@ -149,7 +152,6 @@
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
-
 -(void)addCyclePictures{
     
     NSMutableArray *viewsArray = [@[] mutableCopy];
@@ -166,27 +168,72 @@
                 NSData * data = [NSData dataWithContentsOfURL:url];
                 UIImage *img = [UIImage imageWithData:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                        UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-                        imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
-                        viewsArray[i] = imgView;
-                    });
+                    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+                    imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+                    viewsArray[i] = imgView;
+                });
             });
         }
     }
-    self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
-    self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
-    self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
-        return viewsArray[pageIndex];
-    };
-    self.mainScorllView.totalPagesCount = ^NSInteger(void){
-        return 3;
-    };
-    self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
-        NSLog(@"点击了第%ld个",(long)pageIndex);
-    };
-    [self.view addSubview:self.mainScorllView];
+    // 网络加载 --- 创建带标题的图片轮播器
+    NSArray *imagesURL = _cyclePicturesDatasource;
+    NSArray *titles = @[@"感谢您的支持，如果下载的",
+                        @"如果代码在使用过程中出现问题",
+                        @"您可以发邮件到gsdios@126.com",
+                        @"感谢您的支持"
+                        ];
+    SDCycleScrollView *cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneWidth * 2 /3) imageURLStringsGroup:imagesURL];
+    cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
+    cycleScrollView2.delegate = self;
+    cycleScrollView2.titlesGroup = titles;
+    cycleScrollView2.pageDotColor = [UIColor yellowColor]; // 自定义分页控件小圆标颜色
+    cycleScrollView2.placeholderImage = [UIImage imageNamed:@"placeholder"];
+    [self.view addSubview:cycleScrollView2];
     
 }
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"---点击了第%ld张图片", index);
+}
+
+
+//-(void)addCyclePictures{
+//
+//    NSMutableArray *viewsArray = [@[] mutableCopy];
+//    for (int i = 0; i < 3; ++i) {
+//        UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
+//        UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+//        imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+//        [viewsArray addObject:imgView];
+//    }
+//    if (_cyclePicturesDatasource.count > 0) {
+//        for (int i = 0; i < 3; ++i) {
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                NSURL * url = [NSURL URLWithString:_cyclePicturesDatasource[i]];
+//                NSData * data = [NSData dataWithContentsOfURL:url];
+//                UIImage *img = [UIImage imageWithData:data];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                        UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+//                        imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+//                        viewsArray[i] = imgView;
+//                    });
+//            });
+//        }
+//    }
+//    self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
+//    self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
+//    self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
+//        return viewsArray[pageIndex];
+//    };
+//    self.mainScorllView.totalPagesCount = ^NSInteger(void){
+//        return 3;
+//    };
+//    self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
+//        NSLog(@"点击了第%ld个",(long)pageIndex);
+//    };
+//    [self.view addSubview:self.mainScorllView];
+//
+//}
 -(void)getCycleScrollPitures{
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/getImg", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
