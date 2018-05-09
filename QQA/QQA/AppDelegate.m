@@ -144,7 +144,7 @@
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"2通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知2");
+                                                NSLog(@"通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知2：%@", dict);
                                                 
 //                                                dispatch_async(dispatch_get_main_queue(), ^{
 //
