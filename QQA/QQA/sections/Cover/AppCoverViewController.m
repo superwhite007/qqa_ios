@@ -314,9 +314,6 @@
 }
 
 -(void)competeScanResult:(NSString *)result{
-    
-    NSLog(@"resultresult:%@", result);
-    
     if([result rangeOfString:@"appName"].location !=NSNotFound && [result rangeOfString:@"qqoa"].location !=NSNotFound ){
         NSLog(@"yes");
         NSData * dictionartData =  [result  dataUsingEncoding:NSUTF8StringEncoding];
@@ -327,12 +324,57 @@
         NSString * documentfilePath = paths.firstObject;
         NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
         [ddict writeToFile:txtPath atomically:YES];
+        [self sendUMdevicetokenToServer];
         [self clientSendInformationsToServer:dict resultString:result];
     }else{
         NSLog(@"no");
         [self alert:@"异常二维码"];
     }
 }
+
+-(void)sendUMdevicetokenToServer{
+    
+    
+    NSString *devicetokenTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/devicetokentoken.txt"];
+    NSDictionary *resultdevicetokenDic = [NSDictionary dictionaryWithContentsOfFile:devicetokenTextPath];
+    NSMutableDictionary * mdictdevicetoken = [NSMutableDictionary dictionaryWithDictionary:resultdevicetokenDic];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/device/store", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];//deviceToken
+    [mdict setObject:[mdictdevicetoken objectForKey:@"devicetoken"] forKey:@"deviceToken"];
+    NSError * error = nil;
+    NSLog(@"123456789mdict:%@", mdict);
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"error%@", error);
+                                            if (data != nil) {
+                                                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知3：%@", dict);
+                                                
+                                                //                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                //
+                                                //                                                });
+                                            } else{
+                                                //NSLog(@"获取数据失败，问");
+                                            }
+                                        }];
+    [task resume];
+}
+
+
+
 
 -(void)clientSendInformationsToServer:(NSMutableDictionary *)clinetDictionaryDIct  resultString:(NSString *)str{
     
@@ -392,16 +434,13 @@
     request.timeoutInterval = 10.0;
     request.HTTPMethod = @"POST";
     NSError * error = nil;
-    NSLog(@"666666%@", mdict);
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"dataBackdataBackerror:%@", error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"dataBackdataBack:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSArray class]]) {
                                                 } else if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     NSDictionary * dict =  [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
@@ -541,18 +580,14 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    
-    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"%@", error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                NSLog(@"dataBackdataBack:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ( [[dataBack objectForKey:@"message"] intValue] == 8002 ) {
                                                         NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dataBack];

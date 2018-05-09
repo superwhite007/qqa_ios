@@ -122,6 +122,12 @@
 
 -(void)sendUMdevicetokenToServer:(NSString *)UMdevicetoken{
     
+    NSDictionary * dict = [NSDictionary dictionaryWithObject:UMdevicetoken forKey:@"devicetoken"];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentfilePath = paths.firstObject;
+    NSString *txtPath = [documentfilePath stringByAppendingPathComponent:@"devicetokentoken.txt"];
+    [dict  writeToFile:txtPath atomically:YES];
+    
     _isOK = YES;
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/device/store", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -137,11 +143,13 @@
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];//deviceToken
     [mdict setObject:UMdevicetoken forKey:@"deviceToken"];
     NSError * error = nil;
+    NSLog(@"mdict:%@", mdict);
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"error%@", error);
                                             if (data != nil) {
                                                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 NSLog(@"通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知通知2：%@", dict);
