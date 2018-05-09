@@ -153,25 +153,26 @@
 -(void)addCyclePictures{
     
     NSMutableArray *viewsArray = [@[] mutableCopy];
+    for (int i = 0; i < 3; ++i) {
+        UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
+        UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+        imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+        [viewsArray addObject:imgView];
+    }
     if (_cyclePicturesDatasource.count > 0) {
         for (int i = 0; i < 3; ++i) {
-            NSURL * url = [NSURL URLWithString:_cyclePicturesDatasource[i]];
-            NSData * data = [NSData dataWithContentsOfURL:url];
-            UIImage *img = [UIImage imageWithData:data];
-            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
-            [viewsArray addObject:imgView];
-        }
-    } else{
-        for (int i = 0; i < 3; ++i) {
-            UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
-            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
-            [viewsArray addObject:imgView];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSURL * url = [NSURL URLWithString:_cyclePicturesDatasource[i]];
+                NSData * data = [NSData dataWithContentsOfURL:url];
+                UIImage *img = [UIImage imageWithData:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                        UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+                        imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
+                        viewsArray[i] = imgView;
+                    });
+            });
         }
     }
-    
-    
     self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
     self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
     self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
@@ -286,7 +287,6 @@
     if ([self.datasourceRedpoint[0] intValue] > 0 ) {
         _nameShorthandLabel.text = [NSString stringWithFormat:@"%@", self.datasourceRedpoint[0]];
         _nameShorthandLabel.backgroundColor = [UIColor redColor];
-//        _nameShorthandLabel.layer.borderColor = [UIColor redColor].CGColor;
     } else if ([self.datasourceRedpoint[0] intValue] == 0 ) {
         _nameShorthandLabel.text = [NSString stringWithFormat:@" "];
         _nameShorthandLabel.backgroundColor = [UIColor whiteColor];
