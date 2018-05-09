@@ -163,7 +163,7 @@
     view.backgroundColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
 //    [ UIColor colorWithRed:241  / 255.0 green:142  / 255.0 blue:91 / 255.0 alpha:.8];
     [self.view addSubview: view];
-    NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：",  @"NO.", @"电话：", @"email:", @"QQ:", @"微信:"];
+    NSArray * labelNameArray = @[@"imageString", @"姓名:", @"部门：", @"职位：",  @"NO.", @"电话：", @"固话：", @"email:", @"QQ:", @"微信:"];
     NSMutableString * nameAndSex = [NSMutableString new];
     if ([[dict objectForKey:@"sex"] intValue] == 1) {
         nameAndSex = [NSMutableString stringWithFormat:@"%@ ♂", [dict objectForKey:@"username"]];
@@ -173,7 +173,7 @@
         nameAndSex = [NSMutableString stringWithFormat:@"%@ 未知", [dict objectForKey:@"username"]];
     }
    
-    NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , nameAndSex, [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"weiXin"]];
+    NSArray * urlRebackArray = @[[dict objectForKey:@"avatar"] , nameAndSex, [dict objectForKey:@"departments"], [dict objectForKey:@"jobs"],  [dict objectForKey:@"number"], [dict objectForKey:@"telephone"], [dict objectForKey:@"mobile"], [dict objectForKey:@"email"], [dict objectForKey:@"qq"], [dict objectForKey:@"weiXin"]];
     UIImageView * imgVIew = [[UIImageView alloc] initWithFrame:CGRectMake(15, iphoneWidth  / 9 , iphoneWidth * 4 / 9 , iphoneWidth * 4 / 9)];
     imgVIew.backgroundColor = [UIColor redColor];
     imgVIew.layer.cornerRadius = imgVIew.frame.size.width/2;
@@ -183,10 +183,10 @@
     UIImage *image = [UIImage imageWithData:data];
     [imgVIew setImage:image];
     [view addSubview:imgVIew];
-    for (int i = 1; i < 9; i++) {
+    for (int i = 1; i < 10; i++) {
         UILabel * label = [[UILabel alloc] init];
         if ( i > 0 && i < 10) {
-            label.frame = CGRectMake(iphoneWidth * 4 / 9 + 25, iphoneWidth * 2 / 3 / 10 / 2 + ( iphoneWidth * 2 / 3 / 10  * (i - 1)) + 10, iphoneWidth  / 2 - 20,  iphoneWidth * 2 / 3 / 10);
+            label.frame = CGRectMake(iphoneWidth * 4 / 9 + 25, iphoneWidth * 2 / 3 / 10 / 2 + ( iphoneWidth * 2 / 3 / 10  * (i - 1)) , iphoneWidth  / 2 - 20,  iphoneWidth * 2 / 3 / 10);
         }
 //        label.backgroundColor = [UIColor blueColor];
         label.adjustsFontSizeToFitWidth = YES;
