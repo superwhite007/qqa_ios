@@ -16,9 +16,13 @@
 #import "CompanyViewControllerNoCell.h"
 #import "UMFirstViewController.h"
 #import "UMSecondViewController.h"
+#import "AppDelegate.h"
+#import "AppCoverViewController.h"
 
-@interface AppTBViewController (){
+@interface AppTBViewController ()<UITabBarControllerDelegate>
+{
     NSTimer * timer;
+    Boolean loginAgain;
 }
 @end
 
@@ -26,6 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
+    loginAgain = NO;
     [self getStartTimerAboutRedPoint];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
@@ -41,7 +47,7 @@
 }
 -(void)userInfoNotification:(NSNotification*)notification{
     NSDictionary *dict = [notification userInfo];
-    NSLog(@"notification%@", dict);
+//    NSLog(@"notification%@", dict);
     UMFirstViewController *firstvc=[[UMFirstViewController alloc]init];
     firstvc.notcieString=[NSString stringWithFormat:@"%@", [[dict objectForKey:@"aps"] objectForKey:@"alert"]];
 //    [self.navigationController pushViewController:firstvc animated:YES];
@@ -153,6 +159,84 @@
         }
     }];
     [task resume];
+}
+
+#pragma  mark  判断是否多台设备登录该账号
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    if(viewController == [tabBarController.viewControllers objectAtIndex:0])
+    {
+        return YES;
+    }else{
+        [self checkMoreMobleHadLogined];
+        if (loginAgain) {
+            [self alertAppCover:@"该账号已经登录新设备！"];
+            return NO;
+        } else{
+            NSLog(@"第一次登录");
+            return YES;
+        }
+    }
+    
+}
+
+-(void)checkMoreMobleHadLogined{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/app/check", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+//                                                NSLog(@"HadLogin%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 1005 ) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            loginAgain = YES;
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSLog(@"获取数据失败，问gitPersonPermissions");
+                                                }
+                                            }else{
+                                                
+                                            }
+                                        }];
+    [task resume];
+}
+
+
+
+-(void)goBbackToAPPcover{
+    AppCoverViewController *appCoverVController = [AppCoverViewController new];
+    UINavigationController * tbNC = [[UINavigationController alloc] initWithRootViewController:appCoverVController];
+    ((AppDelegate *)([UIApplication sharedApplication].delegate)).window.rootViewController = tbNC;
+}
+-(void)alertAppCover:(NSString *)str{
+    
+    NSString *title = str;
+    NSString *message = @"请联系开发人员";
+    NSString *okButtonTitle = @"确定";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self goBbackToAPPcover];
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+    
 }
 
 
