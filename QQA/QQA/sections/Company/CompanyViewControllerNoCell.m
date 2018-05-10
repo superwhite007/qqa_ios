@@ -177,10 +177,10 @@
     }
     // 网络加载 --- 创建带标题的图片轮播器
     NSArray *imagesURL = _cyclePicturesDatasource;
-    NSArray *titles = @[@"感谢您的支持，如果下载的",
-                        @"如果代码在使用过程中出现问题",
-                        @"您可以发邮件到gsdios@126.com",
-                        @"感谢您的支持"
+    NSArray *titles = @[@" ",
+                        @" ",
+                        @" ",
+                        @" "
                         ];
     SDCycleScrollView *cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneWidth * 2 /3) imageURLStringsGroup:imagesURL];
     cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
