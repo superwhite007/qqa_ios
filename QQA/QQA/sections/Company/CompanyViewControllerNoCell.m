@@ -125,7 +125,7 @@
     NSArray * titleArray = [NSArray arrayWithObjects:@"公司通知", @"规章制度", @"公司信息",  @"组织架构与通讯录", @"公司云盘", nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 10 + i * 60, iphoneWidth - 35, 60);
+        button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 6 + i * 60, iphoneWidth - 35, 60);
         //    button1.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
         button.tag = 1000 + i;
@@ -140,14 +140,14 @@
     NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"update", @"about", @"update", @"about", nil];
     for (int i = 0; i < imageArray.count; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
-        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 +  10 + 15  + 5+ i * 60, 20, 20);
+        firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 +  6 + 15  + 5+ i * 60, 20, 20);
         //    imgView.backgroundColor = [UIColor yellowColor];
         UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
         [firstimgView setImage:firstimage];
         firstimgView.alpha = 0.6;
         [self.view addSubview:firstimgView];
         UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 10 + 15 + 5 + i * 60, 20, 20);
+        imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 6 + 15 + 5 + i * 60, 20, 20);
         UIImage *image = [UIImage imageNamed:@"forward"];
         [imgView setImage:image];
         imgView.alpha = 0.6;
