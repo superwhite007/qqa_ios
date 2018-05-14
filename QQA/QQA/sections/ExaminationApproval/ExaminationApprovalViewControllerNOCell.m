@@ -103,7 +103,7 @@
         [self.view addSubview:imgView];
     }
     for (int i = 0; i <= imageArray.count; i++) {
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 10 + i * 60 , iphoneWidth, .5)];
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 6 + i * 60 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
