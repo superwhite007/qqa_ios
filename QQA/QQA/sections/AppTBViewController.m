@@ -170,7 +170,7 @@
     }else{
         [self checkMoreMobleHadLogined];
         if (loginAgain) {
-            [self alertAppCover:@"该账号已经登录新设备！"];
+            [self alertAppCover:@"该账号已经登录新设备或者已消除！"];
             return NO;
         } else{
             NSLog(@"第一次登录");
@@ -203,7 +203,7 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 //                                                NSLog(@"HadLogin%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 1005 ) {
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 1005 || [[dataBack objectForKey:@"message"] intValue] == 1006 ) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             loginAgain = YES;
                                                         });
