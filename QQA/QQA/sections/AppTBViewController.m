@@ -170,7 +170,7 @@
     }else{
         [self checkMoreMobleHadLogined];
         if (loginAgain) {
-            [self alertAppCover:@"该账号已经登录新设备或者已消除！"];
+            [self alertAppCover:@"该账号已登录新设备或已销毁！"];
             return NO;
         } else{
             NSLog(@"第一次登录");
