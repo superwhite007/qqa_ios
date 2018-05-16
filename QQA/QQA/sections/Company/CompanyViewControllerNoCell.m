@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     _nameShorthandLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 100, iphoneWidth * 2 / 3 + 20, 20, 20)];
     [self getCycleScrollPitures];
     [self getStartTimerAboutRedPoint];
     // Do any additional setup after loading the view.
@@ -315,7 +316,7 @@
                                                     }else {
                                                         
                                                         _cyclePicturesDatasource = [[object  objectForKey:@"data"] objectForKey:@"img"];
-                                                        NSLog(@"_cyclePicturesDatasource:%@", _cyclePicturesDatasource);
+//                                                        NSLog(@"_cyclePicturesDatasource:%@", _cyclePicturesDatasource);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self addCyclePictures];
                                                         });
@@ -374,19 +375,23 @@
 }
 -(void)addRedPoint{
     
-    _nameShorthandLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 100, iphoneWidth * 2 / 3 + 20, 20, 20)];
+//    _nameShorthandLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 100, iphoneWidth * 2 / 3 + 20, 20, 20)];
     _nameShorthandLabel.layer.cornerRadius = _nameShorthandLabel.bounds.size.width/2;
     _nameShorthandLabel.layer.masksToBounds = YES;
     _nameShorthandLabel.textAlignment = NSTextAlignmentCenter;
     _nameShorthandLabel.textColor = [UIColor whiteColor];
+    _nameShorthandLabel.layer.borderWidth = 1;
     [self.view addSubview:_nameShorthandLabel];
     if ([self.datasourceRedpoint[0] intValue] > 0 ) {
         _nameShorthandLabel.text = [NSString stringWithFormat:@"%@", self.datasourceRedpoint[0]];
         _nameShorthandLabel.backgroundColor = [UIColor redColor];
+        _nameShorthandLabel.layer.borderColor = [UIColor redColor].CGColor;
     } else if ([self.datasourceRedpoint[0] intValue] == 0 ) {
         _nameShorthandLabel.text = [NSString stringWithFormat:@" "];
         _nameShorthandLabel.backgroundColor = [UIColor whiteColor];
+        _nameShorthandLabel.layer.borderColor = [UIColor whiteColor].CGColor;
     }
+//    NSLog(@"self.viewself.view:%@", [self.view subviews]);
 }
 
 - (void)didReceiveMemoryWarning {

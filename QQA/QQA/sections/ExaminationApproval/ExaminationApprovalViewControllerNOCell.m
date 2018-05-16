@@ -14,6 +14,7 @@
 @interface ExaminationApprovalViewControllerNOCell ()<SDCycleScrollViewDelegate>
 @property (nonatomic, strong) NSMutableArray * datasource;
 @property (nonatomic, strong) NSMutableArray * datasourceRedpoint;
+@property (nonatomic, strong) NSMutableArray * datasourceRedpointArray;
 @property (nonatomic, strong) NSMutableArray * cyclePicturesDatasource;
 @property (nonatomic , retain) CycleScrollView *mainScorllView;
 @property (nonatomic, strong) UILabel * nameShorthandLabel;
@@ -35,6 +36,12 @@
     }
     return _datasourceRedpoint;
 }
+-(NSMutableArray *)datasourceRedpointArray{
+    if (!_datasourceRedpointArray) {
+        self.datasourceRedpointArray = [NSMutableArray array];
+    }
+    return _datasourceRedpointArray;
+}
 -(NSMutableArray *)cyclePicturesDatasource{
     if (!_cyclePicturesDatasource) {
         self.cyclePicturesDatasource = [NSMutableArray array];
@@ -52,6 +59,12 @@
     [self.datasourceRedpoint addObject:@"0"];
     [self.datasourceRedpoint addObject:@"0"];
     [self.datasourceRedpoint addObject:@"0"];
+    for (int i = 0; i < self.datasourceRedpoint.count; i++) {
+        UILabel *redpointLabel = [[UILabel alloc] init];
+        redpointLabel.frame = CGRectMake(iphoneWidth - 105, iphoneWidth * 2 / 3 + 10 + 15 + 55 + i * 60, 20, 20);
+        [self.view addSubview:redpointLabel];
+        [self.datasourceRedpointArray addObject:redpointLabel];
+    }
     UINavigationBar *navBar = [UINavigationBar appearance];
     navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
     NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
@@ -367,13 +380,11 @@
 }
 -(void)addRedPoint{
     for (int i = 0; i < self.datasourceRedpoint.count; i++) {
-        UILabel *redpointLabel = [[UILabel alloc] init];
-        redpointLabel.frame = CGRectMake(iphoneWidth - 105, iphoneWidth * 2 / 3 + 10 + 15 + 55 + i * 60, 20, 20);
+        UILabel *redpointLabel = self.datasourceRedpointArray[i];
         redpointLabel.layer.cornerRadius = redpointLabel.bounds.size.width/2;
         redpointLabel.layer.masksToBounds = YES;
         redpointLabel.textColor = [UIColor whiteColor];
         redpointLabel.textAlignment = NSTextAlignmentCenter;
-//        redpointLabel.backgroundColor = [UIColor redColor];
         [self.view addSubview:redpointLabel];
         if ([self.datasourceRedpoint[i] intValue] > 0 ) {
             redpointLabel.text = [NSString stringWithFormat:@"%@", self.datasourceRedpoint[i]];
