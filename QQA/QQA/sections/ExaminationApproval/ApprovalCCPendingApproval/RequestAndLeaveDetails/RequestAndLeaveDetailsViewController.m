@@ -199,6 +199,28 @@
                     //                    titleLabe.backgroundColor = [UIColor redColor];
                 }
             }
+            
+            switch (j % 5) {
+                case 0:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                    break;
+                case 1:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                    break;
+                case 2:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                    break;
+                case 3:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                    break;
+                case 4:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
             if ( i == 1 ) {
                 [self.view addSubview:titleLabe];
             }else if( i == 0 ){
@@ -213,6 +235,27 @@
                 titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
                 titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
                 [self.view addSubview:titleLabe];
+                
+                switch (j % 5) {
+                    case 0:
+                        titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                        break;
+                    case 1:
+                        titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                        break;
+                    case 2:
+                        titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                        break;
+                    case 3:
+                        titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                        break;
+                    case 4:
+                        titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                        break;
+                        
+                    default:
+                        break;
+                }
                 
                 
                 
@@ -277,12 +320,33 @@
             titleLabe.layer.masksToBounds = YES;
             titleLabe.textAlignment = NSTextAlignmentCenter;
             titleLabe.font = [UIFont systemFontOfSize:30];
+            switch (j % 5) {
+                case 0:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                    break;
+                case 1:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                    break;
+                case 2:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                    break;
+                case 3:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                    break;
+                case 4:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
             if ( i == 1 ) {
                 [self.view addSubview:titleLabe];
             }else if( i == 0 ){
                 UIButton * titleLabe = [UIButton buttonWithType:UIButtonTypeSystem];
                 titleLabe.frame = CGRectMake(80 + j * ((iphoneWidth - 110 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 110 ) / 5 ) + 80  , (iphoneWidth - 110 ) / 5 , (iphoneWidth - 110 ) / 5);
-                titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+//                titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
                 titleLabe.layer.cornerRadius = (iphoneWidth - 110 ) / 5 / 2;
                 NSString * str = [NSString stringWithFormat:@"%@", [[mArrayOFApproverAndCC[i][j] objectForKey:@"name"] substringToIndex:1]];
                 [titleLabe setTitle:str forState:(UIControlStateNormal)];
@@ -291,6 +355,28 @@
                 titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
                 titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
                 [self.view addSubview:titleLabe];
+                
+                switch (j % 5) {
+                    case 0:
+                        titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                        break;
+                    case 1:
+                        titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                        break;
+                    case 2:
+                        titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                        break;
+                    case 3:
+                        titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                        break;
+                    case 4:
+                        titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                        break;
+                    
+                    default:
+                        break;
+                }
+                
 //                [titleLabe addTarget:self action:@selector(displayComment:) forControlEvents:UIControlEventTouchUpInside];
 //                titleLabe.tag = 100 + j;
                 
