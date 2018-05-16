@@ -223,7 +223,7 @@
     scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [scanButton addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
+    [scanButton addTarget:self action:@selector(startScanssssDelete) forControlEvents:UIControlEventTouchUpInside];
     [plantIDEeyView addSubview:scanButton];
     
 }

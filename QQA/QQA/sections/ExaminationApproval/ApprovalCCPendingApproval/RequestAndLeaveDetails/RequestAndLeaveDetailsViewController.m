@@ -57,7 +57,11 @@
     [self.navigationItem setTitle:_titleIdentStr];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发  送" style:(UIBarButtonItemStyleDone) target:self action:@selector(sendApprovalMessagesToServer)];
     _moveView = [UIView new];
-    _moveView.frame = CGRectMake(0, 0, iphoneWidth, 125 + iphoneWidth * 2 / 3);
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+         _moveView.frame = CGRectMake(0, 0, iphoneWidth, 125 + iphoneWidth * 2 / 3);
+    }else{
+         _moveView.frame = CGRectMake(0, 0, iphoneWidth, 115 + iphoneWidth * 2 / 3);
+    }
 //    _moveView.backgroundColor = [UIColor redColor];
     [self.view addSubview:_moveView];
     [self loadNewData];
@@ -102,14 +106,6 @@
         self.messageTextView.frame = CGRectMake(20, 165 + iphoneWidth * 1 / 3, iphoneWidth - 40, iphoneWidth / 3 - 70);
     }
     
-    
-//    NSArray * array = @[@"拒绝", @"同意"];
-    
-   
-    
-    
-    
-    
     _buttonReject = [UIButton buttonWithType:(UIButtonTypeSystem)];
     _buttonAgreement = [UIButton buttonWithType:(UIButtonTypeSystem)];
      if ([[UIScreen mainScreen] bounds].size.width > 321) {
@@ -117,8 +113,8 @@
          _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  110, 125 + iphoneWidth * 2 / 3  , 100, 30);
          
      } else {
-         _buttonReject.frame = CGRectMake(iphoneWidth - 150 , 125 + iphoneWidth * 2 / 3 - 25  , 60, 25);
-         _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  150, 125 + iphoneWidth * 2 / 3 - 25 , 60, 25);
+         _buttonReject.frame = CGRectMake(iphoneWidth - 150 , 125 + iphoneWidth * 2 / 3 - 28  , 60, 25);
+         _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  150, 125 + iphoneWidth * 2 / 3 - 28 , 60, 25);
      }
     
     
@@ -600,8 +596,8 @@
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
 //    self.view.frame = CGRectMake(0, 64, iphoneWidth, iphoneWidth);
-    _buttonReject.frame = CGRectMake(iphoneWidth - 230 , 125 + iphoneWidth * 2 / 3  , 100, 30);
-    _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  110, 125 + iphoneWidth * 2 / 3  , 100, 30);
+//    _buttonReject.frame = CGRectMake(iphoneWidth - 230 , 125 + iphoneWidth * 2 / 3  , 100, 30);
+//    _buttonAgreement.frame = CGRectMake(iphoneWidth - 230 +  110, 125 + iphoneWidth * 2 / 3  , 100, 30);
 }
 
 - (void)didReceiveMemoryWarning {
