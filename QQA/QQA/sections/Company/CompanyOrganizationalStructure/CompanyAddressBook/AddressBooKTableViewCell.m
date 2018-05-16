@@ -22,10 +22,10 @@
 -(void)addCellView{
     //60
     self.shortName = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
-    _shortName.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+    _shortName.backgroundColor = [UIColor colorWithRed:arc4random()%256 / 255.0 green:arc4random()%256 / 255.0 blue:arc4random()%256 / 255.0 alpha:0.8];
     _shortName.layer.cornerRadius = 20;
-    _shortName.layer.borderColor = [UIColor blackColor].CGColor;
-    _shortName.layer.borderWidth = 1;
+//    _shortName.layer.borderColor = [UIColor blackColor].CGColor;
+//    _shortName.layer.borderWidth = 1;
     _shortName.layer.masksToBounds = YES;
     _shortName.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.shortName];

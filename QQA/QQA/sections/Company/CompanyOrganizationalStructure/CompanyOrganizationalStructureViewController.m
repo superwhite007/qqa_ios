@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) CompanyOrganizationalStructureListView * organizationalStructureListView;
 @property (nonatomic, strong) NSMutableArray * datasouceArray;
+@property (nonatomic, strong) NSMutableArray * colorsArray;
 @property (nonatomic, assign) BOOL isEmpty;
 
 
@@ -32,6 +33,12 @@ static NSString *identifier = @"Cell";
         self.datasouceArray = [NSMutableArray array];
     }
     return _datasouceArray;
+}
+-(NSMutableArray *)colorsArray{
+    if (!_colorsArray) {
+        self.colorsArray = [NSMutableArray array];
+    }
+    return _colorsArray;
 }
 
 -(void)loadView{
@@ -49,6 +56,8 @@ static NSString *identifier = @"Cell";
     self.organizationalStructureListView.tableView.dataSource = self;
     self.organizationalStructureListView.tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
     [self.organizationalStructureListView.tableView registerClass:[CompanyOrganizationalStructureTableViewCell class] forCellReuseIdentifier:identifier];
+    
+      
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -131,6 +140,7 @@ static NSString *identifier = @"Cell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 
 {
+    
     if (!_isEmpty){
         CompanyOrganizationalStructureTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
         if (!cell) {
@@ -138,6 +148,44 @@ static NSString *identifier = @"Cell";
         }
         CompanyOrganizationalStructure * organizationalStructure = self.datasouceArray[indexPath.row];
         cell.companyOrganizationalStructure = organizationalStructure;
+        
+        switch (indexPath.row % 10) {
+            case 0:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                break;
+            case 1:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                break;
+            case 2:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                break;
+            case 3:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                break;
+            case 4:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                break;
+            case 5:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed: 37/ 255.0 green:155 / 255.0 blue: 35 / 255.0 alpha:1];
+                break;
+                
+            case 6:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed:0 green:151 / 255.0 blue: 136 / 255.0 alpha:0.8];
+                break;
+            case 7:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed: 238/ 255.0 green:23 / 255.0 blue: 39 / 255.0 alpha:1];
+                break;
+                
+            case 8:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed: 254/ 255.0 green:65 / 255.0 blue: 129 / 255.0 alpha:1];
+                break;
+                
+            case 9:
+                cell.nameShorthandLabel.backgroundColor = [UIColor colorWithRed:62/ 255.0 green:80 / 255.0 blue: 182 / 255.0 alpha:1];
+                break;
+            default:
+                break;
+        }
         return cell;
     } else {
         UITableViewCell * acell = [tableView dequeueReusableCellWithIdentifier:identifier];
