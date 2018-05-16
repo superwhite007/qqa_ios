@@ -138,7 +138,7 @@
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
     }
-    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"update", @"about", @"update", @"about", nil];
+    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"info", @"youth_info", @"contact-1", @"cloud_storge-1", nil];
     for (int i = 0; i < imageArray.count; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
         firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 +  6 + 15  + 5+ i * 60, 20, 20);
