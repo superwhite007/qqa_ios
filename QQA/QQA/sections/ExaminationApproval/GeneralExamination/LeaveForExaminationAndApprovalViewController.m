@@ -101,7 +101,7 @@
 //    introducePersonLabel.backgroundColor = [UIColor redColor];
 //    NSMutableString * introduceStr = [NSMutableString stringWithFormat:@"11111"];
     [self.view addSubview:introducePersonLabel];
-    _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"其他", nil];
+    _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"外出", @"其他", nil];
     for (int i = 0; i < 3 ; i++) {
         if (i == 0) {
             LMJDropdownMenu * dropdownMenu = [[LMJDropdownMenu alloc] init];
@@ -185,6 +185,8 @@
         self.typeOfStr = @"107";
     } else if (number == 8){
         self.typeOfStr = @"108";
+    } else if (number == 9){
+        self.typeOfStr = @"109";
     }
 }
 

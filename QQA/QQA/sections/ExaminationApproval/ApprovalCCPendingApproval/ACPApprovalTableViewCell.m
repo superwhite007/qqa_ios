@@ -101,6 +101,9 @@
         self.type.text =  @"工伤假";
         
     } else if ([aCPApproval.type isEqualToString:@"108"]){
+        self.type.text = @"外出";
+        
+    } else if ([aCPApproval.type isEqualToString:@"109"]){
         self.type.text = @"其他";
         
     }

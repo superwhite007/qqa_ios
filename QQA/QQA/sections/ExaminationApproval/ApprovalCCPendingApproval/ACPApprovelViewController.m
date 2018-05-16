@@ -290,6 +290,8 @@ static NSString *identifierOne = @"Cell";
     } else if ([str isEqualToString:@"107"]){
         return  @"工伤假";
     } else if ([str isEqualToString:@"108"]){
+        return @"外出";
+    } else if ([str isEqualToString:@"108"]){
         return @"其他";
     }
     return @"其他";
