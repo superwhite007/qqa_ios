@@ -184,6 +184,7 @@ static NSString *identifierOne = @"Cell";
         }
         ACPApproval * approval = self.datasouceArray[indexPath.row];
         cell.aCPApproval = approval;
+        cell.userFamily.textColor = [UIColor whiteColor];
         switch (indexPath.row % 10) {
             case 0:
                 cell.userFamily.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];

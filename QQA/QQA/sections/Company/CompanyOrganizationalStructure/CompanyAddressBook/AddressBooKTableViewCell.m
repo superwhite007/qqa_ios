@@ -28,6 +28,7 @@
 //    _shortName.layer.borderWidth = 1;
     _shortName.layer.masksToBounds = YES;
     _shortName.textAlignment = NSTextAlignmentCenter;
+    _shortName.textColor = [UIColor whiteColor];
     [self.contentView addSubview:self.shortName];
     _peopleName = [[UILabel alloc] initWithFrame:CGRectMake(60 , 10, iphoneWidth - 120 , 40)];
     [self.contentView addSubview:_peopleName];

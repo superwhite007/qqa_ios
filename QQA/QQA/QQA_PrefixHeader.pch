@@ -22,8 +22,8 @@
 
 
 //#define CONST_SERVER_ADDRESS   @"http://172.19.12.6"
-#define CONST_SERVER_ADDRESS   @"http://qqoatest.youth.cn" //测试环境
-//#define CONST_SERVER_ADDRESS   @"http://qqoa.youth.cn"//正式发布环境
+//#define CONST_SERVER_ADDRESS   @"http://qqoatest.youth.cn" //测试环境
+#define CONST_SERVER_ADDRESS   @"http://qqoa.youth.cn"//正式发布环境
 
 //#define  appkeyUM  @"5a3761a6f43e4818c00001d4"
 
