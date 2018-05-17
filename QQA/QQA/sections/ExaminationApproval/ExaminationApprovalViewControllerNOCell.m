@@ -61,10 +61,9 @@
     [self.datasourceRedpoint addObject:@"0"];
     for (int i = 0; i < self.datasourceRedpoint.count; i++) {
         UILabel *redpointLabel = [[UILabel alloc] init];
-        
         if ([[UIScreen mainScreen] bounds].size.width > 321) {
             redpointLabel.frame = CGRectMake(iphoneWidth - 105, iphoneWidth * 2 / 3 + 10 + 15 + 55 + i * 60, 20, 20);
-        }{
+        }else{
             redpointLabel.frame = CGRectMake(iphoneWidth - 105, iphoneWidth * 2 / 3  + 55 + i * 45, 20, 20);
         }
         [self.view addSubview:redpointLabel];
