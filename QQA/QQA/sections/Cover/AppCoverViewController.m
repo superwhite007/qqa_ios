@@ -32,7 +32,7 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
     _documentTxtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
-    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.0.1"];
+    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.1.0"];
     
 }
 
