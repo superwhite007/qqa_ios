@@ -191,6 +191,7 @@
             titleLabe.layer.masksToBounds = YES;
             titleLabe.textAlignment = NSTextAlignmentCenter;
             titleLabe.font = [UIFont systemFontOfSize:30];
+            titleLabe.textColor = [UIColor whiteColor];
             if (i == 0) {
                 NSString * str = [NSString stringWithFormat:@"%@", [mArrayOFApproverAndCC[i][j] objectForKey:@"type"]];
                 if ([str isEqualToString:@"Agreed"]) {
@@ -235,6 +236,7 @@
                 titleLabe.titleLabel.textColor = [UIColor whiteColor];
                 titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
                 titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
+                [titleLabe setTitleColor:[UIColor whiteColor]forState:UIControlStateNormal];
                 [self.view addSubview:titleLabe];
                 
                 switch (j % 5) {
@@ -357,6 +359,7 @@
                 titleLabe.titleLabel.textColor = [UIColor whiteColor];
                 titleLabe.titleLabel.textAlignment = NSTextAlignmentCenter;
                 titleLabe.titleLabel.font = [UIFont systemFontOfSize:30];
+                [titleLabe setTitleColor:[UIColor whiteColor]forState:UIControlStateNormal];
                 [self.view addSubview:titleLabe];
                 
                 switch (j % 5) {

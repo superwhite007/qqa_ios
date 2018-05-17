@@ -241,6 +241,7 @@
             titleLabe.layer.masksToBounds = YES;
             titleLabe.textAlignment = NSTextAlignmentCenter;
             titleLabe.font = [UIFont systemFontOfSize:30];
+            titleLabe.textColor = [UIColor whiteColor];
             switch (j % 5) {
                 case 0:
                     titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
@@ -296,6 +297,7 @@
             titleLabe.layer.masksToBounds = YES;
             titleLabe.textAlignment = NSTextAlignmentCenter;
             titleLabe.font = [UIFont systemFontOfSize:30];
+            titleLabe.textColor = [UIColor whiteColor];
             switch (j % 5) {
                 case 0:
                     titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
