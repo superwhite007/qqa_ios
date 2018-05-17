@@ -267,14 +267,35 @@
         for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
             UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
             UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
-            titleLabe.layer.borderColor = [UIColor blackColor].CGColor;
-            titleLabe.layer.borderWidth = 1;
-            titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
+//            titleLabe.layer.borderColor = [UIColor blackColor].CGColor;
+//            titleLabe.layer.borderWidth = 1;
+//            titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
             titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
             titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
             titleLabe.layer.masksToBounds = YES;
             titleLabe.textAlignment = NSTextAlignmentCenter;
             titleLabe.font = [UIFont systemFontOfSize:30];
+            switch (j % 5) {
+                case 0:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                    break;
+                case 1:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                    break;
+                case 2:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                    break;
+                case 3:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                    break;
+                case 4:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
             [self.view addSubview:titleLabe];
             imgView.layer.borderWidth = 1;
             imgView.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
