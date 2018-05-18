@@ -138,6 +138,11 @@ static NSString *identifier = @"Cell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     }
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+        
+    }else{
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+    }
     cell.textLabel.text = [NSString stringWithFormat:@"打卡时间：%@   成功",[self.datasource[indexPath.row]  objectForKey:@"clockTime"]];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
