@@ -22,23 +22,23 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"https://api.app.net/";
         [_sharedClient.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
             switch (status) {
                 case AFNetworkReachabilityStatusReachableViaWWAN:
-                {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"当前网络情况"
-                                                                    message:@"2g/3g/4g连接"
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
-                }
+//                {
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"当前网络情况"
+//                                                                    message:@"2g/3g/4g连接"
+//                                                                   delegate:nil
+//                                                          cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+//                }
                     break;
                     
                 case AFNetworkReachabilityStatusReachableViaWiFi:
-                {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"当前网络情况"
-                                                                    message:@"wifi连接"
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
-                }
+//                {
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"当前网络情况"
+//                                                                    message:@"wifi连接"
+//                                                                   delegate:nil
+//                                                          cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+//                }
                     break;
                     
                 case AFNetworkReachabilityStatusNotReachable:
