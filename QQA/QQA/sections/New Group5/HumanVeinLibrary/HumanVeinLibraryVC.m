@@ -35,7 +35,7 @@
 }
 
 -(void)addtableView{
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + searchBarHeigint, self.view.bounds.size.width, self.view.bounds.size.height - searchBarHeigint) style:(UITableViewStylePlain)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + searchBarHeigint, self.view.bounds.size.width, self.view.bounds.size.height - searchBarHeigint - 64) style:(UITableViewStylePlain)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
