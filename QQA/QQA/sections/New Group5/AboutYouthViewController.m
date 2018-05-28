@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     [self.navigationItem setTitle:@"青春"];
     self.view.backgroundColor = [UIColor redColor];
-    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.1.0"];
+    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.1.1"];
     
 }
 

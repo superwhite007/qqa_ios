@@ -32,7 +32,7 @@
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentfilePath = paths.firstObject;
     _documentTxtPath = [documentfilePath stringByAppendingPathComponent:@"bada.txt"];
-    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.1.0"];
+    [self setAppCoverImageName:@"app_face.png"  title:@"V1.0.1.1"];
     
 }
 
@@ -223,7 +223,7 @@
     scanButton.titleLabel.font = [UIFont systemFontOfSize:24];
     scanButton.backgroundColor = [UIColor redColor];
     [scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [scanButton addTarget:self action:@selector(startScanssss) forControlEvents:UIControlEventTouchUpInside];
+    [scanButton addTarget:self action:@selector(startScanssssDelete) forControlEvents:UIControlEventTouchUpInside];
     [plantIDEeyView addSubview:scanButton];
     
 }
