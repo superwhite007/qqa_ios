@@ -31,6 +31,8 @@
 		AA392A531FEC947800C1C581 /* UMSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA392A521FEC947800C1C581 /* UMSecondViewController.m */; };
 		AA392A561FEC94D100C1C581 /* UMFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA392A551FEC94D100C1C581 /* UMFirstViewController.m */; };
 		AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */; };
+		AA42F74F20BB9263006BF7E6 /* HumanVeinLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F74E20BB9263006BF7E6 /* HumanVeinLibraryVC.m */; };
+		AA42F75320BB9354006BF7E6 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75220BB9354006BF7E6 /* NewContactViewController.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
 		AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676020A13A1A0088CF64 /* CycleScrollView.m */; };
@@ -147,6 +149,10 @@
 		AA392A551FEC94D100C1C581 /* UMFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMFirstViewController.m; sourceTree = "<group>"; };
 		AA3A75341FE50BC000F3EB25 /* RulesDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RulesDetailViewController.h; sourceTree = "<group>"; };
 		AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RulesDetailViewController.m; sourceTree = "<group>"; };
+		AA42F74D20BB9263006BF7E6 /* HumanVeinLibraryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanVeinLibraryVC.h; sourceTree = "<group>"; };
+		AA42F74E20BB9263006BF7E6 /* HumanVeinLibraryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanVeinLibraryVC.m; sourceTree = "<group>"; };
+		AA42F75120BB9354006BF7E6 /* NewContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewContactViewController.h; sourceTree = "<group>"; };
+		AA42F75220BB9354006BF7E6 /* NewContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewContactViewController.m; sourceTree = "<group>"; };
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		AA5545121FE7BD410031F846 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA5545141FE7BE160031F846 /* QQA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QQA.entitlements; sourceTree = "<group>"; };
@@ -475,6 +481,17 @@
 			path = IInitiatedtheExamination;
 			sourceTree = "<group>";
 		};
+		AA42F75020BB92E6006BF7E6 /* HumanVeinLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				AA42F74D20BB9263006BF7E6 /* HumanVeinLibraryVC.h */,
+				AA42F74E20BB9263006BF7E6 /* HumanVeinLibraryVC.m */,
+				AA42F75120BB9354006BF7E6 /* NewContactViewController.h */,
+				AA42F75220BB9354006BF7E6 /* NewContactViewController.m */,
+			);
+			path = HumanVeinLibrary;
+			sourceTree = "<group>";
+		};
 		AA75675D20A139E50088CF64 /* CycleScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -578,6 +595,7 @@
 			children = (
 				AAEF4CC21FB9615F00474C07 /* MeInformationViewController.h */,
 				AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */,
+				AA42F75020BB92E6006BF7E6 /* HumanVeinLibrary */,
 				AAB675C11FBBE58E00BF696B /* MessageViewController.h */,
 				AAB675C21FBBE58E00BF696B /* MessageViewController.m */,
 				AA199AF71FC3F01D00BCE01A /* SendTheScopeViewController.h */,
@@ -894,6 +912,7 @@
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
 				AA1E54A520297955009A532A /* Reachability.m in Sources */,
 				AAC191F820A183D700494B62 /* CompanyViewControllerNoCell.m in Sources */,
+				AA42F74F20BB9263006BF7E6 /* HumanVeinLibraryVC.m in Sources */,
 				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
@@ -915,6 +934,7 @@
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
 				AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */,
+				AA42F75320BB9354006BF7E6 /* NewContactViewController.m in Sources */,
 				AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
