@@ -10,6 +10,7 @@
 #import "AboutYouthViewController.h"
 #import "MessageViewController.h"
 #import "VersionInformationViewController.h"
+#import "HumanVeinLibraryVC.h"
 
 @interface MeInformationViewController ()
 
@@ -23,7 +24,7 @@
     [super viewDidLoad];
     
     UINavigationBar *navBar = [UINavigationBar appearance];
-    navBar.barTintColor = [UIColor redColor];
+    navBar.barTintColor = [UIColor colorWithRed:245  / 255.0 green:93  / 255.0 blue:84 / 255.0 alpha:1];
     NSDictionary *dict = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [navBar setTitleTextAttributes:dict];
     navBar.translucent = NO;
@@ -34,7 +35,7 @@
 
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
-    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青青",  nil];
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青青", @"人脉库",  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 6 + i * 60, iphoneWidth - 35, 60);
@@ -65,7 +66,7 @@
         imgView.alpha = 0.6;
         [self.view addSubview:imgView];
     }
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 6 + i * 60 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
@@ -87,6 +88,10 @@
     }else if (sender.tag == 2){
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
         [self.navigationController pushViewController:aboutYouthVC animated:YES];
+    }
+    else if (sender.tag == 3){
+        HumanVeinLibraryVC * humanVC = [HumanVeinLibraryVC new];
+        [self.navigationController pushViewController:humanVC animated:YES];
     }
 }
 
