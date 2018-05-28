@@ -33,6 +33,7 @@
 		AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A75351FE50BC000F3EB25 /* RulesDetailViewController.m */; };
 		AA42F74F20BB9263006BF7E6 /* HumanVeinLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F74E20BB9263006BF7E6 /* HumanVeinLibraryVC.m */; };
 		AA42F75320BB9354006BF7E6 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75220BB9354006BF7E6 /* NewContactViewController.m */; };
+		AA42F75620BBCC7F006BF7E6 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75520BBCC7F006BF7E6 /* DataModel.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
 		AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676020A13A1A0088CF64 /* CycleScrollView.m */; };
@@ -153,6 +154,8 @@
 		AA42F74E20BB9263006BF7E6 /* HumanVeinLibraryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanVeinLibraryVC.m; sourceTree = "<group>"; };
 		AA42F75120BB9354006BF7E6 /* NewContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewContactViewController.h; sourceTree = "<group>"; };
 		AA42F75220BB9354006BF7E6 /* NewContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewContactViewController.m; sourceTree = "<group>"; };
+		AA42F75420BBCC7F006BF7E6 /* DataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
+		AA42F75520BBCC7F006BF7E6 /* DataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		AA5545121FE7BD410031F846 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA5545141FE7BE160031F846 /* QQA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QQA.entitlements; sourceTree = "<group>"; };
@@ -486,6 +489,8 @@
 			children = (
 				AA42F74D20BB9263006BF7E6 /* HumanVeinLibraryVC.h */,
 				AA42F74E20BB9263006BF7E6 /* HumanVeinLibraryVC.m */,
+				AA42F75420BBCC7F006BF7E6 /* DataModel.h */,
+				AA42F75520BBCC7F006BF7E6 /* DataModel.m */,
 				AA42F75120BB9354006BF7E6 /* NewContactViewController.h */,
 				AA42F75220BB9354006BF7E6 /* NewContactViewController.m */,
 			);
@@ -925,6 +930,7 @@
 				AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */,
 				AA20C6A01FD14EB00095AF0F /* CompanyOrganizationalStructureTableViewCell.m in Sources */,
 				AAD911FE1FD691B8002A42B5 /* CompanyAddressBookViewController.m in Sources */,
+				AA42F75620BBCC7F006BF7E6 /* DataModel.m in Sources */,
 				AA20C6971FD147BC0095AF0F /* CompanyBylawsViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
