@@ -132,9 +132,9 @@
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman11111nsl%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 4001) {
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 40001) {
                                                                                                                dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送成功"];                                                      });
-                                                    } else if ( [[dataBack objectForKey:@"message"] intValue] == 4002) {
+                                                    } else if ( [[dataBack objectForKey:@"message"] intValue] == 40002) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送失败"];                                                      });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]]) {
