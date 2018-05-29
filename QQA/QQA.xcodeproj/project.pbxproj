@@ -501,10 +501,18 @@
 				AA42F75B20BBE0C0006BF7E6 /* HumanCell.m */,
 				AA42F75420BBCC7F006BF7E6 /* DataModel.h */,
 				AA42F75520BBCC7F006BF7E6 /* DataModel.m */,
+				AA5C193320BCE49600C8EF8E /* NewContact */,
+			);
+			path = HumanVeinLibrary;
+			sourceTree = "<group>";
+		};
+		AA5C193320BCE49600C8EF8E /* NewContact */ = {
+			isa = PBXGroup;
+			children = (
 				AA42F75120BB9354006BF7E6 /* NewContactViewController.h */,
 				AA42F75220BB9354006BF7E6 /* NewContactViewController.m */,
 			);
-			path = HumanVeinLibrary;
+			path = NewContact;
 			sourceTree = "<group>";
 		};
 		AA75675D20A139E50088CF64 /* CycleScrollView */ = {

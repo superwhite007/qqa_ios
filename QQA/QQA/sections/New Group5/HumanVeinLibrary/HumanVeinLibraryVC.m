@@ -9,6 +9,7 @@
 #import "HumanVeinLibraryVC.h"
 #import "DataModel.h"
 #define searchBarHeigint 60
+#import "NewContactViewController.h"
 
 @interface HumanVeinLibraryVC ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -30,6 +31,8 @@
     [self.navigationItem setTitle:@"人脉库"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newContact)];
 //    NSLog(@"x,y.width,height  %f,%f,%f,%f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    
+    [self getHumanVeinLibraryFromServer];//获取人脉库人员列表
     [self addSearchBar];
     [self addtableView];
 }
@@ -78,6 +81,10 @@
     tempLab.backgroundColor = [UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1.0];
     return tempLab;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    NewContactViewController * newContactVC = [NewContactViewController new];
+    [self.navigationController pushViewController:newContactVC animated:NO];
+}
 
 
 
@@ -116,6 +123,48 @@
     self.tableData = tempArray[0];
     self.tableIndexData = tempArray[1];
 }
+
+-(void)getHumanVeinLibraryFromServer{
+    
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/app/check", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman1%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 1005) {
+//                                                        dispatch_async(dispatch_get_main_queue(), ^{
+//                                                            loginAgain = YES;
+//                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSLog(@"HUman2是个数组：%@", dataBack);
+                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSLog(@"HUMan3获取数据失败，问gitPersonPermissions");
+                                                }
+                                            }else{
+                                                 NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                            }
+                                        }];
+    [task resume];
+}
+
+
 -(void)cancelButton{
    [_bar resignFirstResponder];
 }
