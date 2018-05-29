@@ -25,6 +25,7 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((iphoneWidth - 100)/2, 10, 100, 100)];
     [imageView setImage:[UIImage imageNamed:@"new_contact"]];
+//    imageView.layer.cornerRadius = imageView.frame.size.width / 2;
     [self.view addSubview:imageView];
     _nameArray = @[@"姓名", @"描述", @"电话", @"邮件", @"QQ", @"微信"];
     _nameTextViewMArray = [NSMutableArray arrayWithObjects:_nameTextView, _describeTextView, _telephoneTextView, _mailTextView, _QQTextView, _weixinTextView, nil];
@@ -38,14 +39,14 @@
 -(void)addNamesAndTextViews{
     if (_nameArray.count > 0) {
         for (int i = 0; i < _nameArray.count; i++) {
-            UILabel * namesLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 120 + i * 35 ,iphoneWidth / 3 - 40, 30)];
+            UILabel * namesLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 120 + i * 35 ,iphoneWidth / 3 - 60, 30)];
             namesLabel.backgroundColor = [UIColor redColor];
             namesLabel.textAlignment = NSTextAlignmentCenter;
             namesLabel.text = _nameArray[i];
             namesLabel.textColor = [UIColor whiteColor];
             [self.view addSubview:namesLabel];
             
-            _nameTextViewMArray[i] = [[UITextView alloc] initWithFrame:CGRectMake(iphoneWidth / 3 - 20, 120 + i * 35 ,iphoneWidth * 2 / 3 - 40, 30)];
+            _nameTextViewMArray[i] = [[UITextView alloc] initWithFrame:CGRectMake(iphoneWidth / 3 - 25, 120 + i * 35 ,iphoneWidth * 2 / 3 , 30)];
 //            [_nameTextViewMArray[i] setFont:[UIFont systemFontOfSize:24]];
             [_nameTextViewMArray[i] setDelegate:self];
             [self.view addSubview:_nameTextViewMArray[i]];
@@ -56,22 +57,30 @@
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"]) {
-      
-    }else if (range.location >= 200){
-        
+        [textView resignFirstResponder];
+        return NO;
     }
     return YES;
 }
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_nameTextView endEditing:YES];
+    [_describeTextView endEditing:YES];
+    [_telephoneTextView endEditing:YES];
+    [_mailTextView endEditing:YES];
+    [_QQTextView endEditing:YES];
+    [_weixinTextView endEditing:YES];
+}
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    NSLog(@"123456 %@,%@\n", textView,textView.text);
-    
+    NSLog(@"123456：%@\n", textView.text);
 }
 
 
 -(void)ensure{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     [self cacellresignFirstResponder];
+    NSLog(@"姓名：%@, 描述：%@, 电话：%@,邮件： %@,QQ ：%@,微信： %@", _weixinTextView.text, _describeTextView.text, _telephoneTextView.text, _mailTextView.text, _QQTextView.text, _weixinTextView);
     
 }
 -(void)cacellresignFirstResponder{
