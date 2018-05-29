@@ -490,6 +490,13 @@
 			path = IInitiatedtheExamination;
 			sourceTree = "<group>";
 		};
+		AA37F21520BD377C00E4554F /* HumanDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HumanDetail;
+			sourceTree = "<group>";
+		};
 		AA42F75020BB92E6006BF7E6 /* HumanVeinLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +509,7 @@
 				AA42F75420BBCC7F006BF7E6 /* DataModel.h */,
 				AA42F75520BBCC7F006BF7E6 /* DataModel.m */,
 				AA5C193320BCE49600C8EF8E /* NewContact */,
+				AA37F21520BD377C00E4554F /* HumanDetail */,
 			);
 			path = HumanVeinLibrary;
 			sourceTree = "<group>";

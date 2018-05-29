@@ -84,17 +84,17 @@
 
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    NSLog(@"123456：%@\n", textView.text);
+//    NSLog(@"123456：%@\n", textView.text);
 }
 
 -(void)ensure{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     [self giveUpFirstReponcedWithBool:YES];
-    NSLog(@"姓名：%@, 描述：%@, 电话：%@,邮件： %@,QQ ：%@,微信： %@", _nameTextField.text, _describeTextField.text, _telephoneTextField.text, _mailTextField.text, _QQTextField.text, _weixinTextField.text);
+//    NSLog(@"姓名：%@, 描述：%@, 电话：%@,邮件： %@,QQ ：%@,微信： %@", _nameTextField.text, _describeTextField.text, _telephoneTextField.text, _mailTextField.text, _QQTextField.text, _weixinTextField.text);
     
     if (_nameTextField.text.length > 0 && _telephoneTextField.text.length > 0) {
-        [self alert:@"OK"];
-//        [self sendNewContactToServer];
+//        [self alert:@"OK"];
+        [self sendNewContactToServer];
     }else if(_nameTextField.text.length == 0){
         [self alert:@"请输入名字"];
     }else if(_telephoneTextField.text.length == 0){
@@ -103,7 +103,7 @@
 }
 
 -(void)sendNewContactToServer{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/app/check", CONST_SERVER_ADDRESS]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/connection/store", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -115,27 +115,35 @@
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:_nameTextField.text forKey:@"name"];
+    [mdict setObject:_describeTextField.text forKey:@"describe"];
+    [mdict setObject:_telephoneTextField.text forKey:@"telephone"];
+    [mdict setObject:_mailTextField.text forKey:@"email"];
+    [mdict setObject:_QQTextField.text forKey:@"QQ"];
+    [mdict setObject:_weixinTextField.text forKey:@"weiXin"];
+    NSLog(@"99999999999:%@",mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"$$$$$$error$$%@", error);
                                             if (data != nil) {
-                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman1%@", dataBack);
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman11111nsl%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 1005) {
-                                                        //                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                        //                                                            loginAgain = YES;
-                                                        //                                                        });
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 4001) {
+                                                                                                               dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送成功"];                                                      });
+                                                    } else if ( [[dataBack objectForKey:@"message"] intValue] == 4002) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送失败"];                                                      });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]]) {
                                                     NSLog(@"HUman2是个数组：%@", dataBack);
                                                 }else if ([dataBack isKindOfClass:[NSArray class]]) {
-                                                    NSLog(@"HUMan3获取数据失败，问gitPersonPermissions");
+                                                    NSLog(@"HUMan3获取数据失败，问gitPersonPermissions"); dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"失败"];                                                      });
                                                 }
                                             }else{
-                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions"); dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"失败"];                                                      });
                                             }
                                         }];
     [task resume];
