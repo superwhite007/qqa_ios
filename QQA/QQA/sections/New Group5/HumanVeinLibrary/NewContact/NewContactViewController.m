@@ -7,6 +7,7 @@
 //
 
 #import "NewContactViewController.h"
+#import "HumanVeinLibraryVC.h"
 
 @interface NewContactViewController ()
 
@@ -133,7 +134,7 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman11111nsl%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ( [[dataBack objectForKey:@"message"] intValue] == 40001) {
-                                                                                                               dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送成功"];                                                      });
+                                                                                                               dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送成功!"];                                                      });
                                                     } else if ( [[dataBack objectForKey:@"message"] intValue] == 40002) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送失败"];                                                      });
                                                     }
@@ -166,11 +167,19 @@
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // Nothing to do.
+        if ([title isEqualToString:@"发送成功!"]) {
+            for (UIViewController *controller in self.navigationController.viewControllers) {
+                NSLog(@"Class:%@", [controller class]);
+                if ([controller isKindOfClass:[HumanVeinLibraryVC class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                }
+            }
+        }
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
