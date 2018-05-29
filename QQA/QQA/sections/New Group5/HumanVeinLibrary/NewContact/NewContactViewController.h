@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewContactViewController : UIViewController<UITextViewDelegate>
+@interface NewContactViewController : UIViewController<UITextFieldDelegate>
 
-@property (nonatomic, strong) UITextView * nameTextView;
-@property (nonatomic, strong) UITextView * describeTextView;
-@property (nonatomic, strong) UITextView * telephoneTextView;
-@property (nonatomic, strong) UITextView * mailTextView;
-@property (nonatomic, strong) UITextView * QQTextView;
-@property (nonatomic, strong) UITextView * weixinTextView;
+@property (nonatomic, strong) UITextField * nameTextField;
+@property (nonatomic, strong) UITextField * describeTextField;
+@property (nonatomic, strong) UITextField * telephoneTextField;
+@property (nonatomic, strong) UITextField * mailTextField;
+@property (nonatomic, strong) UITextField * QQTextField;
+@property (nonatomic, strong) UITextField * weixinTextField;
 
 @end
