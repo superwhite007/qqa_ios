@@ -10,12 +10,14 @@
 
 @interface Human : NSObject
 
-@property (nonatomic, strong) NSString *humanName;
-@property (nonatomic, strong) NSString *somePeopleCreateTime;
-@property (nonatomic, strong) NSString *jurisdiction;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * content;
+@property (nonatomic, strong) NSString * isShow;
+@property (nonatomic, strong) NSString * connectionId;
 
--(instancetype)initWithHumanName:(NSString *)humanName
-            somePeopleCreateTime:(NSString *)somePeopleCreateTime
-                    jurisdiction:(NSString *)jurisdiction;
+-(instancetype)initWithHumanName:(NSString *)name
+                         content:(NSString *)content
+                          isShow:(NSString *)isShow
+                          connectionId:(NSString *)connectionId;
 
 @end

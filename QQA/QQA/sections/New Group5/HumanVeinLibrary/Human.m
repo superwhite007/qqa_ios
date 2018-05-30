@@ -10,14 +10,15 @@
 
 @implementation Human
 
--(instancetype)initWithHumanName:(NSString *)humanName somePeopleCreateTime:(NSString *)somePeopleCreateTime jurisdiction:(NSString *)jurisdiction{
+-(instancetype)initWithHumanName:(NSString *)name content:(NSString *)content isShow:(NSString *)isShow connectionId:(NSString *)connectionId{
     self = [super init];
     if (self) {
-        self.humanName = humanName;
-        self.somePeopleCreateTime = somePeopleCreateTime;
-        self.jurisdiction = jurisdiction;
+        self.name = name;
+        self.content = content;
+        self.isShow = isShow;
+        self.connectionId = connectionId;
     }
-    return  self;
+    return self;
 }
 -(void)setValue:(id)value forKey:(NSString *)key{
     NSLog(@"human：部分字段无意义");

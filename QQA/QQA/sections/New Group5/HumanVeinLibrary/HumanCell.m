@@ -7,8 +7,46 @@
 //
 
 #import "HumanCell.h"
+#import "Human.h"
 
 @implementation HumanCell
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self addAllViews];
+    }
+    return self;
+}
+-(void)addAllViews{
+    self.nameFamilyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 40, 40)];
+    self.nameFamilyLabel.layer.contentsScale = self.nameFamilyLabel.frame.size.width / 2;
+    self.nameFamilyLabel.layer.masksToBounds = YES;
+    self.nameFamilyLabel.textAlignment = NSTextAlignmentCenter;
+    _nameFamilyLabel.font = [UIFont systemFontOfSize:30];
+    [self.contentView addSubview:_nameLabel];
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, iphoneWidth / 3, 20)];
+    _nameLabel.font = [UIFont systemFontOfSize:20];
+    [self.contentView addSubview:_nameLabel];
+    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 40, iphoneWidth - 120, 10)];
+    _contentLabel.font = [UIFont systemFontOfSize:10];
+    [self.contentView addSubview:_contentLabel];
+    self.isShowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 120, 15, 30, 30)];
+    [self.contentView addSubview:_isShowImageView];
+}
+
+-(void)setHuman:(Human *)human{
+    self.nameFamilyLabel.text = [human.name substringToIndex:1];
+    self.nameLabel.text = human.name;
+    self.contentLabel.text = human.content;
+    if (human.isShow) {
+        self.isShowImageView.image = [UIImage imageNamed:@"lock"];
+    }else{
+        self.isShowImageView.image = [UIImage imageNamed:@"forward"];
+    }
+    self.connectionId.text = human.connectionId;
+    
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
