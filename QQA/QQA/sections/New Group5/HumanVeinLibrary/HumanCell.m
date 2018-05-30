@@ -31,7 +31,7 @@
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 40, iphoneWidth - 120, 10)];
     _contentLabel.font = [UIFont systemFontOfSize:10];
     [self.contentView addSubview:_contentLabel];
-    self.isShowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 40, 15, 30, 30)];
+    self.isShowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 50, 15, 30, 30)];
     [self.contentView addSubview:self.isShowImageView];
 }
 

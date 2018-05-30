@@ -15,7 +15,7 @@
 
 @interface HumanVeinLibraryVC ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
-@property(nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray * tableData;
 @property (nonatomic, strong) NSMutableArray * resultData;
 @property (nonatomic, strong) NSArray * tableIndexData;
@@ -50,9 +50,57 @@ static NSString *identifier = @"CELL";
     [self.navigationItem setTitle:@"人脉库"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newContact)];
     [self getHumanVeinLibraryFromServer];//获取人脉库人员列表
-    [self addSearchBar];
-    [self addtableView];
+    [self  addtableView];
+    
 }
+
+-(void)getHumanVeinLibraryFromServer{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/connection/index", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 40003) {
+                                                        [self.humanReinAllInformationMArray removeAllObjects];
+                                                        [self.humanNamesMArray removeAllObjects];
+                                                        NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
+                                                        for (NSDictionary * dict in dataListArray) {
+                                                            Human * human = [Human new];
+                                                            [human setValuesForKeysWithDictionary:dict];
+                                                            [self.humanReinAllInformationMArray addObject:human];
+                                                            [self.humanNamesMArray addObject:[dict objectForKey:@"name"]];
+                                                        }
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.tableView  reloadData];
+                                                            [self addSearchBar];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                            }
+                                        }];
+    [task resume];
+}
+
 
 -(void)addtableView{
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + searchBarHeigint, self.view.bounds.size.width, self.view.bounds.size.height - searchBarHeigint - 64) style:(UITableViewStylePlain)];
@@ -67,12 +115,10 @@ static NSString *identifier = @"CELL";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    return _searchActive ? _resultData.count : _tableData.count;
-    return 1;
+    return _searchActive ? _resultData.count : _tableData.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return _searchActive ? [_resultData[section] count] : [_tableData[section] count];
-    return _humanReinAllInformationMArray.count;
+    return _searchActive ? [_resultData[section] count] : [_tableData[section] count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
@@ -128,7 +174,6 @@ static NSString *identifier = @"CELL";
         default:
             break;
     }
-    NSLog(@"human.name%@", human.name);
     return  cell;
 }
 
@@ -182,85 +227,21 @@ static NSString *identifier = @"CELL";
     }
     [self.view addSubview:_bar];
     
+    NSLog(@"_humanNamesMArray222222222222:%@", _humanNamesMArray);
+    NSArray *testArr = _humanNamesMArray;
 //    NSArray *testArr = @[@"张三",@"李四",@"王五",@"赵六",@"田七",@"王小二",@"阿三", @"北京", @"啊北", @"必答", @"次次", @"达达", @"夫妇", @"哥哥", @"哈哈", @"爱你", @"久久", @"希望", @"北方", @"你好", @"哈啊哈", @"岁月", @"美好", @"咩咩", @"灭李", @"美丽", @"美的", @"妹妹", @"米恶化", @"眯会"];
-//    NSMutableArray * personArray = [NSMutableArray arrayWithCapacity:testArr.count];
-//    for (NSString * name in testArr)
-//    {
-//        DataModel * model = [DataModel new];
-//        model.aName = name;
-//        [personArray addObject:model];
-//    }
-//    NSArray * tempArray = [self sringSectioncompositor:personArray withSelector:@selector(aName)isDeleEmptyArray:YES];
-//    self.tableData = tempArray[0];
-//    self.tableIndexData = tempArray[1];
-}
-
--(void)searchHumanNameArray{
-    if (_humanNamesMArray.count == 0) {
-        return;
-    } else if (_humanNamesMArray.count > 0){
-        NSArray *testArr = _humanNamesMArray;
-        NSMutableArray * personArray = [NSMutableArray arrayWithCapacity:testArr.count];
-        for (NSString * name in testArr)
-        {
-            DataModel * model = [DataModel new];
-            model.aName = name;
-            [personArray addObject:model];
-        }
-        NSArray * tempArray = [self sringSectioncompositor:personArray withSelector:@selector(aName)isDeleEmptyArray:YES];
-        self.tableData = tempArray[0];
-        self.tableIndexData = tempArray[1];
-    }
-}
-
-
--(void)getHumanVeinLibraryFromServer{
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/connection/index", CONST_SERVER_ADDRESS]];
-    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.timeoutInterval = 10.0;
-    request.HTTPMethod = @"POST";
-    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
-    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
-    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
-    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
-    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
-    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    NSError * error = nil;
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
-    request.HTTPBody = jsonData;
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionTask *task = [session dataTaskWithRequest:request
-                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            if (data != nil) {
-                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ([[dataBack objectForKey:@"message"] intValue] == 40003) {
-                                                        NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
-                                                        NSLog(@"dataListArray:%@", dataListArray);
-                                                        
-                                                        for (NSDictionary * dict in dataListArray) {
-                                                            Human * human = [Human new];
-                                                            [human setValuesForKeysWithDictionary:dict];
-                                                           
-                                                            [self.humanReinAllInformationMArray addObject:human];
-                                                            [self.humanNamesMArray addObject:[dict objectForKey:@"name"]];
-                                                        }
-                                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                                            [self.tableView  reloadData];
-//                                                            [self searchHumanNameArray];
-                                                        });
-                                                    }
-                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    NSLog(@"Server tapy is wrong.");
-                                                }
-                                            }else{
-                                                 NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
-                                            }
-                                        }];
-    [task resume];
+    NSMutableArray * personArray = [NSMutableArray arrayWithCapacity:testArr.count];
+    for (NSString * name in testArr)
+    {
+        DataModel * model = [DataModel new];
+        model.aName = name;
+        [personArray addObject:model];
+    }
+    NSArray * tempArray = [self sringSectioncompositor:personArray withSelector:@selector(aName)isDeleEmptyArray:YES];
+    self.tableData = tempArray[0];
+    self.tableIndexData = tempArray[1];
+    [self.tableView  reloadData];
 }
 
 
@@ -324,7 +305,6 @@ static NSString *identifier = @"CELL";
 //将传进来的对象按通讯录那样分组排序，每个section中也排序  dataarray是中存储的是一组对象，selector是属性名
 - (NSArray *)sringSectioncompositor:(NSArray *)dataArray withSelector:(SEL)selector isDeleEmptyArray:(BOOL)isDele
 {
-    //    UILocalizedIndexedCollation是苹果贴心为开发者提供的排序工具，会自动根据不同地区生成索引标题
     UILocalizedIndexedCollation  *collation = [UILocalizedIndexedCollation currentCollation];
     NSMutableArray * indexArray = [NSMutableArray arrayWithArray:collation.sectionTitles];
     NSUInteger sectionNumber = indexArray.count;
@@ -419,8 +399,6 @@ static NSString *identifier = @"CELL";
 {
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
-
-
 
 
 
