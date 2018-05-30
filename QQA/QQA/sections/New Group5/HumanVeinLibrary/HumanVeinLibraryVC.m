@@ -30,8 +30,6 @@
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"人脉库"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newContact)];
-//    NSLog(@"x,y.width,height  %f,%f,%f,%f", self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-    
     [self getHumanVeinLibraryFromServer];//获取人脉库人员列表
     [self addSearchBar];
     [self addtableView];
@@ -126,7 +124,7 @@
 
 -(void)getHumanVeinLibraryFromServer{
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/app/check", CONST_SERVER_ADDRESS]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/connection/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -145,17 +143,15 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
-                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman1%@", dataBack);
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 1005) {
-//                                                        dispatch_async(dispatch_get_main_queue(), ^{
-//                                                            loginAgain = YES;
-//                                                        });
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 40003) {
+                                                        NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
+                                                        NSLog(@"dataListArray:%@", dataListArray);
+                                                        
                                                     }
-                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
-                                                    NSLog(@"HUman2是个数组：%@", dataBack);
-                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
-                                                    NSLog(@"HUMan3获取数据失败，问gitPersonPermissions");
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
                                                 }
                                             }else{
                                                  NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
