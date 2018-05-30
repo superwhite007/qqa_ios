@@ -91,6 +91,43 @@ static NSString *identifier = @"CELL";
     }
     Human * human = self.humanReinAllInformationMArray[indexPath.row];
     cell.human = human;
+    switch (indexPath.row % 10) {
+        case 0:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+            break;
+        case 1:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+            break;
+        case 2:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+            break;
+        case 3:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+            break;
+        case 4:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+            break;
+        case 5:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed: 37/ 255.0 green:155 / 255.0 blue: 35 / 255.0 alpha:1];
+            break;
+            
+        case 6:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed:0 green:151 / 255.0 blue: 136 / 255.0 alpha:0.8];
+            break;
+        case 7:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed: 238/ 255.0 green:23 / 255.0 blue: 39 / 255.0 alpha:1];
+            break;
+            
+        case 8:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed: 254/ 255.0 green:65 / 255.0 blue: 129 / 255.0 alpha:1];
+            break;
+            
+        case 9:
+            cell.nameFamilyLabel.backgroundColor = [UIColor colorWithRed:62/ 255.0 green:80 / 255.0 blue: 182 / 255.0 alpha:1];
+            break;
+        default:
+            break;
+    }
     NSLog(@"human.name%@", human.name);
     return  cell;
 }
