@@ -135,7 +135,7 @@ static NSString *identifier = @"CELL";
         cell = [[HumanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    Human * human = self.humanReinAllInformationMArray[indexPath.row];
+    Human * human = _searchActive ? _resultData[indexPath.section][indexPath.row] : _tableData[indexPath.section][indexPath.row]; 
     cell.human = human;
     switch (indexPath.row % 10) {
         case 0:
@@ -238,7 +238,7 @@ static NSString *identifier = @"CELL";
         model.aName = name;
         [personArray addObject:model];
     }
-    NSArray * tempArray = [self sringSectioncompositor:personArray withSelector:@selector(aName)isDeleEmptyArray:YES];
+    NSArray * tempArray = [self sringSectioncompositor:_humanReinAllInformationMArray withSelector:@selector(name)isDeleEmptyArray:YES];
     self.tableData = tempArray[0];
     self.tableIndexData = tempArray[1];
     [self.tableView  reloadData];
@@ -310,20 +310,17 @@ static NSString *identifier = @"CELL";
     NSUInteger sectionNumber = indexArray.count;
     //建立每个section数组
     NSMutableArray * sectionArray = [NSMutableArray arrayWithCapacity:sectionNumber];
-    for (int n = 0; n < sectionNumber; n++)
-    {
+    for (int n = 0; n < sectionNumber; n++){
         NSMutableArray *subArray = [NSMutableArray array];
         [sectionArray addObject:subArray];
     }
-    for (DataModel *model in dataArray)
-    {
+    for (Human *model in _humanReinAllInformationMArray){
         //        根据SEL方法返回的字符串判断对象应该处于哪个分区
         NSInteger index = [collation sectionForObject:model collationStringSelector:selector];
         NSMutableArray *tempArray = sectionArray[index];
         [tempArray addObject:model];
     }
-    for (NSMutableArray *tempArray in sectionArray)
-    {
+    for (NSMutableArray *tempArray in sectionArray){
         //        根据SEL方法返回的string对数组元素排序
         NSArray* sorArray = [collation sortedArrayFromArray:tempArray collationStringSelector:selector];
         [tempArray removeAllObjects];
