@@ -20,8 +20,8 @@
     }
     return self;
 }
--(void)setValue:(id)value forKey:(NSString *)key{
-    NSLog(@"human：部分字段无意义");
-}
+//-(void)setValue:(id)value forKey:(NSString *)key{
+//    NSLog(@"human：部分字段无意义");
+//}
 
 @end

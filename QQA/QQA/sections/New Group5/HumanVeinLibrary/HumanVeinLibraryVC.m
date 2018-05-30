@@ -10,6 +10,8 @@
 #import "DataModel.h"
 #define searchBarHeigint 60
 #import "NewContactViewController.h"
+#import "Human.h"
+#import "HumanCell.h"
 
 @interface HumanVeinLibraryVC ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -21,10 +23,27 @@
 @property (nonatomic, assign) BOOL  searchActive;
 @property (nonatomic, strong) UISearchBar * bar;
 
+@property(nonatomic, strong) NSMutableArray * humanReinAllInformationMArray;
+@property(nonatomic, strong) NSMutableArray * humanNamesMArray;
+
 @end
 
 @implementation HumanVeinLibraryVC
 
+static NSString *identifier = @"CELL";
+
+-(NSMutableArray *)humanReinAllInformationMArray{
+    if (!_humanReinAllInformationMArray) {
+        _humanReinAllInformationMArray = [NSMutableArray array];
+    }
+    return _humanReinAllInformationMArray;
+}
+-(NSMutableArray *)humanNamesMArray{
+    if (!_humanNamesMArray) {
+        _humanNamesMArray = [NSMutableArray array];
+    }
+    return _humanNamesMArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
@@ -39,24 +58,41 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + searchBarHeigint, self.view.bounds.size.width, self.view.bounds.size.height - searchBarHeigint - 64) style:(UITableViewStylePlain)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    [self.tableView registerClass:[HumanCell class] forCellReuseIdentifier:identifier];
     [self.view addSubview:_tableView];
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    return 60;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _searchActive ? _resultData.count : _tableData.count;
+//    return _searchActive ? _resultData.count : _tableData.count;
+    return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _searchActive ? [_resultData[section] count] : [_tableData[section] count];
+//    return _searchActive ? [_resultData[section] count] : [_tableData[section] count];
+    return _humanReinAllInformationMArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"CELL";
-    UITableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!aCell) {
-        aCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+   
+//    UITableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//    if (!aCell) {
+//        aCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//        aCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    }
+//    DataModel * m = _searchActive ? _resultData[indexPath.section][indexPath.row] : _tableData[indexPath.section][indexPath.row];
+//    aCell.textLabel.text = m.aName;
+    
+    HumanCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[HumanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    DataModel * m = _searchActive ? _resultData[indexPath.section][indexPath.row] : _tableData[indexPath.section][indexPath.row];
-    aCell.textLabel.text = m.aName;
-    return  aCell;
+    Human * human = self.humanReinAllInformationMArray[indexPath.row];
+    cell.human = human;
+    NSLog(@"human.name%@", human.name);
+    return  cell;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
@@ -109,18 +145,37 @@
     }
     [self.view addSubview:_bar];
     
-    NSArray *testArr = @[@"张三",@"李四",@"王五",@"赵六",@"田七",@"王小二",@"阿三", @"北京", @"啊北", @"必答", @"次次", @"达达", @"夫妇", @"哥哥", @"哈哈", @"爱你", @"久久", @"希望", @"北方", @"你好", @"哈啊哈", @"岁月", @"美好", @"咩咩", @"灭李", @"美丽", @"美的", @"妹妹", @"米恶化", @"眯会"];
-    NSMutableArray * personArray = [NSMutableArray arrayWithCapacity:testArr.count];
-    for (NSString * name in testArr)
-    {
-        DataModel * model = [DataModel new];
-        model.aName = name;
-        [personArray addObject:model];
-    }
-    NSArray * tempArray = [self sringSectioncompositor:personArray withSelector:@selector(aName)isDeleEmptyArray:YES];
-    self.tableData = tempArray[0];
-    self.tableIndexData = tempArray[1];
+//    NSArray *testArr = @[@"张三",@"李四",@"王五",@"赵六",@"田七",@"王小二",@"阿三", @"北京", @"啊北", @"必答", @"次次", @"达达", @"夫妇", @"哥哥", @"哈哈", @"爱你", @"久久", @"希望", @"北方", @"你好", @"哈啊哈", @"岁月", @"美好", @"咩咩", @"灭李", @"美丽", @"美的", @"妹妹", @"米恶化", @"眯会"];
+//    NSMutableArray * personArray = [NSMutableArray arrayWithCapacity:testArr.count];
+//    for (NSString * name in testArr)
+//    {
+//        DataModel * model = [DataModel new];
+//        model.aName = name;
+//        [personArray addObject:model];
+//    }
+//    NSArray * tempArray = [self sringSectioncompositor:personArray withSelector:@selector(aName)isDeleEmptyArray:YES];
+//    self.tableData = tempArray[0];
+//    self.tableIndexData = tempArray[1];
 }
+
+-(void)searchHumanNameArray{
+    if (_humanNamesMArray.count == 0) {
+        return;
+    } else if (_humanNamesMArray.count > 0){
+        NSArray *testArr = _humanNamesMArray;
+        NSMutableArray * personArray = [NSMutableArray arrayWithCapacity:testArr.count];
+        for (NSString * name in testArr)
+        {
+            DataModel * model = [DataModel new];
+            model.aName = name;
+            [personArray addObject:model];
+        }
+        NSArray * tempArray = [self sringSectioncompositor:personArray withSelector:@selector(aName)isDeleEmptyArray:YES];
+        self.tableData = tempArray[0];
+        self.tableIndexData = tempArray[1];
+    }
+}
+
 
 -(void)getHumanVeinLibraryFromServer{
     
@@ -149,6 +204,17 @@
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
                                                         NSLog(@"dataListArray:%@", dataListArray);
                                                         
+                                                        for (NSDictionary * dict in dataListArray) {
+                                                            Human * human = [Human new];
+                                                            [human setValuesForKeysWithDictionary:dict];
+                                                           
+                                                            [self.humanReinAllInformationMArray addObject:human];
+                                                            [self.humanNamesMArray addObject:[dict objectForKey:@"name"]];
+                                                        }
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.tableView  reloadData];
+//                                                            [self searchHumanNameArray];
+                                                        });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
                                                     NSLog(@"Server tapy is wrong.");

@@ -11,12 +11,6 @@
 
 @interface HumanCell : UITableViewCell
 
-/*
- connectionId = 1;
- content = "\U7531\U674e\U9e4f2018\U5e7405\U670829\U65e5\U521b\U5efa";
- isShow = 1;
- name = "\U5f20\U98de";
- */
 @property (nonatomic, strong) UILabel * nameFamilyLabel;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * contentLabel;
