@@ -12,6 +12,7 @@
 #import "NewContactViewController.h"
 #import "Human.h"
 #import "HumanCell.h"
+#import "HumanDetailVC.h"
 
 @interface HumanVeinLibraryVC ()<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
@@ -198,8 +199,11 @@ static NSString *identifier = @"CELL";
     return tempLab;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    NewContactViewController * newContactVC = [NewContactViewController new];
+//    NewContactViewController * newContactVC = [NewContactViewController new];
 //    [self.navigationController pushViewController:newContactVC animated:NO];
+    HumanDetailVC * humanDetailVC = [HumanDetailVC new];
+    [self.navigationController pushViewController:humanDetailVC animated:NO];
+
 }
 
 

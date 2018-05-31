@@ -36,6 +36,7 @@
 		AA42F75620BBCC7F006BF7E6 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75520BBCC7F006BF7E6 /* DataModel.m */; };
 		AA42F75920BBDEA8006BF7E6 /* Human.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75820BBDEA8006BF7E6 /* Human.m */; };
 		AA42F75C20BBE0C0006BF7E6 /* HumanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75B20BBE0C0006BF7E6 /* HumanCell.m */; };
+		AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
 		AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676020A13A1A0088CF64 /* CycleScrollView.m */; };
@@ -162,6 +163,8 @@
 		AA42F75820BBDEA8006BF7E6 /* Human.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Human.m; sourceTree = "<group>"; };
 		AA42F75A20BBE0C0006BF7E6 /* HumanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanCell.h; sourceTree = "<group>"; };
 		AA42F75B20BBE0C0006BF7E6 /* HumanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanCell.m; sourceTree = "<group>"; };
+		AA4C376120BF7D41006DCDD7 /* HumanDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanDetailVC.h; sourceTree = "<group>"; };
+		AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanDetailVC.m; sourceTree = "<group>"; };
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		AA5545121FE7BD410031F846 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA5545141FE7BE160031F846 /* QQA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QQA.entitlements; sourceTree = "<group>"; };
@@ -493,6 +496,8 @@
 		AA37F21520BD377C00E4554F /* HumanDetail */ = {
 			isa = PBXGroup;
 			children = (
+				AA4C376120BF7D41006DCDD7 /* HumanDetailVC.h */,
+				AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */,
 			);
 			path = HumanDetail;
 			sourceTree = "<group>";
@@ -962,6 +967,7 @@
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
 				AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */,
+				AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */,
 				AAB4D49B1FC95D1700116355 /* WSDatePickerView.m in Sources */,
 				AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */,
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
