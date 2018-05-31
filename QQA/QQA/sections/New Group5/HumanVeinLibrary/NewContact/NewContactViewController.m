@@ -63,6 +63,30 @@
     [self.view addSubview:_QQTextField];
     [self.view addSubview:_weixinTextField];
     
+    /*QQ = "\U6682\U65e0";
+     appName = qqoa;
+     connectionId = 10;
+     describe = describe;
+     email = "1376035611@qq.com";
+     idEdit = 1;
+     message = 40005;
+     name = "\U66f9\U4e15";
+     serverType = "QQOA_SERVER";
+     telephone = 18335333445;
+     verBuilds = 1;
+     verFixs = 0;
+     verMajor = 0;
+     verMinor = 1;
+     weiXin = figthing;*/
+    if (_reviceDic.count > 0) {
+        _nameTextField.text = [_reviceDic objectForKey:@"name"];
+        _describeTextField.text = [_reviceDic objectForKey:@"describe"];
+        _telephoneTextField.text = [_reviceDic objectForKey:@"telephone"];
+        _mailTextField.text = [_reviceDic objectForKey:@"email"];
+        _QQTextField.text = [_reviceDic objectForKey:@"QQ"];
+        _weixinTextField.text = [_reviceDic objectForKey:@"weiXin"];
+    }
+    
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {

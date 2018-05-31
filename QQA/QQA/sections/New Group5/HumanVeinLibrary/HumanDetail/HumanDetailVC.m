@@ -14,11 +14,18 @@
 @property(nonatomic, strong) UIView * headerView;
 @property(nonatomic, strong) UILabel * nameLabel;
 @property(nonatomic, strong) UILabel * describeLabel;
+@property(nonatomic, strong) NSDictionary * sendToChangeDic;
 
 @end
 
 @implementation HumanDetailVC
 
+-(NSDictionary *)sendToChangeDic{
+    if (!_sendToChangeDic) {
+        _sendToChangeDic = [NSDictionary dictionary];
+    }
+    return _sendToChangeDic;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -143,15 +150,18 @@
     NSLog(@"idEdit:%@", [dict objectForKey:@"idEdit"]);
     if ([[dict objectForKey:@"idEdit"] intValue] == 1) {
         NSLog(@"有编辑权限");
+        _sendToChangeDic = dict;
+        NSLog(@"_sendToChangeDic_sendToChangeDic: %@", _sendToChangeDic);
+        
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStyleDone) target:self action:@selector(changeHumanInformations:)];
     }else if ([[dict objectForKey:@"idEdit"] intValue] == 0) {
         NSLog(@"无编辑权限");
     }
 }
 -(void)changeHumanInformations:(NSDictionary *)dict{
-    NSLog(@"555555555%@",dict);
     NewContactViewController * newContactVC = [NewContactViewController new];
     [self.navigationItem setTitle:@"编辑"];
+    newContactVC.reviceDic = _sendToChangeDic;
     [self.navigationController pushViewController:newContactVC animated:NO];
 
 }

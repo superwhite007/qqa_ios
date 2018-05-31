@@ -17,4 +17,6 @@
 @property (nonatomic, strong) UITextField * QQTextField;
 @property (nonatomic, strong) UITextField * weixinTextField;
 
+@property (nonatomic, strong) NSDictionary * reviceDic;
+
 @end
