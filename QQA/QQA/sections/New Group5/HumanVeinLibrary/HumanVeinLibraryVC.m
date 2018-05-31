@@ -201,7 +201,11 @@ static NSString *identifier = @"CELL";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
 //    NewContactViewController * newContactVC = [NewContactViewController new];
 //    [self.navigationController pushViewController:newContactVC animated:NO];
+    
+    Human * human = _searchActive ? _resultData[indexPath.section][indexPath.row] : _tableData[indexPath.section][indexPath.row];
+    
     HumanDetailVC * humanDetailVC = [HumanDetailVC new];
+    humanDetailVC.connectionIdStr = [NSString stringWithFormat:@"%@", human.connectionId];
     [self.navigationController pushViewController:humanDetailVC animated:NO];
 
 }

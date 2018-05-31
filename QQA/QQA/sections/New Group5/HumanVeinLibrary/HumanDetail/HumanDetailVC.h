@@ -10,4 +10,5 @@
 
 @interface HumanDetailVC : UIViewController
 
+@property (nonatomic, strong) NSString * connectionIdStr;
 @end
