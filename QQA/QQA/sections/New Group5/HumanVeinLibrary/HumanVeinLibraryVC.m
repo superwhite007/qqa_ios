@@ -231,13 +231,6 @@ static NSString *identifier = @"CELL";
     NSArray *testArr = _humanNamesMArray;
 //    NSArray *testArr = @[@"张三",@"李四",@"王五",@"赵六",@"田七",@"王小二",@"阿三", @"北京", @"啊北", @"必答", @"次次", @"达达", @"夫妇", @"哥哥", @"哈哈", @"爱你", @"久久", @"希望", @"北方", @"你好", @"哈啊哈", @"岁月", @"美好", @"咩咩", @"灭李", @"美丽", @"美的", @"妹妹", @"米恶化", @"眯会"];
     
-    NSMutableArray * personArray = [NSMutableArray arrayWithCapacity:testArr.count];
-    for (NSString * name in testArr)
-    {
-        DataModel * model = [DataModel new];
-        model.aName = name;
-        [personArray addObject:model];
-    }
     NSArray * tempArray = [self sringSectioncompositor:_humanReinAllInformationMArray withSelector:@selector(name)isDeleEmptyArray:YES];
     self.tableData = tempArray[0];
     self.tableIndexData = tempArray[1];
@@ -364,9 +357,9 @@ static NSString *identifier = @"CELL";
                 [_resultData addObject:[NSMutableArray array]];
             }
             
-            [obj enumerateObjectsUsingBlock:^(DataModel * model, NSUInteger bIdx, BOOL * _Nonnull stop) {
+            [obj enumerateObjectsUsingBlock:^(Human * model, NSUInteger bIdx, BOOL * _Nonnull stop) {
                 
-                NSString *tempStr = model.aName;
+                NSString *tempStr = model.name;
                 //----------->把所有的搜索结果转成成拼音
                 NSString *pinyin = [self transformToPinyin:tempStr isQuanPin:NO];
                 
