@@ -47,7 +47,7 @@ static NSString *identifier = @"CELL";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"人脉库"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newContact)];
     [self getHumanVeinLibraryFromServer];//获取人脉库人员列表

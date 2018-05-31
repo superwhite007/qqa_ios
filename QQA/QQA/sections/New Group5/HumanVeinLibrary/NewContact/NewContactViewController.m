@@ -26,7 +26,6 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((iphoneWidth - 100)/2, 10, 100, 100)];
     [imageView setImage:[UIImage imageNamed:@"new_contact"]];
-//    imageView.layer.cornerRadius = imageView.frame.size.width / 2;
     [self.view addSubview:imageView];
     _nameArray = @[@"姓名", @"描述", @"电话", @"邮件", @"QQ", @"微信"];
     _nameTextFieldMArray = [NSMutableArray arrayWithObjects:_nameTextField, _describeTextField, _telephoneTextField, _mailTextField, _QQTextField, _weixinTextField, nil];
@@ -37,10 +36,10 @@
     if (_nameArray.count > 0) {
         for (int i = 0; i < _nameArray.count; i++) {
             UILabel * namesLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 120 + i * 35 ,iphoneWidth / 3 - 60, 30)];
-            namesLabel.backgroundColor = [UIColor redColor];
+//            namesLabel.backgroundColor = [UIColor redColor];
             namesLabel.textAlignment = NSTextAlignmentCenter;
             namesLabel.text = _nameArray[i];
-            namesLabel.textColor = [UIColor whiteColor];
+//            namesLabel.textColor = [UIColor whiteColor];
             [self.view addSubview:namesLabel];
         }
     }

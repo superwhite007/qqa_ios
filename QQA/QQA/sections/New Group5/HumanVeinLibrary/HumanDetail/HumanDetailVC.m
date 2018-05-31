@@ -140,11 +140,11 @@
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
     }
-    
-    if ([dict objectForKey:@"idEdit"]) {
+    NSLog(@"idEdit:%@", [dict objectForKey:@"idEdit"]);
+    if ([[dict objectForKey:@"idEdit"] intValue] == 1) {
         NSLog(@"有编辑权限");
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStyleDone) target:self action:@selector(changeHumanInformations:)];
-    }else{
+    }else if ([[dict objectForKey:@"idEdit"] intValue] == 0) {
         NSLog(@"无编辑权限");
     }
 }
