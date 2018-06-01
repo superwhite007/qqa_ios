@@ -162,6 +162,7 @@
     NewContactViewController * newContactVC = [NewContactViewController new];
     [self.navigationItem setTitle:@"编辑"];
     newContactVC.reviceDic = _sendToChangeDic;
+    newContactVC.receivedStr = @"编辑联系人";
     [self.navigationController pushViewController:newContactVC animated:NO];
 
 }

@@ -20,8 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    NSLog(@"_receivedStr:%@", _receivedStr);
     self.view.backgroundColor = [UIColor redColor];
-    [self.navigationItem setTitle:@"新建联系人"];
+    [self.navigationItem setTitle:_receivedStr];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:(UIBarButtonItemStyleDone) target:self action:@selector(ensure)];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((iphoneWidth - 100)/2, 10, 100, 100)];
@@ -63,21 +64,7 @@
     [self.view addSubview:_QQTextField];
     [self.view addSubview:_weixinTextField];
     
-    /*QQ = "\U6682\U65e0";
-     appName = qqoa;
-     connectionId = 10;
-     describe = describe;
-     email = "1376035611@qq.com";
-     idEdit = 1;
-     message = 40005;
-     name = "\U66f9\U4e15";
-     serverType = "QQOA_SERVER";
-     telephone = 18335333445;
-     verBuilds = 1;
-     verFixs = 0;
-     verMajor = 0;
-     verMinor = 1;
-     weiXin = figthing;*/
+   
     if (_reviceDic.count > 0) {
         _nameTextField.text = [_reviceDic objectForKey:@"name"];
         _describeTextField.text = [_reviceDic objectForKey:@"describe"];
@@ -127,7 +114,13 @@
 }
 
 -(void)sendNewContactToServer{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/connection/store", CONST_SERVER_ADDRESS]];
+    NSString * str = [NSString new];
+    if ([_receivedStr isEqualToString:@"新建联系人"]) {
+        str = @"/v1/api/v2/connection/store";
+    }else if ([_receivedStr isEqualToString:@"编辑联系人"]) {
+        str = @"/v1/api/v2/connection/update";
+    }
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, str]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -145,6 +138,9 @@
     [mdict setObject:_mailTextField.text forKey:@"email"];
     [mdict setObject:_QQTextField.text forKey:@"QQ"];
     [mdict setObject:_weixinTextField.text forKey:@"weiXin"];
+    if ([_receivedStr isEqualToString:@"编辑联系人"]) {
+        [mdict setObject:[_reviceDic objectForKey:@"connectionId"] forKey:@"connectionId"];
+    }
     NSLog(@"99999999999:%@",mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
@@ -152,12 +148,14 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"$$$$$$error$$%@", error);
+                                            
                                             if (data != nil) {
-                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman11111nsl%@", dataBack);
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];                                 NSLog(@"HUman：%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ( [[dataBack objectForKey:@"message"] intValue] == 40001) {
-                                                                                                               dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送成功!"];                                                      });
+                                                        dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"增加成功!"];                                                      });
+                                                    } else if ( [[dataBack objectForKey:@"message"] intValue] == 40009) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"编辑成功!"];                                                      });
                                                     } else if ( [[dataBack objectForKey:@"message"] intValue] == 40002) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{                                           [self alert:@"发送失败"];                                                      });
                                                     }
@@ -190,7 +188,7 @@
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if ([title isEqualToString:@"发送成功!"]) {
+        if ([title isEqualToString:@"编辑成功!"] || [title isEqualToString:@"增加成功!"]) {
             for (UIViewController *controller in self.navigationController.viewControllers) {
                 NSLog(@"Class:%@", [controller class]);
                 if ([controller isKindOfClass:[HumanVeinLibraryVC class]]) {

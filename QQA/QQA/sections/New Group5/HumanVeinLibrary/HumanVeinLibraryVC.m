@@ -54,6 +54,9 @@ static NSString *identifier = @"CELL";
     [self  addtableView];
     
 }
+//-(void)viewWillAppear:(BOOL)animated{
+//    [self.tableView reloadData];
+//}
 
 -(void)getHumanVeinLibraryFromServer{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/connection/index", CONST_SERVER_ADDRESS]];
@@ -403,6 +406,7 @@ static NSString *identifier = @"CELL";
 -(void)newContact{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256  / 255.0 green:arc4random() % 256  / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     NewContactViewController * newContactVC = [NewContactViewController new];
+    newContactVC.receivedStr = @"新建联系人";
     [self.navigationController pushViewController:newContactVC animated:NO];
 }
 
