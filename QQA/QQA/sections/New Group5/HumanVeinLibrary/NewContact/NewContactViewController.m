@@ -51,6 +51,13 @@
     _mailTextField = [[UITextField alloc] initWithFrame:CGRectMake(iphoneWidth / 3 - 25, 120 + 3 * 35 ,iphoneWidth * 2 / 3 , 30)];
     _QQTextField = [[UITextField alloc] initWithFrame:CGRectMake(iphoneWidth / 3 - 25, 120 + 4 * 35 ,iphoneWidth * 2 / 3 , 30)];
     _weixinTextField= [[UITextField alloc] initWithFrame:CGRectMake(iphoneWidth / 3 - 25, 120 + 5 * 35 ,iphoneWidth * 2 / 3 , 30)];
+    [_nameTextField addTarget:self action:@selector(limit:) forControlEvents:UIControlEventEditingChanged];
+    [_describeTextField addTarget:self action:@selector(limit:) forControlEvents:UIControlEventEditingChanged];
+    [_telephoneTextField addTarget:self action:@selector(limit:) forControlEvents:UIControlEventEditingChanged];
+    [_mailTextField addTarget:self action:@selector(limit:) forControlEvents:UIControlEventEditingChanged];
+    [_QQTextField addTarget:self action:@selector(limit:) forControlEvents:UIControlEventEditingChanged];
+    [_weixinTextField addTarget:self action:@selector(limit:) forControlEvents:UIControlEventEditingChanged];
+    
     _nameTextField.borderStyle = UITextBorderStyleRoundedRect;
     _describeTextField.borderStyle = UITextBorderStyleRoundedRect;
     _telephoneTextField.borderStyle = UITextBorderStyleRoundedRect;
@@ -75,6 +82,17 @@
     }
     
 }
+
+- (void)limit:(UITextField *)textField{
+    //限制文本的输入长度不得大于10个字符长度
+    if (textField.text.length >= 20){
+        //截取文本字符长度为10的内容
+        textField.text = [textField.text substringToIndex:20];
+    }
+}
+
+
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"]) {
