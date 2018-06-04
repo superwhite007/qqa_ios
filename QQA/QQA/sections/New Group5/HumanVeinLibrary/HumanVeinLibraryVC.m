@@ -410,6 +410,10 @@ static NSString *identifier = @"CELL";
     [self.navigationController pushViewController:newContactVC animated:NO];
 }
 
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self getHumanVeinLibraryFromServer];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
