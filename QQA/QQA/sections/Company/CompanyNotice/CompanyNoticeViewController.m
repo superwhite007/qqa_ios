@@ -7,10 +7,11 @@
 //
 
 #import "CompanyNoticeViewController.h"
-
+#import "ReadunreadVC.h"
 @interface CompanyNoticeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray * datasource;
+@property (nonatomic, strong) NSMutableArray * allDatasourceMArray;
 @property (nonatomic, assign) int pageNum;
 @property (nonatomic, assign) BOOL isDownRefresh;
 @property (nonatomic, assign) BOOL isEmpty;
@@ -26,6 +27,12 @@ static NSString *identifier = @"Cell";
         _datasource = [NSMutableArray array];
     }
     return _datasource;
+}
+-(NSMutableArray *)allDatasourceMArray{
+    if (!_allDatasourceMArray) {
+        _allDatasourceMArray = [NSMutableArray array];
+    }
+    return _allDatasourceMArray;
 }
 
 - (void)viewDidLoad {
@@ -95,6 +102,7 @@ static NSString *identifier = @"Cell";
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
                                                         self.isEmpty = NO;
                                                         [array1 removeObjectAtIndex:0];
+                                                        _allDatasourceMArray = array1;
                                                         [_datasource removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
                                                             [_datasource addObject:[NSString stringWithFormat:@"%@ %@\n\n        %@",[dict objectForKey:@"sender"],[dict objectForKey:@"createdAt"], [dict objectForKey:@"content"]]];//sender
@@ -172,6 +180,12 @@ static NSString *identifier = @"Cell";
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ReadunreadVC * readunreadVC = [ReadunreadVC new];
+    readunreadVC.uniqueStr = [_allDatasourceMArray[indexPath.row] objectForKey:@"unique"];
+    [self.navigationController pushViewController:readunreadVC animated:YES];
+    
+}
 
 -(long)gitHightForCell:(NSIndexPath *)indexPathRow{
     UILabel * mattersNeedAttentionExplianLable = [[UILabel alloc] initWithFrame:CGRectMake(30 , 340, iphoneWidth - 60 , 120)];

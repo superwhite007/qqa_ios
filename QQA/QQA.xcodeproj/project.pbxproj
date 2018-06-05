@@ -68,6 +68,9 @@
 		AAC191F820A183D700494B62 /* CompanyViewControllerNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC191F720A183D700494B62 /* CompanyViewControllerNoCell.m */; };
 		AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
+		AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD166FD20C6630B008884FC /* ReadunreadVC.m */; };
+		AAD1670120C67C21008884FC /* Readunread.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670020C67C21008884FC /* Readunread.m */; };
+		AAD1670420C67C3F008884FC /* ReadunreadTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670320C67C3F008884FC /* ReadunreadTVCell.m */; };
 		AAD911FE1FD691B8002A42B5 /* CompanyAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD911FD1FD691B8002A42B5 /* CompanyAddressBookViewController.m */; };
 		AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912001FD6955D002A42B5 /* AddressBook.m */; };
 		AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912031FD69576002A42B5 /* AddressBooKTableViewCell.m */; };
@@ -244,6 +247,12 @@
 		AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExaminationApprovalViewControllerNOCell.m; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
+		AAD166FC20C6630B008884FC /* ReadunreadVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadunreadVC.h; sourceTree = "<group>"; };
+		AAD166FD20C6630B008884FC /* ReadunreadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadunreadVC.m; sourceTree = "<group>"; };
+		AAD166FF20C67C21008884FC /* Readunread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Readunread.h; sourceTree = "<group>"; };
+		AAD1670020C67C21008884FC /* Readunread.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Readunread.m; sourceTree = "<group>"; };
+		AAD1670220C67C3F008884FC /* ReadunreadTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadunreadTVCell.h; sourceTree = "<group>"; };
+		AAD1670320C67C3F008884FC /* ReadunreadTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadunreadTVCell.m; sourceTree = "<group>"; };
 		AAD911FC1FD691B8002A42B5 /* CompanyAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyAddressBookViewController.h; sourceTree = "<group>"; };
 		AAD911FD1FD691B8002A42B5 /* CompanyAddressBookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyAddressBookViewController.m; sourceTree = "<group>"; };
 		AAD911FF1FD6955D002A42B5 /* AddressBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
@@ -469,6 +478,7 @@
 			children = (
 				AAB3F8BB1FC7E010001327FA /* CompanyNoticeViewController.h */,
 				AAB3F8BC1FC7E010001327FA /* CompanyNoticeViewController.m */,
+				AAD166FB20C662DD008884FC /* Readunread */,
 			);
 			path = CompanyNotice;
 			sourceTree = "<group>";
@@ -697,6 +707,19 @@
 				AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */,
 			);
 			path = Cover;
+			sourceTree = "<group>";
+		};
+		AAD166FB20C662DD008884FC /* Readunread */ = {
+			isa = PBXGroup;
+			children = (
+				AAD166FC20C6630B008884FC /* ReadunreadVC.h */,
+				AAD166FD20C6630B008884FC /* ReadunreadVC.m */,
+				AAD166FF20C67C21008884FC /* Readunread.h */,
+				AAD1670020C67C21008884FC /* Readunread.m */,
+				AAD1670220C67C3F008884FC /* ReadunreadTVCell.h */,
+				AAD1670320C67C3F008884FC /* ReadunreadTVCell.m */,
+			);
+			path = Readunread;
 			sourceTree = "<group>";
 		};
 		AAD912081FD78058002A42B5 /* AddressBookDetailOfPeopleInformation */ = {
@@ -942,7 +965,9 @@
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
 				AA392A531FEC947800C1C581 /* UMSecondViewController.m in Sources */,
 				AAD9120B1FD780A4002A42B5 /* DetailOfPeopleINformationViewController.m in Sources */,
+				AAD1670120C67C21008884FC /* Readunread.m in Sources */,
 				AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */,
+				AAD1670420C67C3F008884FC /* ReadunreadTVCell.m in Sources */,
 				AAC0B85D1FF0EFA500F5D2DB /* VersionInformationViewController.m in Sources */,
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA42F75C20BBE0C0006BF7E6 /* HumanCell.m in Sources */,
@@ -953,6 +978,7 @@
 				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
+				AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */,
 				AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
 				AAB675C31FBBE58E00BF696B /* MessageViewController.m in Sources */,
