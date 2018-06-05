@@ -149,7 +149,12 @@ static NSString *identifier = @"Cell";
     }
     _tableView.separatorColor = [UIColor blackColor];
     cell.textLabel.text = self.datasource[indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:18];
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+        cell.textLabel.font = [UIFont systemFontOfSize:18];
+    }else{
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+    }
+        
     cell.textLabel.numberOfLines = 0;//表示label可以多行显示
     cell.textLabel.textColor = [UIColor blackColor];
     CGSize sourceSize = CGSizeMake(self.view.bounds.size.width - 100, 2000);
