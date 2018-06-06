@@ -255,7 +255,12 @@
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    NSLog(@"222222222222222222222222");
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    NSLog(@"2111111111111111111111111");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
