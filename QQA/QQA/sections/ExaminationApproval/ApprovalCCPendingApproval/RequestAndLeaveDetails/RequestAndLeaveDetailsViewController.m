@@ -475,7 +475,6 @@
     } else if ([_titleIdentStr isEqualToString:@"请示件"]) {
         [mdict setObject:_leaveIdStr forKey:@"askId"];
     }
-//    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -628,7 +627,6 @@
     }else{
         [mdict setObject:_messageTextView.text forKey:@"comment"];
     }
-//    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;

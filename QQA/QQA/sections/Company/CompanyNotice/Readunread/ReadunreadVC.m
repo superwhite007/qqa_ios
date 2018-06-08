@@ -56,7 +56,6 @@ static NSString *identifier = @"Cell";
         cell = [[ReadunreadTVCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier] ;
     }
     Readunread * readUnread = self.datasourceMArray[indexPath.row];
-    NSLog(@"readUnread.username: %@", readUnread.username);
     cell.readUnread = readUnread;
     
     switch (indexPath.row % 10) {
@@ -129,16 +128,13 @@ static NSString *identifier = @"Cell";
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 5007) {
                                                         NSMutableArray * array1 = [NSMutableArray arrayWithArray:[[dataBack objectForKey:@"data"] objectForKey:@"data_list"]];
-                                                        NSLog(@"array1:%@", array1);
                                                         [self.datasourceMArray removeAllObjects];
                                                         for (NSDictionary * dict in array1) {
-                                                            NSLog(@"%@", dict);
                                                         Readunread * readUnread = [Readunread new];
                                                             [readUnread setValuesForKeysWithDictionary:dict];
                                                             [self.datasourceMArray addObject:readUnread];
                                                         }
                                                         
-                                                        NSLog(@"%lu", (unsigned long)[self.datasourceMArray count]);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self.tableView  reloadData];
                                                         });

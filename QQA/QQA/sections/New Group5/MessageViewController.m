@@ -161,15 +161,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"122222222222222222222222");
-}
--(void)viewDidDisappear:(BOOL)animated{
-    NSLog(@"1111111111111111111111111");
-    int   a=3 , b=4;
-    int c = a+b-(b=a);
-    NSLog(@"%d, %d", c, b);
-}
+//-(void)viewDidAppear:(BOOL)animated{
+//    NSLog(@"122222222222222222222222");
+//}
+//-(void)viewDidDisappear:(BOOL)animated{
+//    NSLog(@"1111111111111111111111111");
+//    int   a=3 , b=4;
+//    int c = a+b-(b=a);
+//    NSLog(@"%d, %d", c, b);
+//}
 
 /*
 #pragma mark - Navigation

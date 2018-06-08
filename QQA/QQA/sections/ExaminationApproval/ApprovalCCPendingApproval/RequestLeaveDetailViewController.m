@@ -185,9 +185,8 @@
     if ([_titleStr isEqualToString:@"请假"]) {
         [mdict setObject:_leaveOrAskId forKey:@"leaveId"];
     } else if ([_titleStr isEqualToString:@"请示件"]) {
-        [mdict setObject:_leaveOrAskId forKey:@"askId"]; //
+        [mdict setObject:_leaveOrAskId forKey:@"askId"]; 
     }
-    NSLog( @"66666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
