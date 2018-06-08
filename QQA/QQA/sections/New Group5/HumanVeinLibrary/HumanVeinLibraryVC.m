@@ -209,10 +209,27 @@ static NSString *identifier = @"CELL";
     
     HumanDetailVC * humanDetailVC = [HumanDetailVC new];
     humanDetailVC.connectionIdStr = [NSString stringWithFormat:@"%@", human.connectionId];
-    [self.navigationController pushViewController:humanDetailVC animated:NO];
-
+    if ([human.isShow intValue] == 0) {
+        [self alert:@"您无权查看该联系人\n请与创建者联系！"];
+    }else{
+        [self.navigationController pushViewController:humanDetailVC animated:NO];
+    }
+   
 }
-
+-(void)alert:(NSString *)str{
+    
+    NSString *title = str;
+    NSString *message = @"请注意!";
+    NSString *okButtonTitle = @"OK";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // 操作具体内容
+        // Nothing to do.
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+    
+}
 
 
 -(void)addSearchBar{
