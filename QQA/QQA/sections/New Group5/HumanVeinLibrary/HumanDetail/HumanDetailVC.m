@@ -101,11 +101,11 @@
     NSString * telephoneStr = [NSString stringWithFormat:@"打电话  %@",[dict objectForKey:@"telephone"]];
     NSString * sendMessage = [NSString stringWithFormat:@"发消息  %@",[dict objectForKey:@"telephone"]];
     NSString * weixin = [NSString stringWithFormat:@"微信  %@",[dict objectForKey:@"weiXin"]];
-    NSString * QQ = [NSString stringWithFormat:@"QQ  %@",[dict objectForKey:@"qq"]];
+    NSString * QQ = [NSString stringWithFormat:@"QQ  %@",[dict objectForKey:@"QQ"]];
     NSString * mobileTelephoneStr = [NSString stringWithFormat:@"打固话  %@",[dict objectForKey:@"mobile"]];
-    NSMutableArray * titleArray = [NSMutableArray arrayWithObjects:telephoneStr, sendMessage, weixin, QQ , emailStr,  nil];
+    NSMutableArray * titleArray = [NSMutableArray arrayWithObjects:telephoneStr,  weixin, QQ , emailStr,  nil];
     if (![[dict objectForKey:@"mobile"] isEqualToString:@"暂无"]) {
-        [titleArray addObject:mobileTelephoneStr];
+//        [titleArray addObject:mobileTelephoneStr];
     }
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -121,9 +121,9 @@
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
     }
-    NSMutableArray * imageArray = [NSMutableArray arrayWithObjects:@"tel", @"sms", @"wechat", @"qq", @"email",  nil];
+    NSMutableArray * imageArray = [NSMutableArray arrayWithObjects:@"tel",  @"wechat", @"qq", @"email",  nil];
     if (![[dict objectForKey:@"mobile"] isEqualToString:@"暂无"]) {
-        [imageArray addObject:@"tel"];
+//        [imageArray addObject:@"tel"];
     }
     for (int i = 0; i < titleArray.count ; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
@@ -168,7 +168,7 @@
 }
 
 -(void)gotoSomeForwed:(UIButton *)sender{
-    if (sender.tag == 2) {
+    if (sender.tag == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"weixin://"]];
     }else if (sender.tag == 1){
         NSString * str = [NSString stringWithFormat:@"sms://%@",[sender.titleLabel.text substringFromIndex:5]];
@@ -179,9 +179,9 @@
         UIWebView * callWebview = [[UIWebView alloc] init];
         [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
         [self.view addSubview:callWebview];
-    }else if (sender.tag == 3){
+    }else if (sender.tag == 2){
         [self openQQ];
-    }else if (sender.tag == 4){
+    }else if (sender.tag == 3){
         NSString * str = [NSString stringWithFormat:@"mailto://%@",[sender.titleLabel.text substringFromIndex:5]];
         NSURL *url = [NSURL URLWithString:str];
         [[UIApplication sharedApplication] openURL:url];
