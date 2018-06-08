@@ -33,7 +33,7 @@
     _taskNewView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_taskNewView];
     
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, iphoneWidth - 80, 70)];
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(40, 20, iphoneWidth - 80, 70)];
     _messageTextView.font = [UIFont systemFontOfSize:24];
 //    _messageTextView.backgroundColor = [UIColor greenColor];
     _messageTextView.layer.borderWidth = 1;
@@ -50,7 +50,7 @@
     [_taskNewView addSubview:_messageTextView];
     
     UIButton * agreeButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    agreeButton.frame = CGRectMake(10, 90, (iphoneWidth - 90) /2, 60);
+    agreeButton.frame = CGRectMake(10, 95, (iphoneWidth - 90) /2, 60);
     [agreeButton setTitle:@"确定" forState:(UIControlStateNormal)];
     
     agreeButton.tag = 10001;
@@ -58,7 +58,7 @@
     [_taskNewView addSubview:agreeButton];
     
     UIButton * refuseButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    refuseButton.frame = CGRectMake(10 + (iphoneWidth - 90) /2 + 10, 90, (iphoneWidth - 90) /2 , 60);
+    refuseButton.frame = CGRectMake(10 + (iphoneWidth - 90) /2 + 10, 95, (iphoneWidth - 90) /2 , 60);
     [refuseButton setTitle:@"取消" forState:(UIControlStateNormal)];
     agreeButton.tag = 10002;
     [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
@@ -116,7 +116,7 @@
 
 -(void)newTask{
     self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:0.6];
-    _taskNewView.frame = CGRectMake(30 , 20, iphoneWidth - 60, 160);
+    _taskNewView.frame = CGRectMake(0 , 0, iphoneWidth, 160);
     
 }
 -(void)removeNewTaskView{
