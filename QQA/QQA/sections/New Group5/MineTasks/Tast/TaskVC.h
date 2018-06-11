@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TaskVC : UIViewController<UITextViewDelegate>
+@interface TaskVC : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong)UITextView * messageTextView;
 

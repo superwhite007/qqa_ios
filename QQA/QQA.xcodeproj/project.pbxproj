@@ -39,6 +39,7 @@
 		AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
+		AA620C2E20CE434700D48D54 /* MineTasksTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA620C2D20CE434700D48D54 /* MineTasksTVC.m */; };
 		AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676020A13A1A0088CF64 /* CycleScrollView.m */; };
 		AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */; };
 		AA7749811FEA303E0095C378 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7749801FEA303E0095C378 /* Assets.xcassets */; };
@@ -174,6 +175,8 @@
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		AA5545121FE7BD410031F846 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA5545141FE7BE160031F846 /* QQA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QQA.entitlements; sourceTree = "<group>"; };
+		AA620C2C20CE434700D48D54 /* MineTasksTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTasksTVC.h; sourceTree = "<group>"; };
+		AA620C2D20CE434700D48D54 /* MineTasksTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTasksTVC.m; sourceTree = "<group>"; };
 		AA75675E20A13A1A0088CF64 /* CycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleScrollView.h; sourceTree = "<group>"; };
 		AA75675F20A13A1A0088CF64 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
 		AA75676020A13A1A0088CF64 /* CycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleScrollView.m; sourceTree = "<group>"; };
@@ -547,6 +550,16 @@
 			path = NewContact;
 			sourceTree = "<group>";
 		};
+		AA620C2820CE42C400D48D54 /* MineTasks */ = {
+			isa = PBXGroup;
+			children = (
+				AA620C2C20CE434700D48D54 /* MineTasksTVC.h */,
+				AA620C2D20CE434700D48D54 /* MineTasksTVC.m */,
+				AAD1670520C77589008884FC /* Tast */,
+			);
+			path = MineTasks;
+			sourceTree = "<group>";
+		};
 		AA75675D20A139E50088CF64 /* CycleScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,7 +663,7 @@
 			children = (
 				AAEF4CC21FB9615F00474C07 /* MeInformationViewController.h */,
 				AAEF4CC31FB9615F00474C07 /* MeInformationViewController.m */,
-				AAD1670520C77589008884FC /* Tast */,
+				AA620C2820CE42C400D48D54 /* MineTasks */,
 				AA42F75020BB92E6006BF7E6 /* HumanVeinLibrary */,
 				AAB675C11FBBE58E00BF696B /* MessageViewController.h */,
 				AAB675C21FBBE58E00BF696B /* MessageViewController.m */,
@@ -1043,6 +1056,7 @@
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
 				AA42F75920BBDEA8006BF7E6 /* Human.m in Sources */,
+				AA620C2E20CE434700D48D54 /* MineTasksTVC.m in Sources */,
 				AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */,

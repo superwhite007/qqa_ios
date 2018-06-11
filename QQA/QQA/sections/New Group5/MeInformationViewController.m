@@ -12,6 +12,7 @@
 #import "VersionInformationViewController.h"
 #import "HumanVeinLibraryVC.h"
 #import "TaskVC.h"
+#import "MineTasksTVC.h"
 
 @interface MeInformationViewController ()
 
@@ -94,8 +95,10 @@
         HumanVeinLibraryVC * humanVC = [HumanVeinLibraryVC new];
         [self.navigationController pushViewController:humanVC animated:YES];
     }else if (sender.tag == 4){
-        TaskVC * taskVC = [TaskVC new];
-        [self.navigationController pushViewController:taskVC animated:YES];
+//        TaskVC * taskVC = [TaskVC new];
+//        [self.navigationController pushViewController:taskVC animated:YES];
+        MineTasksTVC * mineTasksTVC = [MineTasksTVC new];
+        [self.navigationController pushViewController:mineTasksTVC animated:YES];
     }
 }
 

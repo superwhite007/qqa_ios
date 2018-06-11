@@ -11,22 +11,61 @@
 @interface TaskVC ()
 
 @property (nonatomic, strong) UIView * taskNewView;
+@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) NSMutableArray *datasourceMArray;
 
 @end
 
 @implementation TaskVC
 
+static NSString  *  identifier = @"CELL";
+
+-(NSMutableArray *)datasourceMArray{
+    if (!_datasourceMArray) {
+        _datasourceMArray = [NSMutableArray array];
+    }
+    return _datasourceMArray;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"任务"];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight -64) style:UITableViewStylePlain];
+    [self.view addSubview:_tableView];
     [self addNewTaskNameView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newTask)];
    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
+    [self.datasourceMArray addObject:@"test1"];
+    [self.datasourceMArray addObject:@"test2"];
+    [self.datasourceMArray addObject:@"test3"];
+    [self.datasourceMArray addObject:@"test4"];
+    [self.datasourceMArray addObject:@"test5"];
+    [self.datasourceMArray addObject:@"test6"];
+    
+    
     
     
     // Do any additional setup after loading the view.
 }
+
+#pragma  datasource
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return  self.datasourceMArray.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = self.datasourceMArray[indexPath.row];
+    return cell;
+}
+
 
 -(void)addNewTaskNameView{
     _taskNewView = [[UIView alloc] initWithFrame:CGRectMake(30 + iphoneWidth, 20, iphoneWidth - 60, 160)];

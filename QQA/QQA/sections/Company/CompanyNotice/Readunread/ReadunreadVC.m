@@ -33,7 +33,7 @@ static NSString *identifier = @"Cell";
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     [self getReadUnreadPeoplesFromServer];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64) style:UITableViewStylePlain];;
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64) style:UITableViewStylePlain];
     _tableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64);
     [self.view addSubview:_tableView];
     _tableView.rowHeight = 60;
