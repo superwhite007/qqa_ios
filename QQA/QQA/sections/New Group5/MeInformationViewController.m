@@ -36,7 +36,7 @@
 
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
-    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青青", @"人脉库",  @"任务",  nil];
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青青", @"人脉库",  @"我的任务",  nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 6 + i * 60, iphoneWidth - 35, 60);

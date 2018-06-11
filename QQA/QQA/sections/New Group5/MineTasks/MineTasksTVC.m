@@ -22,6 +22,7 @@ static NSString * reuseIdentifier = @"CELL";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 //    self.tableView.rowHeight = 100;
 //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     // Uncomment the following line to preserve selection between presentations.
@@ -72,9 +73,9 @@ static NSString * reuseIdentifier = @"CELL";
     
     TaskVC * taskVC = [TaskVC new];
     if (indexPath.row == 0) {
-        taskVC.mineOrOthersStr = @"MINE";
+        taskVC.mineOrOthersStr = @"自己的任务";
     }else if (indexPath.row == 1) {
-        taskVC.mineOrOthersStr = @"OTHERS";
+        taskVC.mineOrOthersStr = @"下属任务";
     }
     [self.navigationController pushViewController:taskVC animated:YES];
         

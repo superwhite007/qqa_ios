@@ -32,7 +32,7 @@ static NSString  *  identifier = @"CELL";
     NSLog(@"_mineOrOthersStr:%@", _mineOrOthersStr);
     
     self.view.backgroundColor = [UIColor redColor];
-    [self.navigationItem setTitle:@"任务"];
+    [self.navigationItem setTitle:_mineOrOthersStr];
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight -64) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     [self addNewTaskNameView];
