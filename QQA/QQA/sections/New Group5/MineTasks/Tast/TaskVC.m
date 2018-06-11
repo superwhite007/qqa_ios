@@ -35,6 +35,7 @@ static NSString  *  identifier = @"CELL";
     [self.navigationItem setTitle:_mineOrOthersStr];
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight -64) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
+    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self addNewTaskNameView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newTask)];
    
