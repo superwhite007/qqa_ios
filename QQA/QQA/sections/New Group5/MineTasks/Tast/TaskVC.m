@@ -29,6 +29,8 @@ static NSString  *  identifier = @"CELL";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"_mineOrOthersStr:%@", _mineOrOthersStr);
+    
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"任务"];
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight -64) style:UITableViewStylePlain];
@@ -46,8 +48,7 @@ static NSString  *  identifier = @"CELL";
     [self.datasourceMArray addObject:@"test5"];
     [self.datasourceMArray addObject:@"test6"];
     
-    
-    
+   
     
     // Do any additional setup after loading the view.
 }

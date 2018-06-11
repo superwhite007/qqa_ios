@@ -7,6 +7,7 @@
 //
 
 #import "MineTasksTVC.h"
+#import "TaskVC.h"
 
 @interface MineTasksTVC ()
 
@@ -65,6 +66,19 @@ static NSString * reuseIdentifier = @"CELL";
  
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    TaskVC * taskVC = [TaskVC new];
+    if (indexPath.row == 0) {
+        taskVC.mineOrOthersStr = @"MINE";
+    }else if (indexPath.row == 1) {
+        taskVC.mineOrOthersStr = @"OTHERS";
+    }
+    [self.navigationController pushViewController:taskVC animated:YES];
+        
+
 }
 
 /*
