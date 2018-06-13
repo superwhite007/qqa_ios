@@ -47,8 +47,9 @@
     self.commentNumberRedpointCircleLabel.layer.cornerRadius = self.commentNumberRedpointCircleLabel.frame.size.width / 2;
     self.commentNumberRedpointCircleLabel.layer.masksToBounds = YES;
     self.commentNumberRedpointCircleLabel.textAlignment = NSTextAlignmentCenter;
-    _commentNumberRedpointCircleLabel.font = [UIFont systemFontOfSize:30];
-    self.commentNumberRedpointCircleLabel.backgroundColor = [UIColor redColor];
+    
+    _commentNumberRedpointCircleLabel.font = [UIFont systemFontOfSize:28];
+    _commentNumberRedpointCircleLabel.textColor = [UIColor whiteColor];
     [self.contentView addSubview:_commentNumberRedpointCircleLabel];
     
     _forwardImageView = [[UIImageView alloc] init];
@@ -63,10 +64,10 @@
     
     self.titleLabel.text = taskName.title;
     self.describeLabel.text = taskName.describe;
-    if (taskName.commentNumber > 0) {
+    if ([taskName.commentNumber intValue] > 0) {
         _commentNumberRedpointCircleLabel.backgroundColor = [UIColor redColor];
         _commentNumberRedpointCircleLabel.text = [NSMutableString stringWithFormat:@"%@", taskName.commentNumber];
-    }if (taskName.commentNumber == 0) {
+    }else if ([taskName.commentNumber intValue] == 0) {
         _commentNumberRedpointCircleLabel.backgroundColor = [UIColor whiteColor];
         _commentNumberRedpointCircleLabel.text = [NSMutableString stringWithFormat:@"%@", taskName.commentNumber];
     }
