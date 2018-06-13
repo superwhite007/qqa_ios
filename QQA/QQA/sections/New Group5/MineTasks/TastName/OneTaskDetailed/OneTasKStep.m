@@ -10,18 +10,23 @@
 
 @implementation OneTasKStep
 
--(instancetype)initWithIsRead:(NSString *)isRead title:(NSString *)title describe:(NSString *)describe commentNumber:(NSString *)commentNumber taskId:(NSString *)taskId isRename:(BOOL)isRename{
+-(instancetype)initWithtitle:(NSString *)title describe:(NSString *)describe commentNumber:(NSString *)commentNumber subtaskId:(NSString *)subtaskId isRename:(BOOL)isRename isCompleted:(BOOL)isCompleted isDeleted:(BOOL)isDeleted isUpdated:(BOOL)isUpdated{
     self = [super init];
     if (self) {
-        self.isRead = isRead;
         self.title = title;
         self.describe = describe;
         self.commentNumber = commentNumber;
-        self.taskId = taskId;
+        self.subtaskId = subtaskId;
         self.isRename = isRename;
+        self.isCompleted = isCompleted;
+        self.isDeleted = isDeleted;
+        self.isUpdated = isUpdated;
     }
     return self;
+    
 }
+
+
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
     //    NSLog(@"Some key is not existence");
 }

@@ -38,7 +38,7 @@ static NSString  *  identifier = @"CELL";
     
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:_mineOrOthersStr];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, iphoneWidth, iphoneHeight - 108) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, iphoneWidth, iphoneHeight - 104) style:UITableViewStylePlain];
     _tableView.rowHeight = 100;
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];

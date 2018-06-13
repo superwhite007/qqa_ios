@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OneTaskDetailedListVC : UIViewController
+@interface OneTaskDetailedListVC : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong)UITextView * messageTextView;
+@property (nonatomic, strong) NSString * taskIdStr;
 
 @end

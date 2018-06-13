@@ -27,21 +27,12 @@
     _orderCircleLabel.font = [UIFont systemFontOfSize:30];
     [self.contentView addSubview:_orderCircleLabel];
     
-    _redpointOfOrderCircleisReadLabel = [[UILabel alloc] initWithFrame:CGRectMake(75, 25, 20, 20)];
-    self.redpointOfOrderCircleisReadLabel.layer.cornerRadius = self.redpointOfOrderCircleisReadLabel.frame.size.width / 2;
-    self.redpointOfOrderCircleisReadLabel.layer.masksToBounds = YES;
-    self.redpointOfOrderCircleisReadLabel.textAlignment = NSTextAlignmentCenter;
-    _redpointOfOrderCircleisReadLabel.font = [UIFont systemFontOfSize:30];
-    self.redpointOfOrderCircleisReadLabel.backgroundColor = [UIColor redColor];
-    
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 5, iphoneWidth - 200, 60)];//initWithFrame:CGRectZero
-    //    _titleLabel.backgroundColor = [UIColor redColor];
-    //    [self.contentView addSubview: _titleLabel];
     
     _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 70, iphoneWidth - 100, 25)];
     [self.contentView addSubview:_describeLabel];
     
-    _commentNumberRedpointCircleLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 70, 30, 20, 20)];
+    _commentNumberRedpointCircleLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 90, 30, 20, 20)];
     self.commentNumberRedpointCircleLabel.layer.cornerRadius = self.commentNumberRedpointCircleLabel.frame.size.width / 2;
     self.commentNumberRedpointCircleLabel.layer.masksToBounds = YES;
     self.commentNumberRedpointCircleLabel.textAlignment = NSTextAlignmentCenter;
@@ -49,6 +40,13 @@
     _commentNumberRedpointCircleLabel.font = [UIFont systemFontOfSize:12];
     _commentNumberRedpointCircleLabel.textColor = [UIColor whiteColor];
     //    [self.contentView addSubview:_commentNumberRedpointCircleLabel];
+    
+    _complatedImageView = [[UIImageView alloc] init];
+    _complatedImageView.frame = CGRectMake(iphoneWidth - 65, 30, 20, 20);
+//    UIImage *image1 = [UIImage imageNamed:@"forward"];
+//    [_complatedImageView setImage:image1];
+    _complatedImageView.alpha = 0.6;
+    [self.contentView addSubview:_complatedImageView];
     
     _forwardImageView = [[UIImageView alloc] init];
     _forwardImageView.frame = CGRectMake(iphoneWidth - 40, 30, 20, 20);
@@ -60,9 +58,6 @@
 }
 
 -(void)setOneTasKStep:(OneTasKStep *)oneTasKStep{
-    if ([oneTasKStep.isRead intValue] == 0){
-        [self.contentView addSubview:_redpointOfOrderCircleisReadLabel];
-    }
     
     self.titleLabel.text = oneTasKStep.title;
     self.titleLabel.font = [UIFont systemFontOfSize:18];
@@ -74,6 +69,12 @@
     [self.contentView addSubview:self.titleLabel];
     
     self.describeLabel.text = oneTasKStep.describe;
+    
+    if (oneTasKStep.isCompleted) {
+        _complatedImageView.image =  [UIImage imageNamed:@"forward"];
+    } else{
+        _complatedImageView.image =  [UIImage imageNamed:@"forward"];
+    }
     if ([oneTasKStep.commentNumber intValue] > 0) {
         _commentNumberRedpointCircleLabel.backgroundColor = [UIColor redColor];
         _commentNumberRedpointCircleLabel.text = [NSMutableString stringWithFormat:@"%@", oneTasKStep.commentNumber];
