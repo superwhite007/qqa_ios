@@ -112,6 +112,24 @@ static  NSString  * identifier = @"CELL";
     cell.stepDetailCommunication = stepDetailCommunication;
     return cell;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    StepDetailCommunication * stepDetailCommunication = self.datasource[indexPath.row];
+    UILabel * label = [UILabel new];
+    label.text = stepDetailCommunication.content;
+    label.font = [UIFont systemFontOfSize:18];
+    label.numberOfLines = 0;//表示label可以多行显示
+    label.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(iphoneWidth - 200, 2000);
+    CGRect targetRect = [label.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : label.font} context:nil];
+    label.frame = CGRectMake(100, 5, iphoneWidth - 110, CGRectGetHeight(targetRect));
+    if (CGRectGetHeight(targetRect) < 60) {
+        return 100;
+    }else{
+        return CGRectGetHeight(targetRect) + 40;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

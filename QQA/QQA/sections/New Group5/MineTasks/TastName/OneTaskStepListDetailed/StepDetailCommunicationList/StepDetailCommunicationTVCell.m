@@ -20,14 +20,16 @@
 }
 -(void)addAllViews{
     
-    _peopleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(12.5, 12.5, 75, 75)];
-    _peopleImageView.layer.cornerRadius = _peopleImageView.frame.size.width / 2;
-    _peopleImageView.layer.masksToBounds = YES;
-    [self.contentView addSubview:_peopleImageView];
+//    _peopleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(12.5, 12.5, 75, 75)];
+//    _peopleImageView.layer.cornerRadius = _peopleImageView.frame.size.width / 2;
+//    _peopleImageView.layer.masksToBounds = YES;
+//    [self.contentView addSubview:_peopleImageView];
     
+    _peopleImageView = [UIImageView new];
+//    [self.contentView addSubview:_peopleImageView];
     _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 5, iphoneWidth - 100, 60)];
-    
-    _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 70, iphoneWidth - 100, 25)];
+    [self.contentView addSubview:self.contentLabel];
+    _describeLabel = [UILabel new];
     [self.contentView addSubview:_describeLabel];
     
 }
@@ -42,9 +44,21 @@
     CGSize sourceSize = CGSizeMake(iphoneWidth - 200, 2000);
     CGRect targetRect = [self.contentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.contentLabel.font} context:nil];
     self.contentLabel.frame = CGRectMake(100, 5, iphoneWidth - 110, CGRectGetHeight(targetRect));
-    [self.contentView addSubview:self.contentLabel];
+//    [self.contentView addSubview:self.contentLabel];
     self.describeLabel.text = stepDetailCommunication.describe;
+    if (CGRectGetHeight(targetRect) < 60) {
+        _peopleImageView.frame = CGRectMake(12.5, 12.5, 75, 75);
+        _describeLabel.frame = CGRectMake(100, 70, iphoneWidth - 100, 25);
+    }else{
+        _peopleImageView.frame = CGRectMake(12.5, (CGRectGetHeight(targetRect) - 40 ) / 2, 75, 75);
+        _describeLabel.frame = CGRectMake(100, CGRectGetHeight(targetRect) + 10, iphoneWidth - 100, 25);
+    }
+    _peopleImageView.layer.cornerRadius = _peopleImageView.frame.size.width / 2;
+    _peopleImageView.layer.masksToBounds = YES;
+    [self.contentView addSubview:_peopleImageView];
+
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
