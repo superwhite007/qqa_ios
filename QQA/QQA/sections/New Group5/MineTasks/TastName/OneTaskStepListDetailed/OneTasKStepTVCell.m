@@ -71,9 +71,9 @@
     self.describeLabel.text = oneTasKStep.describe;
     
     if (oneTasKStep.isCompleted) {
-        _complatedImageView.image =  [UIImage imageNamed:@"forward"];
+        _complatedImageView.image =  [UIImage imageNamed:@"checkmark_green"];
     } else{
-        _complatedImageView.image =  [UIImage imageNamed:@"forward"];
+        _complatedImageView.image =  [UIImage imageNamed:@"checkmark"];
     }
     if ([oneTasKStep.commentNumber intValue] > 0) {
         _commentNumberRedpointCircleLabel.backgroundColor = [UIColor redColor];
