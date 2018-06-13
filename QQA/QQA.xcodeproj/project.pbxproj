@@ -89,6 +89,8 @@
 		AAE0258720D0BDC2002A28DA /* OneTasKStep.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0258620D0BDC2002A28DA /* OneTasKStep.m */; };
 		AAE0258A20D0BDE4002A28DA /* OneTasKStepTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0258920D0BDE4002A28DA /* OneTasKStepTVCell.m */; };
 		AAE0259220D0EC19002A28DA /* StepDetailCommunicationListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0259120D0EC19002A28DA /* StepDetailCommunicationListVC.m */; };
+		AAE0259820D0F567002A28DA /* StepDetailCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0259720D0F567002A28DA /* StepDetailCommunication.m */; };
+		AAE0259B20D0F9A9002A28DA /* StepDetailCommunicationTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0259A20D0F9A9002A28DA /* StepDetailCommunicationTVCell.m */; };
 		AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA4B1FCF9CBA0012A695 /* Request.m */; };
 		AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */; };
 		AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */; };
@@ -298,6 +300,10 @@
 		AAE0258920D0BDE4002A28DA /* OneTasKStepTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneTasKStepTVCell.m; sourceTree = "<group>"; };
 		AAE0259020D0EC19002A28DA /* StepDetailCommunicationListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StepDetailCommunicationListVC.h; sourceTree = "<group>"; };
 		AAE0259120D0EC19002A28DA /* StepDetailCommunicationListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StepDetailCommunicationListVC.m; sourceTree = "<group>"; };
+		AAE0259620D0F567002A28DA /* StepDetailCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StepDetailCommunication.h; sourceTree = "<group>"; };
+		AAE0259720D0F567002A28DA /* StepDetailCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StepDetailCommunication.m; sourceTree = "<group>"; };
+		AAE0259920D0F9A9002A28DA /* StepDetailCommunicationTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StepDetailCommunicationTVCell.h; sourceTree = "<group>"; };
+		AAE0259A20D0F9A9002A28DA /* StepDetailCommunicationTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StepDetailCommunicationTVCell.m; sourceTree = "<group>"; };
 		AAEEEA4A1FCF9CBA0012A695 /* Request.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
 		AAEEEA4B1FCF9CBA0012A695 /* Request.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		AAEEEA4D1FCF9CD50012A695 /* RequestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestTableViewCell.h; sourceTree = "<group>"; };
@@ -829,6 +835,10 @@
 			children = (
 				AAE0259020D0EC19002A28DA /* StepDetailCommunicationListVC.h */,
 				AAE0259120D0EC19002A28DA /* StepDetailCommunicationListVC.m */,
+				AAE0259620D0F567002A28DA /* StepDetailCommunication.h */,
+				AAE0259720D0F567002A28DA /* StepDetailCommunication.m */,
+				AAE0259920D0F9A9002A28DA /* StepDetailCommunicationTVCell.h */,
+				AAE0259A20D0F9A9002A28DA /* StepDetailCommunicationTVCell.m */,
 			);
 			path = StepDetailCommunicationList;
 			sourceTree = "<group>";
@@ -1061,6 +1071,7 @@
 				AAD1670120C67C21008884FC /* Readunread.m in Sources */,
 				AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */,
 				AAD1670420C67C3F008884FC /* ReadunreadTVCell.m in Sources */,
+				AAE0259820D0F567002A28DA /* StepDetailCommunication.m in Sources */,
 				AAC0B85D1FF0EFA500F5D2DB /* VersionInformationViewController.m in Sources */,
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA42F75C20BBE0C0006BF7E6 /* HumanCell.m in Sources */,
@@ -1089,6 +1100,7 @@
 				AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */,
 				AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */,
 				AAB4D49B1FC95D1700116355 /* WSDatePickerView.m in Sources */,
+				AAE0259B20D0F9A9002A28DA /* StepDetailCommunicationTVCell.m in Sources */,
 				AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */,
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,

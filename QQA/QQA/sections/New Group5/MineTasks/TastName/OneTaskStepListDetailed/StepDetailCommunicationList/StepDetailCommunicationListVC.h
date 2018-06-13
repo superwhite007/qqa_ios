@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StepDetailCommunicationListVC : UIViewController
+@interface StepDetailCommunicationListVC : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong)UITextView * messageTextView;
 @property (nonatomic, strong) NSString * subtaskIdStr;
 
 @end

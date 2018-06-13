@@ -9,7 +9,7 @@
 #import "OneTaskDetailedListVC.h"
 #import "OneTasKStep.h"
 #import "OneTasKStepTVCell.h"
-
+#import "StepDetailCommunicationListVC.h"
 @interface OneTaskDetailedListVC ()
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -46,15 +46,12 @@ static  NSString  * identifier = @"CELL";
     self.tableView.delegate = self;
     [self.tableView registerClass:[OneTasKStepTVCell class] forCellReuseIdentifier:identifier];
     
-    
-    
-    
 }
 -(void)addTaskDetailed{
      self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:0.6];
 }
 -(void)getOneTaskStepListFromServer{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@//v1/api/v2/task/detail/index", CONST_SERVER_ADDRESS]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/detail/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -68,7 +65,6 @@ static  NSString  * identifier = @"CELL";
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:@"1" forKey:@"pageNum"];
     [mdict setObject:_taskIdStr forKey:@"taskId"];
-    NSLog(@"7776%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -77,13 +73,10 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                 NSLog(@"T1276543234565432:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60003) {
-                                                        NSLog(@"TaskList2:%@", dataBack);
                                                         [self.datasource removeAllObjects];
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
-                                                        NSLog(@"dataListArray:%@", dataListArray);
                                                         for (NSDictionary * dict in dataListArray) {
                                                             OneTasKStep * oneTasKStep = [OneTasKStep new];
                                                             [oneTasKStep setValuesForKeysWithDictionary:dict];
@@ -151,6 +144,12 @@ static  NSString  * identifier = @"CELL";
     }    return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    OneTasKStep *  oneTasKStep = self.datasource[indexPath.row];
+    StepDetailCommunicationListVC * stepDetailCommunicationListVC = [StepDetailCommunicationListVC new];
+    stepDetailCommunicationListVC.subtaskIdStr = oneTasKStep.subtaskId;
+    [self.navigationController pushViewController:stepDetailCommunicationListVC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
