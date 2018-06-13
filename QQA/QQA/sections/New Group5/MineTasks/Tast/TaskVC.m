@@ -41,6 +41,7 @@ static NSString  *  identifier = @"CELL";
     _tableView.rowHeight = 100;
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    [self addSegmentControl];
     [self addNewTaskNameView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newTask)];
    
@@ -53,8 +54,7 @@ static NSString  *  identifier = @"CELL";
 //    [self.datasourceMArray addObject:@"test4"];
 //    [self.datasourceMArray addObject:@"test5"];
 //    [self.datasourceMArray addObject:@"test6"];
-    [self addSegmentControl];
-    
+   
     [self getTaskListFromServer];
     
     // Do any additional setup after loading the view.
@@ -76,15 +76,12 @@ static NSString  *  identifier = @"CELL";
     switch (control.selectedSegmentIndex) {
         case 0:
             _conditionMStr = [NSMutableString stringWithFormat:@"uncompleted"];
-            
+            [self getTaskListFromServer];
             break;
         case 1:
             
-            [self.datasourceMArray addObject:@"test7"];
             _conditionMStr = [NSMutableString stringWithFormat:@"completed"];
             [self getTaskListFromServer];
-            
-            [self.tableView reloadData];
             break;
         default:
             break;
@@ -163,6 +160,43 @@ static NSString  *  identifier = @"CELL";
     TaskName * taskName = self.datasourceMArray[indexPath.row];
     cell.taskName = taskName;
     cell.orderCircleLabel.text = [NSMutableString stringWithFormat:@"%ld", (long)indexPath.row + 1];
+    switch (indexPath.row % 10) {
+        case 0:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+            break;
+        case 1:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+            break;
+        case 2:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+            break;
+        case 3:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+            break;
+        case 4:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+            break;
+        case 5:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 37/ 255.0 green:155 / 255.0 blue: 35 / 255.0 alpha:1];
+            break;
+            
+        case 6:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed:0 green:151 / 255.0 blue: 136 / 255.0 alpha:0.8];
+            break;
+        case 7:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 238/ 255.0 green:23 / 255.0 blue: 39 / 255.0 alpha:1];
+            break;
+            
+        case 8:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 254/ 255.0 green:65 / 255.0 blue: 129 / 255.0 alpha:1];
+            break;
+            
+        case 9:
+            cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed:62/ 255.0 green:80 / 255.0 blue: 182 / 255.0 alpha:1];
+            break;
+        default:
+            break;
+    }
     return cell;
 }
 

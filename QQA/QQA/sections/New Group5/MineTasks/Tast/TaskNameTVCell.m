@@ -71,7 +71,6 @@
         _commentNumberRedpointCircleLabel.text = [NSMutableString stringWithFormat:@"%@", taskName.commentNumber];
     }
     
-    
 }
 
 
