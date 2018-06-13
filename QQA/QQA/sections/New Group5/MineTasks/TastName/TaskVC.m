@@ -11,7 +11,7 @@
 #import "TaskNameTVCell.h"
 #import "OneTaskDetailedListVC.h"
 
-@interface TaskVC ()
+@interface TaskVC ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIView * taskNewView;
 @property (nonatomic, strong) UITableView * tableView;
@@ -46,6 +46,12 @@ static NSString  *  identifier = @"CELL";
     [self addNewTaskNameView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newTask)];
    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
+    lpgr.delegate = self;
+    [_tableView addGestureRecognizer:lpgr]; //启用长按事件
+    
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerClass:[TaskNameTVCell class] forCellReuseIdentifier:identifier];
@@ -61,6 +67,17 @@ static NSString  *  identifier = @"CELL";
     // Do any additional setup after loading the view.
 }
 
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
+{
+    NSLog(@"11111111111111111111111111111111111111");
+    CGPoint p = [gestureRecognizer locationInView:_tableView ];
+    NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
+    if (indexPath == nil)
+        NSLog(@"long press on table view but not on a row");
+    else
+        NSLog(@"long press on table view at row %d", indexPath.row);
+    
+}
 -(void)addSegmentControl{
     NSArray * ary = [NSArray arrayWithObjects:@"进行中的任务", @"已完成的任务", nil];
     UISegmentedControl *segment = [[UISegmentedControl alloc]initWithItems:ary];
