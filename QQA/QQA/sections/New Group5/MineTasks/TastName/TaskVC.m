@@ -70,12 +70,30 @@ static NSString  *  identifier = @"CELL";
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
 {
     NSLog(@"11111111111111111111111111111111111111");
-    CGPoint p = [gestureRecognizer locationInView:_tableView ];
-    NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
-    if (indexPath == nil)
-        NSLog(@"long press on table view but not on a row");
-    else
-        NSLog(@"long press on table view at row %d", indexPath.row);
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint p = [gestureRecognizer locationInView:_tableView ];
+        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
+        NSLog(@"indexPath.rowindexPath.rowindexPath.row:%ld", indexPath.row);
+        if (indexPath == nil)
+            NSLog(@"long press on table view but not on a row");
+        else
+            NSLog(@"long press on table view at row %ld", indexPath.row);
+        NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+        [self alert: str];
+    }
+    
+}
+-(void)alertAppCover:(NSString *)str{
+    
+    NSString *title = str;
+    NSString *message = @"请联系开发人员";
+    NSString *okButtonTitle = @"确定";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+       
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
     
 }
 -(void)addSegmentControl{
