@@ -23,7 +23,7 @@
     return self;
 }
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
-    NSLog(@"Some key is not existence");
+//    NSLog(@"Some key is not existence");
 }
 
 @end

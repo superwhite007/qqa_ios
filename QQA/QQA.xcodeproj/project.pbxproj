@@ -86,6 +86,8 @@
 		AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D711FB933FF00A7CC2A /* LanchViewController.m */; };
 		AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */; };
 		AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */; };
+		AAE0258720D0BDC2002A28DA /* OneTasKStep.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0258620D0BDC2002A28DA /* OneTasKStep.m */; };
+		AAE0258A20D0BDE4002A28DA /* OneTasKStepTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0258920D0BDE4002A28DA /* OneTasKStepTVCell.m */; };
 		AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA4B1FCF9CBA0012A695 /* Request.m */; };
 		AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */; };
 		AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */; };
@@ -289,6 +291,10 @@
 		AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
 		AADAAA2C1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestAndLeaveDetailsViewController.h; sourceTree = "<group>"; };
 		AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestAndLeaveDetailsViewController.m; sourceTree = "<group>"; };
+		AAE0258520D0BDC2002A28DA /* OneTasKStep.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneTasKStep.h; sourceTree = "<group>"; };
+		AAE0258620D0BDC2002A28DA /* OneTasKStep.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneTasKStep.m; sourceTree = "<group>"; };
+		AAE0258820D0BDE4002A28DA /* OneTasKStepTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneTasKStepTVCell.h; sourceTree = "<group>"; };
+		AAE0258920D0BDE4002A28DA /* OneTasKStepTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneTasKStepTVCell.m; sourceTree = "<group>"; };
 		AAEEEA4A1FCF9CBA0012A695 /* Request.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
 		AAEEEA4B1FCF9CBA0012A695 /* Request.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
 		AAEEEA4D1FCF9CD50012A695 /* RequestTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestTableViewCell.h; sourceTree = "<group>"; };
@@ -561,7 +567,7 @@
 			children = (
 				AA620C2C20CE434700D48D54 /* MineTasksTVC.h */,
 				AA620C2D20CE434700D48D54 /* MineTasksTVC.m */,
-				AAD1670520C77589008884FC /* Tast */,
+				AAD1670520C77589008884FC /* TastName */,
 			);
 			path = MineTasks;
 			sourceTree = "<group>";
@@ -751,7 +757,7 @@
 			path = Readunread;
 			sourceTree = "<group>";
 		};
-		AAD1670520C77589008884FC /* Tast */ = {
+		AAD1670520C77589008884FC /* TastName */ = {
 			isa = PBXGroup;
 			children = (
 				AAD1670620C775CD008884FC /* TaskVC.h */,
@@ -763,7 +769,7 @@
 				AAD1670920C778E3008884FC /* NewTask */,
 				AAD1670A20C77902008884FC /* OneTaskDetailed */,
 			);
-			path = Tast;
+			path = TastName;
 			sourceTree = "<group>";
 		};
 		AAD1670920C778E3008884FC /* NewTask */ = {
@@ -780,6 +786,10 @@
 			children = (
 				AAD1670B20C779EE008884FC /* OneTaskDetailedListVC.h */,
 				AAD1670C20C779EE008884FC /* OneTaskDetailedListVC.m */,
+				AAE0258520D0BDC2002A28DA /* OneTasKStep.h */,
+				AAE0258620D0BDC2002A28DA /* OneTasKStep.m */,
+				AAE0258820D0BDE4002A28DA /* OneTasKStepTVCell.h */,
+				AAE0258920D0BDE4002A28DA /* OneTasKStepTVCell.m */,
 			);
 			path = OneTaskDetailed;
 			sourceTree = "<group>";
@@ -1062,6 +1072,7 @@
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
 				AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */,
+				AAE0258A20D0BDE4002A28DA /* OneTasKStepTVCell.m in Sources */,
 				AA42F75320BB9354006BF7E6 /* NewContactViewController.m in Sources */,
 				AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
@@ -1084,6 +1095,7 @@
 				AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */,
 				AAD1670820C775CD008884FC /* TaskVC.m in Sources */,
 				AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */,
+				AAE0258720D0BDC2002A28DA /* OneTasKStep.m in Sources */,
 				AAD1671020C77A6F008884FC /* TaskNameVC.m in Sources */,
 				AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,

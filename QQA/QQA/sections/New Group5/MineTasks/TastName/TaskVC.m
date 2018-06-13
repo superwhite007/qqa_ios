@@ -9,6 +9,7 @@
 #import "TaskVC.h"
 #import "TaskName.h"
 #import "TaskNameTVCell.h"
+#import "OneTaskDetailedListVC.h"
 
 @interface TaskVC ()
 
@@ -86,7 +87,9 @@ static NSString  *  identifier = @"CELL";
         default:
             break;
     }
-}-(void)getTaskListFromServer{
+}
+
+-(void)getTaskListFromServer{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -119,14 +122,11 @@ static NSString  *  identifier = @"CELL";
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60001) {
-                                                        NSLog(@"TaskList:%@", dataBack);
                                                         [self.datasourceMArray removeAllObjects];
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
-                                                         NSLog(@"dataListArray:%@", dataListArray);
                                                         for (NSDictionary * dict in dataListArray) {
                                                             TaskName * taskName = [TaskName new];
                                                             [taskName setValuesForKeysWithDictionary:dict];
-                                                            NSLog(@"taskName.title:%@\n\n", taskName.describe);
                                                             [self.datasourceMArray addObject:taskName];
                                                         }
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -179,18 +179,15 @@ static NSString  *  identifier = @"CELL";
         case 5:
             cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 37/ 255.0 green:155 / 255.0 blue: 35 / 255.0 alpha:1];
             break;
-            
         case 6:
             cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed:0 green:151 / 255.0 blue: 136 / 255.0 alpha:0.8];
             break;
         case 7:
             cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 238/ 255.0 green:23 / 255.0 blue: 39 / 255.0 alpha:1];
             break;
-            
         case 8:
             cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed: 254/ 255.0 green:65 / 255.0 blue: 129 / 255.0 alpha:1];
             break;
-            
         case 9:
             cell.orderCircleLabel.backgroundColor = [UIColor colorWithRed:62/ 255.0 green:80 / 255.0 blue: 182 / 255.0 alpha:1];
             break;
@@ -198,6 +195,14 @@ static NSString  *  identifier = @"CELL";
             break;
     }
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    TaskName * taskName = self.datasourceMArray[indexPath.row];
+    OneTaskDetailedListVC * oneTaskDetailedListVC = [OneTaskDetailedListVC new];
+    oneTaskDetailedListVC.taskIdStr = [NSString stringWithFormat:@"%@", taskName.taskId];
+    [self.navigationController pushViewController:oneTaskDetailedListVC animated:NO];
+
 }
 
 
