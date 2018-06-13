@@ -44,6 +44,8 @@
 		AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */; };
 		AA7749811FEA303E0095C378 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7749801FEA303E0095C378 /* Assets.xcassets */; };
 		AA7749831FEA34280095C378 /* me_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7749821FEA34280095C378 /* me_normal.png */; };
+		AA8BB4BB20CF9517008D7823 /* TaskName.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8BB4BA20CF9517008D7823 /* TaskName.m */; };
+		AA8BB4BE20CF9558008D7823 /* TaskNameTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8BB4BD20CF9558008D7823 /* TaskNameTVCell.m */; };
 		AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */; };
 		AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA169F91FA98E0F00F35475 /* AppTBViewController.m */; };
 		AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAAC3D5C1FB0562000D54265 /* PunchClockViewController.m */; };
@@ -183,6 +185,10 @@
 		AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
 		AA7749801FEA303E0095C378 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = resource/youth_info/Assets.xcassets; sourceTree = "<group>"; };
 		AA7749821FEA34280095C378 /* me_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_normal.png; sourceTree = "<group>"; };
+		AA8BB4B920CF9517008D7823 /* TaskName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskName.h; sourceTree = "<group>"; };
+		AA8BB4BA20CF9517008D7823 /* TaskName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskName.m; sourceTree = "<group>"; };
+		AA8BB4BC20CF9558008D7823 /* TaskNameTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskNameTVCell.h; sourceTree = "<group>"; };
+		AA8BB4BD20CF9558008D7823 /* TaskNameTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskNameTVCell.m; sourceTree = "<group>"; };
 		AA9B6AF31FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyinformationAndBylawsViewController.h; sourceTree = "<group>"; };
 		AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyinformationAndBylawsViewController.m; sourceTree = "<group>"; };
 		AAA169F81FA98E0F00F35475 /* AppTBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppTBViewController.h; sourceTree = "<group>"; };
@@ -750,6 +756,10 @@
 			children = (
 				AAD1670620C775CD008884FC /* TaskVC.h */,
 				AAD1670720C775CD008884FC /* TaskVC.m */,
+				AA8BB4B920CF9517008D7823 /* TaskName.h */,
+				AA8BB4BA20CF9517008D7823 /* TaskName.m */,
+				AA8BB4BC20CF9558008D7823 /* TaskNameTVCell.h */,
+				AA8BB4BD20CF9558008D7823 /* TaskNameTVCell.m */,
 				AAD1670920C778E3008884FC /* NewTask */,
 				AAD1670A20C77902008884FC /* OneTaskDetailed */,
 			);
@@ -1029,6 +1039,7 @@
 				AA42F74F20BB9263006BF7E6 /* HumanVeinLibraryVC.m in Sources */,
 				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
+				AA8BB4BB20CF9517008D7823 /* TaskName.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
 				AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */,
 				AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */,
@@ -1067,6 +1078,7 @@
 				AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */,
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
+				AA8BB4BE20CF9558008D7823 /* TaskNameTVCell.m in Sources */,
 				AA20C69A1FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m in Sources */,
 				AAD1670D20C779EE008884FC /* OneTaskDetailedListVC.m in Sources */,
 				AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */,

@@ -7,12 +7,15 @@
 //
 
 #import "TaskVC.h"
+#import "TaskName.h"
+#import "TaskNameTVCell.h"
 
 @interface TaskVC ()
 
 @property (nonatomic, strong) UIView * taskNewView;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray *datasourceMArray;
+@property (nonatomic, strong) NSMutableString * conditionMStr;
 
 @end
 
@@ -30,10 +33,12 @@ static NSString  *  identifier = @"CELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"_mineOrOthersStr:%@", _mineOrOthersStr);
+    _conditionMStr = [NSMutableString stringWithFormat:@"uncompleted"];
     
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:_mineOrOthersStr];
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight -64) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, iphoneWidth, iphoneHeight - 108) style:UITableViewStylePlain];
+    _tableView.rowHeight = 100;
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self addNewTaskNameView];
@@ -41,18 +46,111 @@ static NSString  *  identifier = @"CELL";
    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
-    [self.datasourceMArray addObject:@"test1"];
-    [self.datasourceMArray addObject:@"test2"];
-    [self.datasourceMArray addObject:@"test3"];
-    [self.datasourceMArray addObject:@"test4"];
-    [self.datasourceMArray addObject:@"test5"];
-    [self.datasourceMArray addObject:@"test6"];
+    [self.tableView registerClass:[TaskNameTVCell class] forCellReuseIdentifier:identifier];
+//    [self.datasourceMArray addObject:@"test1"];
+//    [self.datasourceMArray addObject:@"test2"];
+//    [self.datasourceMArray addObject:@"test3"];
+//    [self.datasourceMArray addObject:@"test4"];
+//    [self.datasourceMArray addObject:@"test5"];
+//    [self.datasourceMArray addObject:@"test6"];
+    [self addSegmentControl];
     
-   
+    [self getTaskListFromServer];
     
     // Do any additional setup after loading the view.
 }
+
+-(void)addSegmentControl{
+    NSArray * ary = [NSArray arrayWithObjects:@"进行中的任务", @"已完成的任务", nil];
+    UISegmentedControl *segment = [[UISegmentedControl alloc]initWithItems:ary];
+    segment.frame = CGRectMake(0, 0, iphoneWidth, 40);
+    segment.selectedSegmentIndex = 0;//设置默认选择项索引
+    segment.tintColor = [UIColor redColor];
+    [segment addTarget: self  action: @selector(selected:)  forControlEvents:UIControlEventValueChanged ];
+    segment.backgroundColor=[UIColor whiteColor];
+    [self.view addSubview:segment];
+}
+#pragma mark - 分段选择的点击事件
+-(void)selected:(id)sender{
+    UISegmentedControl* control = (UISegmentedControl*)sender;
+    switch (control.selectedSegmentIndex) {
+        case 0:
+            _conditionMStr = [NSMutableString stringWithFormat:@"uncompleted"];
+            
+            break;
+        case 1:
+            
+            [self.datasourceMArray addObject:@"test7"];
+            _conditionMStr = [NSMutableString stringWithFormat:@"completed"];
+            [self getTaskListFromServer];
+            
+            [self.tableView reloadData];
+            break;
+        default:
+            break;
+    }
+}-(void)getTaskListFromServer{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/index", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    if ([_mineOrOthersStr isEqualToString:@"自己的任务"]) {
+        [mdict setObject:@"own" forKey:@"type"];
+    } else if ([_mineOrOthersStr isEqualToString:@"私人任务"]) {
+        [mdict setObject:@"others" forKey:@"type"];
+    } else if ([_mineOrOthersStr isEqualToString:@"下属任务"]) {
+        [mdict setObject:@"subordinate" forKey:@"type"];
+    }
+    [mdict setObject:@"1" forKey:@"pageNum"];
+    [mdict setObject:_conditionMStr forKey:@"condition"];
+    NSLog(@"6666666%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60001) {
+                                                        NSLog(@"TaskList:%@", dataBack);
+                                                        [self.datasourceMArray removeAllObjects];
+                                                        NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
+                                                         NSLog(@"dataListArray:%@", dataListArray);
+                                                        for (NSDictionary * dict in dataListArray) {
+                                                            TaskName * taskName = [TaskName new];
+                                                            [taskName setValuesForKeysWithDictionary:dict];
+                                                            NSLog(@"taskName.title:%@\n\n", taskName.describe);
+                                                            [self.datasourceMArray addObject:taskName];
+                                                        }
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.tableView  reloadData];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                            }
+                                        }];
+    [task resume];
+}
+
+
+
+
+
+
 
 #pragma  datasource
 
@@ -60,11 +158,11 @@ static NSString  *  identifier = @"CELL";
     return  self.datasourceMArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    cell.textLabel.text = self.datasourceMArray[indexPath.row];
+    
+    TaskNameTVCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    TaskName * taskName = self.datasourceMArray[indexPath.row];
+    cell.taskName = taskName;
+    cell.orderCircleLabel.text = [NSMutableString stringWithFormat:@"%ld", (long)indexPath.row + 1];
     return cell;
 }
 
@@ -106,6 +204,9 @@ static NSString  *  identifier = @"CELL";
     [_taskNewView addSubview:refuseButton];
 
 }
+
+
+
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
     NSLog(@"sender:%@", sender);
