@@ -25,7 +25,6 @@
     self.orderCircleLabel.layer.masksToBounds = YES;
     self.orderCircleLabel.textAlignment = NSTextAlignmentCenter;
     _orderCircleLabel.font = [UIFont systemFontOfSize:30];
-    self.orderCircleLabel.backgroundColor = [UIColor blueColor];
     [self.contentView addSubview:_orderCircleLabel];
     
     _redpointOfOrderCircleisReadLabel = [[UILabel alloc] initWithFrame:CGRectMake(75, 25, 20, 20)];
@@ -34,23 +33,22 @@
     self.redpointOfOrderCircleisReadLabel.textAlignment = NSTextAlignmentCenter;
     _redpointOfOrderCircleisReadLabel.font = [UIFont systemFontOfSize:30];
     self.redpointOfOrderCircleisReadLabel.backgroundColor = [UIColor redColor];
-    [self.contentView addSubview:_redpointOfOrderCircleisReadLabel];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 5, iphoneWidth - 200, 60)];
-    _titleLabel.backgroundColor = [UIColor redColor];
-    [self.contentView addSubview: _titleLabel];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 5, iphoneWidth - 200, 60)];//initWithFrame:CGRectZero
+//    _titleLabel.backgroundColor = [UIColor redColor];
+//    [self.contentView addSubview: _titleLabel];
     
     _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 70, iphoneWidth - 100, 25)];
     [self.contentView addSubview:_describeLabel];
     
-    _commentNumberRedpointCircleLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 80, 30, 20, 20)];
+    _commentNumberRedpointCircleLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 70, 30, 20, 20)];
     self.commentNumberRedpointCircleLabel.layer.cornerRadius = self.commentNumberRedpointCircleLabel.frame.size.width / 2;
     self.commentNumberRedpointCircleLabel.layer.masksToBounds = YES;
     self.commentNumberRedpointCircleLabel.textAlignment = NSTextAlignmentCenter;
     
-    _commentNumberRedpointCircleLabel.font = [UIFont systemFontOfSize:28];
+    _commentNumberRedpointCircleLabel.font = [UIFont systemFontOfSize:12];
     _commentNumberRedpointCircleLabel.textColor = [UIColor whiteColor];
-    [self.contentView addSubview:_commentNumberRedpointCircleLabel];
+//    [self.contentView addSubview:_commentNumberRedpointCircleLabel];
     
     _forwardImageView = [[UIImageView alloc] init];
     _forwardImageView.frame = CGRectMake(iphoneWidth - 40, 30, 20, 20);
@@ -62,18 +60,30 @@
 }
 -(void)setTaskName:(TaskName *)taskName{
     
+    if ([taskName.isRead intValue] == 0){
+        [self.contentView addSubview:_redpointOfOrderCircleisReadLabel];
+    }
+    
     self.titleLabel.text = taskName.title;
+    self.titleLabel.font = [UIFont systemFontOfSize:18];
+    self.titleLabel.numberOfLines = 0;//表示label可以多行显示
+    self.titleLabel.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(iphoneWidth - 200, 2000);
+    CGRect targetRect = [self.titleLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.titleLabel.font} context:nil];
+    self.titleLabel.frame = CGRectMake(100, 5, iphoneWidth - 200, CGRectGetHeight(targetRect));
+    [self.contentView addSubview:self.titleLabel];
+
     self.describeLabel.text = taskName.describe;
     if ([taskName.commentNumber intValue] > 0) {
         _commentNumberRedpointCircleLabel.backgroundColor = [UIColor redColor];
         _commentNumberRedpointCircleLabel.text = [NSMutableString stringWithFormat:@"%@", taskName.commentNumber];
+        [self.contentView addSubview:_commentNumberRedpointCircleLabel];
     }else if ([taskName.commentNumber intValue] == 0) {
         _commentNumberRedpointCircleLabel.backgroundColor = [UIColor whiteColor];
         _commentNumberRedpointCircleLabel.text = [NSMutableString stringWithFormat:@"%@", taskName.commentNumber];
     }
     
 }
-
 
 
 
