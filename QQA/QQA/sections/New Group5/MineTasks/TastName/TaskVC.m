@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSMutableArray *datasourceMArray;
 @property (nonatomic, strong) NSMutableString * conditionMStr;
+@property (nonatomic, strong) UIView * privateORInternalListView;
 
 @end
 
@@ -44,7 +45,7 @@ static NSString  *  identifier = @"CELL";
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self addSegmentControl];
     [self addNewTaskNameView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newTask)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(addPrivateORInternalListView)];
    
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
@@ -289,7 +290,23 @@ static NSString  *  identifier = @"CELL";
 
 }
 
+-(void)addPrivateORInternalListView{
+    _privateORInternalListView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
+    _privateORInternalListView.layer.borderWidth = 1;
+    _privateORInternalListView.layer.cornerRadius = 5;
+    _privateORInternalListView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:_privateORInternalListView];
+    
+    UIImageView * privateImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 2 / 15, iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 / 6)];
+    privateImageView.backgroundColor = [UIColor yellowColor];
+    [_privateORInternalListView addSubview:privateImageView];
+    
+    UIImageView * InternalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 3 / 15 + iphoneWidth * 4 / 9 / 3, iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 / 6)];
+    InternalImageView.backgroundColor = [UIColor yellowColor];
+    [_privateORInternalListView addSubview:InternalImageView];
+    
 
+}
 
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
