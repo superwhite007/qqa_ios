@@ -36,7 +36,7 @@
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:patternStr forKey:@"pattern"];
     [mdict setObject:typeStr forKey:@"type"];
-    [mdict setObject:departmentIdStr forKey:@"department"];
+    [mdict setObject:departmentIdStr forKey:@"departmentId"];
     [mdict setObject:titleStr forKey:@"title"];
     NSLog(@"4321234567%@", mdict);
     NSError * error = nil;
@@ -49,7 +49,7 @@
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                 NSLog(@"4321234567:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60007) {
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60008) {
                                                         NSLog(@"成功0987654321！");
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
