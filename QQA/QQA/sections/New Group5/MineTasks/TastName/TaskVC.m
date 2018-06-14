@@ -242,19 +242,28 @@ static NSString  *  identifier = @"CELL";
 
 
 -(void)addNewTaskNameView{
-    _taskNewView = [[UIView alloc] initWithFrame:CGRectMake(30 + iphoneWidth, 20, iphoneWidth - 60, 160)];
+    _taskNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
+    _taskNewView.layer.borderWidth = 1;
+    _taskNewView.layer.cornerRadius = 5;
     _taskNewView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_taskNewView];
     
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(40, 20, iphoneWidth - 80, 70)];
-    _messageTextView.font = [UIFont systemFontOfSize:24];
+    UILabel * taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 1 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 6 / 27)];
+    taskNameLabel.text = @"新建项目名称";
+    taskNameLabel.textAlignment = NSTextAlignmentCenter;
+    [_taskNewView addSubview:taskNameLabel];
+    
+    
+    
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 8 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 12 / 27)];
+    _messageTextView.font = [UIFont systemFontOfSize:21];
 //    _messageTextView.backgroundColor = [UIColor greenColor];
     _messageTextView.layer.borderWidth = 1;
     _messageTextView.layer.cornerRadius = 5;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 10;// 字体的行间距
+    paragraphStyle.lineSpacing = 8;// 字体的行间距
     NSDictionary *attributes = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:18],
+                                 NSFontAttributeName:[UIFont systemFontOfSize:16],
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
     _messageTextView.attributedText = [[NSAttributedString alloc] initWithString:@"请输入任务名称。不超过30个字符。" attributes:attributes];
@@ -263,16 +272,17 @@ static NSString  *  identifier = @"CELL";
     [_taskNewView addSubview:_messageTextView];
     
     UIButton * agreeButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    agreeButton.frame = CGRectMake(10, 95, (iphoneWidth - 90) /2, 60);
+    agreeButton.frame = CGRectMake(0 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [agreeButton setTitle:@"确定" forState:(UIControlStateNormal)];
-    
+    agreeButton.layer.borderWidth = 0.5;
     agreeButton.tag = 10001;
     [agreeButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_taskNewView addSubview:agreeButton];
     
     UIButton * refuseButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
-    refuseButton.frame = CGRectMake(10 + (iphoneWidth - 90) /2 + 10, 95, (iphoneWidth - 90) /2 , 60);
+    refuseButton.frame = CGRectMake(iphoneWidth / 3 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [refuseButton setTitle:@"取消" forState:(UIControlStateNormal)];
+    refuseButton.layer.borderWidth = 0.5;
     agreeButton.tag = 10002;
     [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_taskNewView addSubview:refuseButton];
@@ -331,16 +341,11 @@ static NSString  *  identifier = @"CELL";
 
 
 -(void)newTask{
-    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:0.6];
-    _taskNewView.frame = CGRectMake(0 , 0, iphoneWidth, 160);
-    
+    _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
 }
 -(void)removeNewTaskView{
-    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:0.6];
-    NSLog(@"_messageTextView.text::%@",_messageTextView.text );
-    _taskNewView.frame = CGRectMake(30 + iphoneWidth , 20, iphoneWidth - 60, 160);
+    _taskNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
     _messageTextView.text = nil;
-    
 }
 
 - (void)didReceiveMemoryWarning {
