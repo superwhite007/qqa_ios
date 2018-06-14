@@ -20,6 +20,11 @@
 @property (nonatomic, strong) NSString * departmentIdStr;
 @property (nonatomic, strong) NSString * titleStr;
 
+//自己私有  1 1 0
+//自己内部  1 2 部门id（单一）
+//下属      2 1  ID change 用户userID
+//
+
 -(instancetype)initNewTaskSendToServerWithpatternStr:(NSString *)patternStr typeStr:(NSString *)typeStr departmentIdStr:(NSString *)departmentIdStr titleStr:(NSString *)titleStr;
 
 -(void)SendNewTaskToServerWithpatternStr:(NSString *)patternStr typeStr:(NSString *)typeStr departmentIdStr:(NSString *)departmentIdStr titleStr:(NSString *)titleStr;

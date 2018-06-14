@@ -12,6 +12,8 @@
 #import "OneTaskDetailedListVC.h"
 #import "InternalDepartmentVC.h"
 
+#import "NewTask.h"
+
 @interface TaskVC ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIView * taskNewView;
@@ -148,7 +150,6 @@ static NSString  *  identifier = @"CELL";
     }
     [mdict setObject:@"1" forKey:@"pageNum"];
     [mdict setObject:_conditionMStr forKey:@"condition"];
-    NSLog(@"6666666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -269,7 +270,6 @@ static NSString  *  identifier = @"CELL";
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
     _messageTextView.attributedText = [[NSAttributedString alloc] initWithString:@"请输入任务名称。不超过30个字符。" attributes:attributes];
-//    _messageTextView.text = @"请输入任务名称。不超过30个字符。";
     _messageTextView.delegate = self;
     [_taskNewView addSubview:_messageTextView];
     
@@ -285,7 +285,7 @@ static NSString  *  identifier = @"CELL";
     refuseButton.frame = CGRectMake(iphoneWidth / 3 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [refuseButton setTitle:@"取消" forState:(UIControlStateNormal)];
     refuseButton.layer.borderWidth = 0.5;
-    agreeButton.tag = 10002;
+    refuseButton.tag = 10002;
     [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_taskNewView addSubview:refuseButton];
 
@@ -334,11 +334,12 @@ static NSString  *  identifier = @"CELL";
 
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
-    NSLog(@"sender:%@", sender);
     if (sender.tag == 10001) {
-        
+        [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
+        [self.tableView reloadData];
     }else if (sender.tag == 10002) {
-        
+        [self removeNewTaskView];
+        [self alert:@"取消创建"];
     }
     [self removeNewTaskView];
 }
@@ -378,13 +379,54 @@ static NSString  *  identifier = @"CELL";
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
 
-
-
-
 -(void)newTask{
     [self removePrivateORInternalListView];
     _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
 }
+-(void)SendNewTaskToServerWithpatternStr:(NSString *)patternStr typeStr:(NSString *)typeStr departmentIdStr:(NSString *)departmentIdStr titleStr:(NSString *)titleStr{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/create", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:patternStr forKey:@"pattern"];
+    [mdict setObject:typeStr forKey:@"type"];
+    [mdict setObject:departmentIdStr forKey:@"departmentId"];
+    [mdict setObject:titleStr forKey:@"title"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"4321234567:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60008) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"创建任务成功"];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self alert:@"创建任务失败"];
+                                                });
+                                            }
+                                        }];
+    [task resume];
+}
+
 -(void)removeNewTaskView{
     _taskNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
     _messageTextView.text = nil;
@@ -394,6 +436,12 @@ static NSString  *  identifier = @"CELL";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [self removeNewTaskView];
+    [self removePrivateORInternalListView];
+}
+
 
 /*
 #pragma mark - Navigation

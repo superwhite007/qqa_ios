@@ -7,6 +7,8 @@
 //
 
 #import "NewTask.h"
+#import <UIKit/UIKit.h>
+
 
 @implementation NewTask
 
@@ -38,7 +40,6 @@
     [mdict setObject:typeStr forKey:@"type"];
     [mdict setObject:departmentIdStr forKey:@"departmentId"];
     [mdict setObject:titleStr forKey:@"title"];
-    NSLog(@"4321234567%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -50,17 +51,18 @@
                                                 NSLog(@"4321234567:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60008) {
-                                                        NSLog(@"成功0987654321！");
+                                                        NSLog(@"1234567854321345678543212345632345发送任务成功");
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
                                                     NSLog(@"Server tapy is wrong.");
                                                 }
                                             }else{
-                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                                NSLog(@"获取数据失败");
                                             }
                                         }];
     [task resume];
 }
+
 
 
 @end

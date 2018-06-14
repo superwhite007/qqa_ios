@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UIView * taskNewView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datasource;
-
+@property (nonatomic, strong) NSMutableString * departmentIdStr;
 @end
 
 @implementation InternalDepartmentVC
@@ -28,7 +28,12 @@ static  NSString  * identifier = @"CELL";
     }
     return _datasource;
 }
-
+-(NSMutableString *)departmentIdStr{
+    if (!_departmentIdStr) {
+        _departmentIdStr = [NSMutableString string];
+    }
+    return _departmentIdStr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -98,7 +103,7 @@ static  NSString  * identifier = @"CELL";
     refuseButton.frame = CGRectMake(iphoneWidth / 3 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [refuseButton setTitle:@"取消" forState:(UIControlStateNormal)];
     refuseButton.layer.borderWidth = 0.5;
-    agreeButton.tag = 10012;
+    refuseButton.tag = 10012;
     [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_taskNewView addSubview:refuseButton];
     
@@ -107,18 +112,62 @@ static  NSString  * identifier = @"CELL";
 -(void)sendNewTaskToServer:(UIButton*)sender{
     NSLog(@"sender:%@", sender);
     if (sender.tag == 10011) {
-        [self alert:@"发送任务成功"];
+        
+        [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"2" departmentIdStr:_departmentIdStr titleStr:_messageTextView.text];
+        
         [self removeNewTaskView];
     }else if (sender.tag == 10012) {
-        [self alert:@"发送任务成功"];
+        [self alert:@"取消创建任务"];
         [self removeNewTaskView];
     }
     [self removeNewTaskView];
 }
 
--(void)newTask{
-    _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
+-(void)SendNewTaskToServerWithpatternStr:(NSString *)patternStr typeStr:(NSString *)typeStr departmentIdStr:(NSString *)departmentIdStr titleStr:(NSString *)titleStr{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/create", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:patternStr forKey:@"pattern"];
+    [mdict setObject:typeStr forKey:@"type"];
+    [mdict setObject:departmentIdStr forKey:@"departmentId"];
+    [mdict setObject:titleStr forKey:@"title"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"4321234567:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60008) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                             [self alert:@"创建任务成功"];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self alert:@"创建任务失败"];
+                                                });
+                                            }
+                                        }];
+    [task resume];
 }
+
+
 -(void)removeNewTaskView{
     _taskNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
     _messageTextView.text = nil;
@@ -150,7 +199,7 @@ static  NSString  * identifier = @"CELL";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Nothing to do.
-        if ([title isEqualToString:@"发送任务成功"]) {
+        if ([title isEqualToString:@"创建任务成功"]) {
             for (UIViewController *controller in self.navigationController.viewControllers) {
                 NSLog(@"Class:%@", [controller class]);
                 
@@ -227,10 +276,13 @@ static  NSString  * identifier = @"CELL";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    _departmentIdStr = [self.datasource[indexPath.row] objectForKey:@"departmentId"];
     [self newTask];
 }
 
-
+-(void)newTask{
+    _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
