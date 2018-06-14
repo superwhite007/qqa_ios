@@ -10,6 +10,7 @@
 #import "TaskName.h"
 #import "TaskNameTVCell.h"
 #import "OneTaskDetailedListVC.h"
+#import "InternalDepartmentVC.h"
 
 @interface TaskVC ()<UIGestureRecognizerDelegate>
 
@@ -291,22 +292,45 @@ static NSString  *  identifier = @"CELL";
 }
 
 -(void)addPrivateORInternalListView{
-    _privateORInternalListView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
+    _privateORInternalListView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6 , iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 - 10)];
     _privateORInternalListView.layer.borderWidth = 1;
     _privateORInternalListView.layer.cornerRadius = 5;
-    _privateORInternalListView.backgroundColor = [UIColor redColor];
+    _privateORInternalListView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_privateORInternalListView];
     
     UIImageView * privateImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 2 / 15, iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 / 6)];
-    privateImageView.backgroundColor = [UIColor yellowColor];
+    privateImageView.image = [UIImage imageNamed:@"lock"];
     [_privateORInternalListView addSubview:privateImageView];
+    UIButton * privateButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    privateButton.frame = CGRectMake(15 + iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 * 2 / 15 , iphoneWidth * 2 / 3 - 25 - iphoneWidth * 4 / 9 / 6 + 20, iphoneWidth * 4 / 9 / 6);
+    privateButton.titleLabel.textColor = [UIColor blackColor];
+    [privateButton setTitle:@"私有任务-仅任务执行者和领导可见" forState:UIControlStateNormal];
+    [privateButton addTarget:self action:@selector(newTask) forControlEvents:UIControlEventTouchUpInside];
+    [_privateORInternalListView addSubview:privateButton];
+    
     
     UIImageView * InternalImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 3 / 15 + iphoneWidth * 4 / 9 / 3, iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 / 6)];
-    InternalImageView.backgroundColor = [UIColor yellowColor];
+    InternalImageView.image = [UIImage imageNamed:@"unlock"];
     [_privateORInternalListView addSubview:InternalImageView];
-    
+    UIButton * InternalButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    InternalButton.frame = CGRectMake(15 + iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 * 3 / 15 + iphoneWidth * 4 / 9 / 3  , iphoneWidth * 2 / 3 - 25 - iphoneWidth * 4 / 9 / 6 + 20, iphoneWidth * 4 / 9 / 6);
+    InternalButton.titleLabel.textColor = [UIColor blackColor];
+    [InternalButton setTitle:@"内部任务-执行者所在的部门可见" forState:UIControlStateNormal];
+    [InternalButton addTarget:self action:@selector(Internal) forControlEvents:UIControlEventTouchUpInside];
+    [_privateORInternalListView addSubview:InternalButton];
 
 }
+-(void)Internal{
+    [self removePrivateORInternalListView];
+    InternalDepartmentVC * internalDepartmentVC = [InternalDepartmentVC new];
+    [self.navigationController pushViewController:internalDepartmentVC animated:YES];
+    
+}
+
+-(void)removePrivateORInternalListView{
+    _privateORInternalListView.frame = CGRectMake(iphoneWidth / 6 + 2 * iphoneWidth , iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 - 10);
+}
+
 
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
@@ -358,6 +382,7 @@ static NSString  *  identifier = @"CELL";
 
 
 -(void)newTask{
+    [self removePrivateORInternalListView];
     _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
 }
 -(void)removeNewTaskView{

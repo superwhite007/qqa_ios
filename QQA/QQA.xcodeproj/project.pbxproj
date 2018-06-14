@@ -71,6 +71,8 @@
 		AAC191F820A183D700494B62 /* CompanyViewControllerNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC191F720A183D700494B62 /* CompanyViewControllerNoCell.m */; };
 		AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */; };
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
+		AAC6062F20D20B5600626911 /* InternalDepartmentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC6062E20D20B5600626911 /* InternalDepartmentVC.m */; };
+		AAC6063320D215F800626911 /* NewTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC6063220D215F800626911 /* NewTask.m */; };
 		AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD166FD20C6630B008884FC /* ReadunreadVC.m */; };
 		AAD1670120C67C21008884FC /* Readunread.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670020C67C21008884FC /* Readunread.m */; };
 		AAD1670420C67C3F008884FC /* ReadunreadTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670320C67C3F008884FC /* ReadunreadTVCell.m */; };
@@ -264,6 +266,10 @@
 		AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExaminationApprovalViewControllerNOCell.m; sourceTree = "<group>"; };
 		AAC4D1F61FAAA11900183930 /* AppCoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoverViewController.h; sourceTree = "<group>"; };
 		AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoverViewController.m; sourceTree = "<group>"; };
+		AAC6062D20D20B5600626911 /* InternalDepartmentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InternalDepartmentVC.h; sourceTree = "<group>"; };
+		AAC6062E20D20B5600626911 /* InternalDepartmentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InternalDepartmentVC.m; sourceTree = "<group>"; };
+		AAC6063120D215F800626911 /* NewTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewTask.h; sourceTree = "<group>"; };
+		AAC6063220D215F800626911 /* NewTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewTask.m; sourceTree = "<group>"; };
 		AAD166FC20C6630B008884FC /* ReadunreadVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadunreadVC.h; sourceTree = "<group>"; };
 		AAD166FD20C6630B008884FC /* ReadunreadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadunreadVC.m; sourceTree = "<group>"; };
 		AAD166FF20C67C21008884FC /* Readunread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Readunread.h; sourceTree = "<group>"; };
@@ -753,6 +759,24 @@
 			path = Cover;
 			sourceTree = "<group>";
 		};
+		AAC6062C20D20B0100626911 /*  InternalDepartment */ = {
+			isa = PBXGroup;
+			children = (
+				AAC6062D20D20B5600626911 /* InternalDepartmentVC.h */,
+				AAC6062E20D20B5600626911 /* InternalDepartmentVC.m */,
+			);
+			path = " InternalDepartment";
+			sourceTree = "<group>";
+		};
+		AAC6063020D215CD00626911 /* General-purpose */ = {
+			isa = PBXGroup;
+			children = (
+				AAC6063120D215F800626911 /* NewTask.h */,
+				AAC6063220D215F800626911 /* NewTask.m */,
+			);
+			path = "General-purpose";
+			sourceTree = "<group>";
+		};
 		AAD166FB20C662DD008884FC /* Readunread */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,12 +793,14 @@
 		AAD1670520C77589008884FC /* TastName */ = {
 			isa = PBXGroup;
 			children = (
+				AAC6063020D215CD00626911 /* General-purpose */,
 				AAD1670620C775CD008884FC /* TaskVC.h */,
 				AAD1670720C775CD008884FC /* TaskVC.m */,
 				AA8BB4B920CF9517008D7823 /* TaskName.h */,
 				AA8BB4BA20CF9517008D7823 /* TaskName.m */,
 				AA8BB4BC20CF9558008D7823 /* TaskNameTVCell.h */,
 				AA8BB4BD20CF9558008D7823 /* TaskNameTVCell.m */,
+				AAC6062C20D20B0100626911 /*  InternalDepartment */,
 				AAD1670920C778E3008884FC /* NewTask */,
 				AAD1670A20C77902008884FC /* OneTaskStepListDetailed */,
 			);
@@ -1097,6 +1123,7 @@
 				AA20C6971FD147BC0095AF0F /* CompanyBylawsViewController.m in Sources */,
 				AABFE66A1FB56F7F000ED5C7 /* PunchRecordViewController.m in Sources */,
 				AAB3F8BD1FC7E010001327FA /* CompanyNoticeViewController.m in Sources */,
+				AAC6062F20D20B5600626911 /* InternalDepartmentVC.m in Sources */,
 				AABD8AE11FC81598005058BD /* ACPApprovelViewController.m in Sources */,
 				AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */,
 				AAB4D49B1FC95D1700116355 /* WSDatePickerView.m in Sources */,
@@ -1134,6 +1161,7 @@
 				AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,
 				AA1CEC841FA9602E00050EFC /* AppDelegate.m in Sources */,
+				AAC6063320D215F800626911 /* NewTask.m in Sources */,
 				AABD8ADE1FC81524005058BD /* ACPApprovalTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
