@@ -1,66 +1,51 @@
 //
-//  InternalDepartmentVC.m
+//  PeopleListsTVC.m
 //  QQA
 //
 //  Created by wang huiming on 2018/6/14.
 //  Copyright © 2018年 youth_huiming. All rights reserved.
 //
 
-#import "InternalDepartmentVC.h"
-#import "TaskVC.h"
-#import "NewTask.h"
 #import "PeopleListsTVC.h"
-@interface InternalDepartmentVC ()
+#import "InternalDepartmentVC.h"
+@interface PeopleListsTVC ()
 
 @property (nonatomic, strong) UIView * taskNewView;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *datasource;
-@property (nonatomic, strong) NSMutableString * departmentIdStr;
+@property (nonatomic, strong) NSMutableArray * datasouceArray;
+@property (nonatomic, strong) NSMutableString * indexRowTempStr;
 @end
 
-@implementation InternalDepartmentVC
+@implementation PeopleListsTVC
 
-static  NSString  * identifier = @"CELL";
-
--(NSMutableArray *)datasource{
-    if (!_datasource) {
-        _datasource = [NSMutableArray array];
+static NSString * reuseIdentifier = @"CELL";
+-(NSMutableArray *)datasouceArray{
+    if (!_datasouceArray) {
+        self.datasouceArray = [NSMutableArray array];
     }
-    return _datasource;
+    return _datasouceArray;
 }
--(NSMutableString *)departmentIdStr{
-    if (!_departmentIdStr) {
-        _departmentIdStr = [NSMutableString string];
+-(NSMutableString *)indexRowTempStr{
+    if (!_indexRowTempStr) {
+        _indexRowTempStr = [NSMutableString string];
     }
-    return _departmentIdStr;
+    return _indexRowTempStr;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
-    [self.navigationItem setTitle:@"内部部门"];
-    // Do any additional setup after loading the view.
     
-    [self getDepartmentsListFromServer];
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
-//    _tableView.rowHeight = 100;
-    [self.view addSubview:_tableView];
-    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    self.tableView.dataSource = self;
+    [self loadDataAndShow];
     self.tableView.delegate = self;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
+    self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self addNewTaskNameView];
     
-    
-    
-    
-    
 }
-
-
-
 -(void)addNewTaskNameView{
     _taskNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
     _taskNewView.layer.borderWidth = 1;
@@ -69,7 +54,7 @@ static  NSString  * identifier = @"CELL";
     [self.view addSubview:_taskNewView];
     
     UILabel * taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 1 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 6 / 27)];
-    taskNameLabel.text = @"新建项目名称";
+    taskNameLabel.text = @"新建内部部门项目名称";
     taskNameLabel.textAlignment = NSTextAlignmentCenter;
     [_taskNewView addSubview:taskNameLabel];
     
@@ -95,7 +80,7 @@ static  NSString  * identifier = @"CELL";
     agreeButton.frame = CGRectMake(0 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [agreeButton setTitle:@"确定" forState:(UIControlStateNormal)];
     agreeButton.layer.borderWidth = 0.5;
-    agreeButton.tag = 10011;
+    agreeButton.tag = 10101;
     [agreeButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_taskNewView addSubview:agreeButton];
     
@@ -103,7 +88,7 @@ static  NSString  * identifier = @"CELL";
     refuseButton.frame = CGRectMake(iphoneWidth / 3 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [refuseButton setTitle:@"取消" forState:(UIControlStateNormal)];
     refuseButton.layer.borderWidth = 0.5;
-    refuseButton.tag = 10012;
+    refuseButton.tag = 10102;
     [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_taskNewView addSubview:refuseButton];
     
@@ -111,19 +96,16 @@ static  NSString  * identifier = @"CELL";
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
     NSLog(@"sender:%@", sender);
-    if (sender.tag == 10011) {
-        
-        [self SendNewTaskToServerWithpatternStr:_patternStr typeStr:_typeStr departmentIdStr:_departmentIdStr titleStr:_messageTextView.text];
-        
+    if (sender.tag == 10101) {
+        [self SendNewTaskToServerWithpatternStr:_patternStr typeStr:_typeStr departmentIdStr:_departmentId titleStr:_messageTextView.text userId:_departmentId];
         [self removeNewTaskView];
-    }else if (sender.tag == 10012) {
+    }else if (sender.tag == 1011102) {
         [self alert:@"取消创建任务"];
         [self removeNewTaskView];
     }
     [self removeNewTaskView];
 }
-
--(void)SendNewTaskToServerWithpatternStr:(NSString *)patternStr typeStr:(NSString *)typeStr departmentIdStr:(NSString *)departmentIdStr titleStr:(NSString *)titleStr{
+-(void)SendNewTaskToServerWithpatternStr:(NSString *)patternStr typeStr:(NSString *)typeStr departmentIdStr:(NSString *)departmentIdStr titleStr:(NSString *)titleStr userId:(NSString *)userId{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/create", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -140,8 +122,8 @@ static  NSString  * identifier = @"CELL";
     [mdict setObject:typeStr forKey:@"type"];
     [mdict setObject:departmentIdStr forKey:@"departmentId"];
     [mdict setObject:titleStr forKey:@"title"];
-    
-    NSLog(@"自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-2222:%@", mdict);
+    [mdict setObject:_indexRowTempStr forKey:@"userId"];
+    NSLog(@"mdict11111111111111111111111111:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -150,11 +132,11 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"4321234567:%@", dataBack);
+                                                NSLog(@"OK:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60008) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                             [self alert:@"创建任务成功"];
+                                                            [self alert:@"创建任务成功"];
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
@@ -169,11 +151,6 @@ static  NSString  * identifier = @"CELL";
     [task resume];
 }
 
-
--(void)removeNewTaskView{
-    _taskNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
-    _messageTextView.text = nil;
-}
 #pragma UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
     textView.text = nil;
@@ -203,7 +180,7 @@ static  NSString  * identifier = @"CELL";
         // Nothing to do.
         if ([title isEqualToString:@"创建任务成功"]) {
             for (UIViewController *controller in self.navigationController.viewControllers) {
-                if ([controller isKindOfClass:[TaskVC class]]) {
+                if ([controller isKindOfClass:[InternalDepartmentVC class]]) {
                     [self.navigationController popToViewController:controller animated:YES];
                 }
             }
@@ -214,9 +191,53 @@ static  NSString  * identifier = @"CELL";
 }
 
 
+-(void)removeNewTaskView{
+    _taskNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
+    _messageTextView.text = nil;
+}
 
--(void)getDepartmentsListFromServer{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/department/index", CONST_SERVER_ADDRESS]];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#warning Incomplete implementation, return the number of sections
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#warning Incomplete implementation, return the number of rows
+    return self.datasouceArray.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:reuseIdentifier];
+    }
+//    cell.imageView.image =  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[ self.datasouceArray[indexPath.row] objectForKey:@"" ]];;
+//    cell.textLabel.text = [[self.datasouceArray[indexPath.row] objectForKey:@"username"] substringToIndex:1];
+//    cell.textLabel.layer.borderWidth = 1;
+//    NSLog(@"%@", cell.textLabel.font);
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:18.00];
+//    NSLog(@"%f/%f/%f/%f", cell.textLabel.frame.origin.x,  cell.textLabel.frame.origin.y,  cell.textLabel.frame.size.width,  cell.textLabel.frame.size.height );
+    cell.detailTextLabel.text = [self.datasouceArray[indexPath.row] objectForKey:@"username"];
+    return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    _indexRowTempStr = [self.datasouceArray[indexPath.row] objectForKey:@"userId"];
+    [self newTask];
+    
+}
+-(void)newTask{
+    _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
+}
+-(void)loadDataAndShow{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/department/users", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -228,7 +249,7 @@ static  NSString  * identifier = @"CELL";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    NSLog(@"77777777%@", mdict);
+    [mdict setObject:_departmentId forKey:@"departmentId"];
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -236,67 +257,65 @@ static  NSString  * identifier = @"CELL";
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
-                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60007) {
-                                                        [self.datasource removeAllObjects];
-                                                        NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
-                                                        for (NSDictionary * dict in dataListArray) {
-                                                            [self.datasource addObject:dict];
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"dataBack:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 7006 ) {
+                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
+                                                        [array1 removeObjectAtIndex:0];
+                                                        [self.datasouceArray removeAllObjects];
+                                                        for (NSDictionary * dict in array1) {
+                                                            [self.datasouceArray addObject:dict];
                                                         }
-                                                        NSLog(@"%@", self.datasource);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self.tableView  reloadData];
                                                         });
                                                     }
-                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    NSLog(@"Server tapy is wrong.");
+                                                }else if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    NSLog(@"获取数据失败");
                                                 }
-                                            }else{
-                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                            } else{
+                                                NSLog(@"获取数据失败");
                                             }
                                         }];
     [task resume];
 }
 
-#pragma mark  tableview data source
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.datasource.count;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    cell.textLabel.text = [self.datasource[indexPath.row] objectForKey:@"name"];
-    return cell;
-}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    _departmentIdStr = [self.datasource[indexPath.row] objectForKey:@"departmentId"];
-    if ([_patternStr isEqualToString:@"1"]) {
-        [self newTask];
-    }else if ([_patternStr isEqualToString:@"2"]) {
-        PeopleListsTVC * peopleListsTVC = [PeopleListsTVC new];
-        peopleListsTVC.patternStr = _patternStr;
-        peopleListsTVC.typeStr = _typeStr;
-        peopleListsTVC.departmentName = [self.datasource[indexPath.row] objectForKey:@"name"];
-        peopleListsTVC.departmentId = [self.datasource[indexPath.row] objectForKey:@"departmentId"];
-        [self.navigationController pushViewController:peopleListsTVC animated:YES];
-        
-    }
-    
-    
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
 }
+*/
 
--(void)newTask{
-    _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
 }
+*/
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 }
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
 
 /*
 #pragma mark - Navigation

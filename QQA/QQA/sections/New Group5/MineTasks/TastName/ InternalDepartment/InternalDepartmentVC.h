@@ -13,4 +13,9 @@
 @property (nonatomic, strong)UITextView * messageTextView;
 @property (nonatomic, strong) NSString * taskIdStr;
 
+@property (nonatomic, strong) NSString * patternStr;
+@property (nonatomic, strong) NSString * typeStr;
+
+
+
 @end

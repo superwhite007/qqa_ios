@@ -256,8 +256,6 @@ static NSString  *  identifier = @"CELL";
     taskNameLabel.textAlignment = NSTextAlignmentCenter;
     [_taskNewView addSubview:taskNameLabel];
     
-    
-    
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 8 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 12 / 27)];
     _messageTextView.font = [UIFont systemFontOfSize:21];
 //    _messageTextView.backgroundColor = [UIColor greenColor];
@@ -301,11 +299,18 @@ static NSString  *  identifier = @"CELL";
     UIImageView * privateImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 2 / 15, iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 / 6)];
     privateImageView.image = [UIImage imageNamed:@"lock"];
     [_privateORInternalListView addSubview:privateImageView];
+    
+    
     UIButton * privateButton = [UIButton buttonWithType:UIButtonTypeSystem];
     privateButton.frame = CGRectMake(15 + iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 * 2 / 15 , iphoneWidth * 2 / 3 - 25 - iphoneWidth * 4 / 9 / 6 + 20, iphoneWidth * 4 / 9 / 6);
     privateButton.titleLabel.textColor = [UIColor blackColor];
     [privateButton setTitle:@"私有任务-仅任务执行者和领导可见" forState:UIControlStateNormal];
-    [privateButton addTarget:self action:@selector(newTask) forControlEvents:UIControlEventTouchUpInside];
+    if ([_mineOrOthersStr isEqualToString:@"自己的任务"]) {
+        [privateButton addTarget:self action:@selector(newTask) forControlEvents:UIControlEventTouchUpInside];
+    } else if ([_mineOrOthersStr isEqualToString:@"下属任务"]) {
+        [privateButton addTarget:self action:@selector(Internal:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    privateButton.tag =  12001;
     [_privateORInternalListView addSubview:privateButton];
     
     
@@ -316,13 +321,30 @@ static NSString  *  identifier = @"CELL";
     InternalButton.frame = CGRectMake(15 + iphoneWidth * 4 / 9 / 6, iphoneWidth * 4 / 9 * 3 / 15 + iphoneWidth * 4 / 9 / 3  , iphoneWidth * 2 / 3 - 25 - iphoneWidth * 4 / 9 / 6 + 20, iphoneWidth * 4 / 9 / 6);
     InternalButton.titleLabel.textColor = [UIColor blackColor];
     [InternalButton setTitle:@"内部任务-执行者所在的部门可见" forState:UIControlStateNormal];
-    [InternalButton addTarget:self action:@selector(Internal) forControlEvents:UIControlEventTouchUpInside];
+    [InternalButton addTarget:self action:@selector(Internal:) forControlEvents:UIControlEventTouchUpInside];
+    InternalButton.tag = 12002;
     [_privateORInternalListView addSubview:InternalButton];
 
 }
--(void)Internal{
-    [self removePrivateORInternalListView];
+-(void)Internal:(UIButton *)sender{
+    
     InternalDepartmentVC * internalDepartmentVC = [InternalDepartmentVC new];
+    
+    if (sender.tag == 12001  && [_mineOrOthersStr isEqualToString:@"自己的任务"]) {
+        internalDepartmentVC.patternStr = @"1";
+        internalDepartmentVC.typeStr = @"1";
+    } else if (sender.tag == 12001  && [_mineOrOthersStr isEqualToString:@"下属任务"]) {
+        internalDepartmentVC.patternStr = @"2";
+        internalDepartmentVC.typeStr = @"1";
+    } else if (sender.tag == 12002  && [_mineOrOthersStr isEqualToString:@"自己的任务"]) {
+        internalDepartmentVC.patternStr = @"1";
+        internalDepartmentVC.typeStr = @"2";
+    } else if (sender.tag == 12002  && [_mineOrOthersStr isEqualToString:@"下属任务"]) {
+        internalDepartmentVC.patternStr = @"2";
+        internalDepartmentVC.typeStr = @"2";
+    }
+    
+    [self removePrivateORInternalListView];
     [self.navigationController pushViewController:internalDepartmentVC animated:YES];
     
 }
@@ -335,8 +357,12 @@ static NSString  *  identifier = @"CELL";
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
     if (sender.tag == 10001) {
-        [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
-        [self.tableView reloadData];
+        if ([_mineOrOthersStr isEqualToString:@"自己的任务"]) {
+            [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
+        } else if ([_mineOrOthersStr isEqualToString:@"下属任务"]) {
+            [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
+        }
+       [self.tableView reloadData];
     }else if (sender.tag == 10002) {
         [self removeNewTaskView];
         [self alert:@"取消创建"];
@@ -400,6 +426,7 @@ static NSString  *  identifier = @"CELL";
     [mdict setObject:typeStr forKey:@"type"];
     [mdict setObject:departmentIdStr forKey:@"departmentId"];
     [mdict setObject:titleStr forKey:@"title"];
+    NSLog(@"自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;

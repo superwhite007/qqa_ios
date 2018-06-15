@@ -73,6 +73,7 @@
 		AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC4D1F71FAAA11900183930 /* AppCoverViewController.m */; };
 		AAC6062F20D20B5600626911 /* InternalDepartmentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC6062E20D20B5600626911 /* InternalDepartmentVC.m */; };
 		AAC6063320D215F800626911 /* NewTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC6063220D215F800626911 /* NewTask.m */; };
+		AAC6063620D2687E00626911 /* PeopleListsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC6063520D2687E00626911 /* PeopleListsTVC.m */; };
 		AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD166FD20C6630B008884FC /* ReadunreadVC.m */; };
 		AAD1670120C67C21008884FC /* Readunread.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670020C67C21008884FC /* Readunread.m */; };
 		AAD1670420C67C3F008884FC /* ReadunreadTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670320C67C3F008884FC /* ReadunreadTVCell.m */; };
@@ -270,6 +271,8 @@
 		AAC6062E20D20B5600626911 /* InternalDepartmentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InternalDepartmentVC.m; sourceTree = "<group>"; };
 		AAC6063120D215F800626911 /* NewTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewTask.h; sourceTree = "<group>"; };
 		AAC6063220D215F800626911 /* NewTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewTask.m; sourceTree = "<group>"; };
+		AAC6063420D2687E00626911 /* PeopleListsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleListsTVC.h; sourceTree = "<group>"; };
+		AAC6063520D2687E00626911 /* PeopleListsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleListsTVC.m; sourceTree = "<group>"; };
 		AAD166FC20C6630B008884FC /* ReadunreadVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadunreadVC.h; sourceTree = "<group>"; };
 		AAD166FD20C6630B008884FC /* ReadunreadVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadunreadVC.m; sourceTree = "<group>"; };
 		AAD166FF20C67C21008884FC /* Readunread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Readunread.h; sourceTree = "<group>"; };
@@ -764,6 +767,8 @@
 			children = (
 				AAC6062D20D20B5600626911 /* InternalDepartmentVC.h */,
 				AAC6062E20D20B5600626911 /* InternalDepartmentVC.m */,
+				AAC6063420D2687E00626911 /* PeopleListsTVC.h */,
+				AAC6063520D2687E00626911 /* PeopleListsTVC.m */,
 			);
 			path = " InternalDepartment";
 			sourceTree = "<group>";
@@ -794,12 +799,12 @@
 			isa = PBXGroup;
 			children = (
 				AAC6063020D215CD00626911 /* General-purpose */,
-				AAD1670620C775CD008884FC /* TaskVC.h */,
-				AAD1670720C775CD008884FC /* TaskVC.m */,
 				AA8BB4B920CF9517008D7823 /* TaskName.h */,
 				AA8BB4BA20CF9517008D7823 /* TaskName.m */,
 				AA8BB4BC20CF9558008D7823 /* TaskNameTVCell.h */,
 				AA8BB4BD20CF9558008D7823 /* TaskNameTVCell.m */,
+				AAD1670620C775CD008884FC /* TaskVC.h */,
+				AAD1670720C775CD008884FC /* TaskVC.m */,
 				AAC6062C20D20B0100626911 /*  InternalDepartment */,
 				AAD1670920C778E3008884FC /* NewTask */,
 				AAD1670A20C77902008884FC /* OneTaskStepListDetailed */,
@@ -1108,6 +1113,7 @@
 				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
 				AAB4D48F1FC9249F00116355 /* LMJDropdownMenu.m in Sources */,
 				AA8BB4BB20CF9517008D7823 /* TaskName.m in Sources */,
+				AAC6063620D2687E00626911 /* PeopleListsTVC.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
 				AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */,
 				AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */,
