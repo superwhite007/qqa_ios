@@ -10,7 +10,7 @@
 #import "OneTasKStep.h"
 #import "OneTasKStepTVCell.h"
 #import "StepDetailCommunicationListVC.h"
-@interface OneTaskDetailedListVC ()
+@interface OneTaskDetailedListVC ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datasource;
@@ -56,9 +56,30 @@ static  NSString  * identifier = @"CELL";
     self.tableView.delegate = self;
     [self.tableView registerClass:[OneTasKStepTVCell class] forCellReuseIdentifier:identifier];
     
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
+    lpgr.delegate = self;
+    [_tableView addGestureRecognizer:lpgr]; //启用长按事件
+    
     [self addNewTaskNameView];
 }
 
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
+{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint p = [gestureRecognizer locationInView:_tableView ];
+        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
+        NSLog(@"NewStepOfTask.rowindexPath.row:%ld", indexPath.row);
+        if (indexPath == nil)
+            NSLog(@"long press on table view but not on a row");
+        else
+            NSLog(@"long press on table view at row %ld", indexPath.row);
+        NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+        [self alert: str];
+    }
+    
+}
 -(void)addNewTaskNameView{
     _stepNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
     _stepNewView.layer.borderWidth = 1;
@@ -108,7 +129,6 @@ static  NSString  * identifier = @"CELL";
 }
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
-    NSLog(@"sender:%@", sender);
     if (sender.tag == 10101) {
         [self SendNewTaskToServerWithtitleStr:_messageTextView.text taskId:_taskIdStr];
         [self removeNewTaskView];
