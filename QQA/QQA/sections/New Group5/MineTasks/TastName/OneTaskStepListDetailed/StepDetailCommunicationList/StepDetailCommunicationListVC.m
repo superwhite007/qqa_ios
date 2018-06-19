@@ -104,7 +104,7 @@ static  NSString  * identifier = @"CELL";
     agreeButton.frame = CGRectMake(0 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [agreeButton setTitle:@"确定" forState:(UIControlStateNormal)];
     agreeButton.layer.borderWidth = 0.5;
-    agreeButton.tag = 10101;
+    agreeButton.tag = 11001;
     [agreeButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_communicationNewView addSubview:agreeButton];
     
@@ -112,24 +112,24 @@ static  NSString  * identifier = @"CELL";
     refuseButton.frame = CGRectMake(iphoneWidth / 3 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [refuseButton setTitle:@"取消" forState:(UIControlStateNormal)];
     refuseButton.layer.borderWidth = 0.5;
-    refuseButton.tag = 10102;
+    refuseButton.tag = 11002;
     [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_communicationNewView addSubview:refuseButton];
     
 }
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
-    if (sender.tag == 10101) {
-//        [self SendNewTaskToServerWithtitleStr:_messageTextView.text taskId:_taskIdStr];
+    if (sender.tag == 11001) {
+        [self SendNewCommunicationToServerWithtitleStr:_messageTextView.text taskId:_subtaskIdStr];
         [self removeNewTaskView];
-    }else if (sender.tag == 10102) {
+    }else if (sender.tag == 11002) {
         [self alert:@"取消交流内容的创建"];
         [self removeNewTaskView];
     }
     [self removeNewTaskView];
 }
 -(void)SendNewCommunicationToServerWithtitleStr:(NSString *)titleStr taskId:(NSString *)taskId{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/detail/create", CONST_SERVER_ADDRESS]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/comment/create", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -141,9 +141,9 @@ static  NSString  * identifier = @"CELL";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    [mdict setObject:titleStr forKey:@"title"];
-//    [mdict setObject:_taskIdStr forKey:@"taskId"];
-    NSLog(@"mdict11111111111111111111111111234567,60010:%@", mdict);
+    [mdict setObject:titleStr forKey:@"content"];
+    [mdict setObject:taskId forKey:@"subtaskId"];
+    [mdict setObject:@"2" forKey:@"type"];//评论类型：1为催单 2为交流
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -152,11 +152,11 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"OK60010:%@", dataBack);
+                                                NSLog(@"OK60012:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60010) {
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60012) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-//                                                            [self getOneTaskStepListFromServer];
+                                                            [self getOneTaskStepCommunicationListFromServer];
                                                             [self alert:@"创建交流内容成功"];
                                                         });
                                                     }
@@ -216,11 +216,7 @@ static  NSString  * identifier = @"CELL";
     _communicationNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
     _messageTextView.text = nil;
 }
--(void)addTaskDetailed{
-    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:0.6];
-}-(void)addTaskCommunication{
-    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:0.6];
-}
+
 -(void)getOneTaskStepCommunicationListFromServer{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/comment/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -236,7 +232,6 @@ static  NSString  * identifier = @"CELL";
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:@"1" forKey:@"pageNum"];
     [mdict setObject:_subtaskIdStr forKey:@"subtaskId"];
-    NSLog(@"66666%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -245,13 +240,10 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"T1276543234565432:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60005) {
-                                                        NSLog(@"TaskList2:%@", dataBack);
                                                         [self.datasource removeAllObjects];
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
-                                                        NSLog(@"dataListArray:%@", dataListArray);
                                                         for (NSDictionary * dict in dataListArray) {
                                                             StepDetailCommunication * stepDetailCommunication = [StepDetailCommunication new];
                                                             [stepDetailCommunication setValuesForKeysWithDictionary:dict];
