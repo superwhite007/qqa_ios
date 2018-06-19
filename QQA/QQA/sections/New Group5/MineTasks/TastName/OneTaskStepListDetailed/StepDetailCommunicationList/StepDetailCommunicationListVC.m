@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datasource;
 
-@property (nonatomic, strong) UIView * stepNewView;
+@property (nonatomic, strong) UIView * communicationNewView;
 @property (nonatomic, strong) NSMutableString * indexRowTempStr;
 
 @end
@@ -35,7 +35,7 @@ static  NSString  * identifier = @"CELL";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor yellowColor];
     [self.navigationItem setTitle:@"任务交流"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newStep)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newCommunication)];
     [self getOneTaskStepCommunicationListFromServer];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
@@ -71,16 +71,16 @@ static  NSString  * identifier = @"CELL";
     
 }
 -(void)addNewTaskNameView{
-    _stepNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
-    _stepNewView.layer.borderWidth = 1;
-    _stepNewView.layer.cornerRadius = 5;
-    _stepNewView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_stepNewView];
+    _communicationNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
+    _communicationNewView.layer.borderWidth = 1;
+    _communicationNewView.layer.cornerRadius = 5;
+    _communicationNewView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_communicationNewView];
     
     UILabel * taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 1 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 6 / 27)];
     taskNameLabel.text = @"新建工作交流内容";
     taskNameLabel.textAlignment = NSTextAlignmentCenter;
-    [_stepNewView addSubview:taskNameLabel];
+    [_communicationNewView addSubview:taskNameLabel];
     
     
     
@@ -98,7 +98,7 @@ static  NSString  * identifier = @"CELL";
     _messageTextView.attributedText = [[NSAttributedString alloc] initWithString:@"请输入交流内容。不超过200个字符。" attributes:attributes];
     //    _messageTextView.text = @"请输入任务名称。不超过30个字符。";
     _messageTextView.delegate = self;
-    [_stepNewView addSubview:_messageTextView];
+    [_communicationNewView addSubview:_messageTextView];
     
     UIButton * agreeButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     agreeButton.frame = CGRectMake(0 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
@@ -106,7 +106,7 @@ static  NSString  * identifier = @"CELL";
     agreeButton.layer.borderWidth = 0.5;
     agreeButton.tag = 10101;
     [agreeButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
-    [_stepNewView addSubview:agreeButton];
+    [_communicationNewView addSubview:agreeButton];
     
     UIButton * refuseButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     refuseButton.frame = CGRectMake(iphoneWidth / 3 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
@@ -114,7 +114,7 @@ static  NSString  * identifier = @"CELL";
     refuseButton.layer.borderWidth = 0.5;
     refuseButton.tag = 10102;
     [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
-    [_stepNewView addSubview:refuseButton];
+    [_communicationNewView addSubview:refuseButton];
     
 }
 
@@ -213,7 +213,7 @@ static  NSString  * identifier = @"CELL";
 
 
 -(void)removeNewTaskView{
-    _stepNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
+    _communicationNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
     _messageTextView.text = nil;
 }
 -(void)addTaskDetailed{
@@ -270,8 +270,8 @@ static  NSString  * identifier = @"CELL";
                                         }];
     [task resume];
 }
--(void)newStep{
-    _stepNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
+-(void)newCommunication{
+    _communicationNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
 }
 
 #pragma mark  tableview data source
