@@ -830,7 +830,6 @@
 				AAE0258620D0BDC2002A28DA /* OneTasKStep.m */,
 				AAE0258820D0BDE4002A28DA /* OneTasKStepTVCell.h */,
 				AAE0258920D0BDE4002A28DA /* OneTasKStepTVCell.m */,
-				AAE0258B20D0EA49002A28DA /* NewStep */,
 				AAE0258C20D0EA58002A28DA /* StepDetailCommunicationList */,
 			);
 			path = OneTaskStepListDetailed;
@@ -852,13 +851,6 @@
 				AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */,
 			);
 			path = RequestAndLeaveDetails;
-			sourceTree = "<group>";
-		};
-		AAE0258B20D0EA49002A28DA /* NewStep */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NewStep;
 			sourceTree = "<group>";
 		};
 		AAE0258C20D0EA58002A28DA /* StepDetailCommunicationList */ = {
