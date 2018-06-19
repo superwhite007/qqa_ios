@@ -21,7 +21,8 @@
 @property (nonatomic, strong) NSMutableArray *datasourceMArray;
 @property (nonatomic, strong) NSMutableString * conditionMStr;
 @property (nonatomic, strong) UIView * privateORInternalListView;
-
+@property (nonatomic, strong) UILabel * taskNameLabel;
+@property (nonatomic, strong) NSMutableString  * taskIdMStr;
 @end
 
 @implementation TaskVC
@@ -33,6 +34,12 @@ static NSString  *  identifier = @"CELL";
         _datasourceMArray = [NSMutableArray array];
     }
     return _datasourceMArray;
+}
+-(NSMutableString *)taskIdMStr{
+    if (!_taskIdMStr) {
+        _taskIdMStr = [NSMutableString string];
+    }
+    return _taskIdMStr;
 }
 
 - (void)viewDidLoad {
@@ -87,6 +94,8 @@ static NSString  *  identifier = @"CELL";
              [self alert: @"有修改权限"];
             [self newTask];
             _messageTextView.text = taskName.title;
+            _taskNameLabel.text = @"修改项目名称";
+            _taskIdMStr = [ NSMutableString stringWithFormat:@"%@", taskName.taskId];
         } else{
              [self alert: @"无修改权限"];
         }
@@ -252,10 +261,10 @@ static NSString  *  identifier = @"CELL";
     _taskNewView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_taskNewView];
     
-    UILabel * taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 1 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 6 / 27)];
-    taskNameLabel.text = @"新建项目名称";
-    taskNameLabel.textAlignment = NSTextAlignmentCenter;
-    [_taskNewView addSubview:taskNameLabel];
+    _taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 1 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 6 / 27)];
+    _taskNameLabel.text = @"新建项目名称";
+    _taskNameLabel.textAlignment = NSTextAlignmentCenter;
+    [_taskNewView addSubview:_taskNameLabel];
     
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 8 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 12 / 27)];
     _messageTextView.font = [UIFont systemFontOfSize:21];
@@ -358,11 +367,16 @@ static NSString  *  identifier = @"CELL";
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
     if (sender.tag == 10001) {
-        if ([_mineOrOthersStr isEqualToString:@"自己的任务"]) {
-            [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
-        } else if ([_mineOrOthersStr isEqualToString:@"下属任务"]) {
-            [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
+        if ([_taskNameLabel.text isEqualToString:@"修改项目名称"]) {
+            [self changeTasktitleStr:_messageTextView.text taskId:_taskIdMStr];
+        } else {
+            if ([_mineOrOthersStr isEqualToString:@"自己的任务"]) {
+                [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
+            } else if ([_mineOrOthersStr isEqualToString:@"下属任务"]) {
+                [self SendNewTaskToServerWithpatternStr:@"1" typeStr:@"1" departmentIdStr:@"0" titleStr:_messageTextView.text];
+            }
         }
+        
        [self.tableView reloadData];
     }else if (sender.tag == 10002) {
         [self removeNewTaskView];
@@ -408,6 +422,7 @@ static NSString  *  identifier = @"CELL";
 
 -(void)newTask{
     [self removePrivateORInternalListView];
+    _taskNameLabel.text = @"新建项目名称";
     _taskNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
 }
 -(void)SendNewTaskToServerWithpatternStr:(NSString *)patternStr typeStr:(NSString *)typeStr departmentIdStr:(NSString *)departmentIdStr titleStr:(NSString *)titleStr{
@@ -455,6 +470,49 @@ static NSString  *  identifier = @"CELL";
     [task resume];
 }
 
+-(void)changeTasktitleStr:(NSString *)titleStr taskId:(NSString *)taskId {
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/update", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:taskId forKey:@"taskId"];
+    [mdict setObject:titleStr forKey:@"title"];
+    NSLog(@"更新项目名称60014:%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"60014:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60014) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"更改任务成功"];
+                                                            [self getTaskListFromServer];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self alert:@"创建任务失败"];
+                                                });
+                                            }
+                                        }];
+    [task resume];
+}
 -(void)removeNewTaskView{
     _taskNewView.frame = CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
     _messageTextView.text = nil;
