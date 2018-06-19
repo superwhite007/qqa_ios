@@ -82,8 +82,15 @@ static NSString  *  identifier = @"CELL";
             NSLog(@"long press on table view but not on a row");
         else
             NSLog(@"long press on table view at row %ld", indexPath.row);
-        NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
-        [self alert: str];
+        TaskName * taskName = self.datasourceMArray[indexPath.row];
+        if (taskName.isRename) {
+             [self alert: @"有修改权限"];
+            [self newTask];
+            _messageTextView.text = taskName.title;
+        } else{
+             [self alert: @"无修改权限"];
+        }
+       
     }
     
 }
@@ -180,12 +187,6 @@ static NSString  *  identifier = @"CELL";
                                         }];
     [task resume];
 }
-
-
-
-
-
-
 
 #pragma  datasource
 
