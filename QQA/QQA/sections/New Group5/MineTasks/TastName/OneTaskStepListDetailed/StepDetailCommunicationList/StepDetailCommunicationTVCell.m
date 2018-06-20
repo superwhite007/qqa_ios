@@ -30,6 +30,7 @@
     _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 5, iphoneWidth - 100, 60)];
     [self.contentView addSubview:self.contentLabel];
     _describeLabel = [UILabel new];
+    _describeLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:_describeLabel];
     
 }

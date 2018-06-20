@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) UIView * communicationNewView;
 @property (nonatomic, strong) NSMutableString * indexRowTempStr;
+@property (nonatomic, strong) UIView * reminderOrNewCommunicationView;
 
 @end
 
@@ -41,7 +42,7 @@ static  NSString  * identifier = @"CELL";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor yellowColor];
     [self.navigationItem setTitle:@"任务交流"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newCommunication)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayReminderOrNewCommunicationView)];
     [self getOneTaskStepCommunicationListFromServer];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
@@ -58,7 +59,7 @@ static  NSString  * identifier = @"CELL";
     [_tableView addGestureRecognizer:lpgr]; //启用长按事件
     
     [self addNewTaskNameView];
-    
+    [self addReminderOrNewCommunicationView];
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
@@ -77,6 +78,53 @@ static  NSString  * identifier = @"CELL";
     }
     
 }
+
+#pragma changeNameDeleteCompleteStep
+-(void)addReminderOrNewCommunicationView{
+    _reminderOrNewCommunicationView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  + 2 * iphoneWidth, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9  - ((iphoneWidth * 4 / 9 - 20 ) / 3 + 5 ))];
+    _reminderOrNewCommunicationView.layer.borderWidth = 1;
+    _reminderOrNewCommunicationView.layer.cornerRadius = 5;
+    _reminderOrNewCommunicationView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_reminderOrNewCommunicationView];
+    NSMutableArray * ary = [NSMutableArray arrayWithObjects:@"催单", @"交流", nil];
+    for (int i = 0; i < ary.count; i++) {
+        UIButton * changeNameButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        changeNameButton.frame = CGRectMake(15 , 5 + i * ((iphoneWidth * 4 / 9 - 20 ) / 3 + 5 ) , iphoneWidth * 2 / 3 - 10, (iphoneWidth * 4 / 9 - 20 ) / 3);
+        changeNameButton.titleLabel.textColor = [UIColor blackColor];
+        changeNameButton.layer.borderWidth = 0.5;
+        changeNameButton.layer.cornerRadius = 4;
+        changeNameButton.tag = 12110 + i;
+        [changeNameButton setTitle:ary[i] forState:UIControlStateNormal];
+        [changeNameButton addTarget:self action:@selector(changeNameDeleteCompleteButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_reminderOrNewCommunicationView addSubview:changeNameButton];
+    }
+}
+-(void)displayReminderOrNewCommunicationView{
+    _reminderOrNewCommunicationView.frame = CGRectMake(iphoneWidth / 6 , iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 - ((iphoneWidth * 4 / 9 - 20 ) / 3 + 5 ));
+}
+-(void)undisplayReminderOrNewCommunicationView{
+    _reminderOrNewCommunicationView.frame = CGRectMake(iphoneWidth / 6  +  iphoneWidth * 2, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
+}
+-(void)changeNameDeleteCompleteButton:(UIButton *)button{
+    [self undisplayReminderOrNewCommunicationView];
+    switch (button.tag) {
+        case 12110:
+            [self SendNewCommunicationToServerWithtitleStr:_messageTextView.text taskId:_subtaskIdStr type:@"1"];
+            break;
+        case 12111:
+            [self newCommunication];
+            break;
+        
+        default:
+            break;
+    }
+}
+
+
+
+
+
+
 -(void)addNewTaskNameView{
     _communicationNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
     _communicationNewView.layer.borderWidth = 1;
@@ -88,8 +136,6 @@ static  NSString  * identifier = @"CELL";
     taskNameLabel.text = @"新建工作交流内容";
     taskNameLabel.textAlignment = NSTextAlignmentCenter;
     [_communicationNewView addSubview:taskNameLabel];
-    
-    
     
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 8 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 12 / 27)];
     _messageTextView.font = [UIFont systemFontOfSize:21];
@@ -127,15 +173,17 @@ static  NSString  * identifier = @"CELL";
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
     if (sender.tag == 11001) {
-        [self SendNewCommunicationToServerWithtitleStr:_messageTextView.text taskId:_subtaskIdStr];
+        [self SendNewCommunicationToServerWithtitleStr:_messageTextView.text taskId:_subtaskIdStr type:@"2"];
         [self removeNewTaskView];
+        [self undisplayReminderOrNewCommunicationView];
     }else if (sender.tag == 11002) {
         [self alert:@"取消交流内容的创建"];
         [self removeNewTaskView];
+        [self undisplayReminderOrNewCommunicationView];
     }
     [self removeNewTaskView];
 }
--(void)SendNewCommunicationToServerWithtitleStr:(NSString *)titleStr taskId:(NSString *)taskId{
+-(void)SendNewCommunicationToServerWithtitleStr:(NSString *)titleStr taskId:(NSString *)taskId type:(NSString *)type{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/comment/create", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

@@ -39,6 +39,7 @@
 //    [self.contentView addSubview: _titleLabel];
     
     _describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 70, iphoneWidth - 100, 25)];
+    _describeLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:_describeLabel];
     
     _commentNumberRedpointCircleLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 70, 30, 20, 20)];

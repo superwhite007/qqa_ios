@@ -53,7 +53,7 @@ static  NSString  * identifier = @"CELL";
     
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"任务步骤"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newStep)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newStepRightBarButtonItem)];
     // Do any additional setup after loading the view.
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
@@ -414,6 +414,11 @@ static  NSString  * identifier = @"CELL";
                                             }
                                         }];
     [task resume];
+}
+-(void)newStepRightBarButtonItem{
+//    _messageTextView.text = @"请输入任务名称。不超过30个字符。";
+    _taskNameLabel.text = @"新建项目步骤的名称";
+    _stepNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
 }
 -(void)newStep{
     _stepNewView.frame = CGRectMake(iphoneWidth / 6  + 20 , iphoneWidth / 6, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
