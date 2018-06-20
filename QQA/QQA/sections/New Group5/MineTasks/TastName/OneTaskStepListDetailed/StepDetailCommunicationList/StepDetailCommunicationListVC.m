@@ -74,7 +74,7 @@ static  NSString  * identifier = @"CELL";
             NSLog(@"long press on table view at row %ld", indexPath.row);
         NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
         _indexRowTempStr = [NSMutableString stringWithFormat:@"%@", str];
-        [self alert: str];
+//        [self alert: str];
     }
     
 }
