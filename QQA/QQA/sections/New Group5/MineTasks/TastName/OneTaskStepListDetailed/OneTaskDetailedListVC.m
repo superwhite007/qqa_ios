@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) UIView * stepNewView;
 @property (nonatomic, strong) NSMutableString * indexRowTempStr;
+@property (nonatomic, strong) UIView * changeNameDeleteCompletestepNewView;
 
 @end
 
@@ -63,6 +64,7 @@ static  NSString  * identifier = @"CELL";
     [_tableView addGestureRecognizer:lpgr]; //启用长按事件
     
     [self addNewTaskNameView];
+    [self ADDchangeNameDeleteCompleteStepView];
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
@@ -77,9 +79,56 @@ static  NSString  * identifier = @"CELL";
             NSLog(@"long press on table view at row %ld", indexPath.row);
         NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
         [self alert: str];
+        [self displayChangeNameDeleteCompleteStepView];
     }
     
 }
+
+
+
+#pragma changeNameDeleteCompleteStep
+-(void)ADDchangeNameDeleteCompleteStepView{
+    _changeNameDeleteCompletestepNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  - iphoneWidth, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 )];
+    _changeNameDeleteCompletestepNewView.layer.borderWidth = 1;
+    _changeNameDeleteCompletestepNewView.layer.cornerRadius = 5;
+    _changeNameDeleteCompletestepNewView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_changeNameDeleteCompletestepNewView];
+    
+    NSMutableArray * ary = [NSMutableArray arrayWithObjects:@"更改步骤名称", @"删除该步骤", @"该步骤已完成", nil];
+    for (int i = 0; i < ary.count; i++) {
+        UIButton * changeNameButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        changeNameButton.frame = CGRectMake(15 , 5 + i * ((iphoneWidth * 4 / 9 - 20 ) / 3 + 5 ) , iphoneWidth * 2 / 3 - 10, (iphoneWidth * 4 / 9 - 20 ) / 3);
+        changeNameButton.titleLabel.textColor = [UIColor blackColor];
+        changeNameButton.layer.borderWidth = 0.5;
+        changeNameButton.layer.cornerRadius = 4;
+        [changeNameButton setTitle:ary[i] forState:UIControlStateNormal];
+        [changeNameButton addTarget:self action:@selector(changeNameDeleteCompleteButton:) forControlEvents:UIControlEventTouchUpInside];
+        changeNameButton.tag =  12001;
+        [_changeNameDeleteCompletestepNewView addSubview:changeNameButton];
+    }
+   
+    
+    
+    
+}
+-(void)changeNameDeleteCompleteButton:(UIButton *)button{
+    
+    
+}
+
+-(void)displayChangeNameDeleteCompleteStepView{
+    _changeNameDeleteCompletestepNewView.frame = CGRectMake(iphoneWidth / 6 , iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
+}
+-(void)undisplayChangeNameDeleteCompleteStepView{
+    _changeNameDeleteCompletestepNewView.frame = CGRectMake(iphoneWidth / 6  - iphoneWidth * 2, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
+}
+#pragma changeNameDeleteCompleteStep  end
+
+
+
+
+
+
 -(void)addNewTaskNameView{
     _stepNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
     _stepNewView.layer.borderWidth = 1;

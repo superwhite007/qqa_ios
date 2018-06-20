@@ -79,7 +79,6 @@
 		AAD1670420C67C3F008884FC /* ReadunreadTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670320C67C3F008884FC /* ReadunreadTVCell.m */; };
 		AAD1670820C775CD008884FC /* TaskVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670720C775CD008884FC /* TaskVC.m */; };
 		AAD1670D20C779EE008884FC /* OneTaskDetailedListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670C20C779EE008884FC /* OneTaskDetailedListVC.m */; };
-		AAD1671020C77A6F008884FC /* TaskNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD1670F20C77A6F008884FC /* TaskNameVC.m */; };
 		AAD911FE1FD691B8002A42B5 /* CompanyAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD911FD1FD691B8002A42B5 /* CompanyAddressBookViewController.m */; };
 		AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912001FD6955D002A42B5 /* AddressBook.m */; };
 		AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912031FD69576002A42B5 /* AddressBooKTableViewCell.m */; };
@@ -283,8 +282,6 @@
 		AAD1670720C775CD008884FC /* TaskVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskVC.m; sourceTree = "<group>"; };
 		AAD1670B20C779EE008884FC /* OneTaskDetailedListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneTaskDetailedListVC.h; sourceTree = "<group>"; };
 		AAD1670C20C779EE008884FC /* OneTaskDetailedListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneTaskDetailedListVC.m; sourceTree = "<group>"; };
-		AAD1670E20C77A6F008884FC /* TaskNameVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskNameVC.h; sourceTree = "<group>"; };
-		AAD1670F20C77A6F008884FC /* TaskNameVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskNameVC.m; sourceTree = "<group>"; };
 		AAD911FC1FD691B8002A42B5 /* CompanyAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyAddressBookViewController.h; sourceTree = "<group>"; };
 		AAD911FD1FD691B8002A42B5 /* CompanyAddressBookViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyAddressBookViewController.m; sourceTree = "<group>"; };
 		AAD911FF1FD6955D002A42B5 /* AddressBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
@@ -806,19 +803,9 @@
 				AAD1670620C775CD008884FC /* TaskVC.h */,
 				AAD1670720C775CD008884FC /* TaskVC.m */,
 				AAC6062C20D20B0100626911 /*  InternalDepartment */,
-				AAD1670920C778E3008884FC /* NewTask */,
 				AAD1670A20C77902008884FC /* OneTaskStepListDetailed */,
 			);
 			path = TastName;
-			sourceTree = "<group>";
-		};
-		AAD1670920C778E3008884FC /* NewTask */ = {
-			isa = PBXGroup;
-			children = (
-				AAD1670E20C77A6F008884FC /* TaskNameVC.h */,
-				AAD1670F20C77A6F008884FC /* TaskNameVC.m */,
-			);
-			path = NewTask;
 			sourceTree = "<group>";
 		};
 		AAD1670A20C77902008884FC /* OneTaskStepListDetailed */ = {
@@ -1155,7 +1142,6 @@
 				AAD1670820C775CD008884FC /* TaskVC.m in Sources */,
 				AA3A75361FE50BC000F3EB25 /* RulesDetailViewController.m in Sources */,
 				AAE0258720D0BDC2002A28DA /* OneTasKStep.m in Sources */,
-				AAD1671020C77A6F008884FC /* TaskNameVC.m in Sources */,
 				AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,
 				AA1CEC841FA9602E00050EFC /* AppDelegate.m in Sources */,

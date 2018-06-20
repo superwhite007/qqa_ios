@@ -29,6 +29,12 @@ static  NSString  * identifier = @"CELL";
     }
     return _datasource;
 }
+-(NSMutableString *)indexRowTempStr{
+    if (!_indexRowTempStr) {
+        _indexRowTempStr = [NSMutableString string];
+    }
+    return _indexRowTempStr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,6 +72,7 @@ static  NSString  * identifier = @"CELL";
         else
             NSLog(@"long press on table view at row %ld", indexPath.row);
         NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+        _indexRowTempStr = [NSMutableString stringWithFormat:@"%@", str];
         [self alert: str];
     }
     
