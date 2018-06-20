@@ -11,11 +11,12 @@
 #import "OneTasKStepTVCell.h"
 #import "StepDetailCommunicationListVC.h"
 #import "OneTasKStep.h"
+
 @interface OneTaskDetailedListVC ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datasource;
-
+@property (nonatomic, strong) UILabel * taskNameLabel;
 @property (nonatomic, strong) UIView * stepNewView;
 @property (nonatomic, strong) NSMutableString * indexRowTempStr;
 @property (nonatomic, strong) NSMutableString * isCompletedMStr;
@@ -93,6 +94,10 @@ static  NSString  * identifier = @"CELL";
             _isCompletedMStr = [NSMutableString stringWithFormat:@"T"];
         }
         
+        _messageTextView.text = oneTasKStep.title;
+        _taskNameLabel.text = @"更改项目步骤的名称";
+        
+        
         [self alert: str];
         [self displayChangeNameDeleteCompleteStepView];
     }
@@ -131,7 +136,8 @@ static  NSString  * identifier = @"CELL";
     [self undisplayChangeNameDeleteCompleteStepView];
     switch (button.tag) {
         case 11110:
-            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/rename" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"0"];
+            [self newStep];
+//            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/rename" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"0"];
             break;
         case 11111:
             [self changeStepAfterUrl:@"/v1/api/v2/task/detail/delete" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"1"];
@@ -215,10 +221,10 @@ static  NSString  * identifier = @"CELL";
     _stepNewView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_stepNewView];
     
-    UILabel * taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 1 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 6 / 27)];
-    taskNameLabel.text = @"新建项目步骤的名称";
-    taskNameLabel.textAlignment = NSTextAlignmentCenter;
-    [_stepNewView addSubview:taskNameLabel];
+    _taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 1 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 6 / 27)];
+    _taskNameLabel.text = @"新建项目步骤的名称";
+    _taskNameLabel.textAlignment = NSTextAlignmentCenter;
+    [_stepNewView addSubview:_taskNameLabel];
     
     
     
@@ -258,8 +264,13 @@ static  NSString  * identifier = @"CELL";
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
     if (sender.tag == 10101) {
-        [self SendNewTaskToServerWithtitleStr:_messageTextView.text taskId:_taskIdStr];
-        [self removeNewTaskView];
+        if ([_taskNameLabel.text isEqualToString:@"更改项目步骤的名称"]) {
+            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/rename" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"0"];
+        }else{
+            [self SendNewTaskToServerWithtitleStr:_messageTextView.text taskId:_taskIdStr];
+            [self removeNewTaskView];
+        }
+       
     }else if (sender.tag == 10102) {
         [self alert:@"取消项目步骤的创建"];
         [self removeNewTaskView];
@@ -312,7 +323,9 @@ static  NSString  * identifier = @"CELL";
 
 #pragma UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-    textView.text = nil;
+    if ([textView.text isEqualToString:@"请输入任务名称。不超过30个字符。"]) {
+        textView.text = nil;
+    }
     return YES;
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
