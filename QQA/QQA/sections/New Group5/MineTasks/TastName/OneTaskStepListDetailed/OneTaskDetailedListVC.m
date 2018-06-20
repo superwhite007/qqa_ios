@@ -10,6 +10,7 @@
 #import "OneTasKStep.h"
 #import "OneTasKStepTVCell.h"
 #import "StepDetailCommunicationListVC.h"
+#import "OneTasKStep.h"
 @interface OneTaskDetailedListVC ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -77,7 +78,10 @@ static  NSString  * identifier = @"CELL";
             NSLog(@"long press on table view but not on a row");
         else
             NSLog(@"long press on table view at row %ld", indexPath.row);
+        
+        OneTasKStep * oneTasKStep = self.datasource[indexPath.row];
         NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+        _indexRowTempStr = [NSMutableString stringWithFormat:@"%@",  oneTasKStep.subtaskId];
         [self alert: str];
         [self displayChangeNameDeleteCompleteStepView];
     }
@@ -93,8 +97,7 @@ static  NSString  * identifier = @"CELL";
     _changeNameDeleteCompletestepNewView.layer.cornerRadius = 5;
     _changeNameDeleteCompletestepNewView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_changeNameDeleteCompletestepNewView];
-    
-    NSMutableArray * ary = [NSMutableArray arrayWithObjects:@"更改步骤名称", @"删除该步骤", @"该步骤已完成", nil];
+    NSMutableArray * ary = [NSMutableArray arrayWithObjects:@"更改步骤名称", @"删除该步骤", @"标记该步骤(完成/未完成)", nil];
     for (int i = 0; i < ary.count; i++) {
         UIButton * changeNameButton = [UIButton buttonWithType:UIButtonTypeSystem];
         changeNameButton.frame = CGRectMake(15 , 5 + i * ((iphoneWidth * 4 / 9 - 20 ) / 3 + 5 ) , iphoneWidth * 2 / 3 - 10, (iphoneWidth * 4 / 9 - 20 ) / 3);
@@ -106,28 +109,73 @@ static  NSString  * identifier = @"CELL";
         changeNameButton.tag =  12001;
         [_changeNameDeleteCompletestepNewView addSubview:changeNameButton];
     }
-   
-    
-    
-    
 }
--(void)changeNameDeleteCompleteButton:(UIButton *)button{
-    
-    
-}
-
 -(void)displayChangeNameDeleteCompleteStepView{
     _changeNameDeleteCompletestepNewView.frame = CGRectMake(iphoneWidth / 6 , iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
 }
 -(void)undisplayChangeNameDeleteCompleteStepView{
     _changeNameDeleteCompletestepNewView.frame = CGRectMake(iphoneWidth / 6  - iphoneWidth * 2, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
 }
+-(void)changeNameDeleteCompleteButton:(UIButton *)button{
+    [self undisplayChangeNameDeleteCompleteStepView];
+    [self changeStepAfterUrl:@"/v1/api/v2/task/detail/delete" titleStr:_messageTextView.text subtaskId:_indexRowTempStr];
+}
+
+-(void)changeStepAfterUrl:(NSString *)afterUrlStr titleStr:(NSString *)titleStr subtaskId:(NSString *)subtaskId {
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, afterUrlStr]];///v1/api/v2/task/detail/rename  /v1/api/v2/task/detail/delete   /v1/api/v2/task/detail/remark
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:subtaskId forKey:@"subtaskId"];
+//    [mdict setObject:titleStr forKey:@"title"];
+    NSLog(@"更新项目名称60020:%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"60020:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60016) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"更改步骤成功"];
+                                                            [self getOneTaskStepListFromServer];
+                                                        });
+                                                    }else if ([[dataBack objectForKey:@"message"] intValue] == 60020) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"删除步骤成功"];
+                                                            [self getOneTaskStepListFromServer];
+                                                        });
+                                                    }else if ([[dataBack objectForKey:@"message"] intValue] == 60018) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"完成/未完成标记成功"];
+                                                            [self getOneTaskStepListFromServer];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self alert:@"创建任务失败"];
+                                                });
+                                            }
+                                        }];
+    [task resume];
+}
+
 #pragma changeNameDeleteCompleteStep  end
-
-
-
-
-
 
 -(void)addNewTaskNameView{
     _stepNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth  / 6 + iphoneWidth, (iphoneHeight - 135) / 2, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
