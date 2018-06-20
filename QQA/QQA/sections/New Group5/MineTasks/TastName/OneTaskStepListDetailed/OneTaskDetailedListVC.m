@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) UIView * stepNewView;
 @property (nonatomic, strong) NSMutableString * indexRowTempStr;
+@property (nonatomic, strong) NSMutableString * isCompletedMStr;
 @property (nonatomic, strong) UIView * changeNameDeleteCompletestepNewView;
 
 @end
@@ -32,14 +33,18 @@ static  NSString  * identifier = @"CELL";
     }
     return _datasource;
 }
-
 -(NSMutableString *)indexRowTempStr{
     if (!_indexRowTempStr) {
         _indexRowTempStr = [NSMutableString string];
     }
     return _indexRowTempStr;
 }
-
+-(NSMutableString *)isCompletedMStr{
+    if (!_isCompletedMStr) {
+        _isCompletedMStr = [NSMutableString string];
+    }
+    return _isCompletedMStr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -78,10 +83,16 @@ static  NSString  * identifier = @"CELL";
             NSLog(@"long press on table view but not on a row");
         else
             NSLog(@"long press on table view at row %ld", indexPath.row);
-        
+
         OneTasKStep * oneTasKStep = self.datasource[indexPath.row];
         NSString * str = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
         _indexRowTempStr = [NSMutableString stringWithFormat:@"%@",  oneTasKStep.subtaskId];
+        if (oneTasKStep.isCompleted) {
+            _isCompletedMStr = [NSMutableString stringWithFormat:@"F"];
+        }else {
+            _isCompletedMStr = [NSMutableString stringWithFormat:@"T"];
+        }
+        
         [self alert: str];
         [self displayChangeNameDeleteCompleteStepView];
     }
@@ -92,7 +103,7 @@ static  NSString  * identifier = @"CELL";
 
 #pragma changeNameDeleteCompleteStep
 -(void)ADDchangeNameDeleteCompleteStepView{
-    _changeNameDeleteCompletestepNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  - iphoneWidth, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 )];
+    _changeNameDeleteCompletestepNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  + 2 * iphoneWidth, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 )];
     _changeNameDeleteCompletestepNewView.layer.borderWidth = 1;
     _changeNameDeleteCompletestepNewView.layer.cornerRadius = 5;
     _changeNameDeleteCompletestepNewView.backgroundColor = [UIColor whiteColor];
@@ -104,9 +115,9 @@ static  NSString  * identifier = @"CELL";
         changeNameButton.titleLabel.textColor = [UIColor blackColor];
         changeNameButton.layer.borderWidth = 0.5;
         changeNameButton.layer.cornerRadius = 4;
+        changeNameButton.tag = 11110 + i;
         [changeNameButton setTitle:ary[i] forState:UIControlStateNormal];
         [changeNameButton addTarget:self action:@selector(changeNameDeleteCompleteButton:) forControlEvents:UIControlEventTouchUpInside];
-        changeNameButton.tag =  12001;
         [_changeNameDeleteCompletestepNewView addSubview:changeNameButton];
     }
 }
@@ -114,15 +125,29 @@ static  NSString  * identifier = @"CELL";
     _changeNameDeleteCompletestepNewView.frame = CGRectMake(iphoneWidth / 6 , iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
 }
 -(void)undisplayChangeNameDeleteCompleteStepView{
-    _changeNameDeleteCompletestepNewView.frame = CGRectMake(iphoneWidth / 6  - iphoneWidth * 2, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
+    _changeNameDeleteCompletestepNewView.frame = CGRectMake(iphoneWidth / 6  +  iphoneWidth * 2, iphoneWidth / 6, iphoneWidth * 2 / 3 + 20, iphoneWidth * 4 / 9 );
 }
 -(void)changeNameDeleteCompleteButton:(UIButton *)button{
     [self undisplayChangeNameDeleteCompleteStepView];
-    [self changeStepAfterUrl:@"/v1/api/v2/task/detail/delete" titleStr:_messageTextView.text subtaskId:_indexRowTempStr];
+    switch (button.tag) {
+        case 11110:
+            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/rename" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"0"];
+            break;
+        case 11111:
+            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/delete" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"1"];
+            break;
+        case 11112:
+            NSLog(@"_isCompletedMStr:%@", _isCompletedMStr);
+            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/remark" titleStr:_isCompletedMStr subtaskId:_indexRowTempStr identifierStr:@"2"];
+            break;
+            
+        default:
+            break;
+    }
 }
 
--(void)changeStepAfterUrl:(NSString *)afterUrlStr titleStr:(NSString *)titleStr subtaskId:(NSString *)subtaskId {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, afterUrlStr]];///v1/api/v2/task/detail/rename  /v1/api/v2/task/detail/delete   /v1/api/v2/task/detail/remark
+-(void)changeStepAfterUrl:(NSString *)afterUrlStr titleStr:(NSString *)titleStr subtaskId:(NSString *)subtaskId identifierStr:(NSString * )identifierStr{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, afterUrlStr]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -135,7 +160,13 @@ static  NSString  * identifier = @"CELL";
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:subtaskId forKey:@"subtaskId"];
-//    [mdict setObject:titleStr forKey:@"title"];
+    if ([identifierStr isEqualToString:@"0"]) {
+        [mdict setObject:titleStr forKey:@"title"];
+    }else if ([identifierStr isEqualToString:@"1"]) {
+
+    }else if ([identifierStr isEqualToString:@"2"]) {
+         [mdict setObject:titleStr forKey:@"isCompleted"];
+    }
     NSLog(@"更新项目名称60020:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
