@@ -23,6 +23,10 @@
 @property (nonatomic, strong) UIView * privateORInternalListView;
 @property (nonatomic, strong) UILabel * taskNameLabel;
 @property (nonatomic, strong) NSMutableString  * taskIdMStr;
+
+@property (nonatomic, assign) int pageNum;
+@property (nonatomic, assign) BOOL isDownRefresh;
+
 @end
 
 @implementation TaskVC
@@ -44,6 +48,10 @@ static NSString  *  identifier = @"CELL";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.pageNum = 1;
+    self.isDownRefresh = NO;
+    
     NSLog(@"_mineOrOthersStr:%@", _mineOrOthersStr);
     _conditionMStr = [NSMutableString stringWithFormat:@"uncompleted"];
     
@@ -68,16 +76,32 @@ static NSString  *  identifier = @"CELL";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerClass:[TaskNameTVCell class] forCellReuseIdentifier:identifier];
-//    [self.datasourceMArray addObject:@"test1"];
-//    [self.datasourceMArray addObject:@"test2"];
-//    [self.datasourceMArray addObject:@"test3"];
-//    [self.datasourceMArray addObject:@"test4"];
-//    [self.datasourceMArray addObject:@"test5"];
-//    [self.datasourceMArray addObject:@"test6"];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
    
-    [self getTaskListFromServer];
+    [self getTaskListFromServer:_pageNum];
     
     // Do any additional setup after loading the view.
+}
+
+-(void)loadNewData
+{
+    self.isDownRefresh = YES;
+    if (self.pageNum > 1) {
+        [self getTaskListFromServer:--self.pageNum];
+    } else{
+        [self getTaskListFromServer:1];
+    }
+    [self.tableView.mj_header endRefreshing];
+}
+
+-(void)loadMoreData
+{
+    //记录不是下拉刷新
+    self.isDownRefresh = NO;
+    [self getTaskListFromServer:++self.pageNum];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
@@ -130,23 +154,24 @@ static NSString  *  identifier = @"CELL";
 }
 #pragma mark - 分段选择的点击事件
 -(void)selected:(id)sender{
+    _pageNum = 1;
     UISegmentedControl* control = (UISegmentedControl*)sender;
     switch (control.selectedSegmentIndex) {
         case 0:
             _conditionMStr = [NSMutableString stringWithFormat:@"uncompleted"];
-            [self getTaskListFromServer];
+            [self getTaskListFromServer:_pageNum];
             break;
         case 1:
             
             _conditionMStr = [NSMutableString stringWithFormat:@"completed"];
-            [self getTaskListFromServer];
+            [self getTaskListFromServer:_pageNum];
             break;
         default:
             break;
     }
 }
 
--(void)getTaskListFromServer{
+-(void)getTaskListFromServer:(int)page{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/task/index", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -167,7 +192,7 @@ static NSString  *  identifier = @"CELL";
     } else if ([_mineOrOthersStr isEqualToString:@"下属任务"]) {
         [mdict setObject:@"subordinate" forKey:@"type"];
     }
-    [mdict setObject:@"1" forKey:@"pageNum"];
+    [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
     [mdict setObject:_conditionMStr forKey:@"condition"];
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
@@ -505,7 +530,7 @@ static NSString  *  identifier = @"CELL";
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60014) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self alert:@"更改任务成功"];
-                                                            [self getTaskListFromServer];
+                                                            [self getTaskListFromServer:_pageNum];
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
