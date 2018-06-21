@@ -10,7 +10,7 @@
 
 @interface OneTaskDetailedListVC : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong)UITextView * messageTextView;
+@property (nonatomic, strong) UITextView * messageTextView;
 @property (nonatomic, strong) NSString * taskIdStr;
-
+@property (nonatomic, strong) NSString * identifierPrivate;
 @end

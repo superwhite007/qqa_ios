@@ -53,7 +53,9 @@ static  NSString  * identifier = @"CELL";
     
     self.view.backgroundColor = [UIColor redColor];
     [self.navigationItem setTitle:@"任务步骤"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newStepRightBarButtonItem)];
+    if (![_identifierPrivate isEqualToString:@"私人任务"]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(newStepRightBarButtonItem)];
+    }
     // Do any additional setup after loading the view.
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];

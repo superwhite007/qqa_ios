@@ -10,7 +10,8 @@
 
 @interface TaskVC : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong)UITextView * messageTextView;
+@property (nonatomic, strong) UITextView * messageTextView;
 @property (nonatomic, strong) NSString * mineOrOthersStr;
+@property (nonatomic, strong) NSString * userIdStr;
 
 @end

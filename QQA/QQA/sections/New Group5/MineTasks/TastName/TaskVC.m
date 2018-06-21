@@ -55,7 +55,9 @@ static NSString  *  identifier = @"CELL";
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self addSegmentControl];
     [self addNewTaskNameView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(addPrivateORInternalListView)];
+    if (![_mineOrOthersStr isEqualToString:@"私人任务"]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(addPrivateORInternalListView)];
+    }
    
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
@@ -161,6 +163,7 @@ static NSString  *  identifier = @"CELL";
         [mdict setObject:@"own" forKey:@"type"];
     } else if ([_mineOrOthersStr isEqualToString:@"私人任务"]) {
         [mdict setObject:@"others" forKey:@"type"];
+        [mdict setObject:_userIdStr forKey:@"userId"];
     } else if ([_mineOrOthersStr isEqualToString:@"下属任务"]) {
         [mdict setObject:@"subordinate" forKey:@"type"];
     }
@@ -249,6 +252,9 @@ static NSString  *  identifier = @"CELL";
     TaskName * taskName = self.datasourceMArray[indexPath.row];
     OneTaskDetailedListVC * oneTaskDetailedListVC = [OneTaskDetailedListVC new];
     oneTaskDetailedListVC.taskIdStr = [NSString stringWithFormat:@"%@", taskName.taskId];
+     if ([_mineOrOthersStr isEqualToString:@"私人任务"]) {
+         oneTaskDetailedListVC.identifierPrivate = _mineOrOthersStr;
+     }
     [self.navigationController pushViewController:oneTaskDetailedListVC animated:NO];
 
 }
