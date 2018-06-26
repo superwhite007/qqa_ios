@@ -446,6 +446,9 @@ static NSString  *  identifier = @"CELL";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Nothing to do.
+        if ([title isEqualToString:@"创建任务成功"]) {
+            [self getTaskListFromServer:_pageNum];
+        }
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
@@ -554,6 +557,9 @@ static NSString  *  identifier = @"CELL";
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self getTaskListFromServer:_pageNum];
+}
 -(void)viewDidDisappear:(BOOL)animated{
     [self removeNewTaskView];
     [self removePrivateORInternalListView];
