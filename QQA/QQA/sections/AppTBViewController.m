@@ -18,6 +18,9 @@
 #import "UMSecondViewController.h"
 #import "AppDelegate.h"
 #import "AppCoverViewController.h"
+#import "TaskVC.h"
+#import "OneTaskDetailedListVC.h"
+#import "StepDetailCommunicationListVC.h"
 
 @interface AppTBViewController ()<UITabBarControllerDelegate>
 {
@@ -47,18 +50,30 @@
 }
 -(void)userInfoNotification:(NSNotification*)notification{
     NSDictionary *dict = [notification userInfo];
-//    NSLog(@"notification%@", dict);
+    NSLog(@"通知：notification%@", dict);
     UMFirstViewController *firstvc=[[UMFirstViewController alloc]init];
     firstvc.notcieString=[NSString stringWithFormat:@"%@", [[dict objectForKey:@"aps"] objectForKey:@"alert"]];
-//    [self.navigationController pushViewController:firstvc animated:YES];
-    
     if ( [[dict objectForKey:@"type"]  intValue] == 1 ) {
         self.selectedViewController = [self.viewControllers objectAtIndex:0];
-    } else if ([[dict objectForKey:@"type"]  intValue] == 2 ){
+    }else if ([[dict objectForKey:@"type"]  intValue] == 2 ){
         self.selectedViewController = [self.viewControllers objectAtIndex:1];
-    }
-    
-    
+    }else if ([[dict objectForKey:@"type"]  intValue] == 3 ){
+        TaskVC * taskVC = [TaskVC new];
+        taskVC.mineOrOthersStr = @"自己的任务";
+        [self.navigationController pushViewController:taskVC animated:YES];
+    }else if ([[dict objectForKey:@"type"]  intValue] == 4 ){
+        TaskVC * taskVC = [TaskVC new];
+        taskVC.mineOrOthersStr = @"下属任务";
+        [self.navigationController pushViewController:taskVC animated:YES];
+    }else if ([[dict objectForKey:@"type"]  intValue] == 5 ){
+        OneTaskDetailedListVC * oneTaskDetailedListVC = [OneTaskDetailedListVC new];
+        oneTaskDetailedListVC.taskIdStr = [NSString stringWithFormat:@"%@", [dict objectForKey:@"taskId"]];
+        [self.navigationController pushViewController:oneTaskDetailedListVC animated:NO];
+    }else if ([[dict objectForKey:@"type"]  intValue] == 6 ){
+        StepDetailCommunicationListVC * stepDetailCommunicationListVC = [StepDetailCommunicationListVC new];
+        stepDetailCommunicationListVC.subtaskIdStr =[NSString stringWithFormat:@"%@", [dict objectForKey:@"subTaskId"]];
+        [self.navigationController pushViewController:stepDetailCommunicationListVC animated:YES];
+  }
 }
 
 
