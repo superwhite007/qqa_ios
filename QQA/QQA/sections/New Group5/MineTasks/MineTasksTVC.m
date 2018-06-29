@@ -70,17 +70,86 @@ static NSString * reuseIdentifier = @"CELL";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        TaskVC * taskVC = [TaskVC new];
+        taskVC.mineOrOthersStr = @"自己的任务";
+        [self.navigationController pushViewController:taskVC animated:YES];
+    }else if (indexPath.row == 1) {
+        [self  gitPersonPermissions];
+    }
+}
+
+-(void)gitPersonPermissions{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/user/permissions", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    NSError * error = nil;
+    NSLog(@"mdict:%@", mdict);
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSLog(@"%@", error);
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                NSLog(@"dataBackdataBack:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ( [[dataBack objectForKey:@"message"] intValue] == 8002 ) {
+                                                         NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:dataBack];
+                                                        if ([[dict objectForKey:@"createTaskForSubordinate" ] isEqualToString:@"yes"]) {
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self havePermissionsYes];
+                                                            });
+                                                        }else{
+                                                            [self alert:@"没有相关权限"];
+                                                        }
+                                                    }else {
+                                                        [self alert:@"没有相关权限"];
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]]) {
+                                                    [self alert:@"没有相关权限"];
+                                                }
+                                            }else{
+                                               [self alert:@"没有相关权限"];
+                                            }
+                                        }];
+    [task resume];
+    
+}
+-(void)havePermissionsYes{
     
     TaskVC * taskVC = [TaskVC new];
-    if (indexPath.row == 0) {
-        taskVC.mineOrOthersStr = @"自己的任务";
-    }else if (indexPath.row == 1) {
-        taskVC.mineOrOthersStr = @"下属任务";
-    }
+    taskVC.mineOrOthersStr = @"下属任务";
     [self.navigationController pushViewController:taskVC animated:YES];
-        
 
 }
+
+-(void)alert:(NSString *)str{
+    NSString *title = str;
+    NSString *message = @"请注意";
+    NSString *okButtonTitle = @"OK";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        // Nothing to do.
+    }];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+}
+
+
+
+
+
 
 /*
 // Override to support conditional editing of the table view.
