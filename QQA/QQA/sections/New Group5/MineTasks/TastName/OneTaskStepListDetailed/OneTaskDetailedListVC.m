@@ -175,7 +175,7 @@ static  NSString  * identifier = @"CELL";
     }else if ([identifierStr isEqualToString:@"2"]) {
          [mdict setObject:titleStr forKey:@"isCompleted"];
     }
-    NSLog(@"更新项目名称60020:%@", mdict);
+    NSLog(@"更新项目名称1111111111111111111111:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -184,12 +184,12 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"60020:%@", dataBack);
+                                                NSLog(@"600？？:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60016) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            [self alert:@"更改步骤成功"];
                                                             [self getOneTaskStepListFromServer];
+                                                            [self alert:@"更改步骤成功"];
                                                         });
                                                     }else if ([[dataBack objectForKey:@"message"] intValue] == 60020) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -198,7 +198,11 @@ static  NSString  * identifier = @"CELL";
                                                         });
                                                     }else if ([[dataBack objectForKey:@"message"] intValue] == 60018) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                                            [self alert:@"完成/未完成标记成功"];
+                                                            if ([_isCompletedMStr isEqualToString:@"T"]) {
+                                                                 [self alert:@"标记完成"];
+                                                            }else if ([_isCompletedMStr isEqualToString:@"F"]) {
+                                                                [self alert:@"标记未完成"];
+                                                            }
                                                             [self getOneTaskStepListFromServer];
                                                         });
                                                     }
