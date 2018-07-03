@@ -253,7 +253,7 @@ static  NSString  * identifier = @"CELL";
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:titleStr forKey:@"content"];
     [mdict setObject:taskId forKey:@"subtaskId"];
-    [mdict setObject:@"2" forKey:@"type"];//评论类型：1为催单 2为交流
+    [mdict setObject:type forKey:@"type"];//评论类型：1为催单 2为交流
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -268,7 +268,7 @@ static  NSString  * identifier = @"CELL";
                                                         
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self getOneTaskStepCommunicationListFromServer];
-                                                            [self alert:@"创建交流内容成功1"];
+                                                            [self alert:@"创建交流内容成功!"];
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
