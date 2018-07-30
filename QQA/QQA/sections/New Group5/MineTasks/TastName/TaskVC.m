@@ -154,6 +154,7 @@ static NSString  *  identifier = @"CELL";
 }
 #pragma mark - 分段选择的点击事件
 -(void)selected:(id)sender{
+    [self removePrivateORInternalListView];
     _pageNum = 1;
     UISegmentedControl* control = (UISegmentedControl*)sender;
     switch (control.selectedSegmentIndex) {
