@@ -85,7 +85,6 @@
 		AAD912071FD6959C002A42B5 /* AddressBooKListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD912061FD6959C002A42B5 /* AddressBooKListView.m */; };
 		AAD9120B1FD780A4002A42B5 /* DetailOfPeopleINformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD9120A1FD780A4002A42B5 /* DetailOfPeopleINformationViewController.m */; };
 		AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */; };
-		AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D711FB933FF00A7CC2A /* LanchViewController.m */; };
 		AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */; };
 		AADAAA2E1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */; };
 		AAE0258720D0BDC2002A28DA /* OneTasKStep.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE0258620D0BDC2002A28DA /* OneTasKStep.m */; };
@@ -294,8 +293,6 @@
 		AAD9120A1FD780A4002A42B5 /* DetailOfPeopleINformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailOfPeopleINformationViewController.m; sourceTree = "<group>"; };
 		AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExaminationApprovalViewController.h; sourceTree = "<group>"; };
 		AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExaminationApprovalViewController.m; sourceTree = "<group>"; };
-		AAD93D701FB933FF00A7CC2A /* LanchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LanchViewController.h; sourceTree = "<group>"; };
-		AAD93D711FB933FF00A7CC2A /* LanchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LanchViewController.m; sourceTree = "<group>"; };
 		AAD93D731FB9372A00A7CC2A /* CompanyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyViewController.h; sourceTree = "<group>"; };
 		AAD93D741FB9372A00A7CC2A /* CompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
 		AADAAA2C1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestAndLeaveDetailsViewController.h; sourceTree = "<group>"; };
@@ -658,8 +655,6 @@
 				AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */,
 				AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */,
 				AABD8AD51FC81360005058BD /* ApprovalCCPendingApproval */,
-				AAD93D701FB933FF00A7CC2A /* LanchViewController.h */,
-				AAD93D711FB933FF00A7CC2A /* LanchViewController.m */,
 				AA13948F1FC263F50070B1E2 /* GeneralExamination */,
 			);
 			path = ExaminationApproval;
@@ -1134,7 +1129,6 @@
 				AA620C2E20CE434700D48D54 /* MineTasksTVC.m in Sources */,
 				AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
-				AAD93D721FB933FF00A7CC2A /* LanchViewController.m in Sources */,
 				AAD912071FD6959C002A42B5 /* AddressBooKListView.m in Sources */,
 				AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */,
 				AABD8ADB1FC8150E005058BD /* ACPApprovalListView.m in Sources */,

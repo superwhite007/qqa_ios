@@ -7,7 +7,6 @@
 //
 
 #import "CompanyViewController.h"
-#import "LanchViewController.h"
 #import "CompanyNoticeViewController.h"
 #import "CompanyinformationAndBylawsViewController.h"
 #import "CompanyOrganizationalStructureViewController.h"
@@ -228,12 +227,9 @@ static NSString *identifier = @"CELL";
             CompanyOrganizationalStructureViewController * organizationalStructurehVC = [CompanyOrganizationalStructureViewController new];
             [self.navigationController pushViewController:organizationalStructurehVC animated:YES];
         } else if (indexPath.row == 4) {
-//            LanchViewController * lanchVC = [LanchViewController new];
-//            [self.navigationController pushViewController:lanchVC animated:YES];
             [self alert:@"开发中、、、"];
         } else{
-            LanchViewController * lanchVC = [LanchViewController new];
-            [self.navigationController pushViewController:lanchVC animated:YES];
+           
         }
 }
 
