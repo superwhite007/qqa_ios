@@ -121,11 +121,11 @@ static NSString * identifier = @"CELL";
         } else if (number == 0){
 //            RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
 //            [self.navigationController pushViewController:leaveVC animated:YES];
-             [self alert:@"期待中、、、"];
+             [self alert:@"开发中"];
         }else if (number == 2){
             //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
             //        [self.navigationController pushViewController:leaveVC animated:YES];
-            [self alert:@"期待中、、、"];
+            [self alert:@"开发中"];
         }
     } else if ([_titleIdentifier isEqualToString:@"待审批的"]){
         if (number == 1) {
@@ -138,11 +138,11 @@ static NSString * identifier = @"CELL";
 //            examinationVC.titleStr = @"待审批的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
 //            [self.navigationController pushViewController:examinationVC animated:YES];
-            [self alert:@"期待中、、、"];
+            [self alert:@"开发中"];
         }else if (number == 2){
             //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
             //        [self.navigationController pushViewController:leaveVC animated:YES];
-             [self alert:@"期待中、、、"];
+             [self alert:@"开发中"];
         }
     }else if ([_titleIdentifier isEqualToString:@"已通过的"]){
         if (number == 1) {
@@ -155,11 +155,11 @@ static NSString * identifier = @"CELL";
 //            examinationVC.titleStr = @"已通过的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
 //            [self.navigationController pushViewController:examinationVC animated:YES];
-            [self alert:@"期待中、、、"];
+            [self alert:@"开发中"];
         }else if (number == 2){
             //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
             //        [self.navigationController pushViewController:leaveVC animated:YES];
-             [self alert:@"期待中、、、"];
+             [self alert:@"开发中"];
         }
     }else if ([_titleIdentifier isEqualToString:@"未通过的"]){
         if (number == 1) {
@@ -172,11 +172,11 @@ static NSString * identifier = @"CELL";
 //            examinationVC.titleStr = @"未通过的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
 //            [self.navigationController pushViewController:examinationVC animated:YES];
-             [self alert:@"期待中、、、"];
+             [self alert:@"开发中"];
         }else if (number == 2){
             //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
             //        [self.navigationController pushViewController:leaveVC animated:YES];
-             [self alert:@"期待中、、、"];
+             [self alert:@"开发中"];
         }
     }else if ([_titleIdentifier isEqualToString:@"抄送我的"]){
         if (number == 1) {
@@ -189,11 +189,11 @@ static NSString * identifier = @"CELL";
 //            examinationVC.titleStr = @"抄送我的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
 //            [self.navigationController pushViewController:examinationVC animated:YES];
-            [self alert:@"期待中、、、"];
+            [self alert:@"开发中"];
         }else if (number == 2){
             //        RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
             //        [self.navigationController pushViewController:leaveVC animated:YES];
-             [self alert:@"期待中、、、"];
+             [self alert:@"开发中"];
         }
     }
 }

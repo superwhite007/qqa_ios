@@ -186,7 +186,7 @@
         [self.navigationController pushViewController:organizationalStructurehVC animated:YES];
         
     }else if (sender.tag == 1004){
-        [self alert:@"开发中、、、"];
+        [self alert:@"开发中"];
         
     }
 }

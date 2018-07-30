@@ -82,7 +82,7 @@
     }else if (sender.tag == 1){
 //        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
 //        [self.navigationController pushViewController:versionInformationVC animated:YES];
-//        [self  alert:@"开发中、、、"];
+//        [self  alert:@"开发中"];
         // app版本
         [self versionCheck];
         

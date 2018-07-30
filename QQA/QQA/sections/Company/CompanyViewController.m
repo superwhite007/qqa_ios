@@ -227,7 +227,7 @@ static NSString *identifier = @"CELL";
             CompanyOrganizationalStructureViewController * organizationalStructurehVC = [CompanyOrganizationalStructureViewController new];
             [self.navigationController pushViewController:organizationalStructurehVC animated:YES];
         } else if (indexPath.row == 4) {
-            [self alert:@"开发中、、、"];
+            [self alert:@"开发中"];
         } else{
            
         }
