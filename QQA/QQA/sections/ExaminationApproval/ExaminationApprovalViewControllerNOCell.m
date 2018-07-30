@@ -88,8 +88,6 @@
         [self addPagesButtonCellSE5S];
     }
     
-    
-    
 }
 
 -(void)addPagesButtonCellSE5S{
@@ -97,7 +95,6 @@
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3  + i * 45, iphoneWidth - 35, 60);
-        //    button1.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
         button.tag = 1000 + i;
         button.titleLabel.textColor=[UIColor blackColor];
@@ -130,18 +127,13 @@
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
     }
-    
-    
-    
 }
-
 
 -(void)addPagesButtonCell{
     NSArray * titleArray = [NSArray arrayWithObjects:@"发起审批", @"待审批的", @"已通过的",  @"未通过的", @"抄送我的", nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 6 + i * 60, iphoneWidth - 35, 60);
-        //    button1.backgroundColor = [UIColor darkGrayColor];
         [button setTitle:titleArray[i] forState:(UIControlStateNormal)];
         button.tag = 1000 + i;
         button.titleLabel.textColor=[UIColor blackColor];
@@ -156,7 +148,6 @@
     for (int i = 0; i < imageArray.count; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
         firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 +  6 + 15  + 5+ i * 60, 20, 20);
-        //    imgView.backgroundColor = [UIColor yellowColor];
         UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
         [firstimgView setImage:firstimage];
         firstimgView.alpha = 0.6;
@@ -174,10 +165,8 @@
         view.backgroundColor = [UIColor blackColor];
         [self.view addSubview:view];
     }
-    
-    
-    
 }
+
 -(void)gotoSomeForwed:(UIButton *)sender{
     IInitiatedtheExaminationTableViewController * examinationVC = [[IInitiatedtheExaminationTableViewController alloc] initWithStyle:(UITableViewStylePlain)];
     if (sender.tag == 1000) {
@@ -207,7 +196,6 @@
 }
 
 -(void)addCyclePictures{
-    
     NSMutableArray *viewsArray = [@[] mutableCopy];
     for (int i = 0; i < 3; ++i) {
         UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
@@ -243,49 +231,13 @@
     cycleScrollView2.pageDotColor = [UIColor yellowColor]; // 自定义分页控件小圆标颜色
     cycleScrollView2.placeholderImage = [UIImage imageNamed:@"placeholder"];
     [self.view addSubview:cycleScrollView2];
-    
 }
+
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     NSLog(@"---点击了第%ld张图片", index);
 }
-//
-//-(void)addCyclePictures{
-//
-//    NSMutableArray *viewsArray = [@[] mutableCopy];
-//    if (_cyclePicturesDatasource.count > 0) {
-//        for (int i = 0; i < 3; ++i) {
-//            NSURL * url = [NSURL URLWithString:_cyclePicturesDatasource[i]];
-//            NSData * data = [NSData dataWithContentsOfURL:url];
-//            UIImage *img = [UIImage imageWithData:data];
-//            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-//            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
-//            [viewsArray addObject:imgView];
-//        }
-//    } else{
-//        for (int i = 0; i < 3; ++i) {
-//            UIImage *img = [UIImage imageNamed:[NSString stringWithFormat:@"everyday_1"]];
-//            UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-//            imgView.frame = CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3);
-//            [viewsArray addObject:imgView];
-//        }
-//    }
-//
-//
-//    self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
-//    self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
-//    self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
-//        return viewsArray[pageIndex];
-//    };
-//    self.mainScorllView.totalPagesCount = ^NSInteger(void){
-//        return 3;
-//    };
-//    self.mainScorllView.TapActionBlock = ^(NSInteger pageIndex){
-//        NSLog(@"点击了第%ld个",(long)pageIndex);
-//    };
-//    [self.view addSubview:self.mainScorllView];
-//
-//}
+
 -(void)getCycleScrollPitures{
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/company/getImg", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -401,10 +353,7 @@
             redpointLabel.backgroundColor = [UIColor whiteColor];
         }
     }
-    
-    
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

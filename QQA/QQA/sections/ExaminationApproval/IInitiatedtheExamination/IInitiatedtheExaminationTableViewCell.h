@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface IInitiatedtheExaminationTableViewCell : UITableViewCell
-
 @property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong) UILabel * reasonTitleLabel;
 @property (nonatomic, strong) UIImageView *imgViewFor;

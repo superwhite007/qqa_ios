@@ -392,6 +392,15 @@
 			path = NoUsed;
 			sourceTree = "<group>";
 		};
+		AA1AEF0B210EAE1B0062ED0E /* LeaveWaitingForExamination */ = {
+			isa = PBXGroup;
+			children = (
+				AAEEEA501FCFE5130012A695 /* RequestLeaveDetailViewController.h */,
+				AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */,
+			);
+			path = LeaveWaitingForExamination;
+			sourceTree = "<group>";
+		};
 		AA1CEC761FA9602E00050EFC = {
 			isa = PBXGroup;
 			children = (
@@ -737,9 +746,8 @@
 				AAEEEA4B1FCF9CBA0012A695 /* Request.m */,
 				AAEEEA4D1FCF9CD50012A695 /* RequestTableViewCell.h */,
 				AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */,
-				AADAAA2B1FCD358900A4FC5D /* RequestAndLeaveDetails */,
-				AAEEEA501FCFE5130012A695 /* RequestLeaveDetailViewController.h */,
-				AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */,
+				AA1AEF0B210EAE1B0062ED0E /* LeaveWaitingForExamination */,
+				AADAAA2B1FCD358900A4FC5D /* LeaveDetails */,
 			);
 			path = ApprovalCCPendingApproval;
 			sourceTree = "<group>";
@@ -834,13 +842,13 @@
 			path = AddressBookDetailOfPeopleInformation;
 			sourceTree = "<group>";
 		};
-		AADAAA2B1FCD358900A4FC5D /* RequestAndLeaveDetails */ = {
+		AADAAA2B1FCD358900A4FC5D /* LeaveDetails */ = {
 			isa = PBXGroup;
 			children = (
 				AADAAA2C1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.h */,
 				AADAAA2D1FCD364100A4FC5D /* RequestAndLeaveDetailsViewController.m */,
 			);
-			path = RequestAndLeaveDetails;
+			path = LeaveDetails;
 			sourceTree = "<group>";
 		};
 		AAE0258C20D0EA58002A28DA /* StepDetailCommunicationList */ = {
