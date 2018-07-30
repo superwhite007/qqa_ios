@@ -9,9 +9,7 @@
 #import "LeaveForExaminationAndApprovalViewController.h"
 
 #import "LMJDropdownMenu.h"
-
 #import "WSDatePickerView.h"
-
 #define RGB(x,y,z) [UIColor colorWithRed:x/255.0 green:y/255.0 blue:z/255.0 alpha:1.0]
 
 
@@ -49,26 +47,7 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
                                             if (data != nil) {
-                                                
-//                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                if ([dataBack isKindOfClass:[NSArray class]]) {
-//                                                    NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                    NSLog(@"MessageViewControllerdict: %@", dictArray);
-//                                                    if ( [[dictArray[0] objectForKey:@"message"] intValue] == 5002) {
-//                                                        NSMutableArray * array1 = [NSMutableArray arrayWithArray:dictArray];
-//                                                        [array1 removeObjectAtIndex:0];
-//
-////                                                        [self setDataToDatasoureSendScopeArray:array1];
-//
-//                                                    }
-//
-//                                                }else if ([dataBack isKindOfClass:[NSDictionary class]]){
-//                                                    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-//                                                    NSLog(@"1234567dict: %@,\n ", dict);
-//                                                }
-                                                
                                                 NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6002 ) {
                                                     self.approvalMarray = dictArray[1];
@@ -82,9 +61,7 @@
                                             }
                                         }];
     [task resume];
-
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -98,8 +75,6 @@
     self.startTimeStr = [NSString new];
     self.endTimeStr = [NSString new];
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, iphoneWidth - 40, 30)];
-//    introducePersonLabel.backgroundColor = [UIColor redColor];
-//    NSMutableString * introduceStr = [NSMutableString stringWithFormat:@"11111"];
     [self.view addSubview:introducePersonLabel];
     _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"外出", @"其他", nil];
     for (int i = 0; i < 3 ; i++) {
@@ -112,7 +87,6 @@
         } else {
             UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
             view.backgroundColor = [UIColor redColor];
-//            [self.view addSubview:view];
             UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             selectBtn.frame = CGRectMake(20, 56 + ( i - 1 ) * 45, iphoneWidth - 40, 40);
             selectBtn.layer.cornerRadius = 5;
@@ -126,10 +100,8 @@
     UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 151, 100, 30)];
     reasonTitleLabel.text = @"请假事由";
     reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
-//    reasonTitleLabel.backgroundColor = [UIColor redColor];
     [self.view addSubview:reasonTitleLabel];
     self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 186, iphoneWidth - 40, iphoneWidth * 1 / 3 + 30)];
-    //    messageTextView.backgroundColor = [UIColor blueColor];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:_messageTextView];
     _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
@@ -162,7 +134,6 @@
 }
 
 -(void)chageColor{
-//    self.view.backgroundColor = [UIColor colorWithRed:arc4random() % 256 / 255.0 green:arc4random() % 256 / 255.0 blue:arc4random() % 256 / 255.0 alpha:1];
     [self sendNoticeToServer];
 }
 
@@ -231,11 +202,7 @@
         reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:reasonTitleLabel];
         for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
-//            UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 8 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 8 + 30 ) + 40  , (iphoneWidth - 70 ) / 10 , (iphoneWidth - 70 ) / 10)];
             UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 ) + 30  , (iphoneWidth - 70 ) / 6 , (iphoneWidth - 70 ) / 6)];
-//            titleLabe.layer.borderColor = [UIColor blackColor].CGColor;
-//            titleLabe.layer.borderWidth = 1;
-//            titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
             titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 6 / 2;
             titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
             titleLabe.layer.masksToBounds = YES;
@@ -264,8 +231,6 @@
             }
             
             [self.view addSubview:titleLabe];
-//            imgView.layer.borderWidth = 1;
-//            imgView.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
             UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5  ) + 25  +  (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
             nameLabel.text = mArrayOFApproverAndCC[i][j];
             nameLabel.font = [UIFont systemFontOfSize:14];
@@ -276,7 +241,6 @@
 }
 
 -(void)ApproverAndCCAfteriPhone6{
-    
     NSArray * titleArray =@[@"审批人", @"抄送人"];
     NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
     NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
@@ -289,9 +253,6 @@
         for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
             UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
             UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
-//            titleLabe.layer.borderColor = [UIColor blackColor].CGColor;
-//            titleLabe.layer.borderWidth = 1;
-//            titleLabe.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
             titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
             titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
             titleLabe.layer.masksToBounds = YES;
@@ -336,14 +297,12 @@
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         [self sendNoticeToServer];
-        //NSLog(@"%@", text);
         return NO;
     }else if (range.location >= 200){
         [self alert:@"最多输入200字符"];
         return NO;
     }
     return YES;
-    
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
@@ -365,7 +324,6 @@
 }
 
 -(void)sendMessagesToServer{
-    
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/store", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -403,7 +361,7 @@
 }
 
 -(void)sendToServerTOBack{
-    [self alert:@"发送服务器：success"];
+    [self alert:@"发送成功!"];
 }
 
 -(void)alert:(NSString *)str{
@@ -413,7 +371,7 @@
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Nothing to do.
-        if ([title isEqualToString:@"发送服务器：success"]) {
+        if ([title isEqualToString:@"发送成功!"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
         
