@@ -173,7 +173,7 @@ static NSString * reuseIdentifier = @"CELL";
 
 -(void)alert:(NSString *)str{
     NSString *title = str;
-    NSString *message = @"请注意!";
+    NSString *message = @" ";
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
