@@ -487,6 +487,10 @@ static  NSString  * identifier = @"CELL";
     [self.navigationController pushViewController:stepDetailCommunicationListVC animated:YES];
 }
 
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [self removeNewTaskView];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
