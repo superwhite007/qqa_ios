@@ -386,6 +386,17 @@
 			path = GeneralExamination;
 			sourceTree = "<group>";
 		};
+		AA1AEF0A210EA4AE0062ED0E /* NoUsed */ = {
+			isa = PBXGroup;
+			children = (
+				AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */,
+				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
+				AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */,
+				AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */,
+			);
+			path = NoUsed;
+			sourceTree = "<group>";
+		};
 		AA1CEC761FA9602E00050EFC = {
 			isa = PBXGroup;
 			children = (
@@ -534,8 +545,6 @@
 		AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */ = {
 			isa = PBXGroup;
 			children = (
-				AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */,
-				AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */,
 				AA25BCD31FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.h */,
 				AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */,
 			);
@@ -644,8 +653,7 @@
 		AAA169F41FA98C8B00F35475 /* ExaminationApproval */ = {
 			isa = PBXGroup;
 			children = (
-				AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */,
-				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
+				AA1AEF0A210EA4AE0062ED0E /* NoUsed */,
 				AAC191F920A1948200494B62 /* ExaminationApprovalViewControllerNOCell.h */,
 				AAC191FA20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m */,
 				AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */,

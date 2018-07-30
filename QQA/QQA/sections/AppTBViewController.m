@@ -100,7 +100,7 @@
     [self setupChildViewController:meVC title:@"我" imageName:@"me_normal" selectedImageName:@"me_normal"];
     self.viewControllers = [NSArray arrayWithObjects:companyVC, examinationApprovalVC, punchClockVC, meVC, nil];
 //    self.viewControllers[0].tabBarItem.badgeValue = @"1";
-    self.selectedViewController = [self.viewControllers objectAtIndex:3];
+    self.selectedViewController = [self.viewControllers objectAtIndex:1];
 }
 
 
