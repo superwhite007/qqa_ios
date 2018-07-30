@@ -490,6 +490,7 @@ static  NSString  * identifier = @"CELL";
 
 -(void)viewDidDisappear:(BOOL)animated{
     [self removeNewTaskView];
+    [self undisplayChangeNameDeleteCompleteStepView];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
