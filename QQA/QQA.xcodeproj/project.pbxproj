@@ -375,8 +375,6 @@
 				AAB4D4901FC9581600116355 /* WSDaePickerView */,
 				AAB4D48D1FC9249F00116355 /* LMJDropdownMenu.h */,
 				AAB4D48E1FC9249F00116355 /* LMJDropdownMenu.m */,
-				AA13948C1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.h */,
-				AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */,
 				AA1394901FC277D20070B1E2 /* RequestForInstructionViewController.h */,
 				AA1394911FC277D20070B1E2 /* RequestForInstructionViewController.m */,
 			);
@@ -399,6 +397,15 @@
 				AAEEEA511FCFE5130012A695 /* RequestLeaveDetailViewController.m */,
 			);
 			path = LeaveWaitingForExamination;
+			sourceTree = "<group>";
+		};
+		AA1AEF0C210EB1030062ED0E /* LeavePage */ = {
+			isa = PBXGroup;
+			children = (
+				AA13948C1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.h */,
+				AA13948D1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m */,
+			);
+			path = LeavePage;
 			sourceTree = "<group>";
 		};
 		AA1CEC761FA9602E00050EFC = {
@@ -746,6 +753,7 @@
 				AAEEEA4B1FCF9CBA0012A695 /* Request.m */,
 				AAEEEA4D1FCF9CD50012A695 /* RequestTableViewCell.h */,
 				AAEEEA4E1FCF9CD50012A695 /* RequestTableViewCell.m */,
+				AA1AEF0C210EB1030062ED0E /* LeavePage */,
 				AA1AEF0B210EAE1B0062ED0E /* LeaveWaitingForExamination */,
 				AADAAA2B1FCD358900A4FC5D /* LeaveDetails */,
 			);
