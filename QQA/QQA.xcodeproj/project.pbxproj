@@ -388,8 +388,6 @@
 			children = (
 				AAD93D6D1FB9224500A7CC2A /* ExaminationApprovalViewController.h */,
 				AAD93D6E1FB9224500A7CC2A /* ExaminationApprovalViewController.m */,
-				AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */,
-				AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */,
 			);
 			path = NoUsed;
 			sourceTree = "<group>";
@@ -542,6 +540,8 @@
 		AA25BCD61FBEA627009B8CA0 /* IInitiatedtheExamination */ = {
 			isa = PBXGroup;
 			children = (
+				AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */,
+				AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */,
 				AA25BCD31FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.h */,
 				AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */,
 			);
