@@ -14,7 +14,7 @@
 
 @interface IInitiatedtheExaminationTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *datadource;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation IInitiatedtheExaminationTableViewController
@@ -22,11 +22,11 @@
 
 static NSString * identifier = @"CELL";
 
--(NSMutableArray *)datadource{
-    if (!_datadource) {
-        self.datadource = [NSMutableArray array];
+-(NSMutableArray *)dataSource{
+    if (!_dataSource) {
+        self.dataSource = [NSMutableArray array];
     }
-    return _datadource;
+    return _dataSource;
 }
 
 - (void)viewDidLoad {
@@ -35,37 +35,37 @@ static NSString * identifier = @"CELL";
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假 - 事假、病假等",@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 - 请领导审批" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 - 工作任务描述" ,@"peopleImageStr":@"worksheet"};
-        [self.datadource addObject:dict1];
-        [self.datadource addObject:dict];
-        [self.datadource addObject:dict2];
+        [self.dataSource addObject:dict1];
+        [self.dataSource addObject:dict];
+        [self.dataSource addObject:dict2];
     } else if ([_titleIdentifier isEqualToString:@"待审批的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅工单" ,@"peopleImageStr":@"worksheet"};
-        [self.datadource addObject:dict1];
-        [self.datadource addObject:dict];
-        [self.datadource addObject:dict2];
+        [self.dataSource addObject:dict1];
+        [self.dataSource addObject:dict];
+        [self.dataSource addObject:dict2];
     }else if ([_titleIdentifier isEqualToString:@"已通过的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅工单" ,@"peopleImageStr":@"worksheet"};
-        [self.datadource addObject:dict1];
-        [self.datadource addObject:dict];
-        [self.datadource addObject:dict2];
+        [self.dataSource addObject:dict1];
+        [self.dataSource addObject:dict];
+        [self.dataSource addObject:dict2];
     }else if ([_titleIdentifier isEqualToString:@"未通过的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"未批阅假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅工单" ,@"peopleImageStr":@"worksheet"};
-        [self.datadource addObject:dict1];
-        [self.datadource addObject:dict];
-        [self.datadource addObject:dict2];
+        [self.dataSource addObject:dict1];
+        [self.dataSource addObject:dict];
+        [self.dataSource addObject:dict2];
     }else if ([_titleIdentifier isEqualToString:@"抄送我的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送工单" ,@"peopleImageStr":@"worksheet"};
-        [self.datadource addObject:dict1];
-        [self.datadource addObject:dict];
-        [self.datadource addObject:dict2];
+        [self.dataSource addObject:dict1];
+        [self.dataSource addObject:dict];
+        [self.dataSource addObject:dict2];
     }
     [self.navigationItem setTitle:_titleIdentifier];
     [self.tableView registerClass:[IInitiatedtheExaminationTableViewCell class] forCellReuseIdentifier:identifier];
@@ -84,7 +84,7 @@ static NSString * identifier = @"CELL";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.datadource.count;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -92,10 +92,10 @@ static NSString * identifier = @"CELL";
     if (!cell) {
         cell = [[IInitiatedtheExaminationTableViewCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:identifier];
     }
-    NSString * str = [NSString stringWithFormat:@"%@", [self.datadource[indexPath.row] objectForKey:@"reasonTitleStr"]];
-    cell.imgView.image = [UIImage imageNamed:[self.datadource[indexPath.row] objectForKey:@"peopleImageStr"]];
+    NSString * str = [NSString stringWithFormat:@"%@", [self.dataSource[indexPath.row] objectForKey:@"reasonTitleStr"]];
+    cell.imgView.image = [UIImage imageNamed:[self.dataSource[indexPath.row] objectForKey:@"peopleImageStr"]];
     cell.reasonTitleLabel.text = str;
-    cell.imgViewFor.image = [UIImage imageNamed:[self.datadource[indexPath.row] objectForKey:@"imageStr"]];
+    cell.imgViewFor.image = [UIImage imageNamed:[self.dataSource[indexPath.row] objectForKey:@"imageStr"]];
     return cell;
 }
 
