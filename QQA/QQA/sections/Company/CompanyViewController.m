@@ -99,8 +99,6 @@ static NSString *identifier = @"CELL";
     return self.datasource.count;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CompanyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
@@ -143,7 +141,6 @@ static NSString *identifier = @"CELL";
         }
     }
     
-    
     self.mainScorllView = [[CycleScrollView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth , iphoneWidth * 2 / 3 ) animationDuration:1];
     self.mainScorllView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.1];
     self.mainScorllView.fetchContentViewAtIndex = ^UIView *(NSInteger pageIndex){
@@ -156,8 +153,6 @@ static NSString *identifier = @"CELL";
         NSLog(@"点击了第%ld个",(long)pageIndex);
     };
     [self.view addSubview:self.mainScorllView];
-
-    
     return  view ;
 }
 
@@ -203,8 +198,6 @@ static NSString *identifier = @"CELL";
                                         }];
     [task resume];
 }
-
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
         if (indexPath.row == 0) {
@@ -293,11 +286,6 @@ static NSString *identifier = @"CELL";
                                         }];
     [task resume];
 }
-
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
