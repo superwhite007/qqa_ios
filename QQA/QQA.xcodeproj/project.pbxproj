@@ -36,6 +36,8 @@
 		AA42F75620BBCC7F006BF7E6 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75520BBCC7F006BF7E6 /* DataModel.m */; };
 		AA42F75920BBDEA8006BF7E6 /* Human.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75820BBDEA8006BF7E6 /* Human.m */; };
 		AA42F75C20BBE0C0006BF7E6 /* HumanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75B20BBE0C0006BF7E6 /* HumanCell.m */; };
+		AA478BEE2112CA9500F0541B /* WorkOrderNameListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */; };
+		AA478BF22112CCD700F0541B /* OneOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA478BF12112CCD700F0541B /* OneOrderVC.m */; };
 		AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
@@ -178,6 +180,10 @@
 		AA42F75820BBDEA8006BF7E6 /* Human.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Human.m; sourceTree = "<group>"; };
 		AA42F75A20BBE0C0006BF7E6 /* HumanCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanCell.h; sourceTree = "<group>"; };
 		AA42F75B20BBE0C0006BF7E6 /* HumanCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanCell.m; sourceTree = "<group>"; };
+		AA478BEC2112CA9500F0541B /* WorkOrderNameListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderNameListVC.h; sourceTree = "<group>"; };
+		AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderNameListVC.m; sourceTree = "<group>"; };
+		AA478BF02112CCD700F0541B /* OneOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrderVC.h; sourceTree = "<group>"; };
+		AA478BF12112CCD700F0541B /* OneOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderVC.m; sourceTree = "<group>"; };
 		AA4C376120BF7D41006DCDD7 /* HumanDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanDetailVC.h; sourceTree = "<group>"; };
 		AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanDetailVC.m; sourceTree = "<group>"; };
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -590,6 +596,25 @@
 			path = HumanVeinLibrary;
 			sourceTree = "<group>";
 		};
+		AA478BEB2112CA4E00F0541B /* WorkOrder */ = {
+			isa = PBXGroup;
+			children = (
+				AA478BEC2112CA9500F0541B /* WorkOrderNameListVC.h */,
+				AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */,
+				AA478BEF2112CCA900F0541B /* OneWorkOrder */,
+			);
+			path = WorkOrder;
+			sourceTree = "<group>";
+		};
+		AA478BEF2112CCA900F0541B /* OneWorkOrder */ = {
+			isa = PBXGroup;
+			children = (
+				AA478BF02112CCD700F0541B /* OneOrderVC.h */,
+				AA478BF12112CCD700F0541B /* OneOrderVC.m */,
+			);
+			path = OneWorkOrder;
+			sourceTree = "<group>";
+		};
 		AA5C193320BCE49600C8EF8E /* NewContact */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +629,7 @@
 			children = (
 				AA620C2C20CE434700D48D54 /* MineTasksTVC.h */,
 				AA620C2D20CE434700D48D54 /* MineTasksTVC.m */,
+				AA478BEB2112CA4E00F0541B /* WorkOrder */,
 				AAD1670520C77589008884FC /* TastName */,
 			);
 			path = MineTasks;
@@ -1137,6 +1163,7 @@
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
 				AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */,
 				AAE0258A20D0BDE4002A28DA /* OneTasKStepTVCell.m in Sources */,
+				AA478BF22112CCD700F0541B /* OneOrderVC.m in Sources */,
 				AA42F75320BB9354006BF7E6 /* NewContactViewController.m in Sources */,
 				AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
@@ -1144,6 +1171,7 @@
 				AA42F75920BBDEA8006BF7E6 /* Human.m in Sources */,
 				AA620C2E20CE434700D48D54 /* MineTasksTVC.m in Sources */,
 				AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */,
+				AA478BEE2112CA9500F0541B /* WorkOrderNameListVC.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AAD912071FD6959C002A42B5 /* AddressBooKListView.m in Sources */,
 				AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */,

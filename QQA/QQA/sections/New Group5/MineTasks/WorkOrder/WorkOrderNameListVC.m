@@ -7,16 +7,23 @@
 //
 
 #import "WorkOrderNameListVC.h"
+#import "OneOrderVC.h"
 
 @interface WorkOrderNameListVC ()
 
 @end
-
 @implementation WorkOrderNameListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
+    [self.navigationItem setTitle:@"工单列表"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(gotoOneOrderVC)];
+}
+
+-(void)gotoOneOrderVC{
+    OneOrderVC * oneOrderVC = [OneOrderVC new];
+    [self.navigationController pushViewController:oneOrderVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
