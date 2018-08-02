@@ -8,7 +8,7 @@
 
 #import "MineTasksTVC.h"
 #import "TaskVC.h"
-
+#import "WorkOrderNameListVC.h"
 @interface MineTasksTVC ()
 
 @end
@@ -79,7 +79,14 @@ static NSString * reuseIdentifier = @"CELL";
         [self.navigationController pushViewController:taskVC animated:YES];
     }else if (indexPath.row == 1) {
         [self  gitPersonPermissions];
+    }else if (indexPath.row == 2){
+        [self gotoWorkOrderVC];
     }
+}
+
+-(void)gotoWorkOrderVC{
+    WorkOrderNameListVC * workOrderNameListVC = [WorkOrderNameListVC new];
+    [self.navigationController pushViewController:workOrderNameListVC animated:YES];
 }
 
 -(void)gitPersonPermissions{
