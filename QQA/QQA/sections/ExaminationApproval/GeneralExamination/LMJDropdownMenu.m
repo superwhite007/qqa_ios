@@ -57,7 +57,6 @@
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self createMainBtnWithFrame:frame];
     }
     return self;
@@ -65,7 +64,6 @@
 
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
-    
     [self createMainBtnWithFrame:frame];
 }
 
@@ -74,7 +72,6 @@
     
     [_mainBtn removeFromSuperview];
     _mainBtn = nil;
-    
     // 主按钮 显示在界面上的点击按钮
     // 样式可以自定义
     _mainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -89,9 +86,7 @@
     _mainBtn.backgroundColor    = [UIColor whiteColor];
     _mainBtn.layer.borderColor  = [UIColor blackColor].CGColor;
     _mainBtn.layer.borderWidth  = 1;
-    
     [self addSubview:_mainBtn];
-    
     
     // 旋转尖头
     _arrowMark = [[UIImageView alloc] initWithFrame:CGRectMake(_mainBtn.frame.size.width - 15, 0, 9, 9)];
@@ -103,14 +98,11 @@
 
 
 - (void)setMenuTitles:(NSArray *)titlesArr rowHeight:(CGFloat)rowHeight{
-    
     if (self == nil) {
         return;
     }
-    
     _titleArr  = [NSArray arrayWithArray:titlesArr];
     _rowHeight = rowHeight;
-    
     
     // 下拉列表背景View
     _listView = [[UIView alloc] init];
@@ -131,9 +123,7 @@
 }
 
 - (void)clickMainBtn:(UIButton *)button{
-    
     [self.superview addSubview:_listView]; // 将下拉视图添加到控件的俯视图上
-    
     if(button.selected == NO) {
         [self showDropDown];
     }
@@ -145,53 +135,37 @@
 - (void)showDropDown{   // 显示下拉列表
     
     [_listView.superview bringSubviewToFront:_listView]; // 将下拉列表置于最上层
-    
-    
-    
     if ([self.delegate respondsToSelector:@selector(dropdownMenuWillShow:)]) {
         [self.delegate dropdownMenuWillShow:self]; // 将要显示回调代理
     }
-    
-    
     [UIView animateWithDuration:AnimateTime animations:^{
-        
         _arrowMark.transform = CGAffineTransformMakeRotation(M_PI);
         _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(_listView), _rowHeight *_titleArr.count);
         _tableView.frame = CGRectMake(0, 0, VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView));
         
     }completion:^(BOOL finished) {
-        
         if ([self.delegate respondsToSelector:@selector(dropdownMenuDidShow:)]) {
             [self.delegate dropdownMenuDidShow:self]; // 已经显示回调代理
         }
     }];
     
-    
-    
     _mainBtn.selected = YES;
 }
 - (void)hideDropDown{  // 隐藏下拉列表
-    
-    
     if ([self.delegate respondsToSelector:@selector(dropdownMenuWillHidden:)]) {
         [self.delegate dropdownMenuWillHidden:self]; // 将要隐藏回调代理
     }
     
-    
     [UIView animateWithDuration:AnimateTime animations:^{
-        
         _arrowMark.transform = CGAffineTransformIdentity;
         _listView.frame  = CGRectMake(VIEW_X(_listView), VIEW_Y(_listView), VIEW_WIDTH(_listView), 0);
         _tableView.frame = CGRectMake(0, 0, VIEW_WIDTH(_listView), VIEW_HEIGHT(_listView));
         
     }completion:^(BOOL finished) {
-        
         if ([self.delegate respondsToSelector:@selector(dropdownMenuDidHidden:)]) {
             [self.delegate dropdownMenuDidHidden:self]; // 已经隐藏回调代理
         }
     }];
-    
-    
     
     _mainBtn.selected = NO;
 }
