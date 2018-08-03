@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UITextField * workOrderTextField;
 @property (nonatomic, strong) UIButton * workOrderNameAgreeBtn;
 @property (nonatomic, strong) UIButton * workOrderNameRejectBtn;
-
+@property (nonatomic, assign) BOOL agreeBTN;
 
 @end
 @implementation WorkOrderNameListVC
@@ -83,8 +83,10 @@
     _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
     [_workOrderNameAgreeBtn setTitle:@"确定" forState:(UIControlStateNormal)];
     _workOrderNameAgreeBtn.layer.borderWidth = 0.5;
-    _workOrderNameAgreeBtn.tag = 60001;
+    _workOrderNameAgreeBtn.tag = 60002;
     [_workOrderNameAgreeBtn addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    _agreeBTN = YES;
+    _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
     [_addOrEditWorkOrderView addSubview:_workOrderNameAgreeBtn];
     
     _workOrderNameRejectBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
@@ -94,6 +96,7 @@
     _workOrderNameRejectBtn.layer.borderWidth = 0.5;
     _workOrderNameRejectBtn.tag = 60001;
     [_workOrderNameRejectBtn addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
     [_addOrEditWorkOrderView addSubview:_workOrderNameRejectBtn];
 }
 
@@ -151,11 +154,15 @@
 
 #pragma agreeANDreject button
 -(void)sendNewTaskToServer:(UIButton*)sender{
-   
+    NSLog(@"11");
     if (sender.tag == 60001) {
-        
+        _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
+        _workOrderNameRejectBtn.backgroundColor = [UIColor redColor];
+        _agreeBTN = NO;
     }else if (sender.tag == 60002) {
-       
+        _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
+        _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
+        _agreeBTN = YES;
     }
 }
 
