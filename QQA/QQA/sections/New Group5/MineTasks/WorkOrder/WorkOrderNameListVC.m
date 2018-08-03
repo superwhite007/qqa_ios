@@ -63,6 +63,7 @@
     [_addOrEditWorkOrderView addSubview:_workOrderTextField];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(reKeyBoard)];
     [_addOrEditWorkOrderView addGestureRecognizer:tap];
+    [self.view addGestureRecognizer:tap];
     
     _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6.5 * kWORKORDERORGINHSPACE,kWORKORDERWIDTH - 20, kWORKORDERORGINHSPACE * 10)];
     _messageTextView.font = [UIFont systemFontOfSize:24];
@@ -84,7 +85,7 @@
     [_workOrderNameAgreeBtn setTitle:@"确定" forState:(UIControlStateNormal)];
     _workOrderNameAgreeBtn.layer.borderWidth = 0.5;
     _workOrderNameAgreeBtn.tag = 60002;
-    [_workOrderNameAgreeBtn addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    [_workOrderNameAgreeBtn addTarget:self action:@selector(selectAgreeORRejectONWorkOrderNameSendToServer:) forControlEvents:UIControlEventTouchUpInside];
     _agreeBTN = YES;
     _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
     [_addOrEditWorkOrderView addSubview:_workOrderNameAgreeBtn];
@@ -95,7 +96,7 @@
     [_workOrderNameRejectBtn setTitle:@"取消" forState:(UIControlStateNormal)];
     _workOrderNameRejectBtn.layer.borderWidth = 0.5;
     _workOrderNameRejectBtn.tag = 60001;
-    [_workOrderNameRejectBtn addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    [_workOrderNameRejectBtn addTarget:self action:@selector(selectAgreeORRejectONWorkOrderNameSendToServer:) forControlEvents:UIControlEventTouchUpInside];
     _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
     [_addOrEditWorkOrderView addSubview:_workOrderNameRejectBtn];
 }
@@ -149,25 +150,35 @@
     _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
 -(void)undisplayaddOrEditWorkOrderView{
+    [self reKeyBoard];
     _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
 
 #pragma agreeANDreject button
--(void)sendNewTaskToServer:(UIButton*)sender{
-    NSLog(@"11");
+-(void)selectAgreeORRejectONWorkOrderNameSendToServer:(UIButton*)sender{
+    [self reKeyBoard];
     if (sender.tag == 60001) {
         _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
         _workOrderNameRejectBtn.backgroundColor = [UIColor redColor];
         _agreeBTN = NO;
+        [self alert:@"取消创建"];
     }else if (sender.tag == 60002) {
         _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
         _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
         _agreeBTN = YES;
+        if (_workOrderTextField.text.length > 0) {
+            [self sendWorkOrderTitleToServer];//待开发
+            [self alert:@"创建成功"];
+        }else{
+            [self alert:@"请输入工单名称"];
+        }
     }
+   
 }
 
-
-
+-(void)sendWorkOrderTitleToServer{
+    //发往服务器
+}
 
 
 -(void)gotoOneOrderVC{
@@ -184,6 +195,10 @@
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // 操作具体内容
         // Nothing to do.
+        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"]) {
+            [self undisplayaddOrEditWorkOrderView];
+        }
+        
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
