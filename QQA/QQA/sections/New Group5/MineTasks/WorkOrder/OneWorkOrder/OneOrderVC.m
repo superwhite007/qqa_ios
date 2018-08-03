@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
-    _dataOfHeaderOfTheDepartment =  [NSMutableArray array];
+    _dataOfHeaderOfTheDepartment = [NSMutableArray array];
     
     [self addHeaderView];
 }
