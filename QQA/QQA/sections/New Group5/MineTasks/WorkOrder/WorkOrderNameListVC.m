@@ -60,6 +60,8 @@
     _workOrderTextField.adjustsFontSizeToFitWidth = YES;
     [_addOrEditWorkOrderView addSubview:_workOrderTextField];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(reKeyBoard)];
+    [_addOrEditWorkOrderView addGestureRecognizer:tap];
     
 }
 
@@ -79,6 +81,14 @@
     }
     return YES;
 }
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;{
+    [textField resignFirstResponder];
+    return YES;
+}
+- (void)reKeyBoard
+{
+    [_workOrderTextField resignFirstResponder];
+}
 
 -(void)gotoOneOrderVC{
     OneOrderVC * oneOrderVC = [OneOrderVC new];
@@ -89,7 +99,7 @@
     
     NSString *title = str;
     NSString *message = @" ";
-    NSString *okButtonTitle = @"OK";
+    NSString *okButtonTitle = @"确定";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // 操作具体内容
