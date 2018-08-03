@@ -17,6 +17,9 @@
 @property (nonatomic, strong) UIView * addOrEditWorkOrderView;
 @property (nonatomic, strong) UILabel * workOrderTitle;
 @property (nonatomic, strong) UITextField * workOrderTextField;
+@property (nonatomic, strong) UIButton * workOrderNameAgreeBtn;
+@property (nonatomic, strong) UIButton * workOrderNameRejectBtn;
+
 
 @end
 @implementation WorkOrderNameListVC
@@ -73,8 +76,25 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
     
+
+    _workOrderNameAgreeBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _workOrderNameAgreeBtn.frame = CGRectMake(kWORKORDERWIDTH - 110, 17.5 * kWORKORDERORGINHSPACE,100, kWORKORDERORGINHSPACE * 2);
+    _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
+    [_workOrderNameAgreeBtn setTitle:@"确定" forState:(UIControlStateNormal)];
+    _workOrderNameAgreeBtn.layer.borderWidth = 0.5;
+    _workOrderNameAgreeBtn.tag = 60001;
+    [_workOrderNameAgreeBtn addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    [_addOrEditWorkOrderView addSubview:_workOrderNameAgreeBtn];
+    
+    _workOrderNameRejectBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _workOrderNameRejectBtn.frame = CGRectMake(kWORKORDERWIDTH - 220, 17.5 * kWORKORDERORGINHSPACE,100, kWORKORDERORGINHSPACE * 2);
+    _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
+    [_workOrderNameRejectBtn setTitle:@"取消" forState:(UIControlStateNormal)];
+    _workOrderNameRejectBtn.layer.borderWidth = 0.5;
+    _workOrderNameRejectBtn.tag = 60001;
+    [_workOrderNameRejectBtn addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    [_addOrEditWorkOrderView addSubview:_workOrderNameRejectBtn];
 }
 
 #pragma UITextFieldDelegate
@@ -119,7 +139,6 @@
 - (void)keyboardWillHide:(NSNotification *)notification{
     [self displayaddOrEditWorkOrderView];
 }
-
 -(void)displayaddOrEditWorkOrderViewHeader{
     _addOrEditWorkOrderView.frame = CGRectMake(10, 10, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
@@ -129,6 +148,19 @@
 -(void)undisplayaddOrEditWorkOrderView{
     _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
+
+#pragma agreeANDreject button
+-(void)sendNewTaskToServer:(UIButton*)sender{
+   
+    if (sender.tag == 60001) {
+        
+    }else if (sender.tag == 60002) {
+       
+    }
+}
+
+
+
 
 
 -(void)gotoOneOrderVC{
