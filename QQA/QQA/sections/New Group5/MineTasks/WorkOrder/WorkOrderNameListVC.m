@@ -50,13 +50,13 @@
     NSArray * labelNameAboutTitleANDContent = @[@"工单标题",@"工单内容"];
     for (int i = 0; i < labelNameAboutTitleANDContent.count; i++) {
         UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (3 + i * 2)* kWORKORDERORGINHSPACE,100, kWORKORDERORGINHSPACE)];
-        nameLabel.textAlignment = NSTextAlignmentLeft;
-        nameLabel.backgroundColor = [UIColor whiteColor];
+        nameLabel.textAlignment = NSTextAlignmentCenter;
+//        nameLabel.backgroundColor = [UIColor whiteColor];
         nameLabel.text = labelNameAboutTitleANDContent[i];
         [_addOrEditWorkOrderView addSubview:nameLabel];
     }
     
-    _workOrderTextField.frame = CGRectMake(115 , 3 * kWORKORDERORGINHSPACE - kWORKORDERORGINHSPACE / 2,  kWORKORDERWIDTH  - 120, kWORKORDERORGINHSPACE * 2);
+    _workOrderTextField.frame = CGRectMake(100 , 3 * kWORKORDERORGINHSPACE - kWORKORDERORGINHSPACE / 2,  kWORKORDERWIDTH  - 120, kWORKORDERORGINHSPACE * 2);
     _workOrderTextField.backgroundColor = [UIColor whiteColor];
     _workOrderTextField.borderStyle = UITextBorderStyleLine;
     _workOrderTextField.adjustsFontSizeToFitWidth = YES;
