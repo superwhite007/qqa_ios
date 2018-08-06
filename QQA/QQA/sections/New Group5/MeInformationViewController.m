@@ -99,7 +99,6 @@
     }
 }
 
-
 -(void)alert:(NSString *)str{
     NSString *title = str;
     NSString *message = @"  ";

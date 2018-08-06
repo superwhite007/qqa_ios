@@ -629,8 +629,8 @@
 			children = (
 				AA620C2C20CE434700D48D54 /* MineTasksTVC.h */,
 				AA620C2D20CE434700D48D54 /* MineTasksTVC.m */,
-				AA478BEB2112CA4E00F0541B /* WorkOrder */,
 				AAD1670520C77589008884FC /* TastName */,
+				AA478BEB2112CA4E00F0541B /* WorkOrder */,
 			);
 			path = MineTasks;
 			sourceTree = "<group>";

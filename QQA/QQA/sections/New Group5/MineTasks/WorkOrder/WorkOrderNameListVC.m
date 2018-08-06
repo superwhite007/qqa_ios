@@ -31,7 +31,7 @@
     _workOrderTextField = [[UITextField alloc] init];
     _workOrderTextField.delegate = self;
     
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"工单列表"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(gotoOneOrderVC)];
     [self addNewOREditWorkOrderView];
