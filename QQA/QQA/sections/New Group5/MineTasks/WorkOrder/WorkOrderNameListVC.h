@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WorkOrderNameListVC : UIViewController<UITextViewDelegate>
+@interface WorkOrderNameListVC : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong)UITextView * messageTextView;
 

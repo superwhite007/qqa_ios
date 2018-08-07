@@ -8,6 +8,7 @@
 
 #import "WorkOrderNameListVC.h"
 #import "OneOrderVC.h"
+#import "WorkOrderTVCell.h"
 
 #define kWORKORDERWIDTH  iphoneWidth - 20 //WORKORDERWIDTH
 #define kWORKORDERORGINh  (iphoneHeight - iphoneWidth)/2   //iphoneHeight
@@ -21,8 +22,12 @@
 @property (nonatomic, strong) UIButton * workOrderNameRejectBtn;
 @property (nonatomic, assign) BOOL agreeBTN;
 
+@property (nonatomic, strong) UITableView * tableView;
+
 @end
 @implementation WorkOrderNameListVC
+
+static  NSString  * identifier = @"CELL";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +40,16 @@
     [self.navigationItem setTitle:@"工单列表"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(gotoOneOrderVC)];
     [self addNewOREditWorkOrderView];
+    
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
+    _tableView.rowHeight = 100;
+    [self.view addSubview:_tableView];
+    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView registerClass:[WorkOrderTVCell class] forCellReuseIdentifier:identifier];
+    
 }
 
 -(void)addNewOREditWorkOrderView{
@@ -182,9 +197,27 @@
 
 
 -(void)gotoOneOrderVC{
+    
     OneOrderVC * oneOrderVC = [OneOrderVC new];
     [self.navigationController pushViewController:oneOrderVC animated:YES];
 }
+
+#pragma UItableDasource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 6;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    WorkOrderTVCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    return  cell;
+}
+
+
+
+
+
 
 -(void)alert:(NSString *)str{
     
@@ -198,11 +231,10 @@
         if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"]) {
             [self undisplayaddOrEditWorkOrderView];
         }
-        
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
-    
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

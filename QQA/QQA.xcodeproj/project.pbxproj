@@ -38,6 +38,8 @@
 		AA42F75C20BBE0C0006BF7E6 /* HumanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA42F75B20BBE0C0006BF7E6 /* HumanCell.m */; };
 		AA478BEE2112CA9500F0541B /* WorkOrderNameListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */; };
 		AA478BF22112CCD700F0541B /* OneOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA478BF12112CCD700F0541B /* OneOrderVC.m */; };
+		AA4AA0DF2119649B00675EBB /* WorkOrderTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4AA0DE2119649B00675EBB /* WorkOrderTVCell.m */; };
+		AA4AA0E2211964B800675EBB /* WorkOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4AA0E1211964B800675EBB /* WorkOrder.m */; };
 		AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
@@ -184,6 +186,10 @@
 		AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderNameListVC.m; sourceTree = "<group>"; };
 		AA478BF02112CCD700F0541B /* OneOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrderVC.h; sourceTree = "<group>"; };
 		AA478BF12112CCD700F0541B /* OneOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderVC.m; sourceTree = "<group>"; };
+		AA4AA0DD2119649B00675EBB /* WorkOrderTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderTVCell.h; sourceTree = "<group>"; };
+		AA4AA0DE2119649B00675EBB /* WorkOrderTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderTVCell.m; sourceTree = "<group>"; };
+		AA4AA0E0211964B800675EBB /* WorkOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrder.h; sourceTree = "<group>"; };
+		AA4AA0E1211964B800675EBB /* WorkOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrder.m; sourceTree = "<group>"; };
 		AA4C376120BF7D41006DCDD7 /* HumanDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanDetailVC.h; sourceTree = "<group>"; };
 		AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanDetailVC.m; sourceTree = "<group>"; };
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -601,6 +607,10 @@
 			children = (
 				AA478BEC2112CA9500F0541B /* WorkOrderNameListVC.h */,
 				AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */,
+				AA4AA0E0211964B800675EBB /* WorkOrder.h */,
+				AA4AA0E1211964B800675EBB /* WorkOrder.m */,
+				AA4AA0DD2119649B00675EBB /* WorkOrderTVCell.h */,
+				AA4AA0DE2119649B00675EBB /* WorkOrderTVCell.m */,
 				AA478BEF2112CCA900F0541B /* OneWorkOrder */,
 			);
 			path = WorkOrder;
@@ -1132,6 +1142,7 @@
 				AA42F75C20BBE0C0006BF7E6 /* HumanCell.m in Sources */,
 				AA199AF91FC3F01D00BCE01A /* SendTheScopeViewController.m in Sources */,
 				AA1E54A520297955009A532A /* Reachability.m in Sources */,
+				AA4AA0E2211964B800675EBB /* WorkOrder.m in Sources */,
 				AAC191F820A183D700494B62 /* CompanyViewControllerNoCell.m in Sources */,
 				AA42F74F20BB9263006BF7E6 /* HumanVeinLibraryVC.m in Sources */,
 				AAEEEA521FCFE5130012A695 /* RequestLeaveDetailViewController.m in Sources */,
@@ -1139,6 +1150,7 @@
 				AA8BB4BB20CF9517008D7823 /* TaskName.m in Sources */,
 				AAC6063620D2687E00626911 /* PeopleListsTVC.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
+				AA4AA0DF2119649B00675EBB /* WorkOrderTVCell.m in Sources */,
 				AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */,
 				AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */,
 				AAC4D1F81FAAA11900183930 /* AppCoverViewController.m in Sources */,
