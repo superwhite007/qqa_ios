@@ -31,6 +31,11 @@
     [self.contentView addSubview:_workCreatedByPeopleANDTimeLabel];
     
     _workRedpointNnumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 80, 40, 20 , 20)];
+    _workRedpointNnumberLabel.layer.cornerRadius = _workRedpointNnumberLabel.frame.size.width / 2;
+    _workRedpointNnumberLabel.layer.masksToBounds = YES;
+    _workRedpointNnumberLabel.text = @"99";
+    _workRedpointNnumberLabel.font = [UIFont systemFontOfSize:12];
+    _workRedpointNnumberLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:_workRedpointNnumberLabel];
     
     _workCompleteANDUnfinishedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 55, 40, 20 , 20)];

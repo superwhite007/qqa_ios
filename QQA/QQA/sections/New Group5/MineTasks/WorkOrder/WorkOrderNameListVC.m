@@ -39,7 +39,7 @@ static  NSString  * identifier = @"CELL";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"工单列表"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(gotoOneOrderVC)];
-    [self addNewOREditWorkOrderView];
+    
     
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
@@ -50,6 +50,7 @@ static  NSString  * identifier = @"CELL";
     self.tableView.delegate = self;
     [self.tableView registerClass:[WorkOrderTVCell class] forCellReuseIdentifier:identifier];
     
+    [self addNewOREditWorkOrderView];
 }
 
 -(void)addNewOREditWorkOrderView{
@@ -213,8 +214,6 @@ static  NSString  * identifier = @"CELL";
     WorkOrderTVCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     return  cell;
 }
-
-
 
 
 
