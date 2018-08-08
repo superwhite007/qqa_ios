@@ -235,7 +235,7 @@
     NSComparisonResult result = [@"2" compare:versionNumber options:NSNumericSearch];//比较的是字符串的值,如果有多个比较条件,加一个|然后加比较条件
     switch (result) {
         case NSOrderedAscending:
-            [self alertSS:@"前往更新版本！" urlStr:url];
+            [self alertSS:@"前往更新版本!" urlStr:url];
             break;
         case NSOrderedSame:
             [self alert:@"已经是最新版本!"];
