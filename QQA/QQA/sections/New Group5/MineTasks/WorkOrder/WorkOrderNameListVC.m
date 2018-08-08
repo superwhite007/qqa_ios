@@ -38,7 +38,7 @@ static  NSString  * identifier = @"CELL";
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"工单列表"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(gotoOneOrderVC)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddOrEditWorkOrderView)];
     
     
     
@@ -54,7 +54,7 @@ static  NSString  * identifier = @"CELL";
 }
 
 -(void)addNewOREditWorkOrderView{
-    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+    _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
     _addOrEditWorkOrderView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:_addOrEditWorkOrderView];
     
