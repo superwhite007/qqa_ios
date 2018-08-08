@@ -285,9 +285,9 @@ static  NSString  * identifier = @"CELL";
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70001) {
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
+                                                         [self.datasourceMArray removeAllObjects];
                                                         for (NSDictionary * dict in dataListArray) {
-                                                            NSLog(@"dataBack::::dataListArray:%@", dataListArray);
-                                                            [self.datasourceMArray removeAllObjects];
+//                                                            NSLog(@"dataBack::::dataListArray:%@", dataListArray);
                                                             WorkOrder * workOrder = [WorkOrder new];
                                                             [workOrder setValuesForKeysWithDictionary:dict];
                                                             [self.datasourceMArray addObject:workOrder];
