@@ -9,6 +9,7 @@
 #import "WorkOrderNameListVC.h"
 #import "OneOrderVC.h"
 #import "WorkOrderTVCell.h"
+#import "WorkOrder.h"
 
 #define kWORKORDERWIDTH  iphoneWidth - 20 //WORKORDERWIDTH
 #define kWORKORDERORGINh  (iphoneHeight - iphoneWidth)/2   //iphoneHeight
@@ -24,10 +25,21 @@
 
 @property (nonatomic, strong) UITableView * tableView;
 
+@property (nonatomic, assign) int pageNum;
+@property (nonatomic, assign) BOOL isDownRefresh;
+@property (nonatomic, strong) NSMutableArray *datasourceMArray;
+
+
 @end
 @implementation WorkOrderNameListVC
 
 static  NSString  * identifier = @"CELL";
+-(NSMutableArray *)datasourceMArray{
+    if (!_datasourceMArray) {
+        _datasourceMArray = [NSMutableArray array];
+    }
+    return _datasourceMArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +47,9 @@ static  NSString  * identifier = @"CELL";
     _workOrderTitle = [UILabel new];
     _workOrderTextField = [[UITextField alloc] init];
     _workOrderTextField.delegate = self;
+    
+    self.pageNum = 1;
+    self.isDownRefresh = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationItem setTitle:@"工单列表"];
@@ -53,6 +68,10 @@ static  NSString  * identifier = @"CELL";
     [self addNewOREditWorkOrderView];
     
     [self getWorkOrderListFromServer:1];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    
 }
 
 -(void)addNewOREditWorkOrderView{
@@ -210,11 +229,33 @@ static  NSString  * identifier = @"CELL";
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    return  self.datasourceMArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkOrderTVCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    WorkOrder * workOrder = self.datasourceMArray[indexPath.row];
+    cell.workOrder = workOrder;
     return  cell;
+}
+
+#pragma getDataFServer
+-(void)loadNewData
+{
+    self.isDownRefresh = YES;
+    if (self.pageNum > 1) {
+        [self getWorkOrderListFromServer:--self.pageNum];
+    } else{
+        [self getWorkOrderListFromServer:1];
+    }
+    [self.tableView.mj_header endRefreshing];
+}
+
+-(void)loadMoreData
+{
+    //记录不是下拉刷新
+    self.isDownRefresh = NO;
+    [self getWorkOrderListFromServer:++self.pageNum];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 -(void)getWorkOrderListFromServer:(int)page{
@@ -240,16 +281,18 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"dataBack:::::%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70001) {
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
                                                         for (NSDictionary * dict in dataListArray) {
                                                             NSLog(@"dataBack::::dataListArray:%@", dataListArray);
+                                                            WorkOrder * workOrder = [WorkOrder new];
+                                                            [workOrder setValuesForKeysWithDictionary:dict];
+                                                            [self.datasourceMArray addObject:workOrder];
                                                         }
-//                           dispatch_async(dispatch_get_main_queue(), ^{
-//                                [self.tableView  reloadData];
-//                            });
+                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self.tableView  reloadData];
+                                                        });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
                                                     NSLog(@"Server tapy is wrong.");

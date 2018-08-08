@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class WorkOrder;
 @interface WorkOrderTVCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel * workNameLabel;
@@ -18,5 +18,6 @@
 @property (nonatomic, strong) UIImageView * workCompleteANDUnfinishedImageView;
 @property (nonatomic, strong) UIImageView * nextForwardImageView;
 
+@property (nonatomic, strong) WorkOrder * workOrder;
 
 @end

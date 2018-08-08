@@ -7,6 +7,7 @@
 //
 
 #import "WorkOrderTVCell.h"
+#import "WorkOrder.h"
 
 @implementation WorkOrderTVCell
 
@@ -45,15 +46,23 @@
     [self.contentView addSubview:_nextForwardImageView];
     
     
-    _workNameLabel.backgroundColor = [UIColor redColor];
+//    _workNameLabel.backgroundColor = [UIColor redColor];
     _workContentLabel.backgroundColor = [UIColor greenColor];
-    _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor blueColor];
+//    _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor blueColor];
     
     _workRedpointNnumberLabel.backgroundColor = [UIColor redColor];
     _workCompleteANDUnfinishedImageView.backgroundColor = [UIColor redColor];
     _nextForwardImageView.backgroundColor = [UIColor redColor];
 }
 
+-(void)setWorkOrder:(WorkOrder *)workOrder{
+    _workNameLabel.text = workOrder.title;
+    _workContentLabel.text = workOrder.content;
+    _workCreatedByPeopleANDTimeLabel.text = workOrder.describe;
+    if (workOrder.unreadCommentNum > 0) {
+        _workRedpointNnumberLabel.text = [NSString stringWithFormat:@"%@", workOrder.unreadCommentNum];
+    }
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
