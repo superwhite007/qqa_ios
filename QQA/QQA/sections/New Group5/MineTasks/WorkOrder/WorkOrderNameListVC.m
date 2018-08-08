@@ -219,7 +219,6 @@ static  NSString  * identifier = @"CELL";
 
 
 -(void)gotoOneOrderVC{
-    
     OneOrderVC * oneOrderVC = [OneOrderVC new];
     [self.navigationController pushViewController:oneOrderVC animated:YES];
 }
@@ -237,7 +236,9 @@ static  NSString  * identifier = @"CELL";
     cell.workOrder = workOrder;
     return  cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self gotoOneOrderVC];
+}
 #pragma getDataFServer
 -(void)loadNewData
 {
@@ -303,17 +304,6 @@ static  NSString  * identifier = @"CELL";
                                         }];
     [task resume];
 }
-
-
-
-
-
-
-
-
-
-
-
 
 -(void)alert:(NSString *)str{
     
