@@ -29,6 +29,7 @@
     
     _workCreatedByPeopleANDTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_workContentLabel.frame) + 5, iphoneWidth - 20, 15)];
     _workCreatedByPeopleANDTimeLabel.textAlignment = NSTextAlignmentLeft;
+    _workCreatedByPeopleANDTimeLabel.font = [UIFont systemFontOfSize:10];
     [self.contentView addSubview:_workCreatedByPeopleANDTimeLabel];
     
     _workRedpointNnumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 80, 40, 20 , 20)];
@@ -47,7 +48,7 @@
     
     
 //    _workNameLabel.backgroundColor = [UIColor redColor];
-    _workContentLabel.backgroundColor = [UIColor greenColor];
+//    _workContentLabel.backgroundColor = [UIColor greenColor];
 //    _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor blueColor];
     
     _workRedpointNnumberLabel.backgroundColor = [UIColor redColor];
