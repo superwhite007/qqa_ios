@@ -287,6 +287,7 @@ static  NSString  * identifier = @"CELL";
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
                                                         for (NSDictionary * dict in dataListArray) {
                                                             NSLog(@"dataBack::::dataListArray:%@", dataListArray);
+                                                            [self.datasourceMArray removeAllObjects];
                                                             WorkOrder * workOrder = [WorkOrder new];
                                                             [workOrder setValuesForKeysWithDictionary:dict];
                                                             [self.datasourceMArray addObject:workOrder];

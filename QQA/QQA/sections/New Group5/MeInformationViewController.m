@@ -90,10 +90,10 @@
         AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
         [self.navigationController pushViewController:aboutYouthVC animated:YES];
     }
-    else if (sender.tag == 4){
+    else if (sender.tag == 3){
         HumanVeinLibraryVC * humanVC = [HumanVeinLibraryVC new];
         [self.navigationController pushViewController:humanVC animated:YES];
-    }else if (sender.tag == 3){
+    }else if (sender.tag == 4){
         MineTasksTVC * mineTasksTVC = [MineTasksTVC new];
         [self.navigationController pushViewController:mineTasksTVC animated:YES];
     }
