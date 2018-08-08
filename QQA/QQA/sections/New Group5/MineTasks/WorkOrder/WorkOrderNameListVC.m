@@ -51,6 +51,8 @@ static  NSString  * identifier = @"CELL";
     [self.tableView registerClass:[WorkOrderTVCell class] forCellReuseIdentifier:identifier];
     
     [self addNewOREditWorkOrderView];
+    
+    [self getWorkOrderListFromServer:1];
 }
 
 -(void)addNewOREditWorkOrderView{
@@ -214,6 +216,58 @@ static  NSString  * identifier = @"CELL";
     WorkOrderTVCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     return  cell;
 }
+
+-(void)getWorkOrderListFromServer:(int)page{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workList/index", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
+    NSLog(@"mdict:::%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"dataBack:::::%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70001) {
+                                                        NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
+                                                        for (NSDictionary * dict in dataListArray) {
+                                                            NSLog(@"dataBack::::dataListArray:%@", dataListArray);
+                                                        }
+//                           dispatch_async(dispatch_get_main_queue(), ^{
+//                                [self.tableView  reloadData];
+//                            });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                            }
+                                        }];
+    [task resume];
+}
+
+
+
+
+
+
+
+
 
 
 
