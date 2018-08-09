@@ -10,6 +10,7 @@
 #import "OneOrderVC.h"
 #import "WorkOrderTVCell.h"
 #import "WorkOrder.h"
+//#import "UILabel+HeightBYLabel.h"
 
 #define kWORKORDERWIDTH  iphoneWidth - 20 //WORKORDERWIDTH
 #define kWORKORDERORGINh  (iphoneHeight - iphoneWidth)/2   //iphoneHeight
@@ -31,7 +32,6 @@
 @property (nonatomic, strong) NSMutableString * workListId;
 
 @end
-
 @implementation WorkOrderNameLIstsViewController
 
 static  NSString  * identifier = @"CELL";
@@ -45,15 +45,15 @@ static  NSString  * identifier = @"CELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationItem setTitle:@"工单列表"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddNewOrEditWorkOrderView)];
     
     _addOrEditWorkOrderView = [UIView new];
     _workOrderTitle = [UILabel new];
-    
     _workOrderTextField = [[UITextField alloc] init];
     _workOrderTextField.delegate = self;
-    
     _workListId = [NSMutableString new];
-    
     self.pageNum = 1;
     self.isDownRefresh = NO;
     
@@ -64,30 +64,20 @@ static  NSString  * identifier = @"CELL";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.tableView registerClass:[WorkOrderTVCell class] forCellReuseIdentifier:identifier];
-    
-
     [self getWorkOrderListFromServer:1];
-    
-    
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"工单列表"];
-    
     [self addNewOREditWorkOrderView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddNewOrEditWorkOrderView)];
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
     lpgr.delegate = self;
     [_tableView addGestureRecognizer:lpgr]; //启用长按事件
     
-    
 }
 #pragma shoushi
--(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
-{
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint p = [gestureRecognizer locationInView:_tableView ];
         NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
@@ -159,13 +149,14 @@ static  NSString  * identifier = @"CELL";
     }else{
         return CGRectGetHeight(targetRect) + 60;
     }
+
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkOrder * workOrder = self.datasourceMArray[indexPath.row];
     if ([workOrder.isEdit intValue] == 1 ) {
         _workListId = [NSMutableString stringWithFormat:@"%@", workOrder.workListId];
     }
-    //需要后续开发
+    //需要后续开发,补充数据
     OneOrderVC * oneOrderVC = [OneOrderVC new];
     [self.navigationController pushViewController:oneOrderVC animated:YES];
 }
