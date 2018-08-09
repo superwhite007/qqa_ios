@@ -27,6 +27,7 @@
 		AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */; };
 		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
+		AA32F67B211BC7D300024FBD /* WorkOrderNameLIstsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32F67A211BC7D300024FBD /* WorkOrderNameLIstsViewController.m */; };
 		AA342F4F207F43E400438EFD /* CompanyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA342F4E207F43E400438EFD /* CompanyTableViewCell.m */; };
 		AA392A531FEC947800C1C581 /* UMSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA392A521FEC947800C1C581 /* UMSecondViewController.m */; };
 		AA392A561FEC94D100C1C581 /* UMFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA392A551FEC94D100C1C581 /* UMFirstViewController.m */; };
@@ -163,6 +164,8 @@
 		AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewCell.m; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
+		AA32F679211BC7D300024FBD /* WorkOrderNameLIstsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderNameLIstsViewController.h; sourceTree = "<group>"; };
+		AA32F67A211BC7D300024FBD /* WorkOrderNameLIstsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrderNameLIstsViewController.m; sourceTree = "<group>"; };
 		AA342F4D207F43E400438EFD /* CompanyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyTableViewCell.h; sourceTree = "<group>"; };
 		AA342F4E207F43E400438EFD /* CompanyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyTableViewCell.m; sourceTree = "<group>"; };
 		AA3508111FAC444800EBA535 /* QQA_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QQA_PrefixHeader.pch; sourceTree = "<group>"; };
@@ -611,6 +614,8 @@
 				AA4AA0E1211964B800675EBB /* WorkOrder.m */,
 				AA4AA0DD2119649B00675EBB /* WorkOrderTVCell.h */,
 				AA4AA0DE2119649B00675EBB /* WorkOrderTVCell.m */,
+				AA32F679211BC7D300024FBD /* WorkOrderNameLIstsViewController.h */,
+				AA32F67A211BC7D300024FBD /* WorkOrderNameLIstsViewController.m */,
 				AA478BEF2112CCA900F0541B /* OneWorkOrder */,
 			);
 			path = WorkOrder;
@@ -1150,6 +1155,7 @@
 				AA8BB4BB20CF9517008D7823 /* TaskName.m in Sources */,
 				AAC6063620D2687E00626911 /* PeopleListsTVC.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
+				AA32F67B211BC7D300024FBD /* WorkOrderNameLIstsViewController.m in Sources */,
 				AA4AA0DF2119649B00675EBB /* WorkOrderTVCell.m in Sources */,
 				AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */,
 				AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */,

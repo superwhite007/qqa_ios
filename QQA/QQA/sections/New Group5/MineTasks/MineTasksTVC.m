@@ -9,6 +9,7 @@
 #import "MineTasksTVC.h"
 #import "TaskVC.h"
 #import "WorkOrderNameListVC.h"
+#import "WorkOrderNameLIstsViewController.h"
 @interface MineTasksTVC ()
 
 @end
@@ -85,7 +86,7 @@ static NSString * reuseIdentifier = @"CELL";
 }
 
 -(void)gotoWorkOrderVC{
-    WorkOrderNameListVC * workOrderNameListVC = [WorkOrderNameListVC new];
+    WorkOrderNameLIstsViewController * workOrderNameListVC = [WorkOrderNameLIstsViewController new];
     [self.navigationController pushViewController:workOrderNameListVC animated:YES];
 }
 
