@@ -69,10 +69,10 @@
     _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, CGRectGetHeight(targetRect));
     if (CGRectGetHeight(targetRect) < 40) {
         _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, 40);
-        _workCreatedByPeopleANDTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_workContentLabel.frame) + 5, iphoneWidth - 20, 15)];
-        _workRedpointNnumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 80, 40, 20 , 20)];
-        _workCompleteANDUnfinishedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 55, 40, 20 , 20)];
-        _nextForwardImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 30, 40, 20 , 20)];
+        _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(10, CGRectGetMaxY(_workContentLabel.frame) + 5, iphoneWidth - 20, 15);
+        _workRedpointNnumberLabel.frame = CGRectMake(iphoneWidth - 80, 40, 20 , 20);
+        _workCompleteANDUnfinishedImageView.frame = CGRectMake(iphoneWidth - 55, 40, 20 , 20);
+        _nextForwardImageView.frame = CGRectMake(iphoneWidth - 30, 40, 20 , 20);
     }else{
         _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, CGRectGetHeight(targetRect) );
         _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(10, CGRectGetMaxY(_workContentLabel.frame) + 5, iphoneWidth - 20, 15);
