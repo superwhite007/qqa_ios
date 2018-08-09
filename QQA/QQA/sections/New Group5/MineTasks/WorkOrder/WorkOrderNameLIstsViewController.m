@@ -220,15 +220,15 @@ static  NSString  * identifier = @"CELL";
 //    [_addOrEditWorkOrderView addGestureRecognizer:tap];
 //    [self.view addGestureRecognizer:tap];
     
-//    _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6.5 * kWORKORDERORGINHSPACE,kWORKORDERWIDTH - 20, kWORKORDERORGINHSPACE * 10)];
-//    _messageTextView.font = [UIFont systemFontOfSize:24];
-//    [self.view addSubview:_messageTextView];
-//    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
-//    _messageTextView.layer.borderWidth = 1;
-//    _messageTextView.layer.cornerRadius = 10;
-//    _messageTextView.returnKeyType = UIReturnKeySend;
-//    _messageTextView.delegate = self;
-//    [_addOrEditWorkOrderView addSubview:_messageTextView];
+    _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6.5 * kWORKORDERORGINHSPACE,kWORKORDERWIDTH - 20, kWORKORDERORGINHSPACE * 10)];
+    _messageTextView.font = [UIFont systemFontOfSize:24];
+    [self.view addSubview:_messageTextView];
+    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    _messageTextView.layer.borderWidth = 1;
+    _messageTextView.layer.cornerRadius = 10;
+    _messageTextView.returnKeyType = UIReturnKeySend;
+    _messageTextView.delegate = self;
+    [_addOrEditWorkOrderView addSubview:_messageTextView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -256,6 +256,18 @@ static  NSString  * identifier = @"CELL";
     [_addOrEditWorkOrderView addSubview:_workOrderNameRejectBtn];
 }
 
+#pragma UITextViewDelegate
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqual:@"\n"]) {//判断按的是不是return
+        [_messageTextView resignFirstResponder];
+        return NO;
+    }else if (range.location >= 200){
+        [self alert:@"最多输入200字符"];
+        self.messageTextView.text = [_messageTextView.text substringToIndex:200];
+        return NO;
+    }
+    return YES;
+}
 #pragma agreeANDreject button
 -(void)selectAgreeORRejectONWorkOrderNameSendToServer:(UIButton*)sender{
     [self reKeyBoard];
