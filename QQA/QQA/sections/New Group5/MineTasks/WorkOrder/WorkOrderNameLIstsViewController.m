@@ -16,7 +16,7 @@
 #define kWORKORDERORGINHSPACE  (iphoneWidth - 20) / 20   //workOrderSpace
 
 
-@interface WorkOrderNameLIstsViewController ()
+@interface WorkOrderNameLIstsViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIView * addOrEditWorkOrderView;
 @property (nonatomic, strong) UILabel * workOrderTitle;
 @property (nonatomic, strong) UITextField * workOrderTextField;
@@ -49,8 +49,9 @@ static  NSString  * identifier = @"CELL";
     
     _addOrEditWorkOrderView = [UIView new];
     _workOrderTitle = [UILabel new];
+    
     _workOrderTextField = [[UITextField alloc] init];
-//    _workOrderTextField.delegate = self;
+    _workOrderTextField.delegate = self;
     
     self.pageNum = 1;
     self.isDownRefresh = NO;
@@ -83,6 +84,29 @@ static  NSString  * identifier = @"CELL";
 -(void)gotoOneOrderVC{
     OneOrderVC * oneOrderVC = [OneOrderVC new];
     [self.navigationController pushViewController:oneOrderVC animated:YES];
+}
+#pragma UITextFieldDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField == self.workOrderTextField) {
+        //这里的if时候为了获取删除操作,如果没有次if会造成当达到字数限制后删除键也不能使用的后果.
+        if (string.length == 0) {
+            return YES;
+        }else if (self.workOrderTextField.text.length >= 20) {
+            [self alert:@"工单标题不能超过20个字符!"];
+            self.workOrderTextField.text = [textField.text substringToIndex:20];
+            return NO;
+        }
+    }
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;{
+    [textField resignFirstResponder];
+    return YES;
+}
+- (void)reKeyBoard
+{
+    [_workOrderTextField resignFirstResponder];
+//    [_messageTextView resignFirstResponder];//textView
 }
 
 #pragma UItableDasource
@@ -234,7 +258,7 @@ static  NSString  * identifier = @"CELL";
 
 #pragma agreeANDreject button
 -(void)selectAgreeORRejectONWorkOrderNameSendToServer:(UIButton*)sender{
-//    [self reKeyBoard];
+    [self reKeyBoard];
     if (sender.tag == 60001) {
         _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
         _workOrderNameRejectBtn.backgroundColor = [UIColor redColor];
@@ -268,7 +292,7 @@ static  NSString  * identifier = @"CELL";
     _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
 -(void)undisplayaddOrEditWorkOrderView{
-//    [self reKeyBoard];
+    [self reKeyBoard];
     _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
 
