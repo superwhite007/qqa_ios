@@ -17,8 +17,15 @@
 
 
 @interface WorkOrderNameLIstsViewController ()
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) UIView * addOrEditWorkOrderView;
+@property (nonatomic, strong) UILabel * workOrderTitle;
+@property (nonatomic, strong) UITextField * workOrderTextField;
+@property (nonatomic, strong) UIButton * workOrderNameAgreeBtn;
+@property (nonatomic, strong) UIButton * workOrderNameRejectBtn;
+@property (nonatomic, assign) BOOL agreeBTN;
 
+
+@property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, assign) int pageNum;
 @property (nonatomic, assign) BOOL isDownRefresh;
 @property (nonatomic, strong) NSMutableArray *datasourceMArray;
@@ -40,6 +47,11 @@ static  NSString  * identifier = @"CELL";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _addOrEditWorkOrderView = [UIView new];
+    _workOrderTitle = [UILabel new];
+    _workOrderTextField = [[UITextField alloc] init];
+//    _workOrderTextField.delegate = self;
+    
     self.pageNum = 1;
     self.isDownRefresh = NO;
     
@@ -51,12 +63,20 @@ static  NSString  * identifier = @"CELL";
     self.tableView.delegate = self;
     [self.tableView registerClass:[WorkOrderTVCell class] forCellReuseIdentifier:identifier];
     
-//    [self addNewOREditWorkOrderView];
+
     [self getWorkOrderListFromServer:1];
     
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationItem setTitle:@"工单列表"];
+    
+    [self addNewOREditWorkOrderView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddOrEditWorkOrderView)];
+    
+    
     
     
 }
@@ -148,6 +168,116 @@ static  NSString  * identifier = @"CELL";
     [task resume];
 }
 
+-(void)addNewOREditWorkOrderView{
+    _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+    _addOrEditWorkOrderView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:_addOrEditWorkOrderView];
+    
+    _workOrderTitle.frame = CGRectMake(10, kWORKORDERORGINHSPACE, kWORKORDERWIDTH, kWORKORDERORGINHSPACE);
+    _workOrderTitle.textAlignment = NSTextAlignmentCenter;
+    _workOrderTitle.text = @"新建工单";
+    [_addOrEditWorkOrderView addSubview:_workOrderTitle];
+    
+    NSArray * labelNameAboutTitleANDContent = @[@"工单标题",@"工单内容"];
+    for (int i = 0; i < labelNameAboutTitleANDContent.count; i++) {
+        UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, (3 + i * 2)* kWORKORDERORGINHSPACE,100, kWORKORDERORGINHSPACE)];
+        nameLabel.textAlignment = NSTextAlignmentCenter;
+        //        nameLabel.backgroundColor = [UIColor whiteColor];
+        nameLabel.text = labelNameAboutTitleANDContent[i];
+        [_addOrEditWorkOrderView addSubview:nameLabel];
+    }
+    
+    _workOrderTextField.frame = CGRectMake(100 , 3 * kWORKORDERORGINHSPACE - kWORKORDERORGINHSPACE / 2,  kWORKORDERWIDTH  - 120, kWORKORDERORGINHSPACE * 2);
+    _workOrderTextField.backgroundColor = [UIColor whiteColor];
+    _workOrderTextField.borderStyle = UITextBorderStyleLine;
+    _workOrderTextField.adjustsFontSizeToFitWidth = YES;
+    [_addOrEditWorkOrderView addSubview:_workOrderTextField];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(reKeyBoard)];
+//    [_addOrEditWorkOrderView addGestureRecognizer:tap];
+//    [self.view addGestureRecognizer:tap];
+    
+//    _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6.5 * kWORKORDERORGINHSPACE,kWORKORDERWIDTH - 20, kWORKORDERORGINHSPACE * 10)];
+//    _messageTextView.font = [UIFont systemFontOfSize:24];
+//    [self.view addSubview:_messageTextView];
+//    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
+//    _messageTextView.layer.borderWidth = 1;
+//    _messageTextView.layer.cornerRadius = 10;
+//    _messageTextView.returnKeyType = UIReturnKeySend;
+//    _messageTextView.delegate = self;
+//    [_addOrEditWorkOrderView addSubview:_messageTextView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+    _workOrderNameAgreeBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _workOrderNameAgreeBtn.frame = CGRectMake(kWORKORDERWIDTH - 110, 17.5 * kWORKORDERORGINHSPACE,100, kWORKORDERORGINHSPACE * 2);
+    _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
+    [_workOrderNameAgreeBtn setTitle:@"确定" forState:(UIControlStateNormal)];
+    _workOrderNameAgreeBtn.layer.borderWidth = 0.5;
+    _workOrderNameAgreeBtn.tag = 60002;
+    [_workOrderNameAgreeBtn addTarget:self action:@selector(selectAgreeORRejectONWorkOrderNameSendToServer:) forControlEvents:UIControlEventTouchUpInside];
+    _agreeBTN = YES;
+    _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
+    [_addOrEditWorkOrderView addSubview:_workOrderNameAgreeBtn];
+    
+    _workOrderNameRejectBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _workOrderNameRejectBtn.frame = CGRectMake(kWORKORDERWIDTH - 220, 17.5 * kWORKORDERORGINHSPACE,100, kWORKORDERORGINHSPACE * 2);
+    _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
+    [_workOrderNameRejectBtn setTitle:@"取消" forState:(UIControlStateNormal)];
+    _workOrderNameRejectBtn.layer.borderWidth = 0.5;
+    _workOrderNameRejectBtn.tag = 60001;
+    [_workOrderNameRejectBtn addTarget:self action:@selector(selectAgreeORRejectONWorkOrderNameSendToServer:) forControlEvents:UIControlEventTouchUpInside];
+    _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
+    [_addOrEditWorkOrderView addSubview:_workOrderNameRejectBtn];
+}
+
+#pragma agreeANDreject button
+-(void)selectAgreeORRejectONWorkOrderNameSendToServer:(UIButton*)sender{
+//    [self reKeyBoard];
+    if (sender.tag == 60001) {
+        _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
+        _workOrderNameRejectBtn.backgroundColor = [UIColor redColor];
+        _agreeBTN = NO;
+        [self alert:@"取消创建"];
+    }else if (sender.tag == 60002) {
+        _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
+        _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
+        _agreeBTN = YES;
+        if (_workOrderTextField.text.length > 0) {
+//            [self sendWorkOrderTitleToServer];//待开发
+            [self alert:@"创建成功"];
+        }else{
+            [self alert:@"请输入工单名称"];
+        }
+    }
+    
+}
+
+#pragma keyboard
+- (void)keyboardWillShow:(NSNotification *)notification{
+    [self displayaddOrEditWorkOrderViewHeader];
+}
+- (void)keyboardWillHide:(NSNotification *)notification{
+    [self displayaddOrEditWorkOrderView];
+}
+-(void)displayaddOrEditWorkOrderViewHeader{
+    _addOrEditWorkOrderView.frame = CGRectMake(10, 10, kWORKORDERWIDTH, kWORKORDERWIDTH);
+}
+-(void)displayaddOrEditWorkOrderView{
+    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+}
+-(void)undisplayaddOrEditWorkOrderView{
+//    [self reKeyBoard];
+    _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+}
+
+
+
+
+
+
+
 -(void)alert:(NSString *)str{
     
     NSString *title = str;
@@ -158,7 +288,7 @@ static  NSString  * identifier = @"CELL";
         // 操作具体内容
         // Nothing to do.
         if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"]) {
-//            [self undisplayaddOrEditWorkOrderView];
+            [self undisplayaddOrEditWorkOrderView];
         }
     }];
     [alertDialog addAction:okAction];
