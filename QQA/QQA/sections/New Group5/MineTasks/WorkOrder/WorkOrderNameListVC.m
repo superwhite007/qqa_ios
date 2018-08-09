@@ -75,7 +75,7 @@ static  NSString  * identifier = @"CELL";
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
     lpgr.delegate = self;
-//    [_tableView addGestureRecognizer:lpgr]; //启用长按事件
+    [_tableView addGestureRecognizer:lpgr]; //启用长按事件
 }
 
 -(void)addNewOREditWorkOrderView{

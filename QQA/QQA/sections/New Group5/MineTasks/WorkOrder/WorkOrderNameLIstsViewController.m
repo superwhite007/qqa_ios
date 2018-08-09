@@ -16,7 +16,7 @@
 #define kWORKORDERORGINHSPACE  (iphoneWidth - 20) / 20   //workOrderSpace
 
 
-@interface WorkOrderNameLIstsViewController ()<UITextFieldDelegate>
+@interface WorkOrderNameLIstsViewController ()<UITextFieldDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView * addOrEditWorkOrderView;
 @property (nonatomic, strong) UILabel * workOrderTitle;
 @property (nonatomic, strong) UITextField * workOrderTextField;
@@ -77,8 +77,41 @@ static  NSString  * identifier = @"CELL";
     [self addNewOREditWorkOrderView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddOrEditWorkOrderView)];
     
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
+    lpgr.delegate = self;
+    [_tableView addGestureRecognizer:lpgr]; //启用长按事件
     
     
+}
+#pragma shoushi
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
+{
+    NSLog(@"11111111111111111111111111111111111111");
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint p = [gestureRecognizer locationInView:_tableView ];
+        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
+        NSLog(@"indexPath.rowindexPath.rowindexPath.row:%ld", indexPath.row);
+        if (indexPath == nil)
+            NSLog(@"long press on table view but not on a row");
+        else
+            NSLog(@"long press on table view at row %ld", indexPath.row);
+        WorkOrder * workOrder = self.datasourceMArray[indexPath.row];
+        //        if (taskName.isRename) {
+        //            [self alert: @"有修改权限"];
+        //            [self newTask];
+        //            _messageTextView.text = taskName.title;
+        //            _taskNameLabel.text = @"修改项目名称";
+        //            _taskIdMStr = [ NSMutableString stringWithFormat:@"%@", taskName.taskId];
+        //        } else{
+        //            [self alert: @"无修改权限"];
+        //        }
+        _workOrderTitle.text = @"编辑工单";
+        _workOrderTextField.text = workOrder.title;
+        _messageTextView.text = workOrder.content;
+        [self displayaddOrEditWorkOrderView];
+        
+    }
     
 }
 -(void)gotoOneOrderVC{
