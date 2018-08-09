@@ -24,7 +24,7 @@
     _workNameLabel.font = [UIFont systemFontOfSize:20];
     [self.contentView addSubview:_workNameLabel];
     
-    _workContentLabel = [[UILabel alloc] init];
+    _workContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, 40)];
     _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, 40);
     [self.contentView addSubview:_workContentLabel];
     
@@ -60,7 +60,6 @@
         _workRedpointNnumberLabel.text = [NSString stringWithFormat:@"%@", workOrder.unreadCommentNum];
     }
     
-
     _workContentLabel.text = workOrder.content;
     _workContentLabel.font = [UIFont systemFontOfSize:18];
     _workContentLabel.numberOfLines = 0;//表示label可以多行显示
@@ -68,8 +67,12 @@
     CGSize sourceSize = CGSizeMake((iphoneWidth - 20) * 3 / 4, 2000);
     CGRect targetRect = [_workContentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _workContentLabel.font} context:nil];
     _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, CGRectGetHeight(targetRect));
-    if (CGRectGetHeight(targetRect) < 60) {
+    if (CGRectGetHeight(targetRect) < 40) {
         _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, 40);
+        _workCreatedByPeopleANDTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_workContentLabel.frame) + 5, iphoneWidth - 20, 15)];
+        _workRedpointNnumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(iphoneWidth - 80, 40, 20 , 20)];
+        _workCompleteANDUnfinishedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 55, 40, 20 , 20)];
+        _nextForwardImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 30, 40, 20 , 20)];
     }else{
         _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, CGRectGetHeight(targetRect) );
         _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(10, CGRectGetMaxY(_workContentLabel.frame) + 5, iphoneWidth - 20, 15);
