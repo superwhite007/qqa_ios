@@ -579,6 +579,15 @@
 			path = IInitiatedtheExamination;
 			sourceTree = "<group>";
 		};
+		AA32F67C211BD15100024FBD /* NOuse */ = {
+			isa = PBXGroup;
+			children = (
+				AA478BEC2112CA9500F0541B /* WorkOrderNameListVC.h */,
+				AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */,
+			);
+			path = NOuse;
+			sourceTree = "<group>";
+		};
 		AA37F21520BD377C00E4554F /* HumanDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,8 +617,7 @@
 		AA478BEB2112CA4E00F0541B /* WorkOrder */ = {
 			isa = PBXGroup;
 			children = (
-				AA478BEC2112CA9500F0541B /* WorkOrderNameListVC.h */,
-				AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */,
+				AA32F67C211BD15100024FBD /* NOuse */,
 				AA4AA0E0211964B800675EBB /* WorkOrder.h */,
 				AA4AA0E1211964B800675EBB /* WorkOrder.m */,
 				AA4AA0DD2119649B00675EBB /* WorkOrderTVCell.h */,

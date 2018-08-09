@@ -87,15 +87,14 @@ static  NSString  * identifier = @"CELL";
 #pragma shoushi
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
 {
-    NSLog(@"11111111111111111111111111111111111111");
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint p = [gestureRecognizer locationInView:_tableView ];
         NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
-        NSLog(@"indexPath.rowindexPath.rowindexPath.row:%ld", indexPath.row);
-        if (indexPath == nil)
-            NSLog(@"long press on table view but not on a row");
-        else
-            NSLog(@"long press on table view at row %ld", indexPath.row);
+//        NSLog(@"indexPath.rowindexPath.rowindexPath.row:%ld", indexPath.row);
+//        if (indexPath == nil)
+////            NSLog(@"long press on table view but not on a row");
+//        else
+//            NSLog(@"long press on table view at row %ld", indexPath.row);
         WorkOrder * workOrder = self.datasourceMArray[indexPath.row];
         //        if (taskName.isRename) {
         //            [self alert: @"有修改权限"];
@@ -139,7 +138,7 @@ static  NSString  * identifier = @"CELL";
 - (void)reKeyBoard
 {
     [_workOrderTextField resignFirstResponder];
-//    [_messageTextView resignFirstResponder];//textView
+    [_messageTextView resignFirstResponder];
 }
 
 #pragma UItableDasource
@@ -192,7 +191,7 @@ static  NSString  * identifier = @"CELL";
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
-    NSLog(@"mdict:::%@", mdict);
+//    NSLog(@"mdict:::%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -206,7 +205,6 @@ static  NSString  * identifier = @"CELL";
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
                                                         [self.datasourceMArray removeAllObjects];
                                                         for (NSDictionary * dict in dataListArray) {
-                                                            //                                                            NSLog(@"dataBack::::dataListArray:%@", dataListArray);
                                                             WorkOrder * workOrder = [WorkOrder new];
                                                             [workOrder setValuesForKeysWithDictionary:dict];
                                                             [self.datasourceMArray addObject:workOrder];
@@ -216,10 +214,10 @@ static  NSString  * identifier = @"CELL";
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    NSLog(@"Server tapy is wrong.");
+//                                                    NSLog(@"Server tapy is wrong.");
                                                 }
                                             }else{
-                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+//                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
                                             }
                                         }];
     [task resume];
@@ -250,7 +248,6 @@ static  NSString  * identifier = @"CELL";
     _workOrderTextField.adjustsFontSizeToFitWidth = YES;
     [_addOrEditWorkOrderView addSubview:_workOrderTextField];
 
-    
     _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6.5 * kWORKORDERORGINHSPACE,kWORKORDERWIDTH - 20, kWORKORDERORGINHSPACE * 10)];
     _messageTextView.font = [UIFont systemFontOfSize:24];
     [self.view addSubview:_messageTextView];
@@ -263,7 +260,6 @@ static  NSString  * identifier = @"CELL";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
     
     _workOrderNameAgreeBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
     _workOrderNameAgreeBtn.frame = CGRectMake(kWORKORDERWIDTH - 110, 17.5 * kWORKORDERORGINHSPACE,100, kWORKORDERORGINHSPACE * 2);
@@ -312,14 +308,61 @@ static  NSString  * identifier = @"CELL";
         _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
         _agreeBTN = YES;
         if (_workOrderTextField.text.length > 0) {
-//            [self sendWorkOrderTitleToServer];//待开发
-            [self alert:@"创建成功"];
+            if ([_workOrderTitle.text isEqualToString:@"新建工单"]) {
+                [self sendWorkOrderTitleToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workList/create", CONST_SERVER_ADDRESS]];
+            }else if ([_workOrderTitle.text isEqualToString:@"编辑工单"]) {
+                [self sendWorkOrderTitleToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workList/update", CONST_SERVER_ADDRESS]];
+            }
         }else{
             [self alert:@"请输入工单名称"];
         }
     }
-    
 }
+-(void)sendWorkOrderTitleToServer:(NSString *)urlStr{
+    
+    NSURL * url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:_workOrderTextField.text forKey:@"title"];
+    [mdict setObject:_messageTextView.text forKey:@"content"];
+    NSLog(@"NewWorkOrder:::%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"NewdataBack%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70003) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"发送成功"];
+                                                        });
+                                                    }else{
+                                                        [self alert:@"工单失败"];
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    [self alert:@"工单失败"];
+                                                }
+                                            }else{
+                                                [self alert:@"工单失败"];
+                                            }
+                                        }];
+    [task resume];
+}
+
+
 
 #pragma keyboard
 - (void)keyboardWillShow:(NSNotification *)notification{
@@ -349,7 +392,6 @@ static  NSString  * identifier = @"CELL";
 }
 
 -(void)alert:(NSString *)str{
-    
     NSString *title = str;
     NSString *message = @" ";
     NSString *okButtonTitle = @"确定";
@@ -357,7 +399,7 @@ static  NSString  * identifier = @"CELL";
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // 操作具体内容
         // Nothing to do.
-        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"]) {
+        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
             [self undisplayaddOrEditWorkOrderView];
         }
     }];
