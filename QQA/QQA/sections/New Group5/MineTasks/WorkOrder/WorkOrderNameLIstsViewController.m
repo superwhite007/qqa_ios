@@ -143,6 +143,23 @@ static  NSString  * identifier = @"CELL";
     cell.workOrder = workOrder;
     return  cell;
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    WorkOrder * stepDetailCommunication = self.datasourceMArray[indexPath.row];
+    UILabel * label = [UILabel new];
+    label.text = stepDetailCommunication.content;
+    label.font = [UIFont systemFontOfSize:18];
+    label.numberOfLines = 0;//表示label可以多行显示
+    label.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake((iphoneWidth - 20) * 3 / 4, 2000);
+    CGRect targetRect = [label.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : label.font} context:nil];
+    label.frame = CGRectMake(100, 5, iphoneWidth - 110, CGRectGetHeight(targetRect));
+    if (CGRectGetHeight(targetRect) < 40) {
+        return 100;
+    }else{
+        return CGRectGetHeight(targetRect) + 60;
+    }
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     WorkOrder * workOrder = self.datasourceMArray[indexPath.row];
     if ([workOrder.isEdit intValue] == 1 ) {

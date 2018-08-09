@@ -20,7 +20,8 @@
 }
 -(void)addAllViews{
     _workNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, iphoneWidth - 100, 25)];
-    _workNameLabel.textAlignment = NSTextAlignmentLeft;
+    _workNameLabel.textAlignment = NSTextAlignmentCenter;
+    _workNameLabel.font = [UIFont systemFontOfSize:20];
     [self.contentView addSubview:_workNameLabel];
     
     _workContentLabel = [[UILabel alloc] init];
@@ -58,6 +59,26 @@
     if (workOrder.unreadCommentNum > 0) {
         _workRedpointNnumberLabel.text = [NSString stringWithFormat:@"%@", workOrder.unreadCommentNum];
     }
+    
+
+    _workContentLabel.text = workOrder.content;
+    _workContentLabel.font = [UIFont systemFontOfSize:18];
+    _workContentLabel.numberOfLines = 0;//表示label可以多行显示
+    _workContentLabel.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake((iphoneWidth - 20) * 3 / 4, 2000);
+    CGRect targetRect = [_workContentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _workContentLabel.font} context:nil];
+    _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, CGRectGetHeight(targetRect));
+    if (CGRectGetHeight(targetRect) < 60) {
+        _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, 40);
+    }else{
+        _workContentLabel.frame = CGRectMake(10, 35, (iphoneWidth - 20) * 3 / 4, CGRectGetHeight(targetRect) );
+        _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(10, CGRectGetMaxY(_workContentLabel.frame) + 5, iphoneWidth - 20, 15);
+        _workRedpointNnumberLabel.frame = CGRectMake(iphoneWidth - 80, (40 + CGRectGetMaxY(_workContentLabel.frame)) / 2 , 20 , 20);
+        _workCompleteANDUnfinishedImageView.frame = CGRectMake(iphoneWidth - 55, (40 + CGRectGetMaxY(_workContentLabel.frame)) / 2, 20 , 20);
+        _nextForwardImageView.frame = CGRectMake(iphoneWidth - 30,  (40 + CGRectGetMaxY(_workContentLabel.frame)) / 2, 20 , 20);
+    }
+    
+    
 }
 
 - (void)awakeFromNib {
