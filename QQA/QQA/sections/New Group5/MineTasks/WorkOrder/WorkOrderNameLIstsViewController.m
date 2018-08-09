@@ -75,7 +75,7 @@ static  NSString  * identifier = @"CELL";
     [self.navigationItem setTitle:@"工单列表"];
     
     [self addNewOREditWorkOrderView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddOrEditWorkOrderView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddNewOrEditWorkOrderView)];
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
@@ -249,9 +249,7 @@ static  NSString  * identifier = @"CELL";
     _workOrderTextField.borderStyle = UITextBorderStyleLine;
     _workOrderTextField.adjustsFontSizeToFitWidth = YES;
     [_addOrEditWorkOrderView addSubview:_workOrderTextField];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(reKeyBoard)];
-//    [_addOrEditWorkOrderView addGestureRecognizer:tap];
-//    [self.view addGestureRecognizer:tap];
+
     
     _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 6.5 * kWORKORDERORGINHSPACE,kWORKORDERWIDTH - 20, kWORKORDERORGINHSPACE * 10)];
     _messageTextView.font = [UIFont systemFontOfSize:24];
@@ -336,16 +334,19 @@ static  NSString  * identifier = @"CELL";
 -(void)displayaddOrEditWorkOrderView{
     _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
+-(void)displayaddNewOrEditWorkOrderView{
+    _workOrderTitle.text = @"新建工单";
+    _workOrderTextField.text = @"";
+    _messageTextView.text = @"";
+    _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
+    _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
+    _agreeBTN = YES;
+    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+}
 -(void)undisplayaddOrEditWorkOrderView{
     [self reKeyBoard];
     _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
-
-
-
-
-
-
 
 -(void)alert:(NSString *)str{
     
