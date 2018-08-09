@@ -41,19 +41,14 @@
     [self.contentView addSubview:_workRedpointNnumberLabel];
     
     _workCompleteANDUnfinishedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 55, 40, 20 , 20)];
+    _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"checkmark"];
     [self.contentView addSubview:_workCompleteANDUnfinishedImageView];
     
     _nextForwardImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 30, 40, 20 , 20)];
+    _nextForwardImageView.image = [UIImage imageNamed:@"forward"];
     [self.contentView addSubview:_nextForwardImageView];
     
-    
-//    _workNameLabel.backgroundColor = [UIColor redColor];
-//    _workContentLabel.backgroundColor = [UIColor greenColor];
-//    _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor blueColor];
-    
     _workRedpointNnumberLabel.backgroundColor = [UIColor redColor];
-    _workCompleteANDUnfinishedImageView.backgroundColor = [UIColor redColor];
-    _nextForwardImageView.backgroundColor = [UIColor redColor];
 }
 
 -(void)setWorkOrder:(WorkOrder *)workOrder{
