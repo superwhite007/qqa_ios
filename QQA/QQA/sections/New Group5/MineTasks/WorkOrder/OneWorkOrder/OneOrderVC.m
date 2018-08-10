@@ -166,6 +166,7 @@ static  NSString  * identifier = @"CELL";
     [self getHeadOfTheDepartmentFromServder];
 }
 -(void)getHeadOfTheDepartmentFromServder{
+    [_dataOfHeaderOfTheDepartment removeAllObjects];
     [_dataOfHeaderOfTheDepartment addObject:@"test1"];
     [_dataOfHeaderOfTheDepartment addObject:@"test2"];
     [_dataOfHeaderOfTheDepartment addObject:@"test3"];
