@@ -7,10 +7,11 @@
 //
 
 #import "OneOrderVC.h"
-#define kHEADERBTNSPACE  (iphoneWidth - 320) / 5 //button间隙
 #import "OneOrder.h"
 #import "OneOrderCell.h"
 #import "OneOrderCommunicationVController.h"
+
+#define kHEADERBTNSPACE  (iphoneWidth - 320) / 5 //button间隙
 
 @interface OneOrderVC ()
 @property (nonatomic, strong) UIView * headerView;
@@ -49,10 +50,7 @@ static  NSString  * identifier = @"CELL";
     self.tableView.delegate = self;
     [self.tableView registerClass:[OneOrderCell class] forCellReuseIdentifier:identifier];
     [self getWorkOrderListFromServer:1];
-//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-//    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-//
-    
+
 }
 
 
@@ -66,23 +64,6 @@ static  NSString  * identifier = @"CELL";
 //    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
 
-#pragma getDataFServer
-//-(void)loadNewData
-//{
-//    self.isDownRefresh = YES;
-//    if (self.pageNum > 1) {
-//        [self getWorkOrderListFromServer:--self.pageNum];
-//    } else{
-//        [self getWorkOrderListFromServer:1];
-//    }
-//    [self.tableView.mj_header endRefreshing];
-//}
-//
-//-(void)loadMoreData{
-//    self.isDownRefresh = NO;
-//    [self getWorkOrderListFromServer:++self.pageNum];
-//    [self.tableView.mj_footer endRefreshing];
-//}
 
 -(void)getWorkOrderListFromServer:(int)page{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/index", CONST_SERVER_ADDRESS]];
@@ -139,12 +120,11 @@ static  NSString  * identifier = @"CELL";
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  self.datasourceMArray.count;
-//    return 20;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OneOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     OneOrder * oneOrder = self.datasourceMArray[indexPath.row];
-    cell.oneOrder = oneOrder; //待开发
+    cell.oneOrder = oneOrder;
     return  cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
