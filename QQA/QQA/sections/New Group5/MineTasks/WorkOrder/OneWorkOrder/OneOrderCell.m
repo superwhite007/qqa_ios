@@ -8,6 +8,7 @@
 
 #import "OneOrderCell.h"
 #import "OneOrder.h"
+#import "UIButton+WebCache.h"
 @implementation OneOrderCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -21,6 +22,7 @@
     
     _selectPeopleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.contentView addSubview:_selectPeopleButton];
+    
     
     _peopleNameLabel = [UILabel new];
     [self.contentView addSubview:_peopleNameLabel];
@@ -52,10 +54,34 @@
     _selectPeopleButton.backgroundColor = [UIColor redColor];
     _peopleNameLabel.backgroundColor = [UIColor redColor];
     _contentLabel.backgroundColor = [UIColor redColor];
-    _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor redColor];
+    _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor greenColor];
     _workRedpointNnumberLabel.backgroundColor = [UIColor redColor];
-    _workCompleteANDUnfinishedImageView.backgroundColor = [UIColor redColor];
-    _nextForwardImageView.backgroundColor = [UIColor redColor];
+//    _workCompleteANDUnfinishedImageView.backgroundColor = [UIColor redColor];
+//    _nextForwardImageView.backgroundColor = [UIColor redColor];
+    
+    _contentLabel.frame = CGRectMake(75, 5, iphoneWidth - 175, 60);
+    _contentLabel.textAlignment = NSTextAlignmentLeft;
+    _selectPeopleButton.frame = CGRectMake(10, 5, 60, 60);
+    _selectPeopleButton.layer.cornerRadius = CGRectGetWidth(_selectPeopleButton.frame) / 2;
+    _selectPeopleButton.layer.masksToBounds = YES;
+    _peopleNameLabel.frame = CGRectMake(5, 70, 70, 25);
+    _peopleNameLabel.text = @"北京你好";
+//    _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(75, CGRectGetMaxY(_contentLabel.frame), iphoneWidth - 100, 25);
+    _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(85, 70, iphoneWidth - 100, 25);
+    _workCreatedByPeopleANDTimeLabel.textAlignment = NSTextAlignmentRight;
+    
+}
+-(void)setOneOrder:(OneOrder *)oneOrder{
+    NSLog(@"oneOrder.executorImg::%@", oneOrder.executorImg);
+    if (![oneOrder.executorImg isEqualToString:@"暂无"]) {
+        [_selectPeopleButton xr_setButtonImageWithUrl:oneOrder.executorImg];
+    }
+//    [_selectPeopleButton xr_setButtonImageWithUrl:oneOrder.executorImg];
+    _peopleNameLabel.text = oneOrder.executorName;
+    _contentLabel.text = oneOrder.content;
+    _workCreatedByPeopleANDTimeLabel.text = oneOrder.describe;
+    _workRedpointNnumberLabel.text = [NSString stringWithFormat:@"%@", oneOrder.unreadCommentNum];
+//    _workCompleteANDUnfinishedImageView
     
 }
 

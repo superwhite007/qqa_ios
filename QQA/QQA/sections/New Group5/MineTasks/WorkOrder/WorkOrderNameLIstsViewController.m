@@ -158,6 +158,7 @@ static  NSString  * identifier = @"CELL";
     }
     //需要后续开发,补充数据
     OneOrderVC * oneOrderVC = [OneOrderVC new];
+    oneOrderVC.workListIdStr = _workListId;
     [self.navigationController pushViewController:oneOrderVC animated:YES];
 }
 #pragma getDataFServer

@@ -28,6 +28,8 @@
 		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
 		AA2649FA211D1AB300C6614B /* OneOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2649F9211D1AB300C6614B /* OneOrder.m */; };
 		AA2649FD211D1AD100C6614B /* OneOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2649FC211D1AD100C6614B /* OneOrderCell.m */; };
+		AA264A01211D274700C6614B /* OneOrderCommunicationVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA264A00211D274700C6614B /* OneOrderCommunicationVController.m */; };
+		AA264A04211D3BD400C6614B /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AA264A03211D3BD400C6614B /* UIButton+WebCache.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AA32F67B211BC7D300024FBD /* WorkOrderNameLIstsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32F67A211BC7D300024FBD /* WorkOrderNameLIstsViewController.m */; };
 		AA32F682211C116D00024FBD /* UILabel+HeightBYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32F681211C116D00024FBD /* UILabel+HeightBYLabel.m */; };
@@ -169,6 +171,10 @@
 		AA2649F9211D1AB300C6614B /* OneOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrder.m; sourceTree = "<group>"; };
 		AA2649FB211D1AD100C6614B /* OneOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrderCell.h; sourceTree = "<group>"; };
 		AA2649FC211D1AD100C6614B /* OneOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderCell.m; sourceTree = "<group>"; };
+		AA2649FF211D274700C6614B /* OneOrderCommunicationVController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrderCommunicationVController.h; sourceTree = "<group>"; };
+		AA264A00211D274700C6614B /* OneOrderCommunicationVController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderCommunicationVController.m; sourceTree = "<group>"; };
+		AA264A02211D3BD400C6614B /* UIButton+WebCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+WebCache.h"; sourceTree = "<group>"; };
+		AA264A03211D3BD400C6614B /* UIButton+WebCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AA32F679211BC7D300024FBD /* WorkOrderNameLIstsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderNameLIstsViewController.h; sourceTree = "<group>"; };
@@ -588,6 +594,15 @@
 			path = IInitiatedtheExamination;
 			sourceTree = "<group>";
 		};
+		AA2649FE211D26F500C6614B /* OneOrderCommunication */ = {
+			isa = PBXGroup;
+			children = (
+				AA2649FF211D274700C6614B /* OneOrderCommunicationVController.h */,
+				AA264A00211D274700C6614B /* OneOrderCommunicationVController.m */,
+			);
+			path = OneOrderCommunication;
+			sourceTree = "<group>";
+		};
 		AA32F67C211BD15100024FBD /* NOuse */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,6 +664,9 @@
 				AA2649F9211D1AB300C6614B /* OneOrder.m */,
 				AA2649FB211D1AD100C6614B /* OneOrderCell.h */,
 				AA2649FC211D1AD100C6614B /* OneOrderCell.m */,
+				AA264A02211D3BD400C6614B /* UIButton+WebCache.h */,
+				AA264A03211D3BD400C6614B /* UIButton+WebCache.m */,
+				AA2649FE211D26F500C6614B /* OneOrderCommunication */,
 			);
 			path = OneWorkOrder;
 			sourceTree = "<group>";
@@ -1204,6 +1222,7 @@
 				AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */,
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
 				AAEEEA4C1FCF9CBA0012A695 /* Request.m in Sources */,
+				AA264A04211D3BD400C6614B /* UIButton+WebCache.m in Sources */,
 				AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */,
 				AAE0258A20D0BDE4002A28DA /* OneTasKStepTVCell.m in Sources */,
 				AA478BF22112CCD700F0541B /* OneOrderVC.m in Sources */,
@@ -1224,6 +1243,7 @@
 				AA1CEC8C1FA9602E00050EFC /* main.m in Sources */,
 				AAA169FA1FA98E0F00F35475 /* AppTBViewController.m in Sources */,
 				AA8BB4BE20CF9558008D7823 /* TaskNameTVCell.m in Sources */,
+				AA264A01211D274700C6614B /* OneOrderCommunicationVController.m in Sources */,
 				AA20C69A1FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m in Sources */,
 				AAD1670D20C779EE008884FC /* OneTaskDetailedListVC.m in Sources */,
 				AAE0259220D0EC19002A28DA /* StepDetailCommunicationListVC.m in Sources */,
