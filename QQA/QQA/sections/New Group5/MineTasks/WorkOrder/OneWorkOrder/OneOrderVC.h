@@ -8,5 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OneOrderVC : UIViewController
+@interface OneOrderVC : UIViewController<UITextViewDelegate,UITableViewDelegate, UITableViewDataSource>
+
+//@property (nonatomic, strong)UITextView * messageTextView;
+
 @end

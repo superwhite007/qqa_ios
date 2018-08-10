@@ -8,14 +8,27 @@
 
 #import "OneOrderVC.h"
 #define kHEADERBTNSPACE  (iphoneWidth - 320) / 5 //button间隙
+#import "OneOrder.h"
+#import "OneOrderCell.h"
 
 @interface OneOrderVC ()
 @property (nonatomic, strong) UIView * headerView;
 @property (nonatomic, strong) NSMutableArray * dataOfHeaderOfTheDepartment;
 
-@end
+@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, assign) int pageNum;
+@property (nonatomic, assign) BOOL isDownRefresh;
+@property (nonatomic, strong) NSMutableArray *datasourceMArray;
 
+@end
 @implementation OneOrderVC
+static  NSString  * identifier = @"CELL";
+-(NSMutableArray *)datasourceMArray{
+    if (!_datasourceMArray) {
+        _datasourceMArray = [NSMutableArray array];
+    }
+    return _datasourceMArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +36,109 @@
     _dataOfHeaderOfTheDepartment = [NSMutableArray array];
     [self.navigationItem  setTitle:@"工单详情"];
     [self addHeaderView];
+    
+    self.pageNum = 1;
+    self.isDownRefresh = NO;
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
+    _tableView.rowHeight = 100;
+    [self.view addSubview:_tableView];
+    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView registerClass:[OneOrderCell class] forCellReuseIdentifier:identifier];
+//    [self getWorkOrderListFromServer:1];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    
+    
+    
+    
+    
 }
+
+#pragma getDataFServer
+-(void)loadNewData
+{
+    self.isDownRefresh = YES;
+    if (self.pageNum > 1) {
+        [self getWorkOrderListFromServer:--self.pageNum];
+    } else{
+        [self getWorkOrderListFromServer:1];
+    }
+    [self.tableView.mj_header endRefreshing];
+}
+
+-(void)loadMoreData{
+    self.isDownRefresh = NO;
+    [self getWorkOrderListFromServer:++self.pageNum];
+    [self.tableView.mj_footer endRefreshing];
+}
+
+-(void)getWorkOrderListFromServer:(int)page{
+//    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workList/index", CONST_SERVER_ADDRESS]];
+//    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    request.timeoutInterval = 10.0;
+//    request.HTTPMethod = @"POST";
+//    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+//    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+//    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+//    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+//    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+//    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+//    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+//    [mdict setObject:[NSString stringWithFormat:@"%d", page] forKey:@"pageNum"];
+//    NSError * error = nil;
+//    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+//    request.HTTPBody = jsonData;
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    NSURLSessionTask *task = [session dataTaskWithRequest:request
+//                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                                            if (data != nil) {
+//                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+//                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+//                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70001) {
+//                                                        NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
+//                                                        [self.datasourceMArray removeAllObjects];
+//                                                        for (NSDictionary * dict in dataListArray) {
+//                                                            WorkOrder * workOrder = [WorkOrder new];
+//                                                            [workOrder setValuesForKeysWithDictionary:dict];
+//                                                            [self.datasourceMArray addObject:workOrder];
+//                                                        }
+//                                                        dispatch_async(dispatch_get_main_queue(), ^{
+//                                                            [self.tableView  reloadData];
+//                                                        });
+//                                                    }
+//                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+//                                                    [self alert:@"获取失败"];
+//                                                }
+//                                            }else{
+//                                                [self alert:@"获取失败"];
+//                                            }
+//                                        }];
+//    [task resume];
+}
+
+
+#pragma UItableDasource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return  self.datasourceMArray.count;
+    return 3;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    OneOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+//    OneOrder * oneOrder = self.datasourceMArray[indexPath.row];
+//    cell.oneOrder = oneOrder;
+    return  cell;
+}
+
+
+
+
 -(void)addHeaderView{
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, 120)];
     _headerView.backgroundColor = [UIColor blueColor];

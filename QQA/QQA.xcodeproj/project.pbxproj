@@ -26,6 +26,8 @@
 		AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA20C6A21FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m */; };
 		AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */; };
 		AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */; };
+		AA2649FA211D1AB300C6614B /* OneOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2649F9211D1AB300C6614B /* OneOrder.m */; };
+		AA2649FD211D1AD100C6614B /* OneOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2649FC211D1AD100C6614B /* OneOrderCell.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AA32F67B211BC7D300024FBD /* WorkOrderNameLIstsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32F67A211BC7D300024FBD /* WorkOrderNameLIstsViewController.m */; };
 		AA32F682211C116D00024FBD /* UILabel+HeightBYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32F681211C116D00024FBD /* UILabel+HeightBYLabel.m */; };
@@ -163,6 +165,10 @@
 		AA25BCD41FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewController.m; sourceTree = "<group>"; };
 		AA25BCD71FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IInitiatedtheExaminationTableViewCell.h; sourceTree = "<group>"; };
 		AA25BCD81FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IInitiatedtheExaminationTableViewCell.m; sourceTree = "<group>"; };
+		AA2649F8211D1AB300C6614B /* OneOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrder.h; sourceTree = "<group>"; };
+		AA2649F9211D1AB300C6614B /* OneOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrder.m; sourceTree = "<group>"; };
+		AA2649FB211D1AD100C6614B /* OneOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrderCell.h; sourceTree = "<group>"; };
+		AA2649FC211D1AD100C6614B /* OneOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderCell.m; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AA32F679211BC7D300024FBD /* WorkOrderNameLIstsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderNameLIstsViewController.h; sourceTree = "<group>"; };
@@ -585,6 +591,8 @@
 		AA32F67C211BD15100024FBD /* NOuse */ = {
 			isa = PBXGroup;
 			children = (
+				AA32F680211C116D00024FBD /* UILabel+HeightBYLabel.h */,
+				AA32F681211C116D00024FBD /* UILabel+HeightBYLabel.m */,
 				AA478BEC2112CA9500F0541B /* WorkOrderNameListVC.h */,
 				AA478BED2112CA9500F0541B /* WorkOrderNameListVC.m */,
 			);
@@ -627,8 +635,6 @@
 				AA4AA0DE2119649B00675EBB /* WorkOrderTVCell.m */,
 				AA32F679211BC7D300024FBD /* WorkOrderNameLIstsViewController.h */,
 				AA32F67A211BC7D300024FBD /* WorkOrderNameLIstsViewController.m */,
-				AA32F680211C116D00024FBD /* UILabel+HeightBYLabel.h */,
-				AA32F681211C116D00024FBD /* UILabel+HeightBYLabel.m */,
 				AA478BEF2112CCA900F0541B /* OneWorkOrder */,
 			);
 			path = WorkOrder;
@@ -639,6 +645,10 @@
 			children = (
 				AA478BF02112CCD700F0541B /* OneOrderVC.h */,
 				AA478BF12112CCD700F0541B /* OneOrderVC.m */,
+				AA2649F8211D1AB300C6614B /* OneOrder.h */,
+				AA2649F9211D1AB300C6614B /* OneOrder.m */,
+				AA2649FB211D1AD100C6614B /* OneOrderCell.h */,
+				AA2649FC211D1AD100C6614B /* OneOrderCell.m */,
 			);
 			path = OneWorkOrder;
 			sourceTree = "<group>";
@@ -1148,6 +1158,7 @@
 				AA20C69D1FD14E9A0095AF0F /* CompanyOrganizationalStructure.m in Sources */,
 				AAB4D4941FC959F600116355 /* UIView+Extension.m in Sources */,
 				AA1394921FC277D20070B1E2 /* RequestForInstructionViewController.m in Sources */,
+				AA2649FD211D1AD100C6614B /* OneOrderCell.m in Sources */,
 				AAD93D751FB9372A00A7CC2A /* CompanyViewController.m in Sources */,
 				AA392A531FEC947800C1C581 /* UMSecondViewController.m in Sources */,
 				AAD9120B1FD780A4002A42B5 /* DetailOfPeopleINformationViewController.m in Sources */,
@@ -1223,6 +1234,7 @@
 				AA13948E1FC263F00070B1E2 /* LeaveForExaminationAndApprovalViewController.m in Sources */,
 				AAEF4CC71FB9646500474C07 /* AboutYouthViewController.m in Sources */,
 				AA1CEC841FA9602E00050EFC /* AppDelegate.m in Sources */,
+				AA2649FA211D1AB300C6614B /* OneOrder.m in Sources */,
 				AAC6063320D215F800626911 /* NewTask.m in Sources */,
 				AABD8ADE1FC81524005058BD /* ACPApprovalTableViewCell.m in Sources */,
 			);
