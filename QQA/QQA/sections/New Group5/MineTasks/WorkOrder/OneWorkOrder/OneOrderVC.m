@@ -21,7 +21,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
     _dataOfHeaderOfTheDepartment = [NSMutableArray array];
-    
+    [self.navigationItem  setTitle:@"工单详情"];
     [self addHeaderView];
 }
 -(void)addHeaderView{
