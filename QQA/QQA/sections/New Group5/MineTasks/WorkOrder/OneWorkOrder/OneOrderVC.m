@@ -352,7 +352,7 @@ static  NSString  * identifier = @"CELL";
             break;
         case 51001:
             NSLog(@"%ld", (long)sender.tag);
-            [self testCodes];
+            [self menuAlertViewControllerTitle:@"增加负责人"];
             break;
         default:
             break;
@@ -360,10 +360,11 @@ static  NSString  * identifier = @"CELL";
 }
 
 
--(void)testCodes{
+-(void)menuAlertViewControllerTitle:(NSString *)title{
+    
     MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:@[@"技术魏总监", @"技术魏总监" ,@"技术魏总监",@"技术魏总监",@"技术魏总监",@"技术魏总监"] detailsItems:@[@"2017-10-10", @"2019-10-10"] selectImage:@"select_normal" normalImage:@"select_not"];
     vc.leftBtnTitle = @"取消";
-    vc.title = @"我是标题";
+    vc.title = title;
     vc.leftTitleColor = [UIColor redColor];
     vc.btnFont = 20;
     vc.leftBtnBgColor = [UIColor grayColor];
@@ -375,12 +376,9 @@ static  NSString  * identifier = @"CELL";
     //    vc.rowDetailColor = [UIColor redColor];
     
     vc.confirmSelectRowBlock = ^(NSInteger index) {
-        
         NSLog(@"index: %zd", index);
     };
-    
     [self presentViewController:vc animated:false completion:nil];
-    
 }
 
 
