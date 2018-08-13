@@ -36,6 +36,8 @@
 @property (nonatomic, strong) UIButton * orderDetailRejectBtn;
 @property (nonatomic, assign) BOOL agreeButton;
 
+@property (nonatomic, strong) NSMutableArray * departmentsDatasource;
+
 @end
 @implementation OneOrderVC
 static  NSString  * identifier = @"CELL";
@@ -50,6 +52,12 @@ static  NSString  * identifier = @"CELL";
         _leadersMArray = [NSMutableArray new];
     }
     return _leadersMArray;
+}
+-(NSMutableArray *)departmentsDatasource{
+    if (!_departmentsDatasource) {
+        _departmentsDatasource = [NSMutableArray array];
+    }
+    return _departmentsDatasource;
 }
 
 - (void)viewDidLoad {
@@ -283,9 +291,11 @@ static  NSString  * identifier = @"CELL";
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70006) {
                                                         NSMutableArray * leaderMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"leaders"];
+                                                        NSMutableArray * departmentsMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"departments"];
                                                         NSLog(@"self.datasourceMArrayleader:%@", self.datasourceMArray);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self addLeadersViews:leaderMArray];
+                                                            [self Valuedepartments:departmentsMArray];
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
@@ -297,6 +307,11 @@ static  NSString  * identifier = @"CELL";
                                         }];
     [task resume];
 }
+
+-(void)Valuedepartments:(NSMutableArray *)mArray{
+    _departmentsDatasource = mArray;
+}
+
 -(void)addLeadersViews:(NSMutableArray *)mAry{
     _dataOfHeaderOfTheDepartment = mAry;
     for (int i = 0; i < _dataOfHeaderOfTheDepartment.count; i++) {
@@ -363,7 +378,19 @@ static  NSString  * identifier = @"CELL";
 
 -(void)menuAlertViewControllerTitle:(NSString *)title{
     
-    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:@[@"技术魏总监", @"技术魏总监" ,@"技术魏总监",@"技术魏总监",@"技术魏总监",@"技术魏总监"] detailsItems:@[@"2017-10-10", @"2019-10-10"] selectImage:@"select_normal" normalImage:@"select_not"];
+    NSMutableArray * nameAndleaderJob = [NSMutableArray array];
+    NSMutableArray * departmentName = [NSMutableArray array];
+    for (int i = 0; i < _departmentsDatasource.count; i++) {
+        NSString * str  = [NSString stringWithFormat:@"%@-%@",[_departmentsDatasource[i] objectForKey:@"leaderName"],[_departmentsDatasource[i] objectForKey:@"leaderJob"]];
+        [nameAndleaderJob addObject:str];
+        [departmentName addObject:[_departmentsDatasource[i] objectForKey:@"departmentName"]];
+    }
+    NSArray * nameAndleaderJobArray = nameAndleaderJob;
+    NSArray * departmentNameArray = departmentName;
+    NSLog(@":::::::%@,%@", nameAndleaderJobArray, departmentNameArray);
+    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:nameAndleaderJobArray detailsItems:departmentNameArray selectImage:@"select_normal" normalImage:@"select_not"];
+
+//    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:@[@"技术魏总监", @"技术魏总监" ,@"技术魏总监",@"技术魏总监",@"技术魏总监",@"技术魏总监"] detailsItems:@[@"2017-10-10", @"2019-10-10"] selectImage:@"select_normal" normalImage:@"select_not"];
     vc.leftBtnTitle = @"取消";
 //    if (title.length == 0) {
         vc.title = @"选择执行人";
