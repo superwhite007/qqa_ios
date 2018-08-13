@@ -409,8 +409,54 @@ static  NSString  * identifier = @"CELL";
     
     vc.confirmSelectRowBlock = ^(NSInteger index) {
         NSLog(@"index: %zd", index);
+        [self sendSelectedLeadersToServer:index];
     };
     [self presentViewController:vc animated:false completion:nil];
+}
+
+-(void)sendSelectedLeadersToServer:(NSInteger)index{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workList/add/leader", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:_workListIdStr forKey:@"workListId"];
+    [mdict setObject:[_departmentsDatasource[index] objectForKey:@"departmentId"] forKey:@"departmentId"];
+    [mdict setObject:[_departmentsDatasource[index] objectForKey:@"leaderId"] forKey:@"leaderId"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"dataBack:oneOrder:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70007) {
+                                                        
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                           [self alert:@"增加负责人成功!"];
+                                                            [self getSelectedLeadersFromServer];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    [self alert:@"获取失败"];
+                                                }
+                                            }else{
+                                                [self alert:@"获取失败"];
+                                            }
+                                        }];
+    [task resume];
+    
+    
 }
 
 
