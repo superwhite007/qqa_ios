@@ -242,6 +242,7 @@ static  NSString  * identifier = @"CELL";
     OneOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     OneOrder * oneOrder = self.datasourceMArray[indexPath.row];
     cell.oneOrder = oneOrder;
+    [cell.selectPeopleButton addTarget:self action:@selector(menuAlertViewControllerTitle:) forControlEvents:UIControlEventTouchUpInside];
     return  cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -364,7 +365,11 @@ static  NSString  * identifier = @"CELL";
     
     MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:@[@"技术魏总监", @"技术魏总监" ,@"技术魏总监",@"技术魏总监",@"技术魏总监",@"技术魏总监"] detailsItems:@[@"2017-10-10", @"2019-10-10"] selectImage:@"select_normal" normalImage:@"select_not"];
     vc.leftBtnTitle = @"取消";
-    vc.title = title;
+//    if (title.length == 0) {
+        vc.title = @"选择执行人";
+//    }else{
+//        vc.title = title;
+//    }
     vc.leftTitleColor = [UIColor redColor];
     vc.btnFont = 20;
     vc.leftBtnBgColor = [UIColor grayColor];
