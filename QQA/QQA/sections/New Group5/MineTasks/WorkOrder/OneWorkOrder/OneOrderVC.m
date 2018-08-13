@@ -31,7 +31,7 @@
 @property (nonatomic, strong) UILabel * orderDetailTitle;
 @property (nonatomic, strong) UIButton * orderDetailAgreeBtn;
 @property (nonatomic, strong) UIButton * orderDetailRejectBtn;
-@property (nonatomic, assign) BOOL agreeBTN;
+@property (nonatomic, assign) BOOL agreeButton;
 
 @end
 @implementation OneOrderVC
@@ -54,10 +54,11 @@ static  NSString  * identifier = @"CELL";
     self.view.backgroundColor = [UIColor yellowColor];
     _dataOfHeaderOfTheDepartment = [NSMutableArray array];
     [self.navigationItem  setTitle:@"工单详情"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddNewOrEditWorkOrderView)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddNewOrderView)];
 
     self.pageNum = 1;
     self.isDownRefresh = NO;
+    _agreeButton = YES;
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
     _tableView.rowHeight = 100;
@@ -73,7 +74,7 @@ static  NSString  * identifier = @"CELL";
 
 -(void)addNewOrderDetailViews{
     
-    _orderDetailView = [[UIView alloc] initWithFrame:CGRectMake(10, kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH)];
+    _orderDetailView = [[UIView alloc] initWithFrame:CGRectMake(10 + 3 * iphoneWidth, kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH)];
     _orderDetailView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:_orderDetailView];
     
@@ -104,9 +105,9 @@ static  NSString  * identifier = @"CELL";
     _orderDetailAgreeBtn.backgroundColor = [UIColor whiteColor];
     [_orderDetailAgreeBtn setTitle:@"确定" forState:(UIControlStateNormal)];
     _orderDetailAgreeBtn.layer.borderWidth = 0.5;
-    _orderDetailAgreeBtn.tag = 60002;
+    _orderDetailAgreeBtn.tag = 70702;
     [_orderDetailAgreeBtn addTarget:self action:@selector(selectAgreeORRejectSendToServer:) forControlEvents:UIControlEventTouchUpInside];
-    _agreeBTN = YES;
+    _agreeButton = YES;
     _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
     [_orderDetailView addSubview:_orderDetailAgreeBtn];
     
@@ -115,7 +116,7 @@ static  NSString  * identifier = @"CELL";
     _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
     [_orderDetailRejectBtn setTitle:@"取消" forState:(UIControlStateNormal)];
     _orderDetailRejectBtn.layer.borderWidth = 0.5;
-    _orderDetailRejectBtn.tag = 60001;
+    _orderDetailRejectBtn.tag = 70701;
     [_orderDetailRejectBtn addTarget:self action:@selector(selectAgreeORRejectSendToServer:) forControlEvents:UIControlEventTouchUpInside];
     _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
     [_orderDetailView addSubview:_orderDetailRejectBtn];
@@ -124,28 +125,33 @@ static  NSString  * identifier = @"CELL";
 
 #pragma agreeANDreject button
 -(void)selectAgreeORRejectSendToServer:(UIButton*)sender{
-//    [self reKeyBoard];
-//    if (sender.tag == 60001) {
-//        _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
-//        _workOrderNameRejectBtn.backgroundColor = [UIColor redColor];
-//        _agreeBTN = NO;
-//        [self alert:@"取消创建"];
-//    }else if (sender.tag == 60002) {
-//        _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
-//        _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
-//        _agreeBTN = YES;
-//        if (_workOrderTextField.text.length > 0) {
+    [self reKeyBoard];
+    if (sender.tag == 70701) {
+        _orderDetailAgreeBtn.backgroundColor = [UIColor whiteColor];
+        _orderDetailRejectBtn.backgroundColor = [UIColor redColor];
+        _agreeButton = NO;
+        [self alert:@"取消创建"];
+    }else if (sender.tag == 70702) {
+        _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
+        _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
+        _agreeButton = YES;
+        if (_messageTextView.text.length > 0) {
 //            if ([_workOrderTitle.text isEqualToString:@"新建工单"]) {
 //                [self sendWorkOrderTitleToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workList/create", CONST_SERVER_ADDRESS] workListId:[NSMutableString stringWithFormat:@"无"]];
 //            }else if ([_workOrderTitle.text isEqualToString:@"编辑工单"]) {
 //                [self sendWorkOrderTitleToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workList/update", CONST_SERVER_ADDRESS] workListId:_workListId];
 //            }
-//        }else{
-//            [self alert:@"请输入工单名称"];
-//        }
-//    }
+        }else{
+            [self alert:@"请输入工单内容"];
+        }
+    }
 }
 
+#pragma UITextViewDelegate
+- (void)reKeyBoard
+{
+    [_messageTextView resignFirstResponder];
+}
 #pragma keyboard
 - (void)keyboardWillShow:(NSNotification *)notification{
     [self displayaddOrEditWorkOrderViewHeader];
@@ -154,23 +160,22 @@ static  NSString  * identifier = @"CELL";
     [self displayaddOrEditWorkOrderView];
 }
 -(void)displayaddOrEditWorkOrderViewHeader{
-//    _addOrEditWorkOrderView.frame = CGRectMake(10, 10, kWORKORDERWIDTH, kWORKORDERWIDTH);
+    _orderDetailView.frame = CGRectMake(10 , 10, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
 }
 -(void)displayaddOrEditWorkOrderView{
-//    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+    _orderDetailView.frame = CGRectMake(10 , kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
 }
--(void)displayaddNewOrEditWorkOrderView{
-//    _workOrderTitle.text = @"新建工单";
-//    _workOrderTextField.text = @"";
-//    _messageTextView.text = @"";
-//    _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
-//    _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
-//    _agreeBTN = YES;
-//    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+-(void)displayaddNewOrderView{
+    _orderDetailTitle.text = @"新建工单";
+    _messageTextView.text = @"";
+    _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
+    _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
+    _agreeButton = YES;
+    _orderDetailView.frame = CGRectMake(10 , kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
 }
 -(void)undisplayaddOrEditWorkOrderView{
-//    [self reKeyBoard];
-//    _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+    [self reKeyBoard];
+    _orderDetailView.frame = CGRectMake(10 + 3 * iphoneWidth, kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
 }
 
 
@@ -367,12 +372,12 @@ static  NSString  * identifier = @"CELL";
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // 操作具体内容
         // Nothing to do.
-//        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
-//            [self undisplayaddOrEditWorkOrderView];
-//            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
+        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
+            [self undisplayaddOrEditWorkOrderView];
+            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
 //                [self getWorkOrderListFromServer:_pageNum];
-//            }
-//        }
+            }
+        }
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
