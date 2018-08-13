@@ -12,6 +12,9 @@
 #import "OneOrderCommunicationVController.h"
 #import "UIButton+WebCache.h"
 
+#import "MenuAlertViewController.h"
+#import "CenterView.h"
+
 #define kHEADERBTNSPACE  (iphoneWidth - 320) / 5 //button间隙
 #define kORDERDETAILWIDTH  iphoneWidth - 20 //WORKORDERWIDTH
 #define kORDERDETAILHEIGHT  (iphoneHeight - iphoneWidth)/2   //iphoneHeight
@@ -349,11 +352,38 @@ static  NSString  * identifier = @"CELL";
             break;
         case 51001:
             NSLog(@"%ld", (long)sender.tag);
+            [self testCodes];
             break;
         default:
             break;
     }
 }
+
+
+-(void)testCodes{
+    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:@[@"技术魏总监", @"技术魏总监" ,@"技术魏总监",@"技术魏总监",@"技术魏总监",@"技术魏总监"] detailsItems:@[@"2017-10-10", @"2019-10-10"] selectImage:@"select_normal" normalImage:@"select_not"];
+    vc.leftBtnTitle = @"取消";
+    vc.title = @"我是标题";
+    vc.leftTitleColor = [UIColor redColor];
+    vc.btnFont = 20;
+    vc.leftBtnBgColor = [UIColor grayColor];
+    vc.titleFont = 17;
+    vc.titleColor = [UIColor redColor];
+    //    vc.rowTitleFont = 17;
+    //    vc.rowDetailFont = 12;
+    //    vc.rowTitleColor = [UIColor redColor];
+    //    vc.rowDetailColor = [UIColor redColor];
+    
+    vc.confirmSelectRowBlock = ^(NSInteger index) {
+        
+        NSLog(@"index: %zd", index);
+    };
+    
+    [self presentViewController:vc animated:false completion:nil];
+    
+}
+
+
 
 
 
@@ -375,7 +405,7 @@ static  NSString  * identifier = @"CELL";
         if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
             [self undisplayaddOrEditWorkOrderView];
             if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
-//                [self getWorkOrderListFromServer:_pageNum];
+//                [self getWorkOrder51001ListFromServer:_pageNum];
             }
         }
     }];

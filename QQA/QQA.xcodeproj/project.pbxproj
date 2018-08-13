@@ -30,6 +30,11 @@
 		AA2649FD211D1AD100C6614B /* OneOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2649FC211D1AD100C6614B /* OneOrderCell.m */; };
 		AA264A01211D274700C6614B /* OneOrderCommunicationVController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA264A00211D274700C6614B /* OneOrderCommunicationVController.m */; };
 		AA264A04211D3BD400C6614B /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AA264A03211D3BD400C6614B /* UIButton+WebCache.m */; };
+		AA26834221215A6700C13D6F /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26833A21215A6600C13D6F /* Model.m */; };
+		AA26834321215A6700C13D6F /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26833B21215A6600C13D6F /* TableViewCell.m */; };
+		AA26834421215A6700C13D6F /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA26833D21215A6600C13D6F /* TableViewCell.xib */; };
+		AA26834521215A6700C13D6F /* MenuAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26833E21215A6600C13D6F /* MenuAlertViewController.m */; };
+		AA26834621215A6700C13D6F /* CenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26834121215A6600C13D6F /* CenterView.m */; };
 		AA2CED701FAAFF0900433BFA /* ScanImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */; };
 		AA32F67B211BC7D300024FBD /* WorkOrderNameLIstsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32F67A211BC7D300024FBD /* WorkOrderNameLIstsViewController.m */; };
 		AA32F682211C116D00024FBD /* UILabel+HeightBYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA32F681211C116D00024FBD /* UILabel+HeightBYLabel.m */; };
@@ -175,6 +180,15 @@
 		AA264A00211D274700C6614B /* OneOrderCommunicationVController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderCommunicationVController.m; sourceTree = "<group>"; };
 		AA264A02211D3BD400C6614B /* UIButton+WebCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+WebCache.h"; sourceTree = "<group>"; };
 		AA264A03211D3BD400C6614B /* UIButton+WebCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
+		AA26833921215A6600C13D6F /* MenuAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuAlertViewController.h; sourceTree = "<group>"; };
+		AA26833A21215A6600C13D6F /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		AA26833B21215A6600C13D6F /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		AA26833C21215A6600C13D6F /* CenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterView.h; sourceTree = "<group>"; };
+		AA26833D21215A6600C13D6F /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		AA26833E21215A6600C13D6F /* MenuAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuAlertViewController.m; sourceTree = "<group>"; };
+		AA26833F21215A6600C13D6F /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		AA26834021215A6600C13D6F /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		AA26834121215A6600C13D6F /* CenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterView.m; sourceTree = "<group>"; };
 		AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanImageViewController.m; sourceTree = "<group>"; };
 		AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanImageViewController.h; sourceTree = "<group>"; };
 		AA32F679211BC7D300024FBD /* WorkOrderNameLIstsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkOrderNameLIstsViewController.h; sourceTree = "<group>"; };
@@ -603,6 +617,22 @@
 			path = OneOrderCommunication;
 			sourceTree = "<group>";
 		};
+		AA26833821215A6600C13D6F /* MenuAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				AA26833921215A6600C13D6F /* MenuAlertViewController.h */,
+				AA26833E21215A6600C13D6F /* MenuAlertViewController.m */,
+				AA26833C21215A6600C13D6F /* CenterView.h */,
+				AA26834121215A6600C13D6F /* CenterView.m */,
+				AA26833A21215A6600C13D6F /* Model.m */,
+				AA26834021215A6600C13D6F /* Model.h */,
+				AA26833F21215A6600C13D6F /* TableViewCell.h */,
+				AA26833B21215A6600C13D6F /* TableViewCell.m */,
+				AA26833D21215A6600C13D6F /* TableViewCell.xib */,
+			);
+			path = MenuAlertView;
+			sourceTree = "<group>";
+		};
 		AA32F67C211BD15100024FBD /* NOuse */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,6 +696,7 @@
 				AA2649FC211D1AD100C6614B /* OneOrderCell.m */,
 				AA264A02211D3BD400C6614B /* UIButton+WebCache.h */,
 				AA264A03211D3BD400C6614B /* UIButton+WebCache.m */,
+				AA26833821215A6600C13D6F /* MenuAlertView */,
 				AA2649FE211D26F500C6614B /* OneOrderCommunication */,
 			);
 			path = OneWorkOrder;
@@ -1086,6 +1117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAC0B8631FF3838900F5D2DB /* askware.png in Resources */,
+				AA26834421215A6700C13D6F /* TableViewCell.xib in Resources */,
 				AAC0B8611FF226BB00F5D2DB /* rules.png in Resources */,
 				AAC0B8671FF383A800F5D2DB /* worksheet.jpg in Resources */,
 				AAC0B85F1FF21D1A00F5D2DB /* history.png in Resources */,
@@ -1184,6 +1216,7 @@
 				AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */,
 				AAD1670420C67C3F008884FC /* ReadunreadTVCell.m in Sources */,
 				AAE0259820D0F567002A28DA /* StepDetailCommunication.m in Sources */,
+				AA26834621215A6700C13D6F /* CenterView.m in Sources */,
 				AAC0B85D1FF0EFA500F5D2DB /* VersionInformationViewController.m in Sources */,
 				AABD8AD81FC814C1005058BD /* ACPApproval.m in Sources */,
 				AA42F75C20BBE0C0006BF7E6 /* HumanCell.m in Sources */,
@@ -1198,6 +1231,7 @@
 				AAC6063620D2687E00626911 /* PeopleListsTVC.m in Sources */,
 				AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */,
 				AA32F67B211BC7D300024FBD /* WorkOrderNameLIstsViewController.m in Sources */,
+				AA26834521215A6700C13D6F /* MenuAlertViewController.m in Sources */,
 				AA4AA0DF2119649B00675EBB /* WorkOrderTVCell.m in Sources */,
 				AAD166FE20C6630B008884FC /* ReadunreadVC.m in Sources */,
 				AAD912041FD69576002A42B5 /* AddressBooKTableViewCell.m in Sources */,
@@ -1227,6 +1261,7 @@
 				AAE0258A20D0BDE4002A28DA /* OneTasKStepTVCell.m in Sources */,
 				AA478BF22112CCD700F0541B /* OneOrderVC.m in Sources */,
 				AA42F75320BB9354006BF7E6 /* NewContactViewController.m in Sources */,
+				AA26834221215A6700C13D6F /* Model.m in Sources */,
 				AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
 				AAAC3D601FB0562000D54265 /* PunchClockViewController.m in Sources */,
@@ -1245,6 +1280,7 @@
 				AA8BB4BE20CF9558008D7823 /* TaskNameTVCell.m in Sources */,
 				AA264A01211D274700C6614B /* OneOrderCommunicationVController.m in Sources */,
 				AA20C69A1FD147DF0095AF0F /* CompanyOrganizationalStructureViewController.m in Sources */,
+				AA26834321215A6700C13D6F /* TableViewCell.m in Sources */,
 				AAD1670D20C779EE008884FC /* OneTaskDetailedListVC.m in Sources */,
 				AAE0259220D0EC19002A28DA /* StepDetailCommunicationListVC.m in Sources */,
 				AAEEEA4F1FCF9CD50012A695 /* RequestTableViewCell.m in Sources */,
