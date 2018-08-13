@@ -412,6 +412,10 @@ static  NSString  * identifier = @"CELL";
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [self undisplayaddOrEditWorkOrderView];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
