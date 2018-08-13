@@ -125,9 +125,10 @@
     self.lastModel = model;
     self.lastModel.isSelect = YES;
     [self.tableView reloadData];
-    
+    NSLog(@"1111:::::%ld", (long)indexPath.row);
     if (self.selectRowBlock) {
         self.selectRowBlock(indexPath.row, model.title);
+        NSLog(@"222222:::::%ld", (long)indexPath.row);
     }
     
 }

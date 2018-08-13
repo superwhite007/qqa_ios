@@ -21,9 +21,9 @@
     self.detailsLabel.text = [NSString stringWithFormat:@"最近到期日: %@",model.detail];
     
     if (model.isSelect) {
-        [self.selectBtn setBackgroundImage:[UIImage imageNamed:model.selectImage] forState:UIControlStateNormal];
+        [self.selectBtn setBackgroundImage:[UIImage imageNamed:@"select_normal-1"] forState:UIControlStateNormal];
     }else {
-        [self.selectBtn setBackgroundImage:[UIImage imageNamed:model.normalImage] forState:UIControlStateNormal];
+        [self.selectBtn setBackgroundImage:[UIImage imageNamed:@"select_not-1"] forState:UIControlStateNormal];
     }
 }
 
