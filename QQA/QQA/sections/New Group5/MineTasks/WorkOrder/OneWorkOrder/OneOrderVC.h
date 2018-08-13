@@ -10,7 +10,7 @@
 
 @interface OneOrderVC : UIViewController<UITextViewDelegate,UITableViewDelegate, UITableViewDataSource>
 
-//@property (nonatomic, strong)UITextView * messageTextView;
+@property (nonatomic, strong)UITextView * messageTextView;
 @property (nonnull, strong) NSString * workListIdStr;
 
 @end

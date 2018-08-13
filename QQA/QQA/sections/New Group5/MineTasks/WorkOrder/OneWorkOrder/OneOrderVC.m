@@ -13,6 +13,9 @@
 #import "UIButton+WebCache.h"
 
 #define kHEADERBTNSPACE  (iphoneWidth - 320) / 5 //button间隙
+#define kORDERDETAILWIDTH  iphoneWidth - 20 //WORKORDERWIDTH
+#define kORDERDETAILHEIGHT  (iphoneHeight - iphoneWidth)/2   //iphoneHeight
+#define kNEWSPACE  (iphoneWidth - 20) / 20   //workOrderSpace
 
 @interface OneOrderVC ()
 @property (nonatomic, strong) UIView * headerView;
@@ -24,6 +27,11 @@
 @property (nonatomic, strong) NSMutableArray *datasourceMArray;
 @property (nonatomic, strong) NSMutableArray * leadersMArray;
 
+@property (nonatomic, strong) UIView * orderDetailView;
+@property (nonatomic, strong) UILabel * orderDetailTitle;
+@property (nonatomic, strong) UIButton * orderDetailAgreeBtn;
+@property (nonatomic, strong) UIButton * orderDetailRejectBtn;
+@property (nonatomic, assign) BOOL agreeBTN;
 
 @end
 @implementation OneOrderVC
@@ -60,9 +68,97 @@ static  NSString  * identifier = @"CELL";
     [self.tableView registerClass:[OneOrderCell class] forCellReuseIdentifier:identifier];
     [self getWorkOrderListFromServer:1];
 
+    [self addNewOrderDetailViews];
 }
 
+-(void)addNewOrderDetailViews{
+    
+    _orderDetailView = [[UIView alloc] initWithFrame:CGRectMake(10, kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH)];
+    _orderDetailView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:_orderDetailView];
+    
+    _orderDetailTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, kNEWSPACE, iphoneWidth - 40, 2 * kNEWSPACE)];
+    _orderDetailTitle.text = @"新建工单详情";
+    _orderDetailTitle.textAlignment = NSTextAlignmentCenter;
+    [_orderDetailView addSubview:_orderDetailTitle];
+    
+    UILabel * describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 4 * kNEWSPACE, iphoneWidth - 40,  kNEWSPACE)];
+    describeLabel.text = @"交流内容";
+    [_orderDetailView addSubview:describeLabel];
+    
+    _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 5.5 * kNEWSPACE,kORDERDETAILWIDTH - 20, kNEWSPACE * 11)];
+    _messageTextView.font = [UIFont systemFontOfSize:24];
+    [self.view addSubview:_messageTextView];
+    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    _messageTextView.layer.borderWidth = 1;
+    _messageTextView.layer.cornerRadius = 10;
+    _messageTextView.returnKeyType = UIReturnKeySend;
+    _messageTextView.delegate = self;
+    [_orderDetailView addSubview:_messageTextView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    _orderDetailAgreeBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _orderDetailAgreeBtn.frame = CGRectMake(kORDERDETAILWIDTH - 110, 17.5 * kNEWSPACE,100, kNEWSPACE * 2);
+    _orderDetailAgreeBtn.backgroundColor = [UIColor whiteColor];
+    [_orderDetailAgreeBtn setTitle:@"确定" forState:(UIControlStateNormal)];
+    _orderDetailAgreeBtn.layer.borderWidth = 0.5;
+    _orderDetailAgreeBtn.tag = 60002;
+    [_orderDetailAgreeBtn addTarget:self action:@selector(selectAgreeORRejectSendToServer:) forControlEvents:UIControlEventTouchUpInside];
+    _agreeBTN = YES;
+    _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
+    [_orderDetailView addSubview:_orderDetailAgreeBtn];
+    
+    _orderDetailRejectBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    _orderDetailRejectBtn.frame = CGRectMake(kORDERDETAILWIDTH - 220, 17.5 * kNEWSPACE,100, kNEWSPACE * 2);
+    _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
+    [_orderDetailRejectBtn setTitle:@"取消" forState:(UIControlStateNormal)];
+    _orderDetailRejectBtn.layer.borderWidth = 0.5;
+    _orderDetailRejectBtn.tag = 60001;
+    [_orderDetailRejectBtn addTarget:self action:@selector(selectAgreeORRejectSendToServer:) forControlEvents:UIControlEventTouchUpInside];
+    _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
+    [_orderDetailView addSubview:_orderDetailRejectBtn];
+    
+}
 
+#pragma agreeANDreject button
+-(void)selectAgreeORRejectSendToServer:(UIButton*)sender{
+//    [self reKeyBoard];
+//    if (sender.tag == 60001) {
+//        _workOrderNameAgreeBtn.backgroundColor = [UIColor whiteColor];
+//        _workOrderNameRejectBtn.backgroundColor = [UIColor redColor];
+//        _agreeBTN = NO;
+//        [self alert:@"取消创建"];
+//    }else if (sender.tag == 60002) {
+//        _workOrderNameAgreeBtn.backgroundColor = [UIColor redColor];
+//        _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
+//        _agreeBTN = YES;
+//        if (_workOrderTextField.text.length > 0) {
+//            if ([_workOrderTitle.text isEqualToString:@"新建工单"]) {
+//                [self sendWorkOrderTitleToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workList/create", CONST_SERVER_ADDRESS] workListId:[NSMutableString stringWithFormat:@"无"]];
+//            }else if ([_workOrderTitle.text isEqualToString:@"编辑工单"]) {
+//                [self sendWorkOrderTitleToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workList/update", CONST_SERVER_ADDRESS] workListId:_workListId];
+//            }
+//        }else{
+//            [self alert:@"请输入工单名称"];
+//        }
+//    }
+}
+
+#pragma keyboard
+- (void)keyboardWillShow:(NSNotification *)notification{
+    [self displayaddOrEditWorkOrderViewHeader];
+}
+- (void)keyboardWillHide:(NSNotification *)notification{
+    [self displayaddOrEditWorkOrderView];
+}
+-(void)displayaddOrEditWorkOrderViewHeader{
+//    _addOrEditWorkOrderView.frame = CGRectMake(10, 10, kWORKORDERWIDTH, kWORKORDERWIDTH);
+}
+-(void)displayaddOrEditWorkOrderView{
+//    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+}
 -(void)displayaddNewOrEditWorkOrderView{
 //    _workOrderTitle.text = @"新建工单";
 //    _workOrderTextField.text = @"";
@@ -71,6 +167,10 @@ static  NSString  * identifier = @"CELL";
 //    _workOrderNameRejectBtn.backgroundColor = [UIColor whiteColor];
 //    _agreeBTN = YES;
 //    _addOrEditWorkOrderView.frame = CGRectMake(10, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
+}
+-(void)undisplayaddOrEditWorkOrderView{
+//    [self reKeyBoard];
+//    _addOrEditWorkOrderView.frame = CGRectMake(10 + 2 * iphoneWidth, kWORKORDERORGINh, kWORKORDERWIDTH, kWORKORDERWIDTH);
 }
 
 
