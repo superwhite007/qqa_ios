@@ -225,7 +225,7 @@ static  NSString  * identifier = @"CELL";
     [self.view addSubview:_orderDetailView];
     
     _orderDetailTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, kNEWSPACE, iphoneWidth - 40, 2 * kNEWSPACE)];
-    _orderDetailTitle.text = @"新建工单详情";
+    _orderDetailTitle.text = @"新建工单内容";
     _orderDetailTitle.textAlignment = NSTextAlignmentCenter;
     [_orderDetailView addSubview:_orderDetailTitle];
     
@@ -366,7 +366,7 @@ static  NSString  * identifier = @"CELL";
     _orderDetailView.frame = CGRectMake(10 , kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
 }
 -(void)displayaddNewOrderView{
-    _orderDetailTitle.text = @"新建工单详情";
+    _orderDetailTitle.text = @"新建工单内容";
     _messageTextView.text = @"";
     _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
     _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
