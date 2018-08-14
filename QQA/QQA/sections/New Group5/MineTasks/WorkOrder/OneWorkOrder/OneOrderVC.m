@@ -20,7 +20,8 @@
 #define kORDERDETAILHEIGHT  (iphoneHeight - iphoneWidth)/2   //iphoneHeight
 #define kNEWSPACE  (iphoneWidth - 20) / 20   //workOrderSpace
 
-@interface OneOrderVC ()
+@interface OneOrderVC ()<UIGestureRecognizerDelegate>
+
 @property (nonatomic, strong) UIView * headerView;
 @property (nonatomic, strong) NSMutableArray * dataOfHeaderOfTheDepartment;
 
@@ -82,7 +83,33 @@ static  NSString  * identifier = @"CELL";
     [self getWorkOrderListFromServer:1];
 
     [self addNewOrderDetailViews];
+    
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
+    lpgr.delegate = self;
+    [_tableView addGestureRecognizer:lpgr]; //启用长按事件
 }
+
+#pragma shoushi
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint p = [gestureRecognizer locationInView:_tableView ];
+        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
+        if (indexPath == nil){
+            NSLog(@"LongPress");
+        }else{
+             OneOrder * onekOrder = self.datasourceMArray[indexPath.row];
+            if ([onekOrder.isUpdateStatus intValue] == 1 ) {
+                _orderDetailTitle.text = @"编辑工单内容";
+                _messageTextView.text = onekOrder.content;
+                _workListDetailIdStr = [NSMutableString stringWithFormat:@"%@", onekOrder.workListDetailId];
+                [self displayaddOrEditWorkOrderView];
+            }
+        }
+    }
+}
+
 
 -(void)addNewOrderDetailViews{
     
@@ -148,11 +175,11 @@ static  NSString  * identifier = @"CELL";
         _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
         _agreeButton = YES;
         if (_messageTextView.text.length > 0) {
-//            if ([_workOrderTitle.text isEqualToString:@"新建工单"]) {
+            if ([_orderDetailTitle.text isEqualToString:@"新建工单内容"]) {
                 [self sendOrderDetailToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/add", CONST_SERVER_ADDRESS]];
-//            }else if ([_workOrderTitle.text isEqualToString:@"编辑工单"]) {
-//                [self sendWorkOrderTitleToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workList/update", CONST_SERVER_ADDRESS] workListId:_workListId];
-//            }
+            }else if ([_orderDetailTitle.text isEqualToString:@"编辑工单内容"]) {
+                [self sendOrderDetailToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/content/update", CONST_SERVER_ADDRESS]];
+            }
         }else{
             [self alert:@"请输入工单内容"];
         }
@@ -173,9 +200,11 @@ static  NSString  * identifier = @"CELL";
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:_messageTextView.text forKey:@"content"];
-//    if ([_workOrderTitle.text isEqualToString:@"编辑工单"]){
+    if ([_orderDetailTitle.text isEqualToString:@"新建工单内容"]){
         [mdict setObject:_workListIdStr forKey:@"workListId"];
-//    }
+    }else if([_orderDetailTitle.text isEqualToString:@"编辑工单内容"]){
+        [mdict setObject:_workListDetailIdStr forKey:@"workListDetailId"];
+    }
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -186,9 +215,13 @@ static  NSString  * identifier = @"CELL";
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
                                                 NSLog(@"dataBack1:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70009 || [[dataBack objectForKey:@"message"] intValue] == 70005) {
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70009) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self alert:@"发送成功"];
+                                                        });
+                                                    }else if ([[dataBack objectForKey:@"message"] intValue] == 70017) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"编辑工单内容成功！"];
                                                         });
                                                     }else{
                                                         [self alert:@"工单失败"];
@@ -643,9 +676,9 @@ static  NSString  * identifier = @"CELL";
     NSString *okButtonTitle = @"确定";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]||[str isEqualToString:@"选择执行人成功！"]) {
+        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]||[str isEqualToString:@"选择执行人成功！"]  ||[str isEqualToString:@"编辑工单内容成功！"] ) {
             [self undisplayaddOrEditWorkOrderView];
-            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"] ||[str isEqualToString:@"选择执行人成功！"]) {
+            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"] ||[str isEqualToString:@"选择执行人成功！"] ||[str isEqualToString:@"编辑工单内容成功！"] ) {
                 [self getWorkOrderListFromServer:1];
             }
         }
