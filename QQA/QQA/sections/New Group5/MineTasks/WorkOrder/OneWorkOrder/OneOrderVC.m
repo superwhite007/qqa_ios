@@ -37,9 +37,9 @@
 @property (nonatomic, strong) UIButton * orderDetailRejectBtn;
 @property (nonatomic, assign) BOOL agreeButton;
 @property (nonatomic, strong) NSString * workListDetailIdStr;
-
 @property (nonatomic, strong) NSMutableArray * departmentsDatasource;
-
+@property (nonatomic, strong) UIView * changeDetailNameOrCompleteView;
+@property (nonatomic, strong) NSString * longPressStr;
 @end
 @implementation OneOrderVC
 static  NSString  * identifier = @"CELL";
@@ -89,6 +89,8 @@ static  NSString  * identifier = @"CELL";
     lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
     lpgr.delegate = self;
     [_tableView addGestureRecognizer:lpgr]; //启用长按事件
+    
+    [self addChangeDetailCompleteStepView];
 }
 
 #pragma shoushi
@@ -99,16 +101,113 @@ static  NSString  * identifier = @"CELL";
         if (indexPath == nil){
             NSLog(@"LongPress");
         }else{
-             OneOrder * onekOrder = self.datasourceMArray[indexPath.row];
-            if ([onekOrder.isUpdateStatus intValue] == 1 ) {
-                _orderDetailTitle.text = @"编辑工单内容";
-                _messageTextView.text = onekOrder.content;
-                _workListDetailIdStr = [NSMutableString stringWithFormat:@"%@", onekOrder.workListDetailId];
-                [self displayaddOrEditWorkOrderView];
-            }
+            _longPressStr = [NSString stringWithFormat:@"%ld", indexPath.row];
+            [self displayChangeNameDeleteCompleteStepView];
         }
     }
 }
+
+#pragma changeNameDeleteCompleteStep
+-(void)addChangeDetailCompleteStepView{
+    _changeDetailNameOrCompleteView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  + 5 * iphoneWidth, iphoneWidth / 5, iphoneWidth * 2 / 3 + 20, iphoneWidth * 3 / 9 )];
+    _changeDetailNameOrCompleteView.layer.borderWidth = 1;
+    _changeDetailNameOrCompleteView.layer.cornerRadius = 5;
+    _changeDetailNameOrCompleteView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_changeDetailNameOrCompleteView];
+    NSMutableArray * ary = [NSMutableArray arrayWithObjects:@"编辑工单内容",  @"标记该步骤(完成/未完成)", nil];
+    for (int i = 0; i < ary.count; i++) {
+        UIButton * changeNameButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        changeNameButton.frame = CGRectMake(15 , 5 + i * ((iphoneWidth * 4 / 9 - 20 ) / 3 + 5 ) , iphoneWidth * 2 / 3 - 10, (iphoneWidth * 4 / 9 - 20 ) / 3);
+        changeNameButton.titleLabel.textColor = [UIColor blackColor];
+        changeNameButton.layer.borderWidth = 0.5;
+        changeNameButton.layer.cornerRadius = 4;
+        changeNameButton.tag = 100000 + i;
+        [changeNameButton setTitle:ary[i] forState:UIControlStateNormal];
+        [changeNameButton addTarget:self action:@selector(changeNameDeleteCompleteButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_changeDetailNameOrCompleteView addSubview:changeNameButton];
+    }
+}
+-(void)displayChangeNameDeleteCompleteStepView{
+    _changeDetailNameOrCompleteView.frame = CGRectMake(iphoneWidth / 6 , iphoneWidth / 5, iphoneWidth * 2 / 3 + 20, iphoneWidth * 3 / 9 );
+}
+-(void)undisplayChangeNameDeleteCompleteStepView{
+    _changeDetailNameOrCompleteView.frame = CGRectMake(iphoneWidth / 6  +  iphoneWidth * 5, iphoneWidth / 5, iphoneWidth * 2 / 3 + 20, iphoneWidth * 3 / 9 );
+}
+-(void)changeNameDeleteCompleteButton:(UIButton *)button{
+    [self undisplayChangeNameDeleteCompleteStepView];
+    switch (button.tag) {
+        case 100000:
+            [self changeDetail];
+            break;
+        case 100001:
+//            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/delete" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"1"];
+            break;
+        default:
+            break;
+    }
+}
+-(void)changeDetail{
+    OneOrder * onekOrder = self.datasourceMArray[[_longPressStr intValue]];
+    if ([onekOrder.isUpdateStatus intValue] == 1 ) {
+        _orderDetailTitle.text = @"编辑工单内容";
+        _messageTextView.text = onekOrder.content;
+        _workListDetailIdStr = [NSMutableString stringWithFormat:@"%@", onekOrder.workListDetailId];
+        [self displayaddOrEditWorkOrderView];
+    }
+}
+
+-(void)changeStepAfterUrl:(NSString *)afterUrlStr titleStr:(NSString *)titleStr subtaskId:(NSString *)subtaskId identifierStr:(NSString * )identifierStr{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, afterUrlStr]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:subtaskId forKey:@"subtaskId"];
+    if ([identifierStr isEqualToString:@"0"]) {
+        [mdict setObject:titleStr forKey:@"title"];
+    }else if ([identifierStr isEqualToString:@"1"]) {
+        
+    }else if ([identifierStr isEqualToString:@"2"]) {
+        [mdict setObject:titleStr forKey:@"isCompleted"];
+    }
+    NSLog(@"更新项目名称1111111111111111111111:%@", mdict);
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"600？？:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60016) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+//                                                            [self getOneTaskStepListFromServer];
+                                                            [self alert:@"更改步骤成功"];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    NSLog(@"Server tapy is wrong.");
+                                                }
+                                            }else{
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [self alert:@"创建任务失败"];
+                                                });
+                                            }
+                                        }];
+    [task resume];
+}
+
+#pragma changeNameDeleteCompleteStep  end
+
 
 
 -(void)addNewOrderDetailViews{
@@ -655,10 +754,10 @@ static  NSString  * identifier = @"CELL";
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    [self alert:@"获取失败1"];
+                                                    [self alert:@"获取失败"];
                                                 }
                                             }else{
-                                                [self alert:@"获取失败2"];
+                                                [self alert:@"获取失败"];
                                             }
                                         }];
     [task resume];
@@ -678,7 +777,7 @@ static  NSString  * identifier = @"CELL";
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]||[str isEqualToString:@"选择执行人成功！"]  ||[str isEqualToString:@"编辑工单内容成功！"] ) {
             [self undisplayaddOrEditWorkOrderView];
-            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"] ||[str isEqualToString:@"选择执行人成功！"] ||[str isEqualToString:@"编辑工单内容成功！"] ) {
+            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"] ||[str isEqualToString:@"选择执行人成功！"] ||[str isEqualToString:@"编辑工单内容成功！"]) {
                 [self getWorkOrderListFromServer:1];
             }
         }
