@@ -533,10 +533,9 @@ static  NSString  * identifier = @"CELL";
                                                 NSLog(@"dataBack:oneOrder:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70007) {
-                                                        
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                            [self alert:@"增加负责人成功!"];
-                                                            [self getSelectedLeadersFromServer];
+                                                           [self getSelectedLeadersFromServer];
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
@@ -548,19 +547,12 @@ static  NSString  * identifier = @"CELL";
                                         }];
     [task resume];
     
-    
 }
-
-
-
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     OneOrderCommunicationVController * oneOrderCommunicationVController = [OneOrderCommunicationVController new];
     [self.navigationController pushViewController:oneOrderCommunicationVController animated:YES];
 }
-
-
 
 -(void)alert:(NSString *)str{
     NSString *title = str;
@@ -568,8 +560,6 @@ static  NSString  * identifier = @"CELL";
     NSString *okButtonTitle = @"确定";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // 操作具体内容
-        // Nothing to do.
         if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
             [self undisplayaddOrEditWorkOrderView];
             if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
