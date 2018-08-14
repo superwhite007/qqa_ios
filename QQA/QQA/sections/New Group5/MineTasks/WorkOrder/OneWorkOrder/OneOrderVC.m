@@ -35,6 +35,7 @@
 @property (nonatomic, strong) UIButton * orderDetailAgreeBtn;
 @property (nonatomic, strong) UIButton * orderDetailRejectBtn;
 @property (nonatomic, assign) BOOL agreeButton;
+@property (nonatomic, strong) NSString * workListDetailIdStr;
 
 @property (nonatomic, strong) NSMutableArray * departmentsDatasource;
 
@@ -310,6 +311,7 @@ static  NSString  * identifier = @"CELL";
 -(void)cellButton:(UIButton *)sender{
     NSInteger numder = sender.tag % 1000;
     OneOrder * oneOrder = self.datasourceMArray[numder];
+    _workListDetailIdStr = oneOrder.workListDetailId;
     if ([oneOrder.isAddExecutor intValue] == 1) {
         [self getMembersOfDepartment];
     }
@@ -382,10 +384,53 @@ static  NSString  * identifier = @"CELL";
     vc.titleColor = [UIColor redColor];
     vc.confirmSelectRowBlock = ^(NSInteger index) {
         NSLog(@"111111111111index: %zd", index);
-//        [self sendSelectedLeadersToServer:index];
+        [self sendExecutorToserverMemberId:[mArray[index] objectForKey:@"memberId"] departmentId:[mArray[index] objectForKey:@"departmentId"]];
     };
     [self presentViewController:vc animated:false completion:nil];
 }
+
+-(void)sendExecutorToserverMemberId:(NSString *)memberId departmentId:(NSString *)departmentId{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/add/executor", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:_workListIdStr forKey:@"workListId"];
+    [mdict setObject:memberId forKey:@"memberId"];
+    [mdict setObject:departmentId forKey:@"departmentId"];
+    [mdict setObject:_workListDetailIdStr forKey:@"workListDetailId"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"executor:::%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70013) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"选择执行人成功！"];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    [self alert:@"获取失败"];
+                                                }
+                                            }else{
+                                                [self alert:@"获取失败"];
+                                            }
+                                        }];
+    [task resume];
+}
+
 
 #pragma  viewForHeaderInSection
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -598,9 +643,9 @@ static  NSString  * identifier = @"CELL";
     NSString *okButtonTitle = @"确定";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
+        if ([str isEqualToString:@"取消创建"] ||[str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]||[str isEqualToString:@"选择执行人成功！"]) {
             [self undisplayaddOrEditWorkOrderView];
-            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"]) {
+            if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"] ||[str isEqualToString:@"选择执行人成功！"]) {
                 [self getWorkOrderListFromServer:1];
             }
         }
