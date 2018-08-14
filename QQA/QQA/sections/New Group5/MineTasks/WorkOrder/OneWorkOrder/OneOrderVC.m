@@ -298,55 +298,93 @@ static  NSString  * identifier = @"CELL";
     OneOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     OneOrder * oneOrder = self.datasourceMArray[indexPath.row];
     cell.oneOrder = oneOrder;
-    cell.selectPeopleButton.tag = 22001+ indexPath.row;
-    [cell.selectPeopleButton addTarget:self action:@selector(menuAlertViewControllerTitle:) forControlEvents:UIControlEventTouchUpInside];
+    cell.selectPeopleButton.tag = 22000+ indexPath.row;
+    [cell.selectPeopleButton addTarget:self action:@selector(cellButton:) forControlEvents:UIControlEventTouchUpInside];
     return  cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 120;
 }
--(void)menuAlertViewControllerTitleAboutSelectExecutor:(UIButton *)sender{
-    
+
+#pragma cellButton---selectExecutor
+-(void)cellButton:(UIButton *)sender{
     NSInteger numder = sender.tag % 1000;
-//    OneOrder * oneOrder = self.datasourceMArray[numder];
-//    oneOrder.work
+    OneOrder * oneOrder = self.datasourceMArray[numder];
+    if ([oneOrder.isAddExecutor intValue] == 1) {
+        [self getMembersOfDepartment];
+    }
+}
+-(void)getMembersOfDepartment{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/getMembersOfDepartment", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:_workListIdStr forKey:@"workListId"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"Members:::%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 700012) {
+                                                        NSMutableArray * MembersOfDepartmentMArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
+//                                                        NSLog(@"MembersOfDepartmentMArray:%@", MembersOfDepartmentMArray);
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self menuAlertViewControllerMembersOfDepartmentsAboutSelectExecutor:MembersOfDepartmentMArray];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    [self alert:@"获取失败"];
+                                                }
+                                            }else{
+                                                [self alert:@"获取失败"];
+                                            }
+                                        }];
+    [task resume];
+}
+
+-(void)menuAlertViewControllerMembersOfDepartmentsAboutSelectExecutor:(NSMutableArray *)mArray{
     
+    NSMutableArray * nameAndleaderJob = [NSMutableArray array];
+    NSMutableArray * departmentName = [NSMutableArray array];
+    for (int i = 0; i < mArray.count; i++) {
+        NSString * str  = [NSString stringWithFormat:@"%@-%@",[mArray[i] objectForKey:@"username"],[mArray[i] objectForKey:@"memberJob"]];
+        [nameAndleaderJob addObject:str];
+        [departmentName addObject:[mArray[i] objectForKey:@"departmentName"]];
+    }
+    NSArray * nameAndleaderJobArray = nameAndleaderJob;
+    NSArray * departmentNameArray = departmentName;
+    NSLog(@":::::::%@,%@", nameAndleaderJobArray, departmentNameArray);
+    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:nameAndleaderJobArray detailsItems:departmentNameArray selectImage:@"select_normal" normalImage:@"select_not"];
     
-    
-//    NSMutableArray * nameAndleaderJob = [NSMutableArray array];
-//    NSMutableArray * departmentName = [NSMutableArray array];
-//    for (int i = 0; i < _departmentsDatasource.count; i++) {
-//        NSString * str  = [NSString stringWithFormat:@"%@-%@",[_departmentsDatasource[i] objectForKey:@"leaderName"],[_departmentsDatasource[i] objectForKey:@"leaderJob"]];
-//        [nameAndleaderJob addObject:str];
-//        [departmentName addObject:[_departmentsDatasource[i] objectForKey:@"departmentName"]];
-//    }
-//    NSArray * nameAndleaderJobArray = nameAndleaderJob;
-//    NSArray * departmentNameArray = departmentName;
-//    NSLog(@":::::::%@,%@", nameAndleaderJobArray, departmentNameArray);
-//    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:nameAndleaderJobArray detailsItems:departmentNameArray selectImage:@"select_normal" normalImage:@"select_not"];
-//    
-//    //    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:@[@"技术魏总监", @"技术魏总监" ,@"技术魏总监",@"技术魏总监",@"技术魏总监",@"技术魏总监"] detailsItems:@[@"2017-10-10", @"2019-10-10"] selectImage:@"select_normal" normalImage:@"select_not"];
-//    vc.leftBtnTitle = @"取消";
-//    //    if (title.length == 0) {
-//    vc.title = @"选择执行人";
-//    //    }else{
-//    //        vc.title = title;
-//    //    }
-//    vc.leftTitleColor = [UIColor redColor];
-//    vc.btnFont = 20;
-//    vc.leftBtnBgColor = [UIColor grayColor];
-//    vc.titleFont = 17;
-//    vc.titleColor = [UIColor redColor];
-//    //    vc.rowTitleFont = 17;
-//    //    vc.rowDetailFont = 12;
-//    //    vc.rowTitleColor = [UIColor redColor];
-//    //    vc.rowDetailColor = [UIColor redColor];
-//    
-//    vc.confirmSelectRowBlock = ^(NSInteger index) {
-//        NSLog(@"index: %zd", index);
+    vc.leftBtnTitle = @"取消";
+    //    if (title.length == 0) {
+    vc.title = @"选择执行人";
+    //    }else{
+    //        vc.title = title;
+    //    }
+    vc.leftTitleColor = [UIColor redColor];
+    vc.btnFont = 20;
+    vc.leftBtnBgColor = [UIColor grayColor];
+    vc.titleFont = 17;
+    vc.titleColor = [UIColor redColor];
+    vc.confirmSelectRowBlock = ^(NSInteger index) {
+        NSLog(@"111111111111index: %zd", index);
 //        [self sendSelectedLeadersToServer:index];
-//    };
-//    [self presentViewController:vc animated:false completion:nil];
+    };
+    [self presentViewController:vc animated:false completion:nil];
 }
 
 #pragma  viewForHeaderInSection
