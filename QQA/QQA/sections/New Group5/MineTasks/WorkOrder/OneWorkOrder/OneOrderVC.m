@@ -140,7 +140,7 @@ static  NSString  * identifier = @"CELL";
             [self changeDetail];
             break;
         case 100001:
-//            [self changeStepAfterUrl:@"/v1/api/v2/task/detail/delete" titleStr:_messageTextView.text subtaskId:_indexRowTempStr identifierStr:@"1"];
+            [self changeComplete];
             break;
         default:
             break;
@@ -155,8 +155,20 @@ static  NSString  * identifier = @"CELL";
         [self displayaddOrEditWorkOrderView];
     }
 }
+-(void)changeComplete{
+    
+    OneOrder * onekOrder = self.datasourceMArray[[_longPressStr intValue]];
+    if ([onekOrder.isUpdateStatus intValue] == 1 ) {
+        _workListDetailIdStr = [NSMutableString stringWithFormat:@"%@", onekOrder.workListDetailId];
+        if ([onekOrder.isFinished intValue] == 1 ) {
+            [self changeStepAfterUrl:@"/v1/api/v2/workListDetail/status/update" isFinished:@"F"];
+        }else if ([onekOrder.isFinished intValue] == 0 ) {
+            [self changeStepAfterUrl:@"/v1/api/v2/workListDetail/status/update" isFinished:@"T"];
+        }
+    }
+}
 
--(void)changeStepAfterUrl:(NSString *)afterUrlStr titleStr:(NSString *)titleStr subtaskId:(NSString *)subtaskId identifierStr:(NSString * )identifierStr{
+-(void)changeStepAfterUrl:(NSString *)afterUrlStr isFinished:(NSString *)isFinished{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", CONST_SERVER_ADDRESS, afterUrlStr]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -169,15 +181,10 @@ static  NSString  * identifier = @"CELL";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    [mdict setObject:subtaskId forKey:@"subtaskId"];
-    if ([identifierStr isEqualToString:@"0"]) {
-        [mdict setObject:titleStr forKey:@"title"];
-    }else if ([identifierStr isEqualToString:@"1"]) {
-        
-    }else if ([identifierStr isEqualToString:@"2"]) {
-        [mdict setObject:titleStr forKey:@"isCompleted"];
-    }
-    NSLog(@"更新项目名称1111111111111111111111:%@", mdict);
+    [mdict setObject:isFinished forKey:@"isFinished"];
+    [mdict setObject:_workListDetailIdStr forKey:@"workListDetailId"];
+    [mdict setObject:_workListIdStr forKey:@"workListId"];
+    NSLog(@"更新完成1111:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -186,20 +193,21 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"600？？:%@", dataBack);
+                                                NSLog(@"100000000000000:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
-                                                    if ([[dataBack objectForKey:@"message"] intValue] == 60016) {
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70018) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
-//                                                            [self getOneTaskStepListFromServer];
-                                                            [self alert:@"更改步骤成功"];
+                                                            [self alert:@"标记成功！"];
                                                         });
+                                                    }else{
+                                                       NSLog(@"标记失败");
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    NSLog(@"Server tapy is wrong.");
+                                                    NSLog(@"标记失败");
                                                 }
                                             }else{
                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                    [self alert:@"创建任务失败"];
+                                                    [self alert:@"标记失败"];
                                                 });
                                             }
                                         }];
@@ -780,6 +788,9 @@ static  NSString  * identifier = @"CELL";
             if ([str isEqualToString:@"创建成功"] ||[str isEqualToString:@"发送成功"] ||[str isEqualToString:@"选择执行人成功！"] ||[str isEqualToString:@"编辑工单内容成功！"]) {
                 [self getWorkOrderListFromServer:1];
             }
+        }
+        if ([str isEqualToString:@"标记成功！"]){
+            [self getWorkOrderListFromServer:1];
         }
     }];
     [alertDialog addAction:okAction];
