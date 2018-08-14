@@ -12,5 +12,8 @@
 
 @property (nonatomic, strong)UITextView * messageTextView;
 @property (nonnull, strong) NSString * workListIdStr;
+@property (nonnull, strong) NSString * isEdit;
+
+
 
 @end

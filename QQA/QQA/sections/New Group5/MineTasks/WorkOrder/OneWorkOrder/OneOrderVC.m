@@ -683,7 +683,11 @@ static  NSString  * identifier = @"CELL";
             break;
         case 51001:
             //NSLog(@"%ld", (long)sender.tag);
-            [self menuAlertViewControllerTitle:@"增加负责人"];
+            if ([_isEdit intValue] == 0) {
+                [self alert:@"暂无增加责任人的权限"];
+            }else{
+                [self menuAlertViewControllerTitle:@"增加负责人"];
+            }
             break;
         default:
             break;
