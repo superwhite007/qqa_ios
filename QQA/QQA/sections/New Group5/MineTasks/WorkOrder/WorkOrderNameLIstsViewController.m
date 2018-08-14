@@ -69,7 +69,7 @@ static  NSString  * identifier = @"CELL";
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     
     [self addNewOREditWorkOrderView];
-    
+    [self undisplayaddOrEditWorkOrderView];
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
     lpgr.delegate = self;
@@ -413,10 +413,13 @@ static  NSString  * identifier = @"CELL";
     
 }
 
--(void)viewWillDisappear:(BOOL)animated{
+//-(void)viewWillDisappear:(BOOL)animated{
+//    [self undisplayaddOrEditWorkOrderView];
+//}
+
+-(void)viewWillAppear:(BOOL)animated{
     [self undisplayaddOrEditWorkOrderView];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

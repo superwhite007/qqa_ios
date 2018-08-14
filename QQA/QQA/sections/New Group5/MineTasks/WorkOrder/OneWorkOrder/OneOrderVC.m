@@ -801,6 +801,10 @@ static  NSString  * identifier = @"CELL";
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
     
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [self undisplayChangeNameDeleteCompleteStepView];
+    [self undisplayaddOrEditWorkOrderView];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
