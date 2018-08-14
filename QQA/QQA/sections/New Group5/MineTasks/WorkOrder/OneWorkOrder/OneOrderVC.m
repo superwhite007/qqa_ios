@@ -150,7 +150,7 @@ static  NSString  * identifier = @"CELL";
     OneOrder * onekOrder = self.datasourceMArray[[_longPressStr intValue]];
     if ([onekOrder.isUpdateStatus intValue] == 1 ) {
         _orderDetailTitle.text = @"编辑工单内容";
-        _messageTextView.text = onekOrder.content;
+        _messageOneOrederTextView.text = onekOrder.content;
         _workListDetailIdStr = [NSMutableString stringWithFormat:@"%@", onekOrder.workListDetailId];
         [self displayaddOrEditWorkOrderView];
     }
@@ -233,15 +233,15 @@ static  NSString  * identifier = @"CELL";
     describeLabel.text = @"交流内容";
     [_orderDetailView addSubview:describeLabel];
     
-    _messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 5.5 * kNEWSPACE,kORDERDETAILWIDTH - 20, kNEWSPACE * 11)];
-    _messageTextView.font = [UIFont systemFontOfSize:24];
-    [self.view addSubview:_messageTextView];
-    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
-    _messageTextView.layer.borderWidth = 1;
-    _messageTextView.layer.cornerRadius = 10;
-    _messageTextView.returnKeyType = UIReturnKeySend;
-    _messageTextView.delegate = self;
-    [_orderDetailView addSubview:_messageTextView];
+    _messageOneOrederTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 5.5 * kNEWSPACE,kORDERDETAILWIDTH - 20, kNEWSPACE * 11)];
+    _messageOneOrederTextView.font = [UIFont systemFontOfSize:24];
+    [self.view addSubview:_messageOneOrederTextView];
+    _messageOneOrederTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    _messageOneOrederTextView.layer.borderWidth = 1;
+    _messageOneOrederTextView.layer.cornerRadius = 10;
+    _messageOneOrederTextView.returnKeyType = UIReturnKeySend;
+    _messageOneOrederTextView.delegate = self;
+    [_orderDetailView addSubview:_messageOneOrederTextView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -281,7 +281,7 @@ static  NSString  * identifier = @"CELL";
         _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
         _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
         _agreeButton = YES;
-        if (_messageTextView.text.length > 0) {
+        if (_messageOneOrederTextView.text.length > 0) {
             if ([_orderDetailTitle.text isEqualToString:@"新建工单内容"]) {
                 [self sendOrderDetailToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/add", CONST_SERVER_ADDRESS]];
             }else if ([_orderDetailTitle.text isEqualToString:@"编辑工单内容"]) {
@@ -306,7 +306,7 @@ static  NSString  * identifier = @"CELL";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    [mdict setObject:_messageTextView.text forKey:@"content"];
+    [mdict setObject:_messageOneOrederTextView.text forKey:@"content"];
     if ([_orderDetailTitle.text isEqualToString:@"新建工单内容"]){
         [mdict setObject:_workListIdStr forKey:@"workListId"];
     }else if([_orderDetailTitle.text isEqualToString:@"编辑工单内容"]){
@@ -350,7 +350,7 @@ static  NSString  * identifier = @"CELL";
 #pragma UITextViewDelegate
 - (void)reKeyBoard
 {
-    [_messageTextView resignFirstResponder];
+    [_messageOneOrederTextView resignFirstResponder];
 }
 #pragma keyboard
 - (void)keyboardWillShow:(NSNotification *)notification{
@@ -367,7 +367,7 @@ static  NSString  * identifier = @"CELL";
 }
 -(void)displayaddNewOrderView{
     _orderDetailTitle.text = @"新建工单内容";
-    _messageTextView.text = @"";
+    _messageOneOrederTextView.text = @"";
     _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
     _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
     _agreeButton = YES;
