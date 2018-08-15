@@ -636,7 +636,7 @@ static  NSString  * identifier = @"CELL";
         headerOfDepartmentBtn.layer.cornerRadius = headerOfDepartmentBtn.frame.size.width / 2;
         headerOfDepartmentBtn.layer.masksToBounds = YES;
         
-        NSString * urlStr = [NSString stringWithFormat:@"%@", [_dataOfHeaderOfTheDepartment[0] objectForKey:@"img"]];
+        NSString * urlStr = [NSString stringWithFormat:@"%@", [_dataOfHeaderOfTheDepartment[i] objectForKey:@"img"]];
         NSURL * url = [NSURL URLWithString:urlStr];
         NSData *data = [NSData dataWithContentsOfURL:url];
         UIImage * image = [UIImage imageWithData:data];
