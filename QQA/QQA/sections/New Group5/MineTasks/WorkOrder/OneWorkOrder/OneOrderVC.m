@@ -312,6 +312,7 @@ static  NSString  * identifier = @"CELL";
     }else if([_orderDetailTitle.text isEqualToString:@"编辑工单内容"]){
         [mdict setObject:_workListDetailIdStr forKey:@"workListDetailId"];
     }
+    NSLog(@"mdict33333333333555555555555555%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -320,7 +321,7 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"dataBack1:%@", dataBack);
+                                                NSLog(@"3333333333333333333333333:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70009) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -393,6 +394,7 @@ static  NSString  * identifier = @"CELL";
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:_workListIdStr forKey:@"workListId"];
+//    NSLog(@"mdict:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -401,7 +403,7 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                //NSLog(@"dataBack:oneOrder:%@", dataBack);
+//                                                NSLog(@"dataBack:oneOrder:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70006) {
                                                         NSArray * dataListArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"workListDetails"];
@@ -607,7 +609,7 @@ static  NSString  * identifier = @"CELL";
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70006) {
                                                         NSMutableArray * leaderMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"leaders"];
                                                         NSMutableArray * departmentsMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"departments"];
-                                                        //NSLog(@"self.datasourceMArrayleader:%@", self.datasourceMArray);
+//                                                        NSLog(@"self.dtasourceMArrayleader:%@", self.datasourceMArray);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self addLeadersViews:leaderMArray];
                                                             [self Valuedepartments:departmentsMArray];
@@ -649,7 +651,20 @@ static  NSString  * identifier = @"CELL";
         nameLabel.backgroundColor = [UIColor redColor];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.text = [_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"];
-        [_headerView addSubview:nameLabel];
+        
+        NSLog(@"111111111111111111%@", [_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"]);
+        if ([[_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"] isEqualToString:@"同意/拒绝"]) {
+            UIButton * nameLabelButton = [UIButton  buttonWithType:UIButtonTypeSystem];
+            nameLabelButton.frame = CGRectMake((i + 1) * kHEADERBTNSPACE + i * 80, 90, 80, 25);
+            nameLabelButton.backgroundColor = [UIColor redColor];
+            nameLabelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+            nameLabelButton.titleLabel.text = @"同意/拒绝";
+            [nameLabelButton setTitle:@"同意/拒绝" forState:(UIControlStateNormal)];
+            [nameLabelButton addTarget:self action:@selector(leaderSelectedAgreeOrRejectAction:) forControlEvents:UIControlEventTouchUpInside];
+            [_headerView addSubview:nameLabelButton];
+        }else{
+            [_headerView addSubview:nameLabel];
+        }
     }
     if(_dataOfHeaderOfTheDepartment.count < 4){
         UIButton * addNewHeaderOfDepartmentBtn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -667,6 +682,69 @@ static  NSString  * identifier = @"CELL";
         [_headerView addSubview:nameLabel];
     }
 }
+
+-(void)leaderSelectedAgreeOrRejectAction:(UIButton *)sender{
+    [self alertAgreeORReject:@"是否愿意成为责任人"];
+}
+-(void)alertAgreeORReject:(NSString *)str{
+    NSString *title = str;
+    NSString *message = @"责任人可以创建工单内容；非责任人无此权利";
+    NSString *rejectButtonTitle = @"拒绝";
+    NSString *okButtonTitle = @"确定";
+    UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self agreeOrNOTSelectedLeader:@"1"];
+    }];
+    UIAlertAction *rejectAction = [UIAlertAction actionWithTitle:rejectButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self agreeOrNOTSelectedLeader:@"2"];
+    }];
+    
+    [alertDialog addAction:rejectAction];
+    [alertDialog addAction:okAction];
+    [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+    
+}
+
+-(void)agreeOrNOTSelectedLeader:(NSString *)status{
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workList/leader/status/update", CONST_SERVER_ADDRESS]];
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    request.timeoutInterval = 10.0;
+    request.HTTPMethod = @"POST";
+    NSString *sTextPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/bada.txt"];
+    NSDictionary *resultDic = [NSDictionary dictionaryWithContentsOfFile:sTextPath];
+    NSString *sTextPathAccess = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/badaAccessToktn.txt"];
+    NSDictionary *resultDicAccess = [NSDictionary dictionaryWithContentsOfFile:sTextPathAccess];
+    NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
+    [mdict setObject:@"IOS_APP" forKey:@"clientType"];
+    [mdict setObject:_workListIdStr forKey:@"workListId"];
+    [mdict setObject:status forKey:@"status"];
+    NSError * error = nil;
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
+    request.HTTPBody = jsonData;
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            if (data != nil) {
+                                                id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"222222222222222:%@", dataBack);
+                                                if ([dataBack isKindOfClass:[NSDictionary class]]){
+                                                    if ([[dataBack objectForKey:@"message"] intValue] == 70015) {
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self alert:@"成为责任人成功"];
+                                                        });
+                                                    }
+                                                }else if ([dataBack isKindOfClass:[NSArray class]] ) {
+                                                    [self alert:@"失败"];
+                                                }
+                                            }else{
+                                                [self alert:@"失败"];
+                                            }
+                                        }];
+    [task resume];
+    
+}
 -(void)viewOrIncrease:(UIButton *)sender{
     switch (sender.tag) {
         case 50000:
@@ -683,6 +761,7 @@ static  NSString  * identifier = @"CELL";
             break;
         case 51001:
             //NSLog(@"%ld", (long)sender.tag);
+           
             if ([_isEdit intValue] == 0) {
                 [self alert:@"暂无增加责任人的权限"];
             }else{
@@ -795,7 +874,12 @@ static  NSString  * identifier = @"CELL";
         }
         if ([str isEqualToString:@"标记成功！"]){
             [self getWorkOrderListFromServer:1];
+        } else if ([str isEqualToString:@"成为责任人成功"]){
+//            [self getWorkOrderListFromServer:1];
+            [self getSelectedLeadersFromServer];
         }
+        
+        
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
