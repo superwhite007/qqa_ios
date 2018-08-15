@@ -40,6 +40,7 @@
 @property (nonatomic, strong) NSMutableArray * departmentsDatasource;
 @property (nonatomic, strong) UIView * changeDetailNameOrCompleteView;
 @property (nonatomic, strong) NSString * longPressStr;
+@property (nonatomic, strong) NSString *isAddWorkListDetailStr;
 @end
 @implementation OneOrderVC
 static  NSString  * identifier = @"CELL";
@@ -367,12 +368,17 @@ static  NSString  * identifier = @"CELL";
     _orderDetailView.frame = CGRectMake(10 , kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
 }
 -(void)displayaddNewOrderView{
-    _orderDetailTitle.text = @"新建工单内容";
-    _messageOneOrederTextView.text = @"";
-    _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
-    _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
-    _agreeButton = YES;
-    _orderDetailView.frame = CGRectMake(10 , kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
+    if ([_isAddWorkListDetailStr integerValue] == 1) {
+        _orderDetailTitle.text = @"新建工单内容";
+        _messageOneOrederTextView.text = @"";
+        _orderDetailAgreeBtn.backgroundColor = [UIColor redColor];
+        _orderDetailRejectBtn.backgroundColor = [UIColor whiteColor];
+        _agreeButton = YES;
+        _orderDetailView.frame = CGRectMake(10 , kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
+    }else{
+        [self alert:@"暂时没有创建工单的权限"];
+    }
+    
 }
 -(void)undisplayaddOrEditWorkOrderView{
     [self reKeyBoard];
@@ -608,6 +614,7 @@ static  NSString  * identifier = @"CELL";
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70006) {
                                                         NSMutableArray * leaderMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"leaders"];
+                                                        _isAddWorkListDetailStr = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"isAddWorkListDetail"];
                                                         NSMutableArray * departmentsMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"departments"];
 //                                                        NSLog(@"self.dtasourceMArrayleader:%@", self.datasourceMArray);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
