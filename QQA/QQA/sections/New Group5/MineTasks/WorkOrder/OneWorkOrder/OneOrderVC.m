@@ -185,7 +185,6 @@ static  NSString  * identifier = @"CELL";
     [mdict setObject:isFinished forKey:@"isFinished"];
     [mdict setObject:_workListDetailIdStr forKey:@"workListDetailId"];
     [mdict setObject:_workListIdStr forKey:@"workListId"];
-    //NSLog(@"更新完成1111:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -194,17 +193,16 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                //NSLog(@"100000000000000:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70018) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self alert:@"标记成功！"];
                                                         });
                                                     }else{
-                                                       //NSLog(@"标记失败");
+                                                       [self alert:@"标记失败"];
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    //NSLog(@"标记失败");
+                                                    [self alert:@"标记失败"];
                                                 }
                                             }else{
                                                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -313,7 +311,6 @@ static  NSString  * identifier = @"CELL";
     }else if([_orderDetailTitle.text isEqualToString:@"编辑工单内容"]){
         [mdict setObject:_workListDetailIdStr forKey:@"workListDetailId"];
     }
-    NSLog(@"mdict33333333333555555555555555%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -322,7 +319,6 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"3333333333333333333333333:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70009) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -376,7 +372,7 @@ static  NSString  * identifier = @"CELL";
         _agreeButton = YES;
         _orderDetailView.frame = CGRectMake(10 , kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH);
     }else{
-        [self alert:@"暂时没有创建工单的权限"];
+        [self alert:@"暂时没有创建工单内容的权限"];
     }
     
 }
@@ -400,7 +396,6 @@ static  NSString  * identifier = @"CELL";
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:_workListIdStr forKey:@"workListId"];
-//    NSLog(@"mdict:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -409,18 +404,15 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-//                                                NSLog(@"dataBack:oneOrder:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70006) {
                                                         NSArray * dataListArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"workListDetails"];
-                                                        //NSLog(@"dataBack:oneOrder:dataListArray::::%@", dataListArray);
                                                         [self.datasourceMArray removeAllObjects];
                                                         for (NSDictionary * dict in dataListArray) {
                                                             OneOrder * oneOrder = [OneOrder new];
                                                             [oneOrder setValuesForKeysWithDictionary:dict];
                                                             [self.datasourceMArray addObject:oneOrder];
                                                         }
-                                                        //NSLog(@"self.datasourceMArray:%@", self.datasourceMArray);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self.tableView  reloadData];
                                                         });
@@ -486,11 +478,9 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                //NSLog(@"Members:::%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 700012) {
                                                         NSMutableArray * MembersOfDepartmentMArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];
-//                                                        //NSLog(@"MembersOfDepartmentMArray:%@", MembersOfDepartmentMArray);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self menuAlertViewControllerMembersOfDepartmentsAboutSelectExecutor:MembersOfDepartmentMArray];
                                                         });
@@ -516,7 +506,6 @@ static  NSString  * identifier = @"CELL";
     }
     NSArray * nameAndleaderJobArray = nameAndleaderJob;
     NSArray * departmentNameArray = departmentName;
-    //NSLog(@":::::::%@,%@", nameAndleaderJobArray, departmentNameArray);
     MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:nameAndleaderJobArray detailsItems:departmentNameArray selectImage:@"select_normal" normalImage:@"select_not"];
     
     vc.leftBtnTitle = @"取消";
@@ -562,7 +551,6 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                //NSLog(@"executor:::%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70013) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -610,13 +598,11 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                //NSLog(@"dataBack:oneOrder:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70006) {
                                                         NSMutableArray * leaderMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"leaders"];
                                                         _isAddWorkListDetailStr = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"isAddWorkListDetail"];
                                                         NSMutableArray * departmentsMArray = [[[dataBack objectForKey:@"data"] objectForKey:@"data_list"] objectForKey:@"departments"];
-//                                                        NSLog(@"self.dtasourceMArrayleader:%@", self.datasourceMArray);
                                                         dispatch_async(dispatch_get_main_queue(), ^{
                                                             [self addLeadersViews:leaderMArray];
                                                             [self Valuedepartments:departmentsMArray];
@@ -658,8 +644,6 @@ static  NSString  * identifier = @"CELL";
         nameLabel.backgroundColor = [UIColor redColor];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.text = [_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"];
-        
-        NSLog(@"111111111111111111%@", [_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"]);
         if ([[_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"] isEqualToString:@"同意/拒绝"]) {
             UIButton * nameLabelButton = [UIButton  buttonWithType:UIButtonTypeSystem];
             nameLabelButton.frame = CGRectMake((i + 1) * kHEADERBTNSPACE + i * 80, 90, 80, 25);
@@ -735,7 +719,6 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"222222222222222:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70015) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -755,20 +738,14 @@ static  NSString  * identifier = @"CELL";
 -(void)viewOrIncrease:(UIButton *)sender{
     switch (sender.tag) {
         case 50000:
-            //NSLog(@"%ld", (long)sender.tag);
             break;
         case 50001:
-            //NSLog(@"%ld", (long)sender.tag);
             break;
         case 50002:
-            //NSLog(@"%ld", (long)sender.tag);
             break;
         case 50003:
-            //NSLog(@"%ld", (long)sender.tag);
             break;
         case 51001:
-            //NSLog(@"%ld", (long)sender.tag);
-           
             if ([_isEdit intValue] == 0) {
                 [self alert:@"暂无增加责任人的权限"];
             }else{
@@ -779,7 +756,6 @@ static  NSString  * identifier = @"CELL";
             break;
     }
 }
-
 
 -(void)menuAlertViewControllerTitle:(NSString *)title{
     
@@ -792,13 +768,12 @@ static  NSString  * identifier = @"CELL";
     }
     NSArray * nameAndleaderJobArray = nameAndleaderJob;
     NSArray * departmentNameArray = departmentName;
-    //NSLog(@":::::::%@,%@", nameAndleaderJobArray, departmentNameArray);
     MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:nameAndleaderJobArray detailsItems:departmentNameArray selectImage:@"select_normal" normalImage:@"select_not"];
 
 //    MenuAlertViewController *vc = [[MenuAlertViewController alloc]initWithTitleItems:@[@"技术魏总监", @"技术魏总监" ,@"技术魏总监",@"技术魏总监",@"技术魏总监",@"技术魏总监"] detailsItems:@[@"2017-10-10", @"2019-10-10"] selectImage:@"select_normal" normalImage:@"select_not"];
     vc.leftBtnTitle = @"取消";
 //    if (title.length == 0) {
-        vc.title = @"选择执行人";
+        vc.title = @"请选择人员";
 //    }else{
 //        vc.title = title;
 //    }
@@ -843,7 +818,6 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                //NSLog(@"dataBack:oneOrder:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70007) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
