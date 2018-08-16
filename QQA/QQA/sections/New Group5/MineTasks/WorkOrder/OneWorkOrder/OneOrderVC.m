@@ -41,6 +41,12 @@
 @property (nonatomic, strong) UIView * changeDetailNameOrCompleteView;
 @property (nonatomic, strong) NSString * longPressStr;
 @property (nonatomic, strong) NSString *isAddWorkListDetailStr;
+
+@property (nonatomic, strong) UIView * leaderInformationView;
+@property (nonatomic, strong) UIImageView * leaderPeoplePicture;
+@property (nonatomic, strong) UILabel * leaderNameLabel;
+@property (nonatomic, strong) UILabel * leaderDescribeLabel;
+
 @end
 @implementation OneOrderVC
 static  NSString  * identifier = @"CELL";
@@ -69,11 +75,9 @@ static  NSString  * identifier = @"CELL";
     _dataOfHeaderOfTheDepartment = [NSMutableArray array];
     [self.navigationItem  setTitle:@"工单详情"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(displayaddNewOrderView)];
-
     self.pageNum = 1;
     self.isDownRefresh = NO;
     _agreeButton = YES;
-    
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, iphoneHeight - 64) style:UITableViewStylePlain];
     _tableView.rowHeight = 100;
     [self.view addSubview:_tableView];
@@ -82,17 +86,45 @@ static  NSString  * identifier = @"CELL";
     self.tableView.delegate = self;
     [self.tableView registerClass:[OneOrderCell class] forCellReuseIdentifier:identifier];
     [self getWorkOrderListFromServer:1];
-
     [self addNewOrderDetailViews];
-    
-    
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    lpgr.minimumPressDuration = 1.0; //seconds  设置响应时间
+    lpgr.minimumPressDuration = 1.0;
     lpgr.delegate = self;
-    [_tableView addGestureRecognizer:lpgr]; //启用长按事件
-    
+    [_tableView addGestureRecognizer:lpgr];
     [self addChangeDetailCompleteStepView];
+    [self AddLeaderInformationView];
 }
+
+#pragma LeaderInformationView
+-(void)AddLeaderInformationView{
+    _leaderInformationView = [[UIView alloc] initWithFrame:CGRectMake(10 + 7 * iphoneWidth  , 120, iphoneWidth - 20, 100)];
+    _leaderInformationView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:_leaderInformationView];
+    _leaderPeoplePicture =  [[UIImageView alloc] initWithFrame:CGRectMake(10 , 10, 80, 80)];
+    _leaderPeoplePicture.backgroundColor = [UIColor redColor];
+    _leaderPeoplePicture.layer.cornerRadius = _leaderPeoplePicture.frame.size.width / 2;
+    _leaderPeoplePicture.layer.masksToBounds = YES;
+    [_leaderInformationView addSubview:_leaderPeoplePicture];
+    _leaderNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(CGRectGetMaxX(_leaderPeoplePicture.frame) + 10, 10, iphoneWidth - 50 -  CGRectGetMaxX(_leaderPeoplePicture.frame), 40)];
+    _leaderNameLabel.backgroundColor = [UIColor grayColor];
+    [_leaderInformationView addSubview:_leaderNameLabel];
+    _leaderDescribeLabel = [[UILabel alloc] initWithFrame: CGRectMake(CGRectGetMaxX(_leaderPeoplePicture.frame) + 10, CGRectGetMaxY(_leaderNameLabel.frame) + 10, iphoneWidth - 50 -  CGRectGetMaxX(_leaderPeoplePicture.frame), 30)];
+    _leaderDescribeLabel.backgroundColor = [UIColor grayColor];
+    [_leaderInformationView addSubview:_leaderDescribeLabel];
+}
+-(void)displayLeaderInformationView:(NSInteger)number{
+    NSLog(@"%@, %ld", _dataOfHeaderOfTheDepartment, number);
+    _leaderInformationView.frame = CGRectMake(10 , 120, iphoneWidth - 20, 100);
+    _leaderPeoplePicture.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_dataOfHeaderOfTheDepartment[number] objectForKey:@"img"]]]];
+    _leaderNameLabel.text = [_dataOfHeaderOfTheDepartment[number] objectForKey:@"username"];
+    _leaderDescribeLabel.text = [NSString stringWithFormat:@"%@--%@", [_dataOfHeaderOfTheDepartment[number] objectForKey:@"department"],[_dataOfHeaderOfTheDepartment[number] objectForKey:@"job"]];
+    _leaderDescribeLabel.adjustsFontSizeToFitWidth = YES;
+
+}
+-(void)unDisplayLeaderInformationView{
+    _leaderInformationView.frame = CGRectMake(10 + 7 * iphoneWidth , 120, iphoneWidth - 20, 100);
+}
+#pragma LeaderInformationView end
 
 #pragma shoushi
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
@@ -740,12 +772,16 @@ static  NSString  * identifier = @"CELL";
 -(void)viewOrIncrease:(UIButton *)sender{
     switch (sender.tag) {
         case 50000:
+            [self displayLeaderInformationView:0];
             break;
         case 50001:
+            [self displayLeaderInformationView:1];
             break;
         case 50002:
+            [self displayLeaderInformationView:2];
             break;
         case 50003:
+            [self displayLeaderInformationView:3];
             break;
         case 51001:
             if ([_isEdit intValue] == 0) {
