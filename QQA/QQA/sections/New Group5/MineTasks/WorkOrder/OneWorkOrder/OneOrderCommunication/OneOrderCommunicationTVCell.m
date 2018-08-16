@@ -13,7 +13,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        [self addAllViews];
     }
     return self;
 }
@@ -29,6 +29,7 @@
 
 -(void)setOneOrderCommunication:(OneOrderCommunication *)oneOrderCommunication{
     _peopleImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: oneOrderCommunication.img]]];
+    
     self.contentLabel.text = oneOrderCommunication.content;
     self.contentLabel.font = [UIFont systemFontOfSize:18];
     self.contentLabel.numberOfLines = 0;//表示label可以多行显示
