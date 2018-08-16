@@ -49,7 +49,7 @@ static  NSString  * identifier = @"CELL";
 
 
 -(void)addNewOneOrderCommunicatonsView{
-    _orderCommunicationNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6 , 20, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
+    _orderCommunicationNewView = [[UIView alloc] initWithFrame:CGRectMake(iphoneWidth / 6  + 8 * iphoneWidth, 20, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9)];
     _orderCommunicationNewView.layer.borderWidth = 1;
     _orderCommunicationNewView.layer.cornerRadius = 5;
     _orderCommunicationNewView.backgroundColor = [UIColor whiteColor];
@@ -59,21 +59,21 @@ static  NSString  * identifier = @"CELL";
     taskNameLabel.text = @"新建工单交流内容";
     taskNameLabel.textAlignment = NSTextAlignmentCenter;
     [_orderCommunicationNewView addSubview:taskNameLabel];
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 8 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 12 / 27)];
-    _messageTextView.font = [UIFont systemFontOfSize:21];
-    //    _messageTextView.backgroundColor = [UIColor greenColor];
-    _messageTextView.layer.borderWidth = 1;
-    _messageTextView.layer.cornerRadius = 5;
+    _oneOrderCommunicationMessageTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, iphoneWidth * 4 / 9 * 8 / 27, iphoneWidth * 2 / 3 -20, iphoneWidth * 4 / 9 * 12 / 27)];
+    _oneOrderCommunicationMessageTextView.font = [UIFont systemFontOfSize:21];
+    //    _oneOrderCommunicationMessageTextView.backgroundColor = [UIColor greenColor];
+    _oneOrderCommunicationMessageTextView.layer.borderWidth = 1;
+    _oneOrderCommunicationMessageTextView.layer.cornerRadius = 5;
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 8;// 字体的行间距
     NSDictionary *attributes = @{
                                  NSFontAttributeName:[UIFont systemFontOfSize:16],
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
-    _messageTextView.attributedText = [[NSAttributedString alloc] initWithString:@"请输入工单交流内容。不超过200个字符。" attributes:attributes];
-    //    _messageTextView.text = @"请输入任务名称。不超过30个字符。";
-    _messageTextView.delegate = self;
-    [_orderCommunicationNewView addSubview:_messageTextView];
+    _oneOrderCommunicationMessageTextView.attributedText = [[NSAttributedString alloc] initWithString:@"请输入工单交流内容。不超过200个字符。" attributes:attributes];
+    //    _oneOrderCommunicationMessageTextView.text = @"请输入任务名称。不超过30个字符。";
+    _oneOrderCommunicationMessageTextView.delegate = self;
+    [_orderCommunicationNewView addSubview:_oneOrderCommunicationMessageTextView];
     UIButton * agreeButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     agreeButton.frame = CGRectMake(0 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [agreeButton setTitle:@"取消" forState:(UIControlStateNormal)];
@@ -114,7 +114,7 @@ static  NSString  * identifier = @"CELL";
     NSMutableDictionary * mdict = [NSMutableDictionary dictionaryWithDictionary:resultDic];
     [request setValue:resultDicAccess[@"accessToken"] forHTTPHeaderField:@"Authorization"];
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
-    [mdict setObject:_messageTextView.text forKey:@"content"];
+    [mdict setObject:_oneOrderCommunicationMessageTextView.text forKey:@"content"];
     [mdict setObject:_workListIdSTR forKey:@"workListId"];
     [mdict setObject:_workListDetailIdSTR forKey:@"workListDetailId"];
     NSLog(@"OK70019:%@", mdict);
@@ -149,7 +149,7 @@ static  NSString  * identifier = @"CELL";
 
 -(void)removeNewTaskView{
     _orderCommunicationNewView.frame = CGRectMake(iphoneWidth / 6  + 8 * iphoneWidth, 20, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
-    _messageTextView.text = nil;
+    _oneOrderCommunicationMessageTextView.text = nil;
 }
 -(void)displayNewCommunicationView{
     _orderCommunicationNewView.frame = CGRectMake(iphoneWidth / 6 , 20, iphoneWidth * 2 / 3, iphoneWidth * 4 / 9);
@@ -238,7 +238,26 @@ static  NSString  * identifier = @"CELL";
 }
 #pragma datasource end
 
+#pragma UITextViewDelegate
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    if ([textView.text isEqualToString:@"请输入工单交流内容。不超过200个字符。"]) {
+        textView.text = nil;
+    }
+    return YES;
+}
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqual:@"\n"]) {//判断按的是不是return
+        [_oneOrderCommunicationMessageTextView resignFirstResponder];
+        return NO;
+    }else if (range.location >= 200){
+        [self alert:@"最多输入200字符"];
+        _oneOrderCommunicationMessageTextView.text = [_oneOrderCommunicationMessageTextView.text substringToIndex:200];
+        return NO;
+    }
+    return YES;
+}
 
+#pragma UITextViewDelegate end
 
 -(void)alert:(NSString *)str{
     NSLog(@"111111111%@", str);

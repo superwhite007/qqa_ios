@@ -10,7 +10,7 @@
 
 @interface OneOrderCommunicationVController : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UITextView * messageTextView;
+@property (nonatomic, strong) UITextView * oneOrderCommunicationMessageTextView;
 @property (nonatomic, strong) NSString * workListIdSTR;
 @property (nonatomic, strong) NSString * workListDetailIdSTR;
 
