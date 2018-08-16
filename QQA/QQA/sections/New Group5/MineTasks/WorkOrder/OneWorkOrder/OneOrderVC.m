@@ -46,6 +46,7 @@
 @property (nonatomic, strong) UIImageView * leaderPeoplePicture;
 @property (nonatomic, strong) UILabel * leaderNameLabel;
 @property (nonatomic, strong) UILabel * leaderDescribeLabel;
+@property (nonatomic, strong) NSTimer * timer;
 
 @end
 @implementation OneOrderVC
@@ -119,7 +120,7 @@ static  NSString  * identifier = @"CELL";
     _leaderNameLabel.text = [_dataOfHeaderOfTheDepartment[number] objectForKey:@"username"];
     _leaderDescribeLabel.text = [NSString stringWithFormat:@"%@--%@", [_dataOfHeaderOfTheDepartment[number] objectForKey:@"department"],[_dataOfHeaderOfTheDepartment[number] objectForKey:@"job"]];
     _leaderDescribeLabel.adjustsFontSizeToFitWidth = YES;
-
+    [self startTimer];
 }
 -(void)unDisplayLeaderInformationView{
     _leaderInformationView.frame = CGRectMake(10 + 7 * iphoneWidth , 120, iphoneWidth - 20, 100);
@@ -906,6 +907,18 @@ static  NSString  * identifier = @"CELL";
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
     
 }
+
+#pragma  nstimer
+-(void)startTimer{
+    _timer =  [NSTimer timerWithTimeInterval:5 target:self selector:@selector(unDisplayLeaderInformationView) userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [_timer invalidate];
+    _timer = nil;
+}
+#pragma  nstimer end
+
 -(void)viewWillDisappear:(BOOL)animated{
     [self undisplayChangeNameDeleteCompleteStepView];
     [self undisplayaddOrEditWorkOrderView];
