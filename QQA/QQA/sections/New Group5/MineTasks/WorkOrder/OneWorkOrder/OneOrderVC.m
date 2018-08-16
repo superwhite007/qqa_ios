@@ -674,6 +674,7 @@ static  NSString  * identifier = @"CELL";
     }
 }
 
+#pragma accessLeaders
 -(void)leaderSelectedAgreeOrRejectAction:(UIButton *)sender{
     [self alertAgreeORReject:@"是否愿意成为责任人"];
 }
@@ -733,8 +734,9 @@ static  NSString  * identifier = @"CELL";
                                             }
                                         }];
     [task resume];
-    
 }
+#pragma accessLeaders end
+
 -(void)viewOrIncrease:(UIButton *)sender{
     switch (sender.tag) {
         case 50000:
@@ -757,8 +759,10 @@ static  NSString  * identifier = @"CELL";
     }
 }
 
+
+
+
 -(void)menuAlertViewControllerTitle:(NSString *)title{
-    
     NSMutableArray * nameAndleaderJob = [NSMutableArray array];
     NSMutableArray * departmentName = [NSMutableArray array];
     for (int i = 0; i < _departmentsDatasource.count; i++) {
