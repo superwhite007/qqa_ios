@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OneOrderCommunicationVController : UIViewController
+@interface OneOrderCommunicationVController : UIViewController<UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) UITextView * messageTextView;
+@property (nonatomic, strong) NSString * workListIdSTR;
+@property (nonatomic, strong) NSString * workListDetailIdSTR;
 
 @end

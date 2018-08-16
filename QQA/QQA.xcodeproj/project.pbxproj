@@ -52,6 +52,8 @@
 		AA4AA0DF2119649B00675EBB /* WorkOrderTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4AA0DE2119649B00675EBB /* WorkOrderTVCell.m */; };
 		AA4AA0E2211964B800675EBB /* WorkOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4AA0E1211964B800675EBB /* WorkOrder.m */; };
 		AA4C376320BF7D41006DCDD7 /* HumanDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */; };
+		AA504F9B212512040068B4AD /* OneOrderCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = AA504F9A212512040068B4AD /* OneOrderCommunication.m */; };
+		AA504F9E212512220068B4AD /* OneOrderCommunicationTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA504F9D212512220068B4AD /* OneOrderCommunicationTVCell.m */; };
 		AA55449F1FE7BBBB0031F846 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */; };
 		AA5545131FE7BD410031F846 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5545121FE7BD410031F846 /* libz.tbd */; };
 		AA620C2E20CE434700D48D54 /* MineTasksTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA620C2D20CE434700D48D54 /* MineTasksTVC.m */; };
@@ -224,6 +226,10 @@
 		AA4AA0E1211964B800675EBB /* WorkOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkOrder.m; sourceTree = "<group>"; };
 		AA4C376120BF7D41006DCDD7 /* HumanDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HumanDetailVC.h; sourceTree = "<group>"; };
 		AA4C376220BF7D41006DCDD7 /* HumanDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HumanDetailVC.m; sourceTree = "<group>"; };
+		AA504F99212512040068B4AD /* OneOrderCommunication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrderCommunication.h; sourceTree = "<group>"; };
+		AA504F9A212512040068B4AD /* OneOrderCommunication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderCommunication.m; sourceTree = "<group>"; };
+		AA504F9C212512220068B4AD /* OneOrderCommunicationTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneOrderCommunicationTVCell.h; sourceTree = "<group>"; };
+		AA504F9D212512220068B4AD /* OneOrderCommunicationTVCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneOrderCommunicationTVCell.m; sourceTree = "<group>"; };
 		AA55449E1FE7BBBB0031F846 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		AA5545121FE7BD410031F846 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AA5545141FE7BE160031F846 /* QQA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QQA.entitlements; sourceTree = "<group>"; };
@@ -637,6 +643,10 @@
 			children = (
 				AA2649FF211D274700C6614B /* OneOrderCommunicationVController.h */,
 				AA264A00211D274700C6614B /* OneOrderCommunicationVController.m */,
+				AA504F99212512040068B4AD /* OneOrderCommunication.h */,
+				AA504F9A212512040068B4AD /* OneOrderCommunication.m */,
+				AA504F9C212512220068B4AD /* OneOrderCommunicationTVCell.h */,
+				AA504F9D212512220068B4AD /* OneOrderCommunicationTVCell.m */,
 			);
 			path = OneOrderCommunication;
 			sourceTree = "<group>";
@@ -1261,6 +1271,7 @@
 				AA02655C21216C780096904A /* TableViewCell.m in Sources */,
 				AAB4D49B1FC95D1700116355 /* WSDatePickerView.m in Sources */,
 				AAE0259B20D0F9A9002A28DA /* StepDetailCommunicationTVCell.m in Sources */,
+				AA504F9E212512220068B4AD /* OneOrderCommunicationTVCell.m in Sources */,
 				AA32F682211C116D00024FBD /* UILabel+HeightBYLabel.m in Sources */,
 				AA20C6A31FD14EF60095AF0F /* CompanyOrganizationalStructureListView.m in Sources */,
 				AAD912011FD6955D002A42B5 /* AddressBook.m in Sources */,
@@ -1269,6 +1280,7 @@
 				AA75676220A13A1A0088CF64 /* CycleScrollView.m in Sources */,
 				AAE0258A20D0BDE4002A28DA /* OneTasKStepTVCell.m in Sources */,
 				AA478BF22112CCD700F0541B /* OneOrderVC.m in Sources */,
+				AA504F9B212512040068B4AD /* OneOrderCommunication.m in Sources */,
 				AA42F75320BB9354006BF7E6 /* NewContactViewController.m in Sources */,
 				AAC191FB20A1948200494B62 /* ExaminationApprovalViewControllerNOCell.m in Sources */,
 				AA25BCD91FBEA642009B8CA0 /* IInitiatedtheExaminationTableViewCell.m in Sources */,
