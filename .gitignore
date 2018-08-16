@@ -1,2 +1,6 @@
 QQA_PrefixHeader.pch
-
+*.xcworkspace
+Info.plist
+QQA/QQA/Info.plist
+QQA/QQA/QQA_PrefixHeader.pch
+QQA/QQA/sections/Cover/
