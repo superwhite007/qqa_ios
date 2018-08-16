@@ -927,6 +927,11 @@ static  NSString  * identifier = @"CELL";
     [self undisplayChangeNameDeleteCompleteStepView];
     [self undisplayaddOrEditWorkOrderView];
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [self undisplayChangeNameDeleteCompleteStepView];
+    [self undisplayaddOrEditWorkOrderView];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

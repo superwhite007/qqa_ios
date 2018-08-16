@@ -91,15 +91,19 @@ static  NSString  * identifier = @"CELL";
 }
 -(void)sendNewTaskToServer:(UIButton*)sender{
     if (sender.tag == 1211002) {
-        [self SendNewCommunicationToServer];
-        [self removeNewTaskView];
-        [self undisplayReminderOrNewCommunicationView];
+        if ([_oneOrderCommunicationMessageTextView.text isEqualToString:@"请输入工单交流内容。不超过200个字符。"] || _oneOrderCommunicationMessageTextView.text == nil) {
+            [self alert:@"请输入工单交流的内容"];
+        }else{
+            [self SendNewCommunicationToServer];
+            [self removeNewTaskView];
+            [self undisplayReminderOrNewCommunicationView];
+        }
     }else if (sender.tag == 1211001) {
         [self alert:@"取消交流内容的创建"];
         [self removeNewTaskView];
         [self undisplayReminderOrNewCommunicationView];
+        [self removeNewTaskView];
     }
-    [self removeNewTaskView];
 }
 -(void)SendNewCommunicationToServer{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetailComment/create", CONST_SERVER_ADDRESS]];
@@ -260,7 +264,6 @@ static  NSString  * identifier = @"CELL";
 #pragma UITextViewDelegate end
 
 -(void)alert:(NSString *)str{
-    NSLog(@"111111111%@", str);
     NSString *title = str;
     NSString *message = @" ";
     NSString *okButtonTitle = @"OK";
