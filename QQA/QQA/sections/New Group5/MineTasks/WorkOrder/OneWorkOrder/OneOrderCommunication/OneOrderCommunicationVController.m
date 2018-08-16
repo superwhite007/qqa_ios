@@ -261,6 +261,11 @@ static  NSString  * identifier = @"CELL";
     return YES;
 }
 
+- (void)reKeyBoard{
+    [_oneOrderCommunicationMessageTextView resignFirstResponder];
+}
+
+
 #pragma UITextViewDelegate end
 
 -(void)alert:(NSString *)str{
@@ -277,9 +282,23 @@ static  NSString  * identifier = @"CELL";
                 //                }
             }
         }
+        if ([title isEqualToString:@"创建工单交流内容成功!"]) {
+            [self reKeyBoard];
+        }
+        
+        
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self reKeyBoard];
+    [self undisplayReminderOrNewCommunicationView];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [self reKeyBoard];
+    [self undisplayReminderOrNewCommunicationView];
 }
 
 - (void)didReceiveMemoryWarning {
