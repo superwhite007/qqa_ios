@@ -42,9 +42,9 @@
     self.contentLabel.font = [UIFont systemFontOfSize:18];
     self.contentLabel.numberOfLines = 0;//表示label可以多行显示
     self.contentLabel.textColor = [UIColor blackColor];
-    CGSize sourceSize = CGSizeMake(iphoneWidth - 200, 2000);
+    CGSize sourceSize = CGSizeMake(iphoneWidth - 120, 2000);
     CGRect targetRect = [self.contentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.contentLabel.font} context:nil];
-    self.contentLabel.frame = CGRectMake(100, 5, iphoneWidth - 110, CGRectGetHeight(targetRect));
+    self.contentLabel.frame = CGRectMake(100, 5, iphoneWidth - 120, CGRectGetHeight(targetRect));
 //    [self.contentView addSubview:self.contentLabel];
     self.describeLabel.text = stepDetailCommunication.describe;
     if (CGRectGetHeight(targetRect) < 60) {

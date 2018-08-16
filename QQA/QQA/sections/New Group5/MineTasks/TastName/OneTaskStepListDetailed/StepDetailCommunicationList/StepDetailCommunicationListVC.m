@@ -228,6 +228,10 @@ static  NSString  * identifier = @"CELL";
 
 -(void)sendNewTaskToServer:(UIButton*)sender{
     if (sender.tag == 11001) {
+        if (_messageTextView.text.length >= 200){
+            [self alert:@"最多输入200字符"];
+            _messageTextView.text = [_messageTextView.text substringToIndex:200];
+        }
         [self SendNewCommunicationToServerWithtitleStr:_messageTextView.text taskId:_subtaskIdStr type:@"2"];
         [self removeNewTaskView];
         [self undisplayReminderOrNewCommunicationView];
@@ -399,9 +403,8 @@ static  NSString  * identifier = @"CELL";
     label.font = [UIFont systemFontOfSize:18];
     label.numberOfLines = 0;//表示label可以多行显示
     label.textColor = [UIColor blackColor];
-    CGSize sourceSize = CGSizeMake(iphoneWidth - 200, 2000);
+    CGSize sourceSize = CGSizeMake(iphoneWidth - 120, 2000);
     CGRect targetRect = [label.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : label.font} context:nil];
-    label.frame = CGRectMake(100, 5, iphoneWidth - 110, CGRectGetHeight(targetRect));
     if (CGRectGetHeight(targetRect) < 60) {
         return 100;
     }else{
