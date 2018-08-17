@@ -79,17 +79,17 @@ static  NSString  * identifier = @"CELL";
     [agreeButton setTitle:@"取消" forState:(UIControlStateNormal)];
     agreeButton.layer.borderWidth = 0.5;
     agreeButton.tag = 1211001;
-    [agreeButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    [agreeButton addTarget:self action:@selector(recognitionSendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_orderCommunicationNewView addSubview:agreeButton];
     UIButton * refuseButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
     refuseButton.frame = CGRectMake(iphoneWidth / 3 , iphoneWidth * 4 / 9 * 21 / 27, iphoneWidth / 3, iphoneWidth * 4 / 9 * 6 / 27);
     [refuseButton setTitle:@"确定" forState:(UIControlStateNormal)];
     refuseButton.layer.borderWidth = 0.5;
     refuseButton.tag = 1211002;
-    [refuseButton addTarget:self action:@selector(sendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
+    [refuseButton addTarget:self action:@selector(recognitionSendNewTaskToServer:) forControlEvents:UIControlEventTouchUpInside];
     [_orderCommunicationNewView addSubview:refuseButton];
 }
--(void)sendNewTaskToServer:(UIButton*)sender{
+-(void)recognitionSendNewTaskToServer:(UIButton*)sender{
     if (sender.tag == 1211002) {
         if ([_oneOrderCommunicationMessageTextView.text isEqualToString:@"请输入工单交流内容。不超过200个字符。"] || _oneOrderCommunicationMessageTextView.text == nil) {
             [self alert:@"请输入工单交流的内容"];
@@ -126,7 +126,7 @@ static  NSString  * identifier = @"CELL";
     [mdict setObject:_oneOrderCommunicationMessageTextView.text forKey:@"content"];
     [mdict setObject:_workListIdSTR forKey:@"workListId"];
     [mdict setObject:_workListDetailIdSTR forKey:@"workListDetailId"];
-    NSLog(@"OK70019:%@", mdict);
+    NSLog(@"OK7001911111:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
