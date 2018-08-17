@@ -315,6 +315,9 @@ static  NSString  * identifier = @"CELL";
         _agreeButton = YES;
         if (_messageOneOrederTextView.text.length > 0) {
             if ([_orderDetailTitle.text isEqualToString:@"新建工单内容"]) {
+                if (_messageOneOrederTextView.text.length >= 200){
+                    _messageOneOrederTextView.text = [_messageOneOrederTextView.text substringToIndex:200];
+                }
                 [self sendOrderDetailToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/add", CONST_SERVER_ADDRESS]];
             }else if ([_orderDetailTitle.text isEqualToString:@"编辑工单内容"]) {
                 [self sendOrderDetailToServer:[NSString stringWithFormat:@"%@/v1/api/v2/workListDetail/content/update", CONST_SERVER_ADDRESS]];
