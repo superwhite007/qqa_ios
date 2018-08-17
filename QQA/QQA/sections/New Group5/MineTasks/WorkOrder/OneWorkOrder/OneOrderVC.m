@@ -699,6 +699,7 @@ static  NSString  * identifier = @"CELL";
         UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((i + 1) * kHEADERBTNSPACE + i * 80, 90, 80, 25)];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.text = [_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"];
+        nameLabel.backgroundColor = [UIColor whiteColor];
         if ([[_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"] isEqualToString:@"同意/拒绝"]) {
             UIButton * nameLabelButton = [UIButton  buttonWithType:UIButtonTypeSystem];
             nameLabelButton.frame = CGRectMake((i + 1) * kHEADERBTNSPACE + i * 80, 90, 80, 25);
