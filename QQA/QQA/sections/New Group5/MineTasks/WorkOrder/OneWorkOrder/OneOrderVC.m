@@ -99,22 +99,25 @@ static  NSString  * identifier = @"CELL";
 #pragma LeaderInformationView
 -(void)AddLeaderInformationView{
     _leaderInformationView = [[UIView alloc] initWithFrame:CGRectMake(10 + 7 * iphoneWidth  , 120, iphoneWidth - 20, 100)];
-    _leaderInformationView.backgroundColor = [UIColor yellowColor];
+//    _leaderInformationView.backgroundColor = [UIColor yellowColor];
+    _leaderInformationView.layer.borderWidth = 1.2;
+    _leaderInformationView.layer.borderColor = [UIColor grayColor].CGColor;
+    
     [self.view addSubview:_leaderInformationView];
     _leaderPeoplePicture =  [[UIImageView alloc] initWithFrame:CGRectMake(10 , 10, 80, 80)];
-    _leaderPeoplePicture.backgroundColor = [UIColor redColor];
+    _leaderPeoplePicture.backgroundColor = [UIColor grayColor];
     _leaderPeoplePicture.layer.cornerRadius = _leaderPeoplePicture.frame.size.width / 2;
     _leaderPeoplePicture.layer.masksToBounds = YES;
     [_leaderInformationView addSubview:_leaderPeoplePicture];
     _leaderNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(CGRectGetMaxX(_leaderPeoplePicture.frame) + 10, 10, iphoneWidth - 50 -  CGRectGetMaxX(_leaderPeoplePicture.frame), 40)];
-    _leaderNameLabel.backgroundColor = [UIColor grayColor];
+//    _leaderNameLabel.backgroundColor = [UIColor grayColor];
     [_leaderInformationView addSubview:_leaderNameLabel];
     _leaderDescribeLabel = [[UILabel alloc] initWithFrame: CGRectMake(CGRectGetMaxX(_leaderPeoplePicture.frame) + 10, CGRectGetMaxY(_leaderNameLabel.frame) + 10, iphoneWidth - 50 -  CGRectGetMaxX(_leaderPeoplePicture.frame), 30)];
-    _leaderDescribeLabel.backgroundColor = [UIColor grayColor];
+//    _leaderDescribeLabel.backgroundColor = [UIColor grayColor];
     [_leaderInformationView addSubview:_leaderDescribeLabel];
 }
+
 -(void)displayLeaderInformationView:(NSInteger)number{
-    NSLog(@"%@, %ld", _dataOfHeaderOfTheDepartment, number);
     _leaderInformationView.frame = CGRectMake(10 , 120, iphoneWidth - 20, 100);
     _leaderPeoplePicture.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_dataOfHeaderOfTheDepartment[number] objectForKey:@"img"]]]];
     _leaderNameLabel.text = [_dataOfHeaderOfTheDepartment[number] objectForKey:@"username"];
@@ -709,6 +712,7 @@ static  NSString  * identifier = @"CELL";
             [nameLabelButton addTarget:self action:@selector(leaderSelectedAgreeOrRejectAction:) forControlEvents:UIControlEventTouchUpInside];
             [_headerView addSubview:nameLabelButton];
         }else{
+            nameLabel.backgroundColor = [UIColor whiteColor];
             [_headerView addSubview:nameLabel];
         }
     }
