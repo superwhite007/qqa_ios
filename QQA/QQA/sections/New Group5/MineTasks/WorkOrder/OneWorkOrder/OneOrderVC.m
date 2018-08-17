@@ -627,7 +627,9 @@ static  NSString  * identifier = @"CELL";
 #pragma  viewForHeaderInSection
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, iphoneWidth, 120)];
-    _headerView.backgroundColor = [UIColor blueColor];
+    _headerView.layer.borderColor = [UIColor grayColor].CGColor;
+    _headerView.layer.borderWidth = 1.5;
+    _headerView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_headerView];
     [self getSelectedLeadersFromServer];
     return _headerView;
@@ -683,10 +685,9 @@ static  NSString  * identifier = @"CELL";
     for (int i = 0; i < _dataOfHeaderOfTheDepartment.count; i++) {
         UIButton * headerOfDepartmentBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         headerOfDepartmentBtn.frame = CGRectMake((i + 1) * kHEADERBTNSPACE + i * 80, 5, 80, 80);
-        headerOfDepartmentBtn.backgroundColor = [UIColor redColor];
+        headerOfDepartmentBtn.backgroundColor = [UIColor greenColor];
         headerOfDepartmentBtn.layer.cornerRadius = headerOfDepartmentBtn.frame.size.width / 2;
         headerOfDepartmentBtn.layer.masksToBounds = YES;
-        
         NSString * urlStr = [NSString stringWithFormat:@"%@", [_dataOfHeaderOfTheDepartment[i] objectForKey:@"img"]];
         NSURL * url = [NSURL URLWithString:urlStr];
         NSData *data = [NSData dataWithContentsOfURL:url];
@@ -695,15 +696,12 @@ static  NSString  * identifier = @"CELL";
         headerOfDepartmentBtn.tag = 50000 + i;
         [headerOfDepartmentBtn addTarget:self action:@selector(viewOrIncrease:) forControlEvents:UIControlEventTouchUpInside];
         [_headerView addSubview:headerOfDepartmentBtn];
-        
         UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((i + 1) * kHEADERBTNSPACE + i * 80, 90, 80, 25)];
-        nameLabel.backgroundColor = [UIColor redColor];
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.text = [_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"];
         if ([[_dataOfHeaderOfTheDepartment[i] objectForKey:@"status"] isEqualToString:@"同意/拒绝"]) {
             UIButton * nameLabelButton = [UIButton  buttonWithType:UIButtonTypeSystem];
             nameLabelButton.frame = CGRectMake((i + 1) * kHEADERBTNSPACE + i * 80, 90, 80, 25);
-            nameLabelButton.backgroundColor = [UIColor redColor];
             nameLabelButton.titleLabel.textAlignment = NSTextAlignmentCenter;
             nameLabelButton.titleLabel.text = @"同意/拒绝";
             [nameLabelButton setTitle:@"同意/拒绝" forState:(UIControlStateNormal)];
@@ -716,14 +714,13 @@ static  NSString  * identifier = @"CELL";
     if(_dataOfHeaderOfTheDepartment.count < 4){
         UIButton * addNewHeaderOfDepartmentBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         addNewHeaderOfDepartmentBtn.frame = CGRectMake((_dataOfHeaderOfTheDepartment.count + 1) * kHEADERBTNSPACE + _dataOfHeaderOfTheDepartment.count * 80, 5, 80, 80);
-        addNewHeaderOfDepartmentBtn.backgroundColor = [UIColor greenColor];
+        addNewHeaderOfDepartmentBtn.backgroundColor = [UIColor grayColor];
         addNewHeaderOfDepartmentBtn.layer.cornerRadius = addNewHeaderOfDepartmentBtn.frame.size.width / 2;
         addNewHeaderOfDepartmentBtn.layer.masksToBounds = YES;
         addNewHeaderOfDepartmentBtn.tag = 51001;
         [addNewHeaderOfDepartmentBtn addTarget:self action:@selector(viewOrIncrease:) forControlEvents:UIControlEventTouchUpInside];
         [_headerView addSubview:addNewHeaderOfDepartmentBtn];
         UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((_dataOfHeaderOfTheDepartment.count + 1) * kHEADERBTNSPACE + _dataOfHeaderOfTheDepartment.count * 80, 90, 80, 25)];
-        nameLabel.backgroundColor = [UIColor redColor];
         nameLabel.font = [UIFont systemFontOfSize:11];
         nameLabel.text = @"添加部门负责人";
         [_headerView addSubview:nameLabel];
