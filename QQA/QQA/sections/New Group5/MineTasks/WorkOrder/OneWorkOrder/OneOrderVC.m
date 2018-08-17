@@ -248,8 +248,6 @@ static  NSString  * identifier = @"CELL";
 
 #pragma changeNameDeleteCompleteStep  end
 
-
-
 -(void)addNewOrderDetailViews{
     
     _orderDetailView = [[UIView alloc] initWithFrame:CGRectMake(10 + 3 * iphoneWidth, kORDERDETAILHEIGHT, kORDERDETAILWIDTH, kORDERDETAILWIDTH)];

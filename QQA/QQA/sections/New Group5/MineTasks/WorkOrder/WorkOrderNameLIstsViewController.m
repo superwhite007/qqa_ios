@@ -202,6 +202,7 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                                                NSLog(@"dataBack::::%@",dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70001) {
                                                         NSArray * dataListArray = [[dataBack objectForKey:@"data"] objectForKey:@"data_list"];

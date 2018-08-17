@@ -47,9 +47,6 @@
     _peopleNameLabel.backgroundColor = [UIColor redColor];
     _contentLabel.backgroundColor = [UIColor redColor];
     _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor greenColor];
-//    _workRedpointNnumberLabel.backgroundColor = [UIColor redColor];
-//    _workCompleteANDUnfinishedImageView.backgroundColor = [UIColor redColor];
-//    _nextForwardImageView.backgroundColor = [UIColor redColor];
     _contentLabel.frame = CGRectMake(75, 5, iphoneWidth - 175, 60);
     _contentLabel.textAlignment = NSTextAlignmentLeft;
     _selectPeopleButton.frame = CGRectMake(10, 5, 60, 60);
@@ -97,7 +94,17 @@
     }
     
     _workCreatedByPeopleANDTimeLabel.text = oneOrder.describe;
-    _workRedpointNnumberLabel.text = [NSString stringWithFormat:@"%@", oneOrder.unreadCommentNum];
+    NSString * str = [NSString stringWithFormat:@"%@", oneOrder.unreadCommentNum];
+    if ([str intValue] > 0 ) {
+        _workRedpointNnumberLabel.text = str;
+        _workRedpointNnumberLabel.backgroundColor = [UIColor yellowColor];
+        _workRedpointNnumberLabel.layer.borderColor = [UIColor redColor].CGColor;
+    } else if ([str intValue] == 0 ) {
+        _workRedpointNnumberLabel.text = [NSString stringWithFormat:@" "];
+        _workRedpointNnumberLabel.backgroundColor = [UIColor whiteColor];
+        _workRedpointNnumberLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+    }
+    
     if ([oneOrder.isFinished intValue] == 0 ) {
         _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"checkmark"];
     }else if ([oneOrder.isFinished intValue] == 1 ){

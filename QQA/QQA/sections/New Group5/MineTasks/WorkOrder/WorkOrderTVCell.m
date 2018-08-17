@@ -48,17 +48,23 @@
     _nextForwardImageView = [[UIImageView alloc] initWithFrame:CGRectMake(iphoneWidth - 30, 40, 20 , 20)];
     _nextForwardImageView.image = [UIImage imageNamed:@"forward"];
     [self.contentView addSubview:_nextForwardImageView];
-    
-    _workRedpointNnumberLabel.backgroundColor = [UIColor redColor];
 }
 
 -(void)setWorkOrder:(WorkOrder *)workOrder{
     _workNameLabel.text = workOrder.title;
     _workContentLabel.text = workOrder.content;
     _workCreatedByPeopleANDTimeLabel.text = workOrder.describe;
-    if (workOrder.unreadCommentNum > 0) {
-        _workRedpointNnumberLabel.text = [NSString stringWithFormat:@"%@", workOrder.unreadCommentNum];
+    NSString * str = [NSString stringWithFormat:@"%@", workOrder.unreadCommentNum];
+    if ([str intValue] > 0 ) {
+        _workRedpointNnumberLabel.text = str;
+        _workRedpointNnumberLabel.backgroundColor = [UIColor yellowColor];
+        _workRedpointNnumberLabel.layer.borderColor = [UIColor redColor].CGColor;
+    } else if ([str intValue] == 0 ) {
+        _workRedpointNnumberLabel.text = [NSString stringWithFormat:@" "];
+        _workRedpointNnumberLabel.backgroundColor = [UIColor whiteColor];
+        _workRedpointNnumberLabel.layer.borderColor = [UIColor whiteColor].CGColor;
     }
+    
     
     _workContentLabel.text = workOrder.content;
     _workContentLabel.font = [UIFont systemFontOfSize:18];
@@ -80,7 +86,6 @@
         _workCompleteANDUnfinishedImageView.frame = CGRectMake(iphoneWidth - 55, (40 + CGRectGetMaxY(_workContentLabel.frame)) / 2, 20 , 20);
         _nextForwardImageView.frame = CGRectMake(iphoneWidth - 30,  (40 + CGRectGetMaxY(_workContentLabel.frame)) / 2, 20 , 20);
     }
-    
     
 }
 
