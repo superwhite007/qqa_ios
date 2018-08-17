@@ -480,6 +480,28 @@ static  NSString  * identifier = @"CELL";
     return 120;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    OneOrder * oneOrder = self.datasourceMArray[indexPath.row];
+    UILabel * label = [UILabel new];
+    label.text = oneOrder.content;
+    label.font = [UIFont systemFontOfSize:18];
+    label.numberOfLines = 0;//表示label可以多行显示
+    label.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(iphoneWidth - 175, 2000);
+    CGRect targetRect = [label.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : label.font} context:nil];
+    if (CGRectGetHeight(targetRect) < 40) {
+        return 100;
+    }else{
+        return CGRectGetHeight(targetRect) + 60;
+    }
+    
+}
+
+
+
+
+
 #pragma cellButton---selectExecutor
 -(void)cellButton:(UIButton *)sender{
     NSInteger numder = sender.tag % 1000;

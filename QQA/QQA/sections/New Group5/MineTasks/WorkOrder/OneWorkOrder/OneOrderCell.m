@@ -67,7 +67,38 @@
         [_selectPeopleButton xr_setButtonImageWithUrl:oneOrder.executorImg];
     }
     _peopleNameLabel.text = oneOrder.executorName;
+    
     _contentLabel.text = oneOrder.content;
+    _contentLabel.font = [UIFont systemFontOfSize:18];
+    _contentLabel.numberOfLines = 0;//表示label可以多行显示
+    _contentLabel.textColor = [UIColor blackColor];
+    CGSize sourceSize = CGSizeMake(iphoneWidth - 175, 2000);
+    CGRect targetRect = [_contentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _contentLabel.font} context:nil];
+    _contentLabel.frame = CGRectMake(75, 5, iphoneWidth - 175, CGRectGetHeight(targetRect));
+    if (CGRectGetHeight(targetRect) < 40) {
+        _selectPeopleButton.frame = CGRectMake(10, 5, 60, 60);
+        _selectPeopleButton.layer.cornerRadius = CGRectGetWidth(_selectPeopleButton.frame) / 2;
+        _selectPeopleButton.layer.masksToBounds = YES;
+        _peopleNameLabel.frame = CGRectMake(5, 70, 70, 25);
+        _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(85, 70, iphoneWidth - 100, 25);
+        _workRedpointNnumberLabel.frame = CGRectMake(iphoneWidth - 80, 40, 20 , 20);
+        _workCompleteANDUnfinishedImageView.frame = CGRectMake(iphoneWidth - 55, 40, 20 , 20);
+        _nextForwardImageView.frame = CGRectMake(iphoneWidth - 30, 40, 20 , 20);
+        
+    }else{
+        _selectPeopleButton.frame = CGRectMake(10, 5 + (CGRectGetHeight(targetRect) - 60) / 2 , 60, 60);
+        _selectPeopleButton.layer.cornerRadius = CGRectGetWidth(_selectPeopleButton.frame) / 2;
+        _selectPeopleButton.layer.masksToBounds = YES;
+        _peopleNameLabel.frame = CGRectMake(5, CGRectGetMaxY(_selectPeopleButton.frame)+5, 70, 25);
+        _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(85, CGRectGetMaxY(_contentLabel.frame)+5, iphoneWidth - 100, 25);
+        _workRedpointNnumberLabel.frame = CGRectMake(iphoneWidth - 80, 40 + (CGRectGetHeight(targetRect) - 40) / 2, 20 , 20);
+        _workCompleteANDUnfinishedImageView.frame = CGRectMake(iphoneWidth - 55, 40 + (CGRectGetHeight(targetRect) - 40) / 2, 20 , 20);
+        _nextForwardImageView.frame = CGRectMake(iphoneWidth - 30, 40 + (CGRectGetHeight(targetRect) - 40) / 2, 20 , 20);
+
+    }
+    
+    
+    
     _workCreatedByPeopleANDTimeLabel.text = oneOrder.describe;
     _workRedpointNnumberLabel.text = [NSString stringWithFormat:@"%@", oneOrder.unreadCommentNum];
     if ([oneOrder.isFinished intValue] == 0 ) {
