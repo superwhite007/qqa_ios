@@ -269,7 +269,6 @@ static  NSString  * identifier = @"CELL";
     [_oneOrderCommunicationMessageTextView resignFirstResponder];
 }
 
-
 #pragma UITextViewDelegate end
 
 -(void)alert:(NSString *)str{
@@ -278,18 +277,10 @@ static  NSString  * identifier = @"CELL";
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // Nothing to do.
-        if ([title isEqualToString:@"创建任务成功"]) {
-            for (UIViewController *controller in self.navigationController.viewControllers) {
-                //                if ([controller isKindOfClass:[InternalDepartmentVC class]]) {
-                //                    [self.navigationController popToViewController:controller animated:YES];
-                //                }
-            }
-        }
-        if ([title isEqualToString:@"创建工单交流内容成功!"]) {
+        NSLog(@"titletitle:%@", title);
+        if ([title isEqualToString:@"创建工单交流内容成功!"]||[title isEqualToString:@"最多输入200字符"]||[title isEqualToString:@"请输入工单交流内容。不超过200个字符。"]) {
             [self reKeyBoard];
         }
-        
         
     }];
     [alertDialog addAction:okAction];
