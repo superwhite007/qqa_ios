@@ -41,12 +41,9 @@
     [self.contentView addSubview:_nextForwardImageView];
     _workCreatedByPeopleANDTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_contentLabel.frame) + 5, iphoneWidth - 20, 15)];
     _workCreatedByPeopleANDTimeLabel.textAlignment = NSTextAlignmentLeft;
-    _workCreatedByPeopleANDTimeLabel.font = [UIFont systemFontOfSize:10];
+    _workCreatedByPeopleANDTimeLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_workCreatedByPeopleANDTimeLabel];
-    _selectPeopleButton.backgroundColor = [UIColor redColor];
-    _peopleNameLabel.backgroundColor = [UIColor redColor];
-    _contentLabel.backgroundColor = [UIColor redColor];
-    _workCreatedByPeopleANDTimeLabel.backgroundColor = [UIColor greenColor];
+    _selectPeopleButton.backgroundColor = [UIColor grayColor];
     _contentLabel.frame = CGRectMake(75, 5, iphoneWidth - 175, 60);
     _contentLabel.textAlignment = NSTextAlignmentLeft;
     _selectPeopleButton.frame = CGRectMake(10, 5, 60, 60);
@@ -64,7 +61,6 @@
         [_selectPeopleButton xr_setButtonImageWithUrl:oneOrder.executorImg];
     }
     _peopleNameLabel.text = oneOrder.executorName;
-    
     _contentLabel.text = oneOrder.content;
     _contentLabel.font = [UIFont systemFontOfSize:18];
     _contentLabel.numberOfLines = 0;//表示label可以多行显示
@@ -72,7 +68,7 @@
     CGSize sourceSize = CGSizeMake(iphoneWidth - 175, 2000);
     CGRect targetRect = [_contentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _contentLabel.font} context:nil];
     if (CGRectGetHeight(targetRect) < 40) {
-        _contentLabel.frame = CGRectMake(75, 5, iphoneWidth - 175, 60);
+        _contentLabel.frame = CGRectMake(75, 10, iphoneWidth - 175, 60);
         _selectPeopleButton.frame = CGRectMake(10, 5, 60, 60);
         _selectPeopleButton.layer.cornerRadius = CGRectGetWidth(_selectPeopleButton.frame) / 2;
         _selectPeopleButton.layer.masksToBounds = YES;
@@ -82,7 +78,7 @@
         _workCompleteANDUnfinishedImageView.frame = CGRectMake(iphoneWidth - 55, 40, 20 , 20);
         _nextForwardImageView.frame = CGRectMake(iphoneWidth - 30, 40, 20 , 20);
     }else{
-        _contentLabel.frame = CGRectMake(75, 5, iphoneWidth - 175, CGRectGetHeight(targetRect));
+        _contentLabel.frame = CGRectMake(75, 10, iphoneWidth - 175, CGRectGetHeight(targetRect));
         _selectPeopleButton.frame = CGRectMake(10, 5 + (CGRectGetHeight(targetRect) - 60) / 2 , 60, 60);
         _selectPeopleButton.layer.cornerRadius = CGRectGetWidth(_selectPeopleButton.frame) / 2;
         _selectPeopleButton.layer.masksToBounds = YES;
@@ -92,7 +88,6 @@
         _workCompleteANDUnfinishedImageView.frame = CGRectMake(iphoneWidth - 55, 40 + (CGRectGetHeight(targetRect) - 40) / 2, 20 , 20);
         _nextForwardImageView.frame = CGRectMake(iphoneWidth - 30, 40 + (CGRectGetHeight(targetRect) - 40) / 2, 20 , 20);
     }
-    
     _workCreatedByPeopleANDTimeLabel.text = oneOrder.describe;
     NSString * str = [NSString stringWithFormat:@"%@", oneOrder.unreadCommentNum];
     if ([str intValue] > 0 ) {
@@ -104,7 +99,6 @@
         _workRedpointNnumberLabel.backgroundColor = [UIColor whiteColor];
         _workRedpointNnumberLabel.layer.borderColor = [UIColor whiteColor].CGColor;
     }
-    
     if ([oneOrder.isFinished intValue] == 0 ) {
         _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"checkmark"];
     }else if ([oneOrder.isFinished intValue] == 1 ){
