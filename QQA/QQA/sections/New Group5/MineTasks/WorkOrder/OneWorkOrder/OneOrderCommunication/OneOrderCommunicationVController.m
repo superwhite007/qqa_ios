@@ -229,7 +229,7 @@ static  NSString  * identifier = @"CELL";
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+//    NSLog(@"cellllllllllllllllllllllVC");
     OneOrderCommunication * oneOrderCommunication = self.datasource[indexPath.row];
     UILabel * label = [UILabel new];
     label.text = oneOrderCommunication.content;

@@ -20,6 +20,7 @@
 
 -(void)addAllViews{
     _peopleImageView = [UIImageView new];
+    [self.contentView addSubview:_peopleImageView];
     _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 5, iphoneWidth - 100, 60)];
     [self.contentView addSubview:self.contentLabel];
     _describeLabel = [UILabel new];
@@ -28,33 +29,35 @@
 }
 
 -(void)setOneOrderCommunication:(OneOrderCommunication *)oneOrderCommunication{
-    _peopleImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString: oneOrderCommunication.img]]];
-    
+    NSURL * url = [NSURL URLWithString:oneOrderCommunication.img];
+    dispatch_queue_t xrQueue = dispatch_queue_create("loadImagePeople", NULL); // 创建GCD线程队列
+    dispatch_async(xrQueue, ^{
+        // 异步下载图片
+        UIImage * img = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        // 主线程刷新UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _peopleImageView.image = img;
+        });
+    });
+    self.describeLabel.text = oneOrderCommunication.describe;
     self.contentLabel.text = oneOrderCommunication.content;
     self.contentLabel.font = [UIFont systemFontOfSize:18];
     self.contentLabel.numberOfLines = 0;//表示label可以多行显示
     self.contentLabel.textColor = [UIColor blackColor];
     CGSize sourceSize = CGSizeMake(iphoneWidth - 120, 2000);
     CGRect targetRect = [self.contentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.contentLabel.font} context:nil];
-    self.contentLabel.frame = CGRectMake(100, 5, iphoneWidth - 120, CGRectGetHeight(targetRect));
-    //    [self.contentView addSubview:self.contentLabel];
-    self.describeLabel.text = oneOrderCommunication.describe;
     if (CGRectGetHeight(targetRect) < 60) {
+        _contentLabel.frame = CGRectMake(100, 5, iphoneWidth - 120, 60);
         _peopleImageView.frame = CGRectMake(12.5, 12.5, 75, 75);
         _describeLabel.frame = CGRectMake(100, 70, iphoneWidth - 100, 25);
     }else{
+        _contentLabel.frame = CGRectMake(100, 5, iphoneWidth - 120, CGRectGetHeight(targetRect));
         _peopleImageView.frame = CGRectMake(12.5, (CGRectGetHeight(targetRect) - 40 ) / 2, 75, 75);
         _describeLabel.frame = CGRectMake(100, CGRectGetHeight(targetRect) + 10, iphoneWidth - 100, 25);
     }
     _peopleImageView.layer.cornerRadius = _peopleImageView.frame.size.width / 2;
     _peopleImageView.layer.masksToBounds = YES;
-    [self.contentView addSubview:_peopleImageView];
 }
-
-
-
-
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];
