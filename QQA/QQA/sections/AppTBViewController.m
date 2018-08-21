@@ -22,6 +22,10 @@
 #import "OneTaskDetailedListVC.h"
 #import "StepDetailCommunicationListVC.h"
 
+#import "WorkOrderNameLIstsViewController.h"
+#import "OneOrderVC.h"
+#import "OneOrderCommunicationVController.h"
+
 @interface AppTBViewController ()<UITabBarControllerDelegate>
 {
     NSTimer * timer;
@@ -73,10 +77,41 @@
         StepDetailCommunicationListVC * stepDetailCommunicationListVC = [StepDetailCommunicationListVC new];
         stepDetailCommunicationListVC.subtaskIdStr =[NSString stringWithFormat:@"%@", [dict objectForKey:@"subTaskId"]];
         [self.navigationController pushViewController:stepDetailCommunicationListVC animated:YES];
-  }
+    }
+    NSInteger  typeNumber = [[dict objectForKey:@"type"]  intValue];
+    NSLog(@"typeNumbertypeNumber::::%ld", typeNumber);
+    switch (typeNumber) {
+        case 7:
+            [self gotoWorkOrderVC];
+            break;
+        case 8:
+            [self gotoOneOrder];
+            break;
+        case 9:
+            [self gotoCommunication];
+            break;
+        default:
+            break;
+    }
 }
-
-
+-(void)gotoWorkOrderVC{
+    WorkOrderNameLIstsViewController * workOrderNameListVC = [WorkOrderNameLIstsViewController new];
+    [self.navigationController pushViewController:workOrderNameListVC animated:YES];
+}
+-(void)gotoOneOrder{
+    OneOrderVC * oneOrderVC = [OneOrderVC new];
+//    oneOrderVC.workListIdStr = [NSMutableString stringWithFormat:@"%@", workOrder.workListId];
+//    oneOrderVC.isEdit = [NSMutableString stringWithFormat:@"%@", workOrder.isEdit];
+    [self.navigationController pushViewController:oneOrderVC animated:YES];
+}
+-(void)gotoCommunication{
+//    if ([oneOrder.isCreateComment intValue] == 1) {
+        OneOrderCommunicationVController * oneOrderCommunicationVController = [OneOrderCommunicationVController new];
+//        oneOrderCommunicationVController.workListDetailIdSTR = oneOrder.workListDetailId;
+//        oneOrderCommunicationVController.workListIdSTR = _workListIdStr;
+        [self.navigationController pushViewController:oneOrderCommunicationVController animated:YES];
+//    }
+}
 //初始化所有的控制器
 - (void)setupAllChildViewControllers{
     //1.公司
