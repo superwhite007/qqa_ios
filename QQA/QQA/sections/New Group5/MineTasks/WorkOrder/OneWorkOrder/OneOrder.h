@@ -40,9 +40,9 @@
 @property (nonnull, strong) NSString * unreadCommentNum;
 @property (nonnull, strong) NSString * isFinished;
 @property (nonnull, strong) NSString * isAddExecutor;
-//workListDetailId;
 @property (nonnull, strong) NSString * isUpdateStatus;
 @property (nonnull, strong) NSString * workListDetailId;
+@property (nonnull, strong) NSString * isCreateComment;
 
 
 -(instancetype)initWithExecutorImg:(NSString *)executorImg
@@ -53,7 +53,8 @@
                         isFinished:(NSString *)isFinished
                      isAddExecutor:(NSString *)isAddExecutor
                     isUpdateStatus:(NSString *)isUpdateStatus
-                  workListDetailId:(NSString *)workListDetailId;
+                  workListDetailId:(NSString *)workListDetailId
+                   isCreateComment:(NSString *)isCreateComment;
 
 
 @end

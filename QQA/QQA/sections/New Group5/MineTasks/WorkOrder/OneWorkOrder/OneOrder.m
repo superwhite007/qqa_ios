@@ -9,7 +9,7 @@
 #import "OneOrder.h"
 
 @implementation OneOrder
--(instancetype)initWithExecutorImg:(NSString *)executorImg executorName:(NSString *)executorName content:(NSString *)content describe:(NSString *)describe unreadCommentNum:(NSString *)unreadCommentNum isFinished:(NSString *)isFinished isAddExecutor:(NSString *)isAddExecutor isUpdateStatus:(NSString *)isUpdateStatus workListDetailId:(NSString *)workListDetailId{
+-(instancetype)initWithExecutorImg:(NSString *)executorImg executorName:(NSString *)executorName content:(NSString *)content describe:(NSString *)describe unreadCommentNum:(NSString *)unreadCommentNum isFinished:(NSString *)isFinished isAddExecutor:(NSString *)isAddExecutor isUpdateStatus:(NSString *)isUpdateStatus workListDetailId:(NSString *)workListDetailId isCreateComment:(NSString *)isCreateComment{
     self = [super init];
     if (self) {
         self.executorImg = executorImg;
@@ -21,6 +21,7 @@
         self.isAddExecutor = isAddExecutor;
         self.isUpdateStatus = isUpdateStatus;
         self.workListDetailId = workListDetailId;
+        self.isCreateComment = isCreateComment;
     }
     return self;
     

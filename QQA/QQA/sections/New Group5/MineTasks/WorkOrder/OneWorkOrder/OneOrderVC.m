@@ -905,10 +905,12 @@ static  NSString  * identifier = @"CELL";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     OneOrder * oneOrder = self.datasourceMArray[indexPath.row];
-    OneOrderCommunicationVController * oneOrderCommunicationVController = [OneOrderCommunicationVController new];
-    oneOrderCommunicationVController.workListDetailIdSTR = oneOrder.workListDetailId;
-    oneOrderCommunicationVController.workListIdSTR = _workListIdStr;
-    [self.navigationController pushViewController:oneOrderCommunicationVController animated:YES];
+    if ([oneOrder.isCreateComment intValue] == 1) {
+        OneOrderCommunicationVController * oneOrderCommunicationVController = [OneOrderCommunicationVController new];
+        oneOrderCommunicationVController.workListDetailIdSTR = oneOrder.workListDetailId;
+        oneOrderCommunicationVController.workListIdSTR = _workListIdStr;
+        [self.navigationController pushViewController:oneOrderCommunicationVController animated:YES];
+    }
 }
 
 -(void)alert:(NSString *)str{
