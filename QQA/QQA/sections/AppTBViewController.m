@@ -79,16 +79,15 @@
         [self.navigationController pushViewController:stepDetailCommunicationListVC animated:YES];
     }
     NSInteger  typeNumber = [[dict objectForKey:@"type"]  intValue];
-    NSLog(@"typeNumbertypeNumber::::%ld", typeNumber);
     switch (typeNumber) {
         case 7:
             [self gotoWorkOrderVC];
             break;
         case 8:
-            [self gotoOneOrder];
+            [self gotoOneOrder:dict];
             break;
         case 9:
-            [self gotoCommunication];
+            [self gotoCommunication:dict];
             break;
         default:
             break;
@@ -98,19 +97,17 @@
     WorkOrderNameLIstsViewController * workOrderNameListVC = [WorkOrderNameLIstsViewController new];
     [self.navigationController pushViewController:workOrderNameListVC animated:YES];
 }
--(void)gotoOneOrder{
+-(void)gotoOneOrder:(NSDictionary *)dict{
     OneOrderVC * oneOrderVC = [OneOrderVC new];
-//    oneOrderVC.workListIdStr = [NSMutableString stringWithFormat:@"%@", workOrder.workListId];
-//    oneOrderVC.isEdit = [NSMutableString stringWithFormat:@"%@", workOrder.isEdit];
+    oneOrderVC.workListIdStr = [NSMutableString stringWithFormat:@"%@", [dict objectForKey:@"workListId"]];
+    oneOrderVC.isEdit = [NSMutableString stringWithFormat:@"%@", [dict objectForKey:@"isEdit"]];
     [self.navigationController pushViewController:oneOrderVC animated:YES];
 }
--(void)gotoCommunication{
-//    if ([oneOrder.isCreateComment intValue] == 1) {
+-(void)gotoCommunication:(NSDictionary *)dict{
         OneOrderCommunicationVController * oneOrderCommunicationVController = [OneOrderCommunicationVController new];
-//        oneOrderCommunicationVController.workListDetailIdSTR = oneOrder.workListDetailId;
-//        oneOrderCommunicationVController.workListIdSTR = _workListIdStr;
+        oneOrderCommunicationVController.workListDetailIdSTR = [NSMutableString stringWithFormat:@"%@", [dict objectForKey:@"workListDetailId"]];
+        oneOrderCommunicationVController.workListIdSTR = [NSMutableString stringWithFormat:@"%@", [dict objectForKey:@"workListId"]];
         [self.navigationController pushViewController:oneOrderCommunicationVController animated:YES];
-//    }
 }
 //初始化所有的控制器
 - (void)setupAllChildViewControllers{
