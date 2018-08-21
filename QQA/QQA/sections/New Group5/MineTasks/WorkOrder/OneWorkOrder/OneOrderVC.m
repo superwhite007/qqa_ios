@@ -99,7 +99,7 @@ static  NSString  * identifier = @"CELL";
 #pragma LeaderInformationView
 -(void)AddLeaderInformationView{
     _leaderInformationView = [[UIView alloc] initWithFrame:CGRectMake(10 + 7 * iphoneWidth  , 120, iphoneWidth - 20, 100)];
-//    _leaderInformationView.backgroundColor = [UIColor yellowColor];
+    _leaderInformationView.backgroundColor = [UIColor whiteColor];
     _leaderInformationView.layer.borderWidth = 1.2;
     _leaderInformationView.layer.borderColor = [UIColor grayColor].CGColor;
     
