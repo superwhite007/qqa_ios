@@ -954,7 +954,12 @@ static  NSString  * identifier = @"CELL";
     [self undisplayChangeNameDeleteCompleteStepView];
     [self undisplayaddOrEditWorkOrderView];
 }
--(void)viewDidAppear:(BOOL)animated{
+//-(void)viewDidAppear:(BOOL)animated{
+//    [self undisplayChangeNameDeleteCompleteStepView];
+//    [self undisplayaddOrEditWorkOrderView];
+//}
+
+-(void)viewWillAppear:(BOOL)animated{
     [self undisplayChangeNameDeleteCompleteStepView];
     [self undisplayaddOrEditWorkOrderView];
 }
