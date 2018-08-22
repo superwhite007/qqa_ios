@@ -36,7 +36,7 @@
 
 
 //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:238  / 255.0 green:0  / 255.0 blue:0 / 255.0 alpha:0.5];
-    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知", @"版本更新", @"关于青青", @"人脉库",  @"我的任务",  nil];
+    NSArray * titleArray = [NSArray arrayWithObjects:@"发起通知",  @"人脉库",  @"我的任务", @"版本更新", @"关于青青", nil];
     for (int i = 0; i < [titleArray count]; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(35, iphoneWidth * 2 / 3 + 6 + i * 60, iphoneWidth - 35, 60);
@@ -51,8 +51,8 @@
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
     }
-    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"update", @"about",  nil];
-    for (int i = 0; i < 3; i++) {
+    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"update", @"about",@"update", @"about",  nil];
+    for (int i = 0; i < imageArray.count; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
         firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 +  6 + 15  + 5+ i * 60, 20, 20);
         //    imgView.backgroundColor = [UIColor yellowColor];
@@ -67,7 +67,7 @@
         imgView.alpha = 0.6;
         [self.view addSubview:imgView];
     }
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i <= imageArray.count; i++) {
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, iphoneWidth  * 2 / 3 + 6 + i * 60 , iphoneWidth, .5)];
         view.alpha = .4;
         view.backgroundColor = [UIColor blackColor];
@@ -80,22 +80,16 @@
     if (sender.tag == 0) {
         [self gitPersonPermissions];
     }else if (sender.tag == 1){
-//        VersionInformationViewController * versionInformationVC = [VersionInformationViewController new];
-//        [self.navigationController pushViewController:versionInformationVC animated:YES];
-//        [self  alert:@"开发中"];
-        // app版本
-        [self versionCheck];
-        
-    }else if (sender.tag == 2){
-        AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
-        [self.navigationController pushViewController:aboutYouthVC animated:YES];
-    }
-    else if (sender.tag == 3){
         HumanVeinLibraryVC * humanVC = [HumanVeinLibraryVC new];
         [self.navigationController pushViewController:humanVC animated:YES];
-    }else if (sender.tag == 4){
+    }else if (sender.tag == 2){
         MineTasksTVC * mineTasksTVC = [MineTasksTVC new];
         [self.navigationController pushViewController:mineTasksTVC animated:YES];
+    }else if (sender.tag == 3){
+        [self versionCheck];
+    }else if (sender.tag == 4){
+        AboutYouthViewController * aboutYouthVC = [AboutYouthViewController new];
+        [self.navigationController pushViewController:aboutYouthVC animated:YES];
     }
 }
 
