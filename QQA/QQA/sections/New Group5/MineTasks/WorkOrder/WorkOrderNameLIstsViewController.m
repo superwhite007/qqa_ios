@@ -414,10 +414,6 @@ static  NSString  * identifier = @"CELL";
     
 }
 
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [self undisplayaddOrEditWorkOrderView];
-//}
-
 -(void)viewWillAppear:(BOOL)animated{
     [self undisplayaddOrEditWorkOrderView];
 }
