@@ -92,7 +92,7 @@
     NSString * str = [NSString stringWithFormat:@"%@", oneOrder.unreadCommentNum];
     if ([str intValue] > 0 ) {
         _workRedpointNnumberLabel.text = str;
-        _workRedpointNnumberLabel.backgroundColor = [UIColor yellowColor];
+        _workRedpointNnumberLabel.backgroundColor = [UIColor redColor];
         _workRedpointNnumberLabel.layer.borderColor = [UIColor redColor].CGColor;
     } else if ([str intValue] == 0 ) {
         _workRedpointNnumberLabel.text = [NSString stringWithFormat:@" "];
