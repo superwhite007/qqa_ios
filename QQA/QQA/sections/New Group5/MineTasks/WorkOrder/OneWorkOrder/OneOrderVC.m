@@ -573,11 +573,11 @@ static  NSString  * identifier = @"CELL";
     //    }else{
     //        vc.title = title;
     //    }
-    vc.leftTitleColor = [UIColor redColor];
+    vc.leftTitleColor = [UIColor blackColor];
     vc.btnFont = 20;
     vc.leftBtnBgColor = [UIColor grayColor];
     vc.titleFont = 17;
-    vc.titleColor = [UIColor redColor];
+    vc.titleColor = [UIColor blackColor];
     vc.confirmSelectRowBlock = ^(NSInteger index) {
         //NSLog(@"111111111111index: %zd", index);
         [self sendExecutorToserverMemberId:[mArray[index] objectForKey:@"memberId"] departmentId:[mArray[index] objectForKey:@"departmentId"]];
@@ -843,11 +843,11 @@ static  NSString  * identifier = @"CELL";
 //    }else{
 //        vc.title = title;
 //    }
-    vc.leftTitleColor = [UIColor redColor];
+    vc.leftTitleColor = [UIColor blackColor];
     vc.btnFont = 20;
     vc.leftBtnBgColor = [UIColor grayColor];
     vc.titleFont = 17;
-    vc.titleColor = [UIColor redColor];
+    vc.titleColor = [UIColor blackColor];
     //    vc.rowTitleFont = 17;
     //    vc.rowDetailFont = 12;
     //    vc.rowTitleColor = [UIColor redColor];

@@ -226,7 +226,7 @@
         _titleLabel.frame = CGRectMake(x, y, w, h);
         _titleLabel.text = @"请选择使用套餐";
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.backgroundColor = [UIColor greenColor];
+        _titleLabel.backgroundColor = [UIColor brownColor];
     }
     return _titleLabel;
 }
@@ -239,7 +239,7 @@
         CGFloat x = 0;
         CGFloat y = self.showView.frame.size.height - h;
         _bottomView.frame = CGRectMake(x, y, w, h);
-        _bottomView.backgroundColor = [UIColor greenColor];
+        _bottomView.backgroundColor = [UIColor brownColor];
     }
     return _bottomView;
 }
@@ -274,7 +274,7 @@
         _cacelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         _cacelBtn.backgroundColor = [UIColor grayColor];
         [_cacelBtn addTarget:self action:@selector(cacelBtnDidCilck) forControlEvents:(UIControlEventTouchUpInside)];
-        _cacelBtn.backgroundColor = [UIColor yellowColor];
+        _cacelBtn.backgroundColor = [UIColor whiteColor];
     }
     return _cacelBtn;
 }
@@ -293,7 +293,7 @@
         _cacelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         _cacelBtn.backgroundColor = [UIColor purpleColor];
         [_confirmBtn addTarget:self action:@selector(confirmBtnDidCilck) forControlEvents:(UIControlEventTouchUpInside)];
-        _confirmBtn.backgroundColor = [UIColor purpleColor];
+        _confirmBtn.backgroundColor = [UIColor redColor];
     }
     return _confirmBtn;
 }
