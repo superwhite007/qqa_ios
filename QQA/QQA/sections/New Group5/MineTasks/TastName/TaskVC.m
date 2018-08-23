@@ -79,8 +79,6 @@ static NSString  *  identifier = @"CELL";
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
    
     [self getTaskListFromServer:_pageNum];
-    
-    // Do any additional setup after loading the view.
 }
 
 -(void)loadNewData
@@ -94,9 +92,7 @@ static NSString  *  identifier = @"CELL";
     [self.tableView.mj_header endRefreshing];
 }
 
--(void)loadMoreData
-{
-    //记录不是下拉刷新
+-(void)loadMoreData{
     self.isDownRefresh = NO;
     [self getTaskListFromServer:++self.pageNum];
     [self.tableView.mj_footer endRefreshing];
@@ -157,7 +153,6 @@ static NSString  *  identifier = @"CELL";
             [self getTaskListFromServer:_pageNum];
             break;
         case 1:
-            
             _conditionMStr = [NSMutableString stringWithFormat:@"completed"];
             [self getTaskListFromServer:_pageNum];
             break;
@@ -268,7 +263,6 @@ static NSString  *  identifier = @"CELL";
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     TaskName * taskName = self.datasourceMArray[indexPath.row];
     OneTaskDetailedListVC * oneTaskDetailedListVC = [OneTaskDetailedListVC new];
     oneTaskDetailedListVC.taskIdStr = [NSString stringWithFormat:@"%@", taskName.taskId];
@@ -276,7 +270,6 @@ static NSString  *  identifier = @"CELL";
          oneTaskDetailedListVC.identifierPrivate = _mineOrOthersStr;
      }
     [self.navigationController pushViewController:oneTaskDetailedListVC animated:NO];
-
 }
 
 

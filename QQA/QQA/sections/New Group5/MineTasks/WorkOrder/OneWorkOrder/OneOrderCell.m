@@ -56,14 +56,13 @@
     
 }
 -(void)setOneOrder:(OneOrder *)oneOrder{
-    NSLog(@"oneOrder.executorImg::%@", oneOrder.executorImg);
     if (![oneOrder.executorImg isEqualToString:@"暂无"]) {
         [_selectPeopleButton xr_setButtonImageWithUrl:oneOrder.executorImg];
     }
     _peopleNameLabel.text = oneOrder.executorName;
     _contentLabel.text = oneOrder.content;
     _contentLabel.font = [UIFont systemFontOfSize:18];
-    _contentLabel.numberOfLines = 0;//表示label可以多行显示
+    _contentLabel.numberOfLines = 0;
     _contentLabel.textColor = [UIColor blackColor];
     CGSize sourceSize = CGSizeMake(iphoneWidth - 175, 2000);
     CGRect targetRect = [_contentLabel.text boundingRectWithSize:sourceSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : _contentLabel.font} context:nil];
