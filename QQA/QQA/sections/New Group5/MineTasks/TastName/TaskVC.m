@@ -51,8 +51,6 @@ static NSString  *  identifier = @"CELL";
     
     self.pageNum = 1;
     self.isDownRefresh = NO;
-    
-    NSLog(@"_mineOrOthersStr:%@", _mineOrOthersStr);
     _conditionMStr = [NSMutableString stringWithFormat:@"uncompleted"];
     
     self.view.backgroundColor = [UIColor redColor];
@@ -104,13 +102,11 @@ static NSString  *  identifier = @"CELL";
     [self.tableView.mj_footer endRefreshing];
 }
 
--(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer  //长按响应函数
-{
-    NSLog(@"11111111111111111111111111111111111111");
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer{
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint p = [gestureRecognizer locationInView:_tableView ];
-        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];//获取响应的长按的indexpath
-        NSLog(@"indexPath.rowindexPath.rowindexPath.row:%ld", indexPath.row);
+        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:p];
+//        NSLog(@"indexPath.rowindexPath.rowindexPath.row:%ld", indexPath.row);
         if (indexPath == nil)
             NSLog(@"long press on table view but not on a row");
         else
@@ -125,9 +121,7 @@ static NSString  *  identifier = @"CELL";
         } else{
              [self alert: @"无修改权限"];
         }
-       
     }
-    
 }
 -(void)alertAppCover:(NSString *)str{
     
@@ -434,7 +428,7 @@ static NSString  *  identifier = @"CELL";
     return YES;
 }
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    NSLog(@"textview:%@", textView.text);
+    
 }
 
 //- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
@@ -477,7 +471,6 @@ static NSString  *  identifier = @"CELL";
     [mdict setObject:typeStr forKey:@"type"];
     [mdict setObject:departmentIdStr forKey:@"departmentId"];
     [mdict setObject:titleStr forKey:@"title"];
-    NSLog(@"自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-自己的任务-:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -486,7 +479,6 @@ static NSString  *  identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"4321234567:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60008) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -520,7 +512,6 @@ static NSString  *  identifier = @"CELL";
     [mdict setObject:@"IOS_APP" forKey:@"clientType"];
     [mdict setObject:taskId forKey:@"taskId"];
     [mdict setObject:titleStr forKey:@"title"];
-    NSLog(@"更新项目名称60014:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
@@ -529,7 +520,6 @@ static NSString  *  identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"60014:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 60014) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{

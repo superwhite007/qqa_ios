@@ -126,17 +126,14 @@ static  NSString  * identifier = @"CELL";
     [mdict setObject:_oneOrderCommunicationMessageTextView.text forKey:@"content"];
     [mdict setObject:_workListIdSTR forKey:@"workListId"];
     [mdict setObject:_workListDetailIdSTR forKey:@"workListDetailId"];
-    NSLog(@"OK7001911111:%@", mdict);
     NSError * error = nil;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:mdict options:NSJSONWritingPrettyPrinted error:&error];
     request.HTTPBody = jsonData;
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            NSLog(@"OK70019error:%@", error);
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"OK70019:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70019) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -145,11 +142,11 @@ static  NSString  * identifier = @"CELL";
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    NSLog(@"Server tapy is wrong.");
+                                                    [self alert:@"创建交流任务失败!"];
                                                 }
                                             }else{
                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                    [self alert:@"创建交流任务失败2"];
+                                                    [self alert:@"创建交流任务失败!"];
                                                 });
                                             }
                                         }];
@@ -192,7 +189,6 @@ static  NSString  * identifier = @"CELL";
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
                                                 id  dataBack = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-                                                NSLog(@"8888888888888888888:%@", dataBack);
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70020) {
                                                         [self.datasource removeAllObjects];
@@ -207,10 +203,10 @@ static  NSString  * identifier = @"CELL";
                                                         });
                                                     }
                                                 }else if ([dataBack isKindOfClass:[NSArray class]] ) {
-                                                    NSLog(@"Server tapy is wrong.");
+                                                    [self alert:@"创建交流任务失败!"];
                                                 }
                                             }else{
-                                                NSLog(@"HUMan5获取数据失败，问gitPersonPermissions");
+                                                [self alert:@"创建交流任务失败!"];
                                             }
                                         }];
     [task resume];
@@ -229,7 +225,6 @@ static  NSString  * identifier = @"CELL";
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSLog(@"cellllllllllllllllllllllVC");
     OneOrderCommunication * oneOrderCommunication = self.datasource[indexPath.row];
     UILabel * label = [UILabel new];
     label.text = oneOrderCommunication.content;
@@ -277,7 +272,6 @@ static  NSString  * identifier = @"CELL";
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSLog(@"titletitle:%@", title);
         if ([title isEqualToString:@"创建工单交流内容成功!"]||[title isEqualToString:@"最多输入200字符"]||[title isEqualToString:@"请输入工单交流内容。不超过200个字符。"]) {
             [self reKeyBoard];
         }
