@@ -137,6 +137,7 @@ static  NSString  * identifier = @"CELL";
                                                 if ([dataBack isKindOfClass:[NSDictionary class]]){
                                                     if ([[dataBack objectForKey:@"message"] intValue] == 70019) {
                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                            [self reKeyBoard];
                                                             [self getOneOrderdetailCommunicationListFromServer];
                                                             [self alert:@"创建工单交流内容成功!"];
                                                         });
