@@ -64,7 +64,11 @@
         _workRedpointNnumberLabel.backgroundColor = [UIColor whiteColor];
         _workRedpointNnumberLabel.layer.borderColor = [UIColor whiteColor].CGColor;
     }
-    
+    if ([workOrder.isFinished intValue] == 0 ) {
+        _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"unfinish_icon"];
+    }else if ([workOrder.isFinished intValue] == 1 ){
+        _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"checkmark_green"];
+    }
     
     _workContentLabel.text = workOrder.content;
     _workContentLabel.font = [UIFont systemFontOfSize:18];
