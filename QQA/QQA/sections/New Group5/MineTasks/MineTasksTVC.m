@@ -59,17 +59,17 @@ static NSString * reuseIdentifier = @"CELL";
     if (indexPath.row == 0) {
         cell.textLabel.text = @"自己执行的任务列表";
         [cell.detailTextLabel setText:@"包括自己创建和领导创建的任务"];
+        cell.imageView.image = [UIImage imageNamed:@"MineTasks"];
     } else if (indexPath.row == 1) {
         cell.textLabel.text = @"为下属创建的任务列表";
         [cell.detailTextLabel setText:@"可以在此创建和检查这些任务"];
+        cell.imageView.image = [UIImage imageNamed:@"OtherPeopleTask1"];
     }else if (indexPath.row == 2) {
         cell.textLabel.text = @"创建工作单";
         [cell.detailTextLabel setText:@"创建多部门协助工作单，共同完成任务"];
+        cell.imageView.image = [UIImage imageNamed:@"WorkOrder1"];
     }
-    
     [cell layoutSubviews];
- 
-    
     return cell;
 }
 
