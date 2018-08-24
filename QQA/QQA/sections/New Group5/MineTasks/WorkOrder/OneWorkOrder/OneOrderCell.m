@@ -98,7 +98,7 @@
         _workRedpointNnumberLabel.layer.borderColor = [UIColor whiteColor].CGColor;
     }
     if ([oneOrder.isFinished intValue] == 0 ) {
-        _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"checkmark"];
+        _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"unfinish_icon"];
     }else if ([oneOrder.isFinished intValue] == 1 ){
         _workCompleteANDUnfinishedImageView.image = [UIImage imageNamed:@"checkmark_green"];
     }

@@ -276,7 +276,6 @@ static  NSString  * identifier = @"CELL";
         if ([title isEqualToString:@"创建工单交流内容成功!"]||[title isEqualToString:@"最多输入200字符"]||[title isEqualToString:@"请输入工单交流内容。不超过200个字符。"]) {
             [self reKeyBoard];
         }
-        
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
