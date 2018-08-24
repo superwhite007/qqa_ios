@@ -43,12 +43,9 @@
     _workCreatedByPeopleANDTimeLabel.textAlignment = NSTextAlignmentLeft;
     _workCreatedByPeopleANDTimeLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_workCreatedByPeopleANDTimeLabel];
-    _selectPeopleButton.backgroundColor = [UIColor grayColor];
     _contentLabel.frame = CGRectMake(75, 5, iphoneWidth - 175, 60);
     _contentLabel.textAlignment = NSTextAlignmentLeft;
     _selectPeopleButton.frame = CGRectMake(10, 5, 60, 60);
-    _selectPeopleButton.layer.cornerRadius = CGRectGetWidth(_selectPeopleButton.frame) / 2;
-    _selectPeopleButton.layer.masksToBounds = YES;
     _peopleNameLabel.frame = CGRectMake(5, 70, 70, 25);
     _peopleNameLabel.text = @"青青";
     _workCreatedByPeopleANDTimeLabel.frame = CGRectMake(85, 70, iphoneWidth - 100, 25);
@@ -58,6 +55,8 @@
 -(void)setOneOrder:(OneOrder *)oneOrder{
     if (![oneOrder.executorImg isEqualToString:@"暂无"]) {
         [_selectPeopleButton xr_setButtonImageWithUrl:oneOrder.executorImg];
+    }else{
+        [_selectPeopleButton setBackgroundImage:[UIImage imageNamed:@"addLeaderOrExecutor"] forState:UIControlStateNormal];
     }
     _peopleNameLabel.text = oneOrder.executorName;
     _contentLabel.text = oneOrder.content;

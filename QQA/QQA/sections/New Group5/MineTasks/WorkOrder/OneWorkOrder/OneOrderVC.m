@@ -719,10 +719,11 @@ static  NSString  * identifier = @"CELL";
     if(_dataOfHeaderOfTheDepartment.count < 4){
         UIButton * addNewHeaderOfDepartmentBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         addNewHeaderOfDepartmentBtn.frame = CGRectMake((_dataOfHeaderOfTheDepartment.count + 1) * kHEADERBTNSPACE + _dataOfHeaderOfTheDepartment.count * 80, 5, 80, 80);
-        addNewHeaderOfDepartmentBtn.backgroundColor = [UIColor grayColor];
-        addNewHeaderOfDepartmentBtn.layer.cornerRadius = addNewHeaderOfDepartmentBtn.frame.size.width / 2;
-        addNewHeaderOfDepartmentBtn.layer.masksToBounds = YES;
+//        addNewHeaderOfDepartmentBtn.backgroundColor = [UIColor grayColor];
+//        addNewHeaderOfDepartmentBtn.layer.cornerRadius = addNewHeaderOfDepartmentBtn.frame.size.width / 2;
+//        addNewHeaderOfDepartmentBtn.layer.masksToBounds = YES;
         addNewHeaderOfDepartmentBtn.tag = 51001;
+        [addNewHeaderOfDepartmentBtn setBackgroundImage:[UIImage imageNamed:@"addLeaderOrExecutor"] forState:(UIControlStateNormal)];
         [addNewHeaderOfDepartmentBtn addTarget:self action:@selector(viewOrIncrease:) forControlEvents:UIControlEventTouchUpInside];
         [_headerView addSubview:addNewHeaderOfDepartmentBtn];
         UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((_dataOfHeaderOfTheDepartment.count + 1) * kHEADERBTNSPACE + _dataOfHeaderOfTheDepartment.count * 80, 90, 80, 25)];
