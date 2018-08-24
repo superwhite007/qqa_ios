@@ -12,6 +12,7 @@
 #import "VersionInformationViewController.h"
 #import "HumanVeinLibraryVC.h"
 #import "MineTasksTVC.h"
+#import "UIImage+ChangeColor.h"
 
 @interface MeInformationViewController ()
 
@@ -51,14 +52,15 @@
         [button setTintColor:[UIColor blackColor]];
         [self.view addSubview:button];
     }
-    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"update", @"about",@"update", @"about",  nil];
+    NSArray * imageArray = [NSArray arrayWithObjects:@"notify", @"contact-1", @"TaskLists",@"update", @"about",  nil];
     for (int i = 0; i < imageArray.count; i++) {
         UIImageView *firstimgView = [[UIImageView alloc] init];
         firstimgView.frame = CGRectMake( 20, iphoneWidth * 2 / 3 +  6 + 15  + 5+ i * 60, 20, 20);
-        //    imgView.backgroundColor = [UIColor yellowColor];
         UIImage *firstimage = [UIImage imageNamed:imageArray[i]];
-        [firstimgView setImage:firstimage];
+        UIColor * changeColor= [UIColor colorWithRed:83/255.0 green:177/255.0 blue:232/255.0 alpha:1];
+        [firstimgView setImage:[firstimage imageWithColor:changeColor]];
         firstimgView.alpha = 0.6;
+        
         [self.view addSubview:firstimgView];
         UIImageView *imgView = [[UIImageView alloc] init];
         imgView.frame = CGRectMake(iphoneWidth - 55, iphoneWidth * 2 / 3 + 6 + 15 + 5 + i * 60, 20, 20);

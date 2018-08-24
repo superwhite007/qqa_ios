@@ -61,6 +61,7 @@
 		AA75676320A13A1A0088CF64 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */; };
 		AA7749811FEA303E0095C378 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7749801FEA303E0095C378 /* Assets.xcassets */; };
 		AA7749831FEA34280095C378 /* me_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7749821FEA34280095C378 /* me_normal.png */; };
+		AA7CD66D212F95F200A2FD1E /* UIImage+ChangeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7CD66C212F95F200A2FD1E /* UIImage+ChangeColor.m */; };
 		AA8BB4BB20CF9517008D7823 /* TaskName.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8BB4BA20CF9517008D7823 /* TaskName.m */; };
 		AA8BB4BE20CF9558008D7823 /* TaskNameTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8BB4BD20CF9558008D7823 /* TaskNameTVCell.m */; };
 		AA9B6AF51FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9B6AF41FD13EF400D8BC9E /* CompanyinformationAndBylawsViewController.m */; };
@@ -241,6 +242,8 @@
 		AA75676120A13A1A0088CF64 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
 		AA7749801FEA303E0095C378 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = resource/youth_info/Assets.xcassets; sourceTree = "<group>"; };
 		AA7749821FEA34280095C378 /* me_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_normal.png; sourceTree = "<group>"; };
+		AA7CD66B212F95F200A2FD1E /* UIImage+ChangeColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+ChangeColor.h"; sourceTree = "<group>"; };
+		AA7CD66C212F95F200A2FD1E /* UIImage+ChangeColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ChangeColor.m"; sourceTree = "<group>"; };
 		AA8BB4B920CF9517008D7823 /* TaskName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskName.h; sourceTree = "<group>"; };
 		AA8BB4BA20CF9517008D7823 /* TaskName.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskName.m; sourceTree = "<group>"; };
 		AA8BB4BC20CF9558008D7823 /* TaskNameTVCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskNameTVCell.h; sourceTree = "<group>"; };
@@ -1012,6 +1015,8 @@
 				AA1E54A420297955009A532A /* Reachability.m */,
 				AA2CED6F1FAAFF0900433BFA /* ScanImageViewController.h */,
 				AA2CED6E1FAAFF0800433BFA /* ScanImageViewController.m */,
+				AA7CD66B212F95F200A2FD1E /* UIImage+ChangeColor.h */,
+				AA7CD66C212F95F200A2FD1E /* UIImage+ChangeColor.m */,
 			);
 			name = General;
 			path = "New Group2";
@@ -1291,6 +1296,7 @@
 				AA478BEE2112CA9500F0541B /* WorkOrderNameListVC.m in Sources */,
 				AAD93D6F1FB9224500A7CC2A /* ExaminationApprovalViewController.m in Sources */,
 				AAD912071FD6959C002A42B5 /* AddressBooKListView.m in Sources */,
+				AA7CD66D212F95F200A2FD1E /* UIImage+ChangeColor.m in Sources */,
 				AA25BCD51FBEA622009B8CA0 /* IInitiatedtheExaminationTableViewController.m in Sources */,
 				AABD8ADB1FC8150E005058BD /* ACPApprovalListView.m in Sources */,
 				AAEF4CC41FB9615F00474C07 /* MeInformationViewController.m in Sources */,
