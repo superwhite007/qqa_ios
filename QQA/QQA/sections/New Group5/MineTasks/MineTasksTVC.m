@@ -39,7 +39,6 @@ static NSString * reuseIdentifier = @"CELL";
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -70,6 +69,8 @@ static NSString * reuseIdentifier = @"CELL";
         cell.imageView.image = [UIImage imageNamed:@"WorkOrder1"];
     }
     [cell layoutSubviews];
+    
+    
     return cell;
 }
 
@@ -156,11 +157,6 @@ static NSString * reuseIdentifier = @"CELL";
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
 }
-
-
-
-
-
 
 /*
 // Override to support conditional editing of the table view.
