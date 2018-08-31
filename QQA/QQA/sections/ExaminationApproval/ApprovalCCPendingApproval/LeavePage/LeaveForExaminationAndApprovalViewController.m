@@ -29,7 +29,8 @@
 }
 
 -(void)gitInformationCCAndApprovalGroup{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/scope", CONST_SERVER_ADDRESS]];
+//    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/scope", CONST_SERVER_ADDRESS]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/leave/scope", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.timeoutInterval = 10.0;
@@ -48,10 +49,14 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             if (data != nil) {
-                                                NSArray * dictArray = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-                                                if ( [[dictArray[0] objectForKey:@"message"] intValue] == 6002 ) {
-                                                    self.approvalMarray = dictArray[1];
-                                                    self.cCMarray = dictArray[2];
+                                                NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                                                if ( [[dict objectForKey:@"message"] intValue] == 6002 ) {
+                                                    NSDictionary * data_listDic = [[dict objectForKey:@"data"] objectForKey:@"data_list"];
+                                                    NSLog(@"data_listdata_listdata_list:%@", [data_listDic objectForKey:@"A_approval"]);
+                                                    
+                                                    
+                                                    self.approvalMarray = [data_listDic objectForKey:@"B_approval"];
+                                                    self.cCMarray = [data_listDic objectForKey:@"copier"];;
                                                     dispatch_async(dispatch_get_main_queue(), ^{
                                                         [self ApproverAndCC];
                                                     });
