@@ -21,8 +21,11 @@
 @property (nonatomic, strong) NSString * typeOfStr;
 @property (nonatomic, strong) NSString * startTimeStr;
 @property (nonatomic, strong) NSString * endTimeStr;
+@property (nonatomic, strong) NSDate * startDate;
+@property (nonatomic, strong) NSDate * endDate;
 
 @property (nonatomic, strong) UIView * approvalsAndCopyPeoplesView;
+@property (nonatomic, assign) BOOL ThreeDay;
 
 @end
 
@@ -89,7 +92,7 @@
     [self.view addSubview:_approvalsAndCopyPeoplesView];
     NSArray * titleArray =@[@"审批人", @"抄送人"];
     NSMutableArray * peopleOfApprover = [NSMutableArray arrayWithArray:self.approvalMarray];
-    if ([self.typeOfStr  intValue] == 101) {
+    if ([self.typeOfStr  intValue] == 101 || _ThreeDay) {
         peopleOfApprover = self.approvalMarrayA_approval;
     }else{
         peopleOfApprover = self.approvalMarray;
@@ -207,9 +210,12 @@
     self.typeOfStr = [NSString new];
     self.startTimeStr = [NSString new];
     self.endTimeStr = [NSString new];
+    self.startDate = [NSDate new];
+    self.endDate = [NSDate new];
     _approvalsAndCopyPeoplesView = [[UIView new] initWithFrame:CGRectMake(0, 221 + iphoneWidth * 1 / 3, iphoneWidth, iphoneHeight - (216 + iphoneWidth * 1 / 3))];
     _approvalsAndCopyPeoplesView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_approvalsAndCopyPeoplesView];
+    _ThreeDay = NO;
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, iphoneWidth - 40, 30)];
     [self.view addSubview:introducePersonLabel];
     _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"外出", @"其他", nil];
@@ -256,11 +262,15 @@
             NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
             self.startTimeStr = data1;
             [btn setTitle:date forState:UIControlStateNormal];
+            _startDate = selectDate;
+            [self compareStartAndEndtime];
         } else if (btn.tag == 2) {
             NSString *date = [selectDate stringWithFormat:@"结束时间：yyyy-MM-dd HH:mm"];
             NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
             self.endTimeStr = data1;
             [btn setTitle:date forState:UIControlStateNormal];
+            _endDate = selectDate;
+            [self compareStartAndEndtime];
         }
     }];
     datepicker.dateLabelColor = [UIColor orangeColor];//年-月-日-时-分 颜色
@@ -359,6 +369,27 @@
         [self sendMessagesToServer];
     }
 }
+
+-(void)compareStartAndEndtime{
+    NSLog(@"time:timetimetimetimetimetimetime:%@,%@", _startTimeStr, _endTimeStr);
+    if (_endTimeStr.length == 0 || _startTimeStr.length == 0){
+        NSLog(@"空");
+    }else{
+        NSLog(@"时间不为空");
+        NSCalendar *calender=[NSCalendar currentCalendar];
+        NSCalendarUnit unitsave=NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond;
+        NSDateComponents *comTogether=[calender components:unitsave fromDate:_startDate toDate:_endDate options:0];
+        if (comTogether.year > 0 || comTogether.month > 0 || comTogether.day > 2) {
+            _ThreeDay = YES;
+        }else{
+             _ThreeDay = NO;
+        }
+        [self ApproverAndCC];
+        
+//        NSLog(@"jack and Rose Together   %ld Year %ld Month %ld Day %ld Hour %ld Minute %ld Second ",comTogether.year,comTogether.month,comTogether.day,comTogether.hour,comTogether.minute,comTogether.second);
+    }
+}
+
 
 -(void)sendMessagesToServer{
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/store", CONST_SERVER_ADDRESS]];
