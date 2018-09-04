@@ -35,37 +35,37 @@ static NSString * identifier = @"CELL";
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"请假 - 事假、病假等",@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"请示件 - 请领导审批" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"工单 - 工作任务描述" ,@"peopleImageStr":@"worksheet"};
-        [self.dataSource addObject:dict1];
+//        [self.dataSource addObject:dict1];
         [self.dataSource addObject:dict];
-        [self.dataSource addObject:dict2];
+//        [self.dataSource addObject:dict2];
     } else if ([_titleIdentifier isEqualToString:@"待审批的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"批阅工单" ,@"peopleImageStr":@"worksheet"};
-        [self.dataSource addObject:dict1];
+//        [self.dataSource addObject:dict1];
         [self.dataSource addObject:dict];
-        [self.dataSource addObject:dict2];
+//        [self.dataSource addObject:dict2];
     }else if ([_titleIdentifier isEqualToString:@"已通过的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"已批阅工单" ,@"peopleImageStr":@"worksheet"};
-        [self.dataSource addObject:dict1];
+//        [self.dataSource addObject:dict1];
         [self.dataSource addObject:dict];
-        [self.dataSource addObject:dict2];
+//        [self.dataSource addObject:dict2];
     }else if ([_titleIdentifier isEqualToString:@"未通过的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"未批阅假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"未阅工单" ,@"peopleImageStr":@"worksheet"};
-        [self.dataSource addObject:dict1];
+//        [self.dataSource addObject:dict1];
         [self.dataSource addObject:dict];
-        [self.dataSource addObject:dict2];
+//        [self.dataSource addObject:dict2];
     }else if ([_titleIdentifier isEqualToString:@"抄送我的"]){
         NSDictionary * dict = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送假条" ,@"peopleImageStr":@"vacation"  };
         NSDictionary * dict1 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送请示件" ,@"peopleImageStr":@"askware"};
         NSDictionary * dict2 = @{@"imageStr":@"forward", @"reasonTitleStr":@"抄送工单" ,@"peopleImageStr":@"worksheet"};
-        [self.dataSource addObject:dict1];
+//        [self.dataSource addObject:dict1];
         [self.dataSource addObject:dict];
-        [self.dataSource addObject:dict2];
+//        [self.dataSource addObject:dict2];
     }
     [self.navigationItem setTitle:_titleIdentifier];
     [self.tableView registerClass:[IInitiatedtheExaminationTableViewCell class] forCellReuseIdentifier:identifier];
@@ -115,10 +115,10 @@ static NSString * identifier = @"CELL";
 {
     NSInteger number =  indexPath.row;
     if ([_titleIdentifier isEqualToString:@"发起审批"]) {
-        if (number == 1) {
+        if (number == 0) {
             LeaveForExaminationAndApprovalViewController * leaveVC = [[LeaveForExaminationAndApprovalViewController alloc] init];
             [self.navigationController pushViewController:leaveVC animated:YES];
-        } else if (number == 0){
+        } else if (number == 1){
 //            RequestForInstructionViewController * leaveVC = [[RequestForInstructionViewController alloc] init];
 //            [self.navigationController pushViewController:leaveVC animated:YES];
              [self alert:@"开发中"];
@@ -128,12 +128,12 @@ static NSString * identifier = @"CELL";
             [self alert:@"开发中"];
         }
     } else if ([_titleIdentifier isEqualToString:@"待审批的"]){
-        if (number == 1) {
+        if (number == 0) {
             ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
             examinationVC.titleStr = @"待审批的";
             examinationVC.urlStr = @"/v1/api/leave/index";
             [self.navigationController pushViewController:examinationVC animated:YES];
-        } else if (number == 0){
+        } else if (number == 1){
 //            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
 //            examinationVC.titleStr = @"待审批的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
@@ -145,12 +145,12 @@ static NSString * identifier = @"CELL";
              [self alert:@"开发中"];
         }
     }else if ([_titleIdentifier isEqualToString:@"已通过的"]){
-        if (number == 1) {
+        if (number == 0) {
             ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
             examinationVC.titleStr = @"已通过的";
             examinationVC.urlStr = @"/v1/api/leave/index";
             [self.navigationController pushViewController:examinationVC animated:YES];
-        } else if (number == 0){
+        } else if (number == 1){
 //            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
 //            examinationVC.titleStr = @"已通过的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
@@ -162,12 +162,12 @@ static NSString * identifier = @"CELL";
              [self alert:@"开发中"];
         }
     }else if ([_titleIdentifier isEqualToString:@"未通过的"]){
-        if (number == 1) {
+        if (number == 0) {
             ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
             examinationVC.titleStr = @"未通过的";
             examinationVC.urlStr = @"/v1/api/leave/index";
             [self.navigationController pushViewController:examinationVC animated:YES];
-        } else if (number == 0){
+        } else if (number == 1){
 //            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
 //            examinationVC.titleStr = @"未通过的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
@@ -179,12 +179,12 @@ static NSString * identifier = @"CELL";
              [self alert:@"开发中"];
         }
     }else if ([_titleIdentifier isEqualToString:@"抄送我的"]){
-        if (number == 1) {
+        if (number == 0) {
             ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
             examinationVC.titleStr = @"抄送我的";
             examinationVC.urlStr = @"/v1/api/leave/index";
             [self.navigationController pushViewController:examinationVC animated:YES];
-        } else if (number == 0){
+        } else if (number == 1){
 //            ACPApprovelViewController * examinationVC = [[ACPApprovelViewController alloc] init];
 //            examinationVC.titleStr = @"抄送我的";
 //            examinationVC.urlStr = @"/v1/api/ask/index";
