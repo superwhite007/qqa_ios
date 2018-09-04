@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeaveForExaminationAndApprovalViewController : UIViewController<UITextViewDelegate>
+@interface LeaveForExaminationAndApprovalViewController : UIViewController<UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, strong)UITextView * messageTextView;
 

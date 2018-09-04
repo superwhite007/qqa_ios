@@ -27,16 +27,153 @@
 @property (nonatomic, strong) UIView * approvalsAndCopyPeoplesView;
 @property (nonatomic, assign) BOOL ThreeDay;
 
+@property (nonatomic, strong) UIView * maternityLeaveView;
+//@property (nonatomic, assign) BOOL ThreeDay;
+@property (nonatomic, strong) UIPickerView * maternityLeavePickerView;
+@property (nonatomic, strong) NSArray * teams;
+
 @end
 
 @implementation LeaveForExaminationAndApprovalViewController
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationItem setTitle:@"请假"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提  交" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
+    self.cCMarray = [NSMutableArray array];
+    self.approvalMarray = [NSMutableArray array];
+    _approvalMarrayA_approval = [NSMutableArray array];
+    self.typeOfStr = [NSString new];
+    self.startTimeStr = [NSString new];
+    self.endTimeStr = [NSString new];
+    self.startDate = [NSDate new];
+    self.endDate = [NSDate new];
+    _approvalsAndCopyPeoplesView = [[UIView new] initWithFrame:CGRectMake(0, 221 + iphoneWidth * 1 / 3, iphoneWidth, iphoneHeight - (216 + iphoneWidth * 1 / 3))];
+    _approvalsAndCopyPeoplesView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_approvalsAndCopyPeoplesView];
+    
+    _maternityLeaveView = [UIView new];
+    _maternityLeavePickerView = [UIPickerView new];
+    _teams = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8" ,@"9", @"10", @"11", @"12", @"13", @"14", @"15", nil];
+    
+    _ThreeDay = NO;
+    UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, iphoneWidth - 40, 30)];
+    [self.view addSubview:introducePersonLabel];
+    _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"外出", @"其他", nil];
+    for (int i = 0; i < 3 ; i++) {
+        if (i == 0) {
+            LMJDropdownMenu * dropdownMenu = [[LMJDropdownMenu alloc] init];
+            [dropdownMenu setFrame:CGRectMake(20, 10, iphoneWidth - 40, 40)];
+            [dropdownMenu setMenuTitles:_typeMArray rowHeight:30];
+            dropdownMenu.delegate = self;
+            [self.view addSubview:dropdownMenu];
+        } else {
+            UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
+            view.backgroundColor = [UIColor redColor];
+            UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            selectBtn.frame = CGRectMake(20, 56 + ( i - 1 ) * 45, iphoneWidth - 40, 40);
+            selectBtn.layer.cornerRadius = 5;
+            selectBtn.backgroundColor = [UIColor lightGrayColor];
+            [selectBtn setTitle:@"选择时间" forState:UIControlStateNormal];
+            [self.view addSubview:selectBtn];
+            selectBtn.tag = i;
+            [selectBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+    UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 151, 100, 30)];
+    reasonTitleLabel.text = @"请假事由";
+    reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:reasonTitleLabel];
+    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 186, iphoneWidth - 40, iphoneWidth * 1 / 3 + 30)];
+    _messageTextView.font = [UIFont systemFontOfSize:24];
+    [self.view addSubview:_messageTextView];
+    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    _messageTextView.layer.borderWidth = 1;
+    _messageTextView.layer.cornerRadius = 10;
+    _messageTextView.returnKeyType = UIReturnKeySend;
+    _messageTextView.delegate = self;
+}
+
+#pragma maternity leave
+-(void)addMaternityLeaveView{
+    _maternityLeaveView.frame = CGRectMake(0, 100, iphoneWidth, iphoneWidth);
+    _maternityLeaveView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:_maternityLeaveView];
+    
+    _maternityLeavePickerView.frame = CGRectMake(iphoneWidth / 3, iphoneWidth / 2, iphoneWidth / 3, 80);
+    _maternityLeavePickerView.dataSource = self;
+    _maternityLeavePickerView.delegate = self;
+//    _maternityLeavePickerView.backgroundColor = [UIColor blueColor];
+    [_maternityLeaveView addSubview:_maternityLeavePickerView];
+    
+}
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+- (NSInteger)pickerView:(nonnull UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return  _teams.count;
+
+}
+
+-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 100;
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [_teams objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:
+(NSInteger)row inComponent:(NSInteger)component
+{
+    [self alert:[ _teams objectAtIndex:row]];
+}
+
+
+
+#pragma maternity leave end
+
+
+- (void)selectAction:(UIButton *)btn {
+    //_________________________年-月-日-时-分____________________________________________
+    WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDayHourMinute CompleteBlock:^(NSDate *selectDate) {
+        if (btn.tag == 1) {
+            NSString *date = [selectDate stringWithFormat:@"开始时间：yyyy-MM-dd HH:mm"];
+            NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            self.startTimeStr = data1;
+            [btn setTitle:date forState:UIControlStateNormal];
+            _startDate = selectDate;
+            [self compareStartAndEndtime];
+        } else if (btn.tag == 2) {
+            NSString *date = [selectDate stringWithFormat:@"结束时间：yyyy-MM-dd HH:mm"];
+            NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            self.endTimeStr = data1;
+            [btn setTitle:date forState:UIControlStateNormal];
+            _endDate = selectDate;
+            [self compareStartAndEndtime];
+        }
+    }];
+    datepicker.dateLabelColor = [UIColor orangeColor];//年-月-日-时-分 颜色
+    datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
+    datepicker.doneButtonColor = [UIColor orangeColor];//确定按钮的颜色
+    [datepicker show];
+}
+
+-(void)chageColor{
+    [self sendNoticeToServer];
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [self gitInformationCCAndApprovalGroup];
 }
 
 -(void)gitInformationCCAndApprovalGroup{
-//    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/scope", CONST_SERVER_ADDRESS]];
+    //    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/leave/scope", CONST_SERVER_ADDRESS]];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/api/v2/leave/scope", CONST_SERVER_ADDRESS]];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -198,91 +335,6 @@
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationItem setTitle:@"请假"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提  交" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
-    self.cCMarray = [NSMutableArray array];
-    self.approvalMarray = [NSMutableArray array];
-    _approvalMarrayA_approval = [NSMutableArray array];
-    self.typeOfStr = [NSString new];
-    self.startTimeStr = [NSString new];
-    self.endTimeStr = [NSString new];
-    self.startDate = [NSDate new];
-    self.endDate = [NSDate new];
-    _approvalsAndCopyPeoplesView = [[UIView new] initWithFrame:CGRectMake(0, 221 + iphoneWidth * 1 / 3, iphoneWidth, iphoneHeight - (216 + iphoneWidth * 1 / 3))];
-    _approvalsAndCopyPeoplesView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_approvalsAndCopyPeoplesView];
-    _ThreeDay = NO;
-    UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, iphoneWidth - 40, 30)];
-    [self.view addSubview:introducePersonLabel];
-    _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"外出", @"其他", nil];
-    for (int i = 0; i < 3 ; i++) {
-        if (i == 0) {
-            LMJDropdownMenu * dropdownMenu = [[LMJDropdownMenu alloc] init];
-            [dropdownMenu setFrame:CGRectMake(20, 10, iphoneWidth - 40, 40)];
-            [dropdownMenu setMenuTitles:_typeMArray rowHeight:30];
-            dropdownMenu.delegate = self;
-            [self.view addSubview:dropdownMenu];
-        } else {
-            UIView * view = [[UIView alloc] initWithFrame:CGRectMake(20, 110 + i * 45, iphoneWidth - 40, 40)];
-            view.backgroundColor = [UIColor redColor];
-            UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            selectBtn.frame = CGRectMake(20, 56 + ( i - 1 ) * 45, iphoneWidth - 40, 40);
-            selectBtn.layer.cornerRadius = 5;
-            selectBtn.backgroundColor = [UIColor lightGrayColor];
-            [selectBtn setTitle:@"选择时间" forState:UIControlStateNormal];
-            [self.view addSubview:selectBtn];
-            selectBtn.tag = i;
-            [selectBtn addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
-        }
-    }
-    UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 151, 100, 30)];
-    reasonTitleLabel.text = @"请假事由";
-    reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:reasonTitleLabel];
-    self.messageTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 186, iphoneWidth - 40, iphoneWidth * 1 / 3 + 30)];
-    _messageTextView.font = [UIFont systemFontOfSize:24];
-    [self.view addSubview:_messageTextView];
-    _messageTextView.layer.borderColor = [UIColor blackColor].CGColor;
-    _messageTextView.layer.borderWidth = 1;
-    _messageTextView.layer.cornerRadius = 10;
-    _messageTextView.returnKeyType = UIReturnKeySend;
-    _messageTextView.delegate = self;
-}
-
-
-- (void)selectAction:(UIButton *)btn {
-    //_________________________年-月-日-时-分____________________________________________
-    WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonthDayHourMinute CompleteBlock:^(NSDate *selectDate) {
-        if (btn.tag == 1) {
-            NSString *date = [selectDate stringWithFormat:@"开始时间：yyyy-MM-dd HH:mm"];
-            NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            self.startTimeStr = data1;
-            [btn setTitle:date forState:UIControlStateNormal];
-            _startDate = selectDate;
-            [self compareStartAndEndtime];
-        } else if (btn.tag == 2) {
-            NSString *date = [selectDate stringWithFormat:@"结束时间：yyyy-MM-dd HH:mm"];
-            NSString *data1 = [selectDate stringWithFormat:@"yyyy-MM-dd HH:mm"];
-            self.endTimeStr = data1;
-            [btn setTitle:date forState:UIControlStateNormal];
-            _endDate = selectDate;
-            [self compareStartAndEndtime];
-        }
-    }];
-    datepicker.dateLabelColor = [UIColor orangeColor];//年-月-日-时-分 颜色
-    datepicker.datePickerColor = [UIColor blackColor];//滚轮日期颜色
-    datepicker.doneButtonColor = [UIColor orangeColor];//确定按钮的颜色
-    [datepicker show];
-}
-
--(void)chageColor{
-    [self sendNoticeToServer];
-}
-
 - (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
     if (number == 0) {
         self.typeOfStr = @"100";
@@ -296,6 +348,7 @@
     } else if (number == 3){
         self.typeOfStr = @"103";
         [self ApproverAndCC];
+        [self addMaternityLeaveView];
     } else if (number == 4){
         self.typeOfStr = @"104";
         [self ApproverAndCC];
@@ -353,7 +406,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-     [textView resignFirstResponder];
+    [textView resignFirstResponder];
 }
 
 -(void)sendNoticeToServer{
@@ -382,7 +435,7 @@
         if (comTogether.year > 0 || comTogether.month > 0 || comTogether.day > 2 || (comTogether.day == 2 && comTogether.second > 0)|| (comTogether.day == 2 && comTogether.minute > 0)|| (comTogether.day == 2 && comTogether.hour > 0)) {
             _ThreeDay = YES;
         }else{
-             _ThreeDay = NO;
+            _ThreeDay = NO;
         }
         [self ApproverAndCC];
         NSLog(@"jack and Rose Together   %ld Year %ld Month %ld Day %ld Hour %ld Minute %ld Second ",comTogether.year,comTogether.month,comTogether.day,comTogether.hour,comTogether.minute,comTogether.second);
@@ -452,13 +505,14 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
