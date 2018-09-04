@@ -17,9 +17,13 @@
 @property (nonatomic, strong) NSMutableArray * typeMArray;
 @property (nonatomic, strong) NSMutableArray * cCMarray;
 @property (nonatomic, strong) NSMutableArray * approvalMarray;
+@property (nonatomic, strong) NSMutableArray * approvalMarrayA_approval;
 @property (nonatomic, strong) NSString * typeOfStr;
 @property (nonatomic, strong) NSString * startTimeStr;
 @property (nonatomic, strong) NSString * endTimeStr;
+
+@property (nonatomic, strong) UIView * approvalsAndCopyPeoplesView;
+
 @end
 
 @implementation LeaveForExaminationAndApprovalViewController
@@ -52,9 +56,9 @@
                                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
                                                 if ( [[dict objectForKey:@"message"] intValue] == 6002 ) {
                                                     NSDictionary * data_listDic = [[dict objectForKey:@"data"] objectForKey:@"data_list"];
-                                                    NSLog(@"data_listdata_listdata_list:%@", [data_listDic objectForKey:@"A_approval"]);
+                                                    NSLog(@"111data_listdata_listdata_list:%@", data_listDic);
                                                     
-                                                    
+                                                    self.approvalMarrayA_approval = [data_listDic objectForKey:@"A_approval"];
                                                     self.approvalMarray = [data_listDic objectForKey:@"B_approval"];
                                                     self.cCMarray = [data_listDic objectForKey:@"copier"];;
                                                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -68,6 +72,121 @@
     [task resume];
 }
 
+
+-(void)ApproverAndCC{
+    if ([[UIScreen mainScreen] bounds].size.width > 321) {
+        [self ApproverAndCCAfteriPhone6];;
+    }else{
+        [self ApproverAndCCSEAnd5S];
+    }
+}
+
+-(void)ApproverAndCCAfteriPhone6{
+    for (UILabel * label in [_approvalsAndCopyPeoplesView subviews]) {
+        [label removeFromSuperview];
+    }
+    _approvalsAndCopyPeoplesView.frame = CGRectMake(0, 221 + iphoneWidth * 1 / 3, iphoneWidth, iphoneHeight - (216 + iphoneWidth * 1 / 3));
+    [self.view addSubview:_approvalsAndCopyPeoplesView];
+    NSArray * titleArray =@[@"审批人", @"抄送人"];
+    NSMutableArray * peopleOfApprover = [NSMutableArray arrayWithArray:self.approvalMarray];
+    if ([self.typeOfStr  intValue] == 101) {
+        peopleOfApprover = self.approvalMarrayA_approval;
+    }else{
+        peopleOfApprover = self.approvalMarray;
+    }
+    NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
+    NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
+    for (int i = 0 ; i < 2 ; i++ ) {
+        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,  i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 5 , 100, 30)];
+        reasonTitleLabel.text = titleArray[i];
+        reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
+        [_approvalsAndCopyPeoplesView addSubview:reasonTitleLabel];
+        for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
+            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5),i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
+            titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
+            titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
+            titleLabe.layer.masksToBounds = YES;
+            titleLabe.textAlignment = NSTextAlignmentCenter;
+            titleLabe.font = [UIFont systemFontOfSize:30];
+            titleLabe.textColor = [UIColor whiteColor];
+            switch (j % 5) {
+                case 0:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                    break;
+                case 1:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                    break;
+                case 2:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                    break;
+                case 3:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                    break;
+                case 4:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                    break;
+                default:
+                    break;
+            }
+            [_approvalsAndCopyPeoplesView addSubview:titleLabe];
+            UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  +  (iphoneWidth - 70 ) / 5 + 5, (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
+            nameLabel.text = mArrayOFApproverAndCC[i][j];
+            nameLabel.font = [UIFont systemFontOfSize:14];
+            nameLabel.textAlignment = NSTextAlignmentCenter;
+            [_approvalsAndCopyPeoplesView addSubview:nameLabel];
+        }
+    }
+}
+
+-(void)ApproverAndCCSEAnd5S{
+    NSArray * titleArray =@[@"审批人", @"抄送人"];
+    NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
+    NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
+    NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
+    for (int i = 0 ; i < 2 ; i++ ) {
+        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5  ) + 5 , 100, 30)];
+        reasonTitleLabel.text = titleArray[i];
+        reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:reasonTitleLabel];
+        for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
+            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 ) + 30  , (iphoneWidth - 70 ) / 6 , (iphoneWidth - 70 ) / 6)];
+            titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 6 / 2;
+            titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
+            titleLabe.layer.masksToBounds = YES;
+            titleLabe.textAlignment = NSTextAlignmentCenter;
+            titleLabe.font = [UIFont systemFontOfSize:30];
+            titleLabe.textColor = [UIColor whiteColor];
+            switch (j % 5) {
+                case 0:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
+                    break;
+                case 1:
+                    titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
+                    break;
+                case 2:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
+                    break;
+                case 3:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
+                    break;
+                case 4:
+                    titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            [self.view addSubview:titleLabe];
+            UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5  ) + 25  +  (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
+            nameLabel.text = mArrayOFApproverAndCC[i][j];
+            nameLabel.font = [UIFont systemFontOfSize:14];
+            nameLabel.textAlignment = NSTextAlignmentCenter;
+            [self.view addSubview:nameLabel];
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -76,9 +195,13 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提  交" style:(UIBarButtonItemStyleDone) target:self action:@selector(chageColor)];
     self.cCMarray = [NSMutableArray array];
     self.approvalMarray = [NSMutableArray array];
+    _approvalMarrayA_approval = [NSMutableArray array];
     self.typeOfStr = [NSString new];
     self.startTimeStr = [NSString new];
     self.endTimeStr = [NSString new];
+    _approvalsAndCopyPeoplesView = [[UIView new] initWithFrame:CGRectMake(0, 221 + iphoneWidth * 1 / 3, iphoneWidth, iphoneHeight - (216 + iphoneWidth * 1 / 3))];
+    _approvalsAndCopyPeoplesView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_approvalsAndCopyPeoplesView];
     UILabel * introducePersonLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, iphoneWidth - 40, 30)];
     [self.view addSubview:introducePersonLabel];
     _typeMArray = [NSMutableArray arrayWithObjects:@"调休", @"年假", @"婚假", @"产假", @"病假", @"事假", @"丧假", @"工伤假", @"外出", @"其他", nil];
@@ -145,24 +268,34 @@
 - (void)dropdownMenu:(LMJDropdownMenu *)menu selectedCellNumber:(NSInteger)number{
     if (number == 0) {
         self.typeOfStr = @"100";
+        [self ApproverAndCC];
     } else if (number == 1){
         self.typeOfStr = @"101";
+        [self ApproverAndCC];
     } else if (number == 2){
         self.typeOfStr = @"102";
+        [self ApproverAndCC];
     } else if (number == 3){
         self.typeOfStr = @"103";
+        [self ApproverAndCC];
     } else if (number == 4){
         self.typeOfStr = @"104";
+        [self ApproverAndCC];
     } else if (number == 5){
         self.typeOfStr = @"105";
+        [self ApproverAndCC];
     } else if (number == 6){
         self.typeOfStr = @"106";
+        [self ApproverAndCC];
     } else if (number == 7){
         self.typeOfStr = @"107";
+        [self ApproverAndCC];
     } else if (number == 8){
         self.typeOfStr = @"108";
+        [self ApproverAndCC];
     } else if (number == 9){
         self.typeOfStr = @"109";
+        [self ApproverAndCC];
     }
 }
 
@@ -187,115 +320,6 @@
     }
 }
 
--(void)ApproverAndCC{
-    if ([[UIScreen mainScreen] bounds].size.width > 321) {
-        [self ApproverAndCCAfteriPhone6];;
-    }else{
-        [self ApproverAndCCSEAnd5S];
-    }
-}
-
--(void)ApproverAndCCSEAnd5S{
-    
-    NSArray * titleArray =@[@"审批人", @"抄送人"];
-    NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
-    NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
-    NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
-    for (int i = 0 ; i < 2 ; i++ ) {
-        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5  ) + 5 , 100, 30)];
-        reasonTitleLabel.text = titleArray[i];
-        reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:reasonTitleLabel];
-        for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
-            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 ) + 30  , (iphoneWidth - 70 ) / 6 , (iphoneWidth - 70 ) / 6)];
-            titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 6 / 2;
-            titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
-            titleLabe.layer.masksToBounds = YES;
-            titleLabe.textAlignment = NSTextAlignmentCenter;
-            titleLabe.font = [UIFont systemFontOfSize:30];
-            titleLabe.textColor = [UIColor whiteColor];
-            switch (j % 5) {
-                case 0:
-                    titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
-                    break;
-                case 1:
-                    titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
-                    break;
-                case 2:
-                    titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
-                    break;
-                case 3:
-                    titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
-                    break;
-                case 4:
-                    titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            [self.view addSubview:titleLabe];
-            UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(40 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5  ) + 25  +  (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
-            nameLabel.text = mArrayOFApproverAndCC[i][j];
-            nameLabel.font = [UIFont systemFontOfSize:14];
-            nameLabel.textAlignment = NSTextAlignmentCenter;
-            [self.view addSubview:nameLabel];
-        }
-    }
-}
-
--(void)ApproverAndCCAfteriPhone6{
-    NSArray * titleArray =@[@"审批人", @"抄送人"];
-    NSArray * peopleOfApprover = [NSArray arrayWithArray:self.approvalMarray];
-    NSArray * peopleOfCC = [NSArray arrayWithArray:self.cCMarray];
-    NSMutableArray * mArrayOFApproverAndCC = [NSMutableArray arrayWithObjects:peopleOfApprover, peopleOfCC, nil];
-    for (int i = 0 ; i < 2 ; i++ ) {
-        UILabel * reasonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 5 , 100, 30)];
-        reasonTitleLabel.text = titleArray[i];
-        reasonTitleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:reasonTitleLabel];
-        for (int j = 0; j < [mArrayOFApproverAndCC[i] count] ; j++) {
-            UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
-            UILabel * titleLabe = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  , (iphoneWidth - 70 ) / 5 , (iphoneWidth - 70 ) / 5)];
-            titleLabe.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
-            titleLabe.text = [mArrayOFApproverAndCC[i][j] substringToIndex:1];
-            titleLabe.layer.masksToBounds = YES;
-            titleLabe.textAlignment = NSTextAlignmentCenter;
-            titleLabe.font = [UIFont systemFontOfSize:30];
-            titleLabe.textColor = [UIColor whiteColor];
-            switch (j % 5) {
-                case 0:
-                    titleLabe.backgroundColor = [UIColor colorWithRed:57/ 255.0 green:172 / 255.0 blue:253 / 255.0 alpha:1];
-                    break;
-                case 1:
-                    titleLabe.backgroundColor = [UIColor colorWithRed:252/ 255.0 green:131 / 255.0 blue: 52 / 255.0 alpha:1];
-                    break;
-                case 2:
-                    titleLabe.backgroundColor = [UIColor colorWithRed: 48/ 255.0 green:185 / 255.0 blue: 103 / 255.0 alpha:1];
-                    break;
-                case 3:
-                    titleLabe.backgroundColor = [UIColor colorWithRed: 245/ 255.0 green:93 / 255.0 blue: 82 / 255.0 alpha:1];
-                    break;
-                case 4:
-                    titleLabe.backgroundColor = [UIColor colorWithRed: 139/ 255.0 green:194 / 255.0 blue: 75 / 255.0 alpha:1];
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            [self.view addSubview:titleLabe];
-            imgView.layer.borderWidth = 1;
-            imgView.layer.cornerRadius = (iphoneWidth - 70 ) / 5 / 2;
-            UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + j * ((iphoneWidth - 70 ) / 5 + 5), 216 + iphoneWidth * 1 / 3 + i * ( 35 + (iphoneWidth - 70 ) / 5 + 30 ) + 40  +  (iphoneWidth - 70 ) / 5 + 5, (iphoneWidth - 70 ) / 5, (iphoneWidth - 70 ) / 5 / 3)];
-            nameLabel.text = mArrayOFApproverAndCC[i][j];
-            nameLabel.font = [UIFont systemFontOfSize:14];
-            nameLabel.textAlignment = NSTextAlignmentCenter;
-            [self.view addSubview:nameLabel];
-        }
-    }
-}
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -375,11 +399,9 @@
     NSString *okButtonTitle = @"OK";
     UIAlertController *alertDialog = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        // Nothing to do.
         if ([title isEqualToString:@"发送成功!"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
     }];
     [alertDialog addAction:okAction];
     [self.navigationController presentViewController:alertDialog animated:YES completion:nil];
