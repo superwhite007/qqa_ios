@@ -149,7 +149,7 @@
     [self.view addSubview:_approvalsAndCopyPeoplesView];
     NSArray * titleArray =@[@"审批人", @"抄送人"];
     NSMutableArray * peopleOfApprover = [NSMutableArray arrayWithArray:self.approvalMarray];
-    if ([self.typeOfStr  intValue] == 101) {
+    if ([self.typeOfStr  intValue] == 101 || _ThreeDay) {
         peopleOfApprover = self.approvalMarrayA_approval;
     }else{
         peopleOfApprover = self.approvalMarray;
@@ -379,14 +379,13 @@
         NSCalendar *calender=[NSCalendar currentCalendar];
         NSCalendarUnit unitsave=NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond;
         NSDateComponents *comTogether=[calender components:unitsave fromDate:_startDate toDate:_endDate options:0];
-        if (comTogether.year > 0 || comTogether.month > 0 || comTogether.day > 2) {
+        if (comTogether.year > 0 || comTogether.month > 0 || comTogether.day > 2 || (comTogether.day == 2 && comTogether.second > 0)|| (comTogether.day == 2 && comTogether.minute > 0)|| (comTogether.day == 2 && comTogether.hour > 0)) {
             _ThreeDay = YES;
         }else{
              _ThreeDay = NO;
         }
         [self ApproverAndCC];
-        
-//        NSLog(@"jack and Rose Together   %ld Year %ld Month %ld Day %ld Hour %ld Minute %ld Second ",comTogether.year,comTogether.month,comTogether.day,comTogether.hour,comTogether.minute,comTogether.second);
+        NSLog(@"jack and Rose Together   %ld Year %ld Month %ld Day %ld Hour %ld Minute %ld Second ",comTogether.year,comTogether.month,comTogether.day,comTogether.hour,comTogether.minute,comTogether.second);
     }
 }
 
