@@ -99,15 +99,53 @@
 
 #pragma maternity leave
 -(void)addMaternityLeaveView{
-    _maternityLeaveView.frame = CGRectMake(0, 100, iphoneWidth, iphoneWidth);
-    _maternityLeaveView.backgroundColor = [UIColor redColor];
+    _maternityLeaveView.frame = CGRectMake(0, 52, iphoneWidth, iphoneWidth / 2 + 10);
+    _maternityLeaveView.backgroundColor = [UIColor  grayColor];
+    _maternityLeaveView.layer.cornerRadius = 5;
+    _maternityLeaveView.layer.borderWidth = 3;
     [self.view addSubview:_maternityLeaveView];
     
-    _maternityLeavePickerView.frame = CGRectMake(iphoneWidth / 3, iphoneWidth / 2, iphoneWidth / 3, 80);
+    UILabel * maternityTitle = [[UILabel alloc] initWithFrame:CGRectMake((iphoneWidth - 200) / 2, 10, 200, 30)];
+    maternityTitle.text = @"产假胎数选择";
+    maternityTitle.textAlignment = NSTextAlignmentCenter;
+    [_maternityLeaveView addSubview:maternityTitle];
+    
+    UILabel * maternityNumbers = [[UILabel alloc] initWithFrame:CGRectMake(10, 75, 120, 30)];
+    maternityNumbers.text = @"请选择胞胎数:";
+    [_maternityLeaveView addSubview:maternityNumbers];
+    
+    _maternityLeavePickerView.frame = CGRectMake(140, 50, iphoneWidth / 3 + 20, 80);
     _maternityLeavePickerView.dataSource = self;
     _maternityLeavePickerView.delegate = self;
-//    _maternityLeavePickerView.backgroundColor = [UIColor blueColor];
     [_maternityLeaveView addSubview:_maternityLeavePickerView];
+    
+    UILabel * badNews = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 120, 30)];
+    badNews.text = @"难产:";
+//    badNews.backgroundColor = [UIColor blueColor];
+    [_maternityLeaveView addSubview:badNews];
+    
+    UIButton * dystociaYesBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    dystociaYesBtn.frame = CGRectMake(120, 140, 100, 30);
+    dystociaYesBtn.layer.borderWidth = 1;
+    dystociaYesBtn.layer.cornerRadius = 3;
+    dystociaYesBtn.backgroundColor = [UIColor whiteColor];
+    [dystociaYesBtn setTitle:@"是" forState:UIControlStateNormal];
+    
+    UIButton * dystociaNoBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    dystociaNoBtn.frame = CGRectMake(230, 140, 100, 30);
+    dystociaNoBtn.layer.borderWidth = 1;
+    dystociaNoBtn.layer.cornerRadius = 3;
+    dystociaNoBtn.backgroundColor = [UIColor redColor];
+    [dystociaNoBtn setTitle:@"否" forState:UIControlStateNormal];
+    
+    
+    [_maternityLeaveView addSubview:dystociaYesBtn];
+    [_maternityLeaveView addSubview:dystociaNoBtn];
+    
+    
+    
+    
+    
     
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -120,7 +158,7 @@
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
-    return 100;
+    return 30;
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row forComponent:(NSInteger)component
